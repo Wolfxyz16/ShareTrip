@@ -26,3 +26,7 @@ Remember to change your current branch with the next command:
 
 ``git checkout YOUR_NAME``
 
+## What about the sprints?
+1. feb 28 - mar 19
+2. mar 20 - apr 9
+3. apr 10 - may 1
