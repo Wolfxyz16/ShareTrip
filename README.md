@@ -22,9 +22,17 @@ First thing to be done is to clone the repository. Go to the directory where you
 
 ``git clone git@github.com:Wolfxyz16/ShareTrip.git``
 
+In order to have a clean and organized working experience each member of Orquesta Guayacan would need to create a local branch in the repository. This can be done with the next command:
+
+``git branch YOUR_NAME``
+
 Remember to change your current branch with the next command:
 
 ``git checkout YOUR_NAME``
+
+When the task is implemented just push it upstream to the repository. This should create a remote branch in the GitHub repository. Then a pull request should be requested.
+
+With this method we will guarantee that the `main` branch will be always working and with the full features implemented.
 
 ## What about the sprints?
 1. feb 28 - mar 19
