@@ -1,9 +1,9 @@
-package eus.ehu.ridesfx.ui;
+package eus.ehu.sharetrip.ui;
 
-import eus.ehu.ridesfx.configuration.Config;
-import eus.ehu.ridesfx.domain.Driver;
-import eus.ehu.ridesfx.businessLogic.BlFacade;
-import eus.ehu.ridesfx.businessLogic.BlFacadeImplementation;
+import eus.ehu.sharetrip.configuration.Config;
+import eus.ehu.sharetrip.domain.Driver;
+import eus.ehu.sharetrip.businessLogic.BlFacade;
+import eus.ehu.sharetrip.businessLogic.BlFacadeImplementation;
 
 import java.util.Locale;
 

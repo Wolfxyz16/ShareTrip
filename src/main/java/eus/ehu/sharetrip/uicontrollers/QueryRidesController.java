@@ -1,8 +1,8 @@
-package eus.ehu.ridesfx.uicontrollers;
+package eus.ehu.sharetrip.uicontrollers;
 
-import eus.ehu.ridesfx.businessLogic.BlFacade;
-import eus.ehu.ridesfx.domain.Driver;
-import eus.ehu.ridesfx.domain.Ride;
+import eus.ehu.sharetrip.businessLogic.BlFacade;
+import eus.ehu.sharetrip.domain.Driver;
+import eus.ehu.sharetrip.domain.Ride;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -14,8 +14,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.util.Callback;
-import eus.ehu.ridesfx.ui.MainGUI;
-import eus.ehu.ridesfx.utils.Dates;
+import eus.ehu.sharetrip.ui.MainGUI;
+import eus.ehu.sharetrip.utils.Dates;
 
 import java.net.URL;
 import java.time.LocalDate;

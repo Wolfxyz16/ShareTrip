@@ -1,4 +1,4 @@
-package eus.ehu.ridesfx.configuration;
+package eus.ehu.sharetrip.configuration;
 
 import java.time.LocalDate;
 import java.time.ZoneId;

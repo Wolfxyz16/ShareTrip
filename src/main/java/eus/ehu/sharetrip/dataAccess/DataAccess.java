@@ -1,11 +1,11 @@
-package eus.ehu.ridesfx.dataAccess;
+package eus.ehu.sharetrip.dataAccess;
 
-import eus.ehu.ridesfx.configuration.Config;
-import eus.ehu.ridesfx.configuration.UtilDate;
-import eus.ehu.ridesfx.domain.Ride;
-import eus.ehu.ridesfx.domain.Driver;
-import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
-import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
+import eus.ehu.sharetrip.configuration.Config;
+import eus.ehu.sharetrip.configuration.UtilDate;
+import eus.ehu.sharetrip.domain.Ride;
+import eus.ehu.sharetrip.domain.Driver;
+import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
+import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;

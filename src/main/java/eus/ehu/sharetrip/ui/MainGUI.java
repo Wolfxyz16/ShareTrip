@@ -1,13 +1,13 @@
-package eus.ehu.ridesfx.ui;
+package eus.ehu.sharetrip.ui;
 
-import eus.ehu.ridesfx.businessLogic.BlFacade;
+import eus.ehu.sharetrip.businessLogic.BlFacade;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.kordamp.bootstrapfx.BootstrapFX;
-import eus.ehu.ridesfx.uicontrollers.Controller;
+import eus.ehu.sharetrip.uicontrollers.Controller;
 
 import java.io.IOException;
 import java.util.Locale;

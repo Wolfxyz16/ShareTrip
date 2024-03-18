@@ -1,6 +1,6 @@
-package eus.ehu.ridesfx.uicontrollers;
+package eus.ehu.sharetrip.uicontrollers;
 
-import eus.ehu.ridesfx.ui.MainGUI;
+import eus.ehu.sharetrip.ui.MainGUI;
 
 public interface Controller {
   void setMainApp(MainGUI mainGUI);

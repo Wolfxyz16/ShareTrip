@@ -1,9 +1,9 @@
-package eus.ehu.ridesfx.businessLogic;
+package eus.ehu.sharetrip.businessLogic;
 
-import eus.ehu.ridesfx.domain.Driver;
-import eus.ehu.ridesfx.domain.Ride;
-import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
-import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
+import eus.ehu.sharetrip.domain.Driver;
+import eus.ehu.sharetrip.domain.Ride;
+import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
+import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
 
 import java.util.Date;
 import java.util.List;

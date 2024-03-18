@@ -1,11 +1,11 @@
-package eus.ehu.ridesfx.uicontrollers;
+package eus.ehu.sharetrip.uicontrollers;
 
-import eus.ehu.ridesfx.businessLogic.BlFacade;
+import eus.ehu.sharetrip.businessLogic.BlFacade;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import eus.ehu.ridesfx.ui.MainGUI;
+import eus.ehu.sharetrip.ui.MainGUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;

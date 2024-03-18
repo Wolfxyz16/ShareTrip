@@ -1,18 +1,18 @@
-package eus.ehu.ridesfx.uicontrollers;
+package eus.ehu.sharetrip.uicontrollers;
 
-import eus.ehu.ridesfx.businessLogic.BlFacade;
-import eus.ehu.ridesfx.domain.Driver;
-import eus.ehu.ridesfx.domain.Ride;
-import eus.ehu.ridesfx.exceptions.RideAlreadyExistException;
-import eus.ehu.ridesfx.exceptions.RideMustBeLaterThanTodayException;
+import eus.ehu.sharetrip.businessLogic.BlFacade;
+import eus.ehu.sharetrip.domain.Driver;
+import eus.ehu.sharetrip.domain.Ride;
+import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
+import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.util.Callback;
-import eus.ehu.ridesfx.ui.MainGUI;
-import eus.ehu.ridesfx.utils.Dates;
+import eus.ehu.sharetrip.ui.MainGUI;
+import eus.ehu.sharetrip.utils.Dates;
 
 import java.net.URL;
 import java.time.LocalDate;

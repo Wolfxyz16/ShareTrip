@@ -1,4 +1,4 @@
-package eus.ehu.ridesfx.exceptions;
+package eus.ehu.sharetrip.exceptions;
 public class RideMustBeLaterThanTodayException extends Exception {
  private static final long serialVersionUID = 1L;
  

@@ -1,4 +1,4 @@
-package eus.ehu.ridesfx.domain;
+package eus.ehu.sharetrip.domain;
 
 import jakarta.persistence.*;
 

@@ -1,4 +1,4 @@
-package eus.ehu.ridesfx.utils;
+package eus.ehu.sharetrip.utils;
 
 import java.time.LocalDate;
 import java.time.YearMonth;

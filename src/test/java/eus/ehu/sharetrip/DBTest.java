@@ -1,6 +1,6 @@
-package eus.ehu.ridesfx;
+package eus.ehu.sharetrip;
 
-import eus.ehu.ridesfx.dataAccess.DataAccess;
+import eus.ehu.sharetrip.dataAccess.DataAccess;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
