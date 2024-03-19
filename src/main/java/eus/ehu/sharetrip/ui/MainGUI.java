@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import static javafx.application.Application.launch;
+
 public class MainGUI {
 
     private Window mainWin, createRideWin, queryRidesWin;
@@ -106,7 +108,7 @@ public class MainGUI {
         stage.show();
     }
 
-//  public static void main(String[] args) {
-//    launch();
-//  }
+      public static void main(String[] args) {
+       launch();
+    }
 }

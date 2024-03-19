@@ -28,15 +28,15 @@ public class BlFacadeImplementation implements BlFacade {
 		dbManager = new DataAccess(initialize);
 		if (initialize)
 			dbManager.initializeDB();
-		dbManager.close();
+		//dbManager.close();
 	}
 
 	public BlFacadeImplementation(DataAccess dam)  {
 		System.out.println("Creating BlFacadeImplementation instance with DataAccess parameter");
 		if (config.getDataBaseOpenMode().equals("initialize")) {
-			dam.open(true);
+			//dam.open(true);
 			dam.initializeDB();
-			dam.close();
+			//dam.close();
 		}
 		dbManager = dam;
 	}
