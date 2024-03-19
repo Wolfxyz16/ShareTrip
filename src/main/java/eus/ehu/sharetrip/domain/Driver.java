@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Vector;
 
 @Entity
-public class Driver implements Serializable {
+public class Driver extends User implements Serializable {
 	
 	/**
 	 * 
@@ -17,7 +17,8 @@ public class Driver implements Serializable {
 
 	@Id 
 	private String email;
-	private String name; 
+	private String name;
+
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private List<Ride> rides=new Vector<Ride>();
 
@@ -47,8 +48,7 @@ public class Driver implements Serializable {
 		this.name = name;
 	}
 
-	
-	
+
 	public String toString(){
 		return email+";"+name+rides;
 	}

@@ -4,8 +4,11 @@ import eus.ehu.sharetrip.configuration.Config;
 import eus.ehu.sharetrip.configuration.UtilDate;
 import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.domain.Driver;
+import eus.ehu.sharetrip.domain.Traveler;
+import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
+import eus.ehu.sharetrip.exceptions.UnknownUser;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
@@ -274,7 +277,46 @@ public class DataAccess {
     // create domain entities and persist them
   }
 
+  public User getUser(String username) {
+    try {
+      TypedQuery<User> query = db.createQuery(
+              "SELECT u FROM User u WHERE u.userName = :username", User.class);
+      query.setParameter("username", username);
+      return query.getSingleResult();
+    } catch (jakarta.persistence.NoResultException e) {
+      return null; // Or handle it in another appropriate way
+    }
+  }
+  public User login(String username, String password) throws UnknownUser {
+    User user;
+    TypedQuery<User> query = db.createQuery("SELECT u FROM User u WHERE u.userName =?1 AND u.password =?2",
+            User.class);
+    query.setParameter(1, username);
+    query.setParameter(2, password);
+    try {
+      user = query.getSingleResult();
+    } catch (Exception e) {
+      throw new UnknownUser();
+    }
 
+    return user;
+  }
+
+  public User signup(String username, String password, String email, String role) {
+    if (role.equals("Driver")) {
+      Driver driver = new Driver(username, username, email);
+      db.getTransaction().begin();
+      db.persist(driver);
+      db.getTransaction().commit();
+      return driver;
+    } else if (role.equals("Traveler")){
+        Traveler traveler = new Traveler(username, password, email);
+        db.getTransaction().begin();
+        db.persist(traveler);
+        db.getTransaction().commit();
+        return traveler;
+    }
+  }
 
   public void close() {
     db.close();

@@ -6,6 +6,7 @@ import eus.ehu.sharetrip.domain.Driver;
 import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
+import eus.ehu.sharetrip.exceptions.UnknownUser;
 
 import java.util.Date;
 import java.util.List;
@@ -42,18 +43,13 @@ public class BlFacadeImplementation implements BlFacade {
 
 
 	public Ride createRide(String from, String to, Date date, int nPlaces, float price, String driverEmail ) throws RideMustBeLaterThanTodayException, RideAlreadyExistException {
-
-		dbManager.open(false);
 		Ride ride=dbManager.createRide(from, to, date, nPlaces, price, driverEmail);
-		dbManager.close();
 		return ride;
 	}
 
 	@Override
 	public List<Ride> getRides(String origin, String destination, Date date) {
-		dbManager.open(false);
 		List<Ride>  events = dbManager.getRides(origin, destination, date);
-		dbManager.close();
 		return events;
 	}
 
@@ -63,9 +59,7 @@ public class BlFacadeImplementation implements BlFacade {
 	 */
 	@Override
 	public List<Date> getThisMonthDatesWithRides(String from, String to, Date date){
-		dbManager.open(false);
 		List<Date>  dates=dbManager.getThisMonthDatesWithRides(from, to, date);
-		dbManager.close();
 		return dates;
 	}
 
@@ -78,9 +72,7 @@ public class BlFacadeImplementation implements BlFacade {
 	 */
 
 	public Vector<Date> getEventsMonth(Date date) {
-		dbManager.open(false);
 		Vector<Date>  dates = dbManager.getEventsMonth(date);
-		dbManager.close();
 		return dates;
 	}
 
@@ -103,20 +95,9 @@ public class BlFacadeImplementation implements BlFacade {
 	 * It is invoked only when the option "initialize" is declared in the tag dataBaseOpenMode of resources/config.xml file
 	 */
 
-	public void initializeBD(){
-		dbManager.open(false);
-		dbManager.initializeDB();
-		dbManager.close();
-	}
-
 
 public List<String> getDepartCities(){
-		dbManager.open(false);
-
 		List<String> departLocations=dbManager.getDepartCities();
-
-		dbManager.close();
-
 		return departLocations;
 
 	}
@@ -124,19 +105,22 @@ public List<String> getDepartCities(){
 	 * {@inheritDoc}
 	 */
 public List<String> getDestinationCities(String from){
-		dbManager.open(false);
 		List<String> targetCities=dbManager.getArrivalCities(from);
-		dbManager.close();
-
 		return targetCities;
 	}
 
 	@Override
 	public List<Date> getDatesWithRides(String value, String value1) {
-		dbManager.open(false);
 		List<Date> dates = dbManager.getDatesWithRides(value, value1);
-		dbManager.close();
 		return dates;
+	}
+
+	public void login(String username, String password) throws UnknownUser {
+		dbManager.login(username, password);
+	}
+
+	public void signup(String username, String password, String email, String role) {
+		dbManager.signup(username, password, email, role);
 	}
 
 }
