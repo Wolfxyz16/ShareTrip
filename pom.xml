@@ -97,7 +97,7 @@
             <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>eus.ehu.template/eus.ehu.ridesfx.ui.HelloApplication</mainClass>
+              <mainClass>eus.ehu.template/eus.ehu.sharetrip.ui.HelloApplication</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>
