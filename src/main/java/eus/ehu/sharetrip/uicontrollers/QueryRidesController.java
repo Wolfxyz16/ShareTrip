@@ -72,10 +72,7 @@ public class QueryRidesController implements Controller {
     }
 
 
-    @FXML
-    void closeClick(ActionEvent event) {
-        mainGUI.showMain();
-    }
+
 
     private void setEvents(int year, int month) {
         Date date = Dates.toDate(year, month);

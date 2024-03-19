@@ -13,6 +13,16 @@ import java.util.ResourceBundle;
 public class MainGUIController implements Controller{
 
     @FXML
+    public Button createRidesBtn;
+
+    @FXML
+    public Button logInBtn;
+
+    @FXML
+    public Button registerBtn;
+
+
+    @FXML
     private Label selectOptionLbl;
 
     @FXML
@@ -54,7 +64,12 @@ public class MainGUIController implements Controller{
 
     @FXML
     public void logIn(ActionEvent actionEvent) {
-        // mainGUI.showLogin();
+        mainGUI.showLogin();
+    }
+
+    @FXML
+    public void register(ActionEvent actionEvent) {
+        mainGUI.showRegister();
     }
 
 
