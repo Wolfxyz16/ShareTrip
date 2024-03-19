@@ -8,12 +8,15 @@ import javafx.scene.control.TextField;
 public class SignUpController {
 
     @FXML
-    private TextField login;
+    private TextField email;
 
     @FXML
     private PasswordField password;
 
     @FXML
     private ComboBox<String> roles;
+
+    @FXML
+    private TextField username;
 
 }
