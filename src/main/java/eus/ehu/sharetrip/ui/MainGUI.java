@@ -96,6 +96,7 @@ public class MainGUI {
             queryRidesWin = load("QueryRides.fxml");
             BorderPane.setAlignment(queryRidesWin.ui, Pos.CENTER);
             ((BorderPane) scene.getRoot()).setCenter(queryRidesWin.ui);
+            stage.setWidth(1070);
         } catch (IOException e) {
            e.printStackTrace();
         }
@@ -108,6 +109,8 @@ public class MainGUI {
             createRideWin = load("CreateRide.fxml");
             BorderPane.setAlignment(createRideWin.ui, Pos.CENTER);
             ((BorderPane) scene.getRoot()).setCenter(createRideWin.ui);
+
+            stage.setWidth(700);
         } catch (IOException e) {
             e.printStackTrace();
         }
