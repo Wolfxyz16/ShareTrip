@@ -8,7 +8,7 @@
    <children>
       <Label fx:id="selectOptionLbl" layoutX="103.0" layoutY="37.0" text="%SelectUseCase" />
       <Button fx:id="queryRidesBtn" layoutX="70.0" layoutY="75.0" mnemonicParsing="false" onAction="#queryRides" prefHeight="26.0" prefWidth="181.0" text="%QueryRides" />
-      <Button fx:id="createRidesBtn" layoutX="70.0" layoutY="126.0" mnemonicParsing="false" onAction="#createRide" prefHeight="26.0" prefWidth="181.0" text="%CreateRide" />
+      <Button fx:id="i" layoutX="70.0" layoutY="126.0" mnemonicParsing="false" onAction="#createRide" prefHeight="26.0" prefWidth="181.0" text="%CreateRide" />
       <Label layoutX="131.0" layoutY="184.0" text="Driver:" />
       <Label fx:id="lblDriver" layoutX="198.0" layoutY="184.0" text=" " />
    </children>
