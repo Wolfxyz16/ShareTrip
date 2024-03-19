@@ -88,7 +88,7 @@ public class MainGUI {
 
 
     public void showMain() {
-        setupScene(mainWin.ui, "MainTitle", 1070, 450);
+        setupScene(mainWin.ui, "MainTitle", 600, 450);
     }
 
     public void showQueryRides() {
