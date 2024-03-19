@@ -41,7 +41,7 @@ public abstract class User {
     }
 
     public User(String email, String name, String password) {
-        this.userName = userName;
+        this.userName = name;
         this.password = password;
         this.email = email;
     }
