@@ -4,6 +4,7 @@ import eus.ehu.sharetrip.domain.Driver;
 import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
+import eus.ehu.sharetrip.exceptions.UnknownUser;
 
 import java.util.Date;
 import java.util.List;
@@ -70,4 +71,7 @@ public interface BlFacade {
 
 
     List<Date> getDatesWithRides(String value, String value1);
+
+    public void login(String username, String password) throws UnknownUser;
+    public void signup(String email, String username, String password, String role) throws UnknownUser;
 }

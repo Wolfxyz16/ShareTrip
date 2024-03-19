@@ -4,8 +4,11 @@ import eus.ehu.sharetrip.configuration.Config;
 import eus.ehu.sharetrip.configuration.UtilDate;
 import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.domain.Driver;
+import eus.ehu.sharetrip.domain.Traveler;
+import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
+import eus.ehu.sharetrip.exceptions.UnknownUser;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
@@ -75,7 +78,7 @@ public class DataAccess {
 
   public void reset() {
     db.getTransaction().begin();
-    db.createNativeQuery("DELETE FROM DRIVER_RIDE").executeUpdate();
+    db.createNativeQuery("DELETE FROM USERS_RIDE").executeUpdate();
     db.createQuery("DELETE FROM Ride ").executeUpdate();
     db.createQuery("DELETE FROM Driver ").executeUpdate();
     db.getTransaction().commit();
@@ -100,9 +103,9 @@ public class DataAccess {
 
 
       //Create drivers
-      Driver driver1 = new Driver("driver1@gmail.com", "Aitor Fernandez");
-      Driver driver2 = new Driver("driver2@gmail.com", "Ane Gaztañaga");
-      Driver driver3 = new Driver("driver3@gmail.com", "Test driver");
+      Driver driver1 = new Driver("driver1@gmail.com", "Aitor Fernandez", "1234");
+      Driver driver2 = new Driver("driver2@gmail.com", "Ane Gaztañaga", "1234");
+      Driver driver3 = new Driver("driver3@gmail.com", "Test driver", "1234");
 
 
       //Create rides
@@ -274,7 +277,48 @@ public class DataAccess {
     // create domain entities and persist them
   }
 
+  public User getUser(String username) {
+    try {
+      TypedQuery<User> query = db.createQuery(
+              "SELECT u FROM User u WHERE u.userName = :username", User.class);
+      query.setParameter("username", username);
+      return query.getSingleResult();
+    } catch (jakarta.persistence.NoResultException e) {
+      return null; // Or handle it in another appropriate way
+    }
+  }
+  public User login(String username, String password) throws UnknownUser {
+    User user;
+    TypedQuery<User> query = db.createQuery("SELECT u FROM User u WHERE u.userName =?1 AND u.password =?2",
+            User.class);
+    query.setParameter(1, username);
+    query.setParameter(2, password);
+    try {
+      user = query.getSingleResult();
+    } catch (Exception e) {
+      throw new UnknownUser();
+    }
 
+    return user;
+  }
+
+  public User signup(String email, String userName, String password, String role) {
+    if (role.equals("Driver")) {
+      Driver driver = new Driver(email, userName, password);
+      db.getTransaction().begin();
+      db.persist(driver);
+      db.getTransaction().commit();
+      return driver;
+    } else if (role.equals("Traveler")) {
+      Traveler traveler = new Traveler(email, userName, password);
+      db.getTransaction().begin();
+      db.persist(traveler);
+      db.getTransaction().commit();
+      return traveler;
+    }else {
+      return null;
+    }
+  }
 
   public void close() {
     db.close();

@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Vector;
 
 @Entity
-public class Driver implements Serializable {
+@DiscriminatorValue("DRIVER")
+public class Driver extends User implements Serializable {
 	
 	/**
 	 * 
@@ -17,7 +18,8 @@ public class Driver implements Serializable {
 
 	@Id 
 	private String email;
-	private String name; 
+	private String name;
+
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private List<Ride> rides=new Vector<Ride>();
 
@@ -25,9 +27,8 @@ public class Driver implements Serializable {
 		super();
 	}
 
-	public Driver(String email, String name) {
-		this.email = email;
-		this.name = name;
+	public Driver(String email, String userName, String password) {
+		super(email, userName, password);
 	}
 	
 	
@@ -47,8 +48,7 @@ public class Driver implements Serializable {
 		this.name = name;
 	}
 
-	
-	
+
 	public String toString(){
 		return email+";"+name+rides;
 	}

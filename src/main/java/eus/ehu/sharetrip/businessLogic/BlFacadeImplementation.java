@@ -6,6 +6,7 @@ import eus.ehu.sharetrip.domain.Driver;
 import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
+import eus.ehu.sharetrip.exceptions.UnknownUser;
 
 import java.util.Date;
 import java.util.List;
@@ -27,7 +28,17 @@ public class BlFacadeImplementation implements BlFacade {
 		dbManager = new DataAccess(initialize);
 		if (initialize)
 			dbManager.initializeDB();
+		//dbManager.close();
+	}
 
+	public BlFacadeImplementation(DataAccess dam)  {
+		System.out.println("Creating BlFacadeImplementation instance with DataAccess parameter");
+		if (config.getDataBaseOpenMode().equals("initialize")) {
+			//dam.open(true);
+			dam.initializeDB();
+			//dam.close();
+		}
+		dbManager = dam;
 	}
 
 	public Ride createRide(String from, String to, Date date, int nPlaces, float price, String driverEmail ) throws RideMustBeLaterThanTodayException, RideAlreadyExistException {
@@ -74,6 +85,14 @@ public class BlFacadeImplementation implements BlFacade {
 		return this.currentDriver;
 	}
 
+	public void close() {
+		dbManager.close();
+	}
+
+	/**
+	 * This method invokes the data access to initialize the database with some events and questions.
+	 * It is invoked only when the option "initialize" is declared in the tag dataBaseOpenMode of resources/config.xml file
+	 */
 
 public List<String> getDepartCities(){
 		List<String> departLocations=dbManager.getDepartCities();
@@ -92,6 +111,14 @@ public List<String> getDestinationCities(String from){
 	public List<Date> getDatesWithRides(String value, String value1) {
 		List<Date> dates = dbManager.getDatesWithRides(value, value1);
 		return dates;
+	}
+
+	public void login(String username, String password) throws UnknownUser {
+		dbManager.login(username, password);
+	}
+
+	public void signup(String username, String password, String email, String role) {
+		dbManager.signup(email, username, password, role);
 	}
 
 }
