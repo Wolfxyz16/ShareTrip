@@ -3,8 +3,10 @@ package eus.ehu.sharetrip.ui;
 import eus.ehu.sharetrip.businessLogic.BlFacade;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.kordamp.bootstrapfx.BootstrapFX;
 import eus.ehu.sharetrip.uicontrollers.Controller;
@@ -39,6 +41,8 @@ public class MainGUI {
             }
         });
     }
+
+
 
 
     class Window {
@@ -86,11 +90,35 @@ public class MainGUI {
     }
 
     public void showQueryRides() {
-        setupScene(queryRidesWin.ui, "QueryRides", 1000, 500);
+        try {
+            queryRidesWin = load("QueryRides.fxml");
+            BorderPane.setAlignment(queryRidesWin.ui, Pos.CENTER);
+            ((BorderPane) scene.getRoot()).setCenter(queryRidesWin.ui);
+        } catch (IOException e) {
+           e.printStackTrace();
+        }
+
+
     }
 
     public void showCreateRide() {
-        setupScene(createRideWin.ui, "CreateRide", 550, 400);
+        try {
+            queryRidesWin = load("CreateRide.fxml");
+            BorderPane.setAlignment(queryRidesWin.ui, Pos.CENTER);
+            ((BorderPane) scene.getRoot()).setCenter(queryRidesWin.ui);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showLogin() {
+        try {
+            queryRidesWin = load("CreateRide.fxml");
+            BorderPane.setAlignment(queryRidesWin.ui, Pos.CENTER);
+            ((BorderPane) scene.getRoot()).setCenter(queryRidesWin.ui);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setupScene(Parent ui, String title, int width, int height) {

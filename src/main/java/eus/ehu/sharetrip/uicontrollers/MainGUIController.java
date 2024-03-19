@@ -54,7 +54,7 @@ public class MainGUIController implements Controller{
 
     @FXML
     public void logIn(ActionEvent actionEvent) {
-        // mainGUI.showLogin();
+        mainGUI.showLogin();
     }
 
 
