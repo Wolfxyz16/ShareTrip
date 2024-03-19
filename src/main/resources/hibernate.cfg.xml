@@ -12,8 +12,8 @@
         <property name="hibernate.hbm2ddl.auto">create</property>
 
         <property name="hibernate.physical_naming_strategy">org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl</property>
-        <mapping class="eus.ehu.sharetrip.domain.Driver" />
-        <mapping class="eus.ehu.sharetrip.domain.Ride" />
+        <mapping class="eus.ehu.ridesfx.domain.Driver" />
+        <mapping class="eus.ehu.ridesfx.domain.Ride" />
 
     </session-factory>
 </hibernate-configuration>
