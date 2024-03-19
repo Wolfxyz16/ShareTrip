@@ -2219,15 +2219,17 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 726,
+									"left": 687,
 									"top": 435,
+									"width": 78.39990234375,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
 									"hostEdge": {
 										"$ref": "AAAAAAGOV+Ttw0sG9dM="
 									},
-									"edgePosition": 2
+									"edgePosition": 2,
+									"text": "+reservations"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -4976,6 +4978,7 @@
 									"model": {
 										"$ref": "AAAAAAGOWOAzyxvXXO0="
 									},
+									"visible": false,
 									"font": "Arial;13;0",
 									"left": 886,
 									"top": 339,
@@ -5249,6 +5252,7 @@
 									"model": {
 										"$ref": "AAAAAAGOWOBWXydq1qs="
 									},
+									"visible": false,
 									"font": "Arial;13;0",
 									"left": 935,
 									"top": 326,
@@ -5402,8 +5406,7 @@
 									"$ref": "AAAAAAGOWN5SSLmE/ko="
 								},
 								"visibility": "private",
-								"navigable": "navigable",
-								"multiplicity": "1"
+								"navigable": "navigable"
 							}
 						},
 						{
@@ -5434,8 +5437,7 @@
 								"reference": {
 									"$ref": "AAAAAAGOWN5SSLmE/ko="
 								},
-								"navigable": "navigable",
-								"multiplicity": "1"
+								"navigable": "navigable"
 							}
 						}
 					],
