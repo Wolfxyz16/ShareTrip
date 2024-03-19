@@ -38,3 +38,8 @@ With this method we will guarantee that the `main` branch will be always working
 1. feb 28 - mar 19
 2. mar 20 - apr 9
 3. apr 10 - may 1
+
+## How can I pull a single git branch?
+1. `git fetch <remote_name> <branch_name>`
+2. `git branch <branch_name> FETCH_HEAD`
+3. `git checkout <branch_name>`

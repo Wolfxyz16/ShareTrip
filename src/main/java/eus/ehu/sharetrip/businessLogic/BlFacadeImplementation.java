@@ -41,7 +41,6 @@ public class BlFacadeImplementation implements BlFacade {
 		dbManager = dam;
 	}
 
-
 	public Ride createRide(String from, String to, Date date, int nPlaces, float price, String driverEmail ) throws RideMustBeLaterThanTodayException, RideAlreadyExistException {
 		Ride ride=dbManager.createRide(from, to, date, nPlaces, price, driverEmail);
 		return ride;
@@ -94,7 +93,6 @@ public class BlFacadeImplementation implements BlFacade {
 	 * This method invokes the data access to initialize the database with some events and questions.
 	 * It is invoked only when the option "initialize" is declared in the tag dataBaseOpenMode of resources/config.xml file
 	 */
-
 
 public List<String> getDepartCities(){
 		List<String> departLocations=dbManager.getDepartCities();

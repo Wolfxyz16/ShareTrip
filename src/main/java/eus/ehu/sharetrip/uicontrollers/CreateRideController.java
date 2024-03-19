@@ -64,11 +64,7 @@ public class CreateRideController implements Controller {
     private TextField txtPrice;
 
 
-    @FXML
-    void closeClick(ActionEvent event) {
-        clearErrorLabels();
-        mainGUI.showMain();
-    }
+
 
     private void clearErrorLabels() {
         lblErrorMessage.setText("");

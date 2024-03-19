@@ -3,8 +3,10 @@ package eus.ehu.sharetrip.ui;
 import eus.ehu.sharetrip.businessLogic.BlFacade;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.kordamp.bootstrapfx.BootstrapFX;
 import eus.ehu.sharetrip.uicontrollers.Controller;
@@ -17,7 +19,7 @@ import static javafx.application.Application.launch;
 
 public class MainGUI {
 
-    private Window mainWin, createRideWin, queryRidesWin;
+    private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin;
 
     private BlFacade businessLogic;
     private Stage stage;
@@ -41,6 +43,8 @@ public class MainGUI {
             }
         });
     }
+
+
 
 
     class Window {
@@ -73,6 +77,8 @@ public class MainGUI {
         mainWin = load("MainGUI.fxml");
         queryRidesWin = load("QueryRides.fxml");
         createRideWin = load("CreateRide.fxml");
+        //registerWin = load("SingUp.fxml");
+        //loginWin = load("SingIn.fxml");
 
         showMain();
 
@@ -84,15 +90,52 @@ public class MainGUI {
 
 
     public void showMain() {
-        setupScene(mainWin.ui, "MainTitle", 320, 250);
+        setupScene(mainWin.ui, "MainTitle", 600, 450);
     }
 
     public void showQueryRides() {
-        setupScene(queryRidesWin.ui, "QueryRides", 1000, 500);
+        try {
+            queryRidesWin = load("QueryRides.fxml");
+            BorderPane.setAlignment(queryRidesWin.ui, Pos.CENTER);
+            ((BorderPane) scene.getRoot()).setCenter(queryRidesWin.ui);
+            stage.setWidth(1070);
+        } catch (IOException e) {
+           e.printStackTrace();
+        }
+
+
     }
 
     public void showCreateRide() {
-        setupScene(createRideWin.ui, "CreateRide", 550, 400);
+        try {
+            createRideWin = load("CreateRide.fxml");
+            BorderPane.setAlignment(createRideWin.ui, Pos.CENTER);
+            ((BorderPane) scene.getRoot()).setCenter(createRideWin.ui);
+
+            stage.setWidth(700);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showLogin() {
+        try {
+            loginWin = load("SingIn.fxml");
+            BorderPane.setAlignment(loginWin.ui, Pos.CENTER);
+            ((BorderPane) scene.getRoot()).setCenter(loginWin.ui);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showRegister() {
+        try {
+            registerWin = load("SingUp.fxml");
+            BorderPane.setAlignment(registerWin.ui, Pos.CENTER);
+            ((BorderPane) scene.getRoot()).setCenter(registerWin.ui);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setupScene(Parent ui, String title, int width, int height) {
