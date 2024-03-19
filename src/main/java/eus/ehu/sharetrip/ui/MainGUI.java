@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import static javafx.application.Application.launch;
+
 public class MainGUI {
 
     private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin;
@@ -73,10 +75,7 @@ public class MainGUI {
         this.stage = stage;
 
         mainWin = load("MainGUI.fxml");
-        queryRidesWin = load("QueryRides.fxml");
-        createRideWin = load("CreateRide.fxml");
-        //registerWin = load("SingUp.fxml");
-        //loginWin = load("SingIn.fxml");
+
 
         showMain();
 
@@ -118,7 +117,7 @@ public class MainGUI {
 
     public void showLogin() {
         try {
-            loginWin = load("SingIn.fxml");
+            loginWin = load("SignIn.fxml");
             BorderPane.setAlignment(loginWin.ui, Pos.CENTER);
             ((BorderPane) scene.getRoot()).setCenter(loginWin.ui);
         } catch (IOException e) {
@@ -128,7 +127,7 @@ public class MainGUI {
 
     public void showRegister() {
         try {
-            registerWin = load("SingUp.fxml");
+            registerWin = load("SignUp.fxml");
             BorderPane.setAlignment(registerWin.ui, Pos.CENTER);
             ((BorderPane) scene.getRoot()).setCenter(registerWin.ui);
         } catch (IOException e) {
@@ -149,7 +148,7 @@ public class MainGUI {
         stage.show();
     }
 
-//  public static void main(String[] args) {
-//    launch();
-//  }
+      public static void main(String[] args) {
+       launch();
+    }
 }

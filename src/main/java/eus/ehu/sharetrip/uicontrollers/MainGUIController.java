@@ -63,12 +63,12 @@ public class MainGUIController implements Controller{
     }
 
     @FXML
-    public void logIn(ActionEvent actionEvent) {
+    void logIn(ActionEvent actionEvent) {
         mainGUI.showLogin();
     }
 
     @FXML
-    public void register(ActionEvent actionEvent) {
+    void register(ActionEvent actionEvent) {
         mainGUI.showRegister();
     }
 
