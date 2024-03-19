@@ -11,7 +11,7 @@
     <children>
         <Label layoutX="92.0" layoutY="140.0" text="Login:" />
         <Label layoutX="80.0" layoutY="184.0" text="Password:" />
-        <Button layoutX="214.0" layoutY="227.0" mnemonicParsing="false" text="Login" />
+        <Button layoutX="214.0" layoutY="227.0" mnemonicParsing="false" onAction="#onClick" text="Login" />
         <TextField fx:id="login" layoutX="158.0" layoutY="136.0" />
         <PasswordField fx:id="password" layoutX="158.0" layoutY="180.0" />
         <Label layoutX="200.0" layoutY="78.0" text="Sign In">

@@ -40,11 +40,12 @@ public abstract class User {
         return userName;
     }
 
-    public User(String userName, String password, String email) {
+    public User(String email, String name, String password) {
         this.userName = userName;
         this.password = password;
         this.email = email;
     }
+
 
     public User() {
 

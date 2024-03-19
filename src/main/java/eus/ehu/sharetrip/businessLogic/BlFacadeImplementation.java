@@ -120,7 +120,7 @@ public List<String> getDestinationCities(String from){
 	}
 
 	public void signup(String username, String password, String email, String role) {
-		dbManager.signup(username, password, email, role);
+		dbManager.signup(email, username, password, role);
 	}
 
 }
