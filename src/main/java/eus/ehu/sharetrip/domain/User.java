@@ -11,7 +11,7 @@ public abstract class User {
     private String email;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //private Long id;
+    private Long id;
 
     private String userName;
     private String password;
@@ -40,11 +40,12 @@ public abstract class User {
         return userName;
     }
 
-    public User(String userName, String password, String email) {
-        this.userName = userName;
+    public User(String email, String name, String password) {
+        this.userName = name;
         this.password = password;
         this.email = email;
     }
+
 
     public User() {
 

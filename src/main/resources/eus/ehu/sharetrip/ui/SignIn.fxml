@@ -9,9 +9,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="448.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.SignInController">
     <children>
-        <Label layoutX="92.0" layoutY="140.0" text="Login:" />
+        <Label layoutX="80.0" layoutY="141.0" text="Username:" />
         <Label layoutX="80.0" layoutY="184.0" text="Password:" />
-        <Button layoutX="214.0" layoutY="227.0" mnemonicParsing="false" text="Login" />
+        <Button layoutX="214.0" layoutY="227.0" mnemonicParsing="false" onAction="#onClick" text="Login" />
         <TextField fx:id="login" layoutX="158.0" layoutY="136.0" />
         <PasswordField fx:id="password" layoutX="158.0" layoutY="180.0" />
         <Label layoutX="200.0" layoutY="78.0" text="Sign In">
@@ -19,5 +19,6 @@
                 <Font size="25.0" />
             </font>
         </Label>
+      <Label fx:id="loginStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="141.0" layoutY="280.0" prefHeight="17.0" prefWidth="190.0" textFill="#2900ff" />
     </children>
 </AnchorPane>

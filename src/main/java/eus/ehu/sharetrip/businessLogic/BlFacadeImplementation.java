@@ -28,19 +28,18 @@ public class BlFacadeImplementation implements BlFacade {
 		dbManager = new DataAccess(initialize);
 		if (initialize)
 			dbManager.initializeDB();
-		dbManager.close();
+		//dbManager.close();
 	}
 
 	public BlFacadeImplementation(DataAccess dam)  {
 		System.out.println("Creating BlFacadeImplementation instance with DataAccess parameter");
 		if (config.getDataBaseOpenMode().equals("initialize")) {
-			dam.open(true);
+			//dam.open(true);
 			dam.initializeDB();
-			dam.close();
+			//dam.close();
 		}
 		dbManager = dam;
 	}
-
 
 	public Ride createRide(String from, String to, Date date, int nPlaces, float price, String driverEmail ) throws RideMustBeLaterThanTodayException, RideAlreadyExistException {
 		Ride ride=dbManager.createRide(from, to, date, nPlaces, price, driverEmail);
@@ -95,7 +94,6 @@ public class BlFacadeImplementation implements BlFacade {
 	 * It is invoked only when the option "initialize" is declared in the tag dataBaseOpenMode of resources/config.xml file
 	 */
 
-
 public List<String> getDepartCities(){
 		List<String> departLocations=dbManager.getDepartCities();
 		return departLocations;
@@ -119,8 +117,8 @@ public List<String> getDestinationCities(String from){
 		dbManager.login(username, password);
 	}
 
-	public void signup(String username, String password, String email, String role) {
-		dbManager.signup(username, password, email, role);
+	public void signup(String email, String username, String password, String role) {
+		dbManager.signup(email, username, password, role);
 	}
 
 }

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Vector;
 
 @Entity
+@DiscriminatorValue("DRIVER")
 public class Driver extends User implements Serializable {
 	
 	/**
@@ -26,9 +27,8 @@ public class Driver extends User implements Serializable {
 		super();
 	}
 
-	public Driver(String email, String name) {
-		this.email = email;
-		this.name = name;
+	public Driver(String email, String userName, String password) {
+		super(email, userName, password);
 	}
 	
 	
