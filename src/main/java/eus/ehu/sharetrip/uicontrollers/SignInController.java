@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -24,6 +25,9 @@ public class SignInController implements Controller {
 
     @FXML
     private PasswordField password;
+
+    @FXML
+    private Label loginStatus;
 
     @FXML
     private ResourceBundle resources;
@@ -46,11 +50,11 @@ public class SignInController implements Controller {
         if (login.getText() == null
                 || password.getText() == null)
             return;
-
         try {
             bl.login(login.getText(), password.getText());
-            //mainGUI.showGrading();
+            loginStatus.setText("Logged in");
         } catch (UnknownUser unknownUser) {
+            loginStatus.setText("Unknown user");
             System.out.println("Unknown user");
         }
 

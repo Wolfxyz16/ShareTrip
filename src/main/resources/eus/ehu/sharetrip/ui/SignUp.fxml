@@ -24,6 +24,6 @@
         <ComboBox fx:id="roles" layoutX="166.0" layoutY="216.0" prefWidth="150.0" />
       <Label layoutX="110.0" layoutY="138.0" text="Email:" />
       <TextField fx:id="email" layoutX="164.0" layoutY="135.0" />
-      <Label fx:id="errorsLabel" layoutX="168.0" layoutY="291.0" prefHeight="36.0" prefWidth="150.0" />
+      <Label fx:id="errorsLabel" contentDisplay="CENTER" layoutX="168.0" layoutY="291.0" prefHeight="36.0" prefWidth="150.0" />
     </children>
 </AnchorPane>

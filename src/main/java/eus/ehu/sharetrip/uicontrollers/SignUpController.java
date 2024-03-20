@@ -50,6 +50,7 @@ public class SignUpController implements Controller{
         // Call the business logic to sign up the use
         try {
             bl.signup(userEmail, userName, userPassword, userRole);
+            errorsLabel.setText("Registered successfully!");
         } catch (UnknownUser e) {
             throw new RuntimeException(e);
         }

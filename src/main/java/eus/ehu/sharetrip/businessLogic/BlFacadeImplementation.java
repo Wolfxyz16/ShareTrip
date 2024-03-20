@@ -117,7 +117,7 @@ public List<String> getDestinationCities(String from){
 		dbManager.login(username, password);
 	}
 
-	public void signup(String username, String password, String email, String role) {
+	public void signup(String email, String username, String password, String role) {
 		dbManager.signup(email, username, password, role);
 	}
 
