@@ -9,7 +9,7 @@
 
 <BorderPane fx:id="mainWrapper" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.MainGUIController">
    <center>
-      <AnchorPane prefHeight="453.0" prefWidth="617.0" style="-fx-background-color: #999999; -fx-background-radius: 25;" BorderPane.alignment="CENTER">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="617.0" style="-fx-background-color: #999999; -fx-background-radius: 25;" >
          <children>
             <ImageView fitHeight="166.0" fitWidth="180.0" layoutX="127.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
                <image>
