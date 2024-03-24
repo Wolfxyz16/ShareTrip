@@ -53,6 +53,21 @@ public class MainGUIController implements Controller{
     }
 
     @FXML
+    void viewAlerts(ActionEvent event) {
+        mainGUI.showAlertOverview();
+    }
+
+    @FXML
+    void viewMessages(ActionEvent event) {
+        mainGUI.showChatOverview();
+    }
+
+    @FXML
+    void viewFavorites(ActionEvent event) {
+        mainGUI.showFavoriteOverview();
+    }
+
+    @FXML
     void queryRides(ActionEvent event) {
         mainGUI.showQueryRides();
     }

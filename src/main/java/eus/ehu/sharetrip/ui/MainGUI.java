@@ -19,7 +19,7 @@ import static javafx.application.Application.launch;
 
 public class MainGUI {
 
-    private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin;
+    private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin, favoriteOverviewWin, chatOverviewWin, alertOverviewWin;
 
     private BlFacade businessLogic;
     private Stage stage;
@@ -43,9 +43,6 @@ public class MainGUI {
             }
         });
     }
-
-
-
 
     class Window {
         Controller c;
@@ -90,6 +87,36 @@ public class MainGUI {
         setupScene(mainWin.ui, "MainTitle", 1200, 740);
     }
 
+    public void showAlertOverview() {
+        try {
+            alertOverviewWin = load("AlertOverview.fxml");
+            BorderPane.setAlignment(alertOverviewWin.ui, Pos.CENTER);
+            ((BorderPane) scene.getRoot()).setCenter(alertOverviewWin.ui);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showFavoriteOverview() {
+        try {
+            favoriteOverviewWin = load("FavoriteOverview.fxml");
+            BorderPane.setAlignment(favoriteOverviewWin.ui, Pos.CENTER);
+            ((BorderPane) scene.getRoot()).setCenter(favoriteOverviewWin.ui);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showChatOverview() {
+        try {
+            chatOverviewWin = load("ChatOverview.fxml");
+            BorderPane.setAlignment(chatOverviewWin.ui, Pos.CENTER);
+            ((BorderPane) scene.getRoot()).setCenter(chatOverviewWin.ui);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void showQueryRides() {
         try {
             queryRidesWin = load("QueryRides.fxml");
@@ -98,8 +125,6 @@ public class MainGUI {
         } catch (IOException e) {
            e.printStackTrace();
         }
-
-
     }
 
     public void showCreateRide() {
