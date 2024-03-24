@@ -8,9 +8,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="eus.ehu.sharetrip.uicontrollers.ViewAlertsController">
+            fx:controller="eus.ehu.sharetrip.uicontrollers.ViewFavoritesController">
     <children>
-        <TableView fx:id="tblAlerts" layoutX="78.0" layoutY="100.0" prefHeight="200.0" prefWidth="445.0">
+        <TableView fx:id="tblFavorite" layoutX="68.0" layoutY="100.0" prefHeight="200.0" prefWidth="445.0">
             <columns>
                 <TableColumn fx:id="qc1" prefWidth="150" text="Departure City" />
                 <TableColumn fx:id="qc2" prefWidth="150" text="Arrival City" />
@@ -20,7 +20,7 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
-        <Label fx:id="titleLabel" layoutX="240.0" layoutY="44.0" text="Your Alerts">
+        <Label fx:id="titleLabel" layoutX="212.0" layoutY="44.0" text="Your Favorites">
             <font>
                 <Font size="25.0" />
             </font></Label>
