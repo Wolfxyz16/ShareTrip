@@ -13,6 +13,8 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.skin.DatePickerSkin;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 import eus.ehu.sharetrip.ui.MainGUI;
 import eus.ehu.sharetrip.utils.Dates;
@@ -20,12 +22,15 @@ import eus.ehu.sharetrip.utils.Dates;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.YearMonth;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class QueryRidesController implements Controller {
+
+    @FXML
+    public ImageView heartView;
+
+    @FXML
+    public Button loveBtn;
 
     @FXML
     private ResourceBundle resources;
@@ -211,5 +216,18 @@ public class QueryRidesController implements Controller {
     @Override
     public void setMainApp(MainGUI mainGUI) {
         this.mainGUI = mainGUI;
+    }
+
+    @FXML
+    public void addToFavorite(ActionEvent actionEvent) {
+        /**Ride ride = tblRides.getSelectionModel().getSelectedItem();
+        if (ride != null) {
+            businessLogic.addToFavorite(ride);
+        }
+         */
+
+        Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/redHeart.png"));
+        heartView.setImage(image);
+
     }
 }
