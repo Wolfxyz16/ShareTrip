@@ -29,9 +29,12 @@ public class MainGUI {
         return businessLogic;
     }
 
+
+
     public void setBusinessLogic(BlFacade afi) {
         businessLogic = afi;
     }
+
 
     public MainGUI(BlFacade bl) {
         Platform.startup(() -> {
@@ -43,6 +46,8 @@ public class MainGUI {
             }
         });
     }
+
+
 
     class Window {
         Controller c;
@@ -169,6 +174,7 @@ public class MainGUI {
         scene.setRoot(ui);
         stage.show();
     }
+
 
       public static void main(String[] args) {
        launch();

@@ -21,6 +21,12 @@ public class MainGUIController implements Controller{
     @FXML
     public Button registerBtn;
 
+    @FXML
+    public Label userLbl;
+
+    @FXML
+    public Label userNameLbl;
+
 
     @FXML
     private Label selectOptionLbl;
@@ -45,6 +51,7 @@ public class MainGUIController implements Controller{
     private MainGUI mainGUI;
 
     private BlFacade businessLogic;
+
 
     public MainGUIController(){};
 

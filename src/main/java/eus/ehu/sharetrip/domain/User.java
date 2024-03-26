@@ -50,4 +50,12 @@ public abstract class User {
     public User() {
 
     }
+
+    public String getName() {
+        return userName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }

@@ -3,6 +3,7 @@ package eus.ehu.sharetrip.uicontrollers;
 import eus.ehu.sharetrip.businessLogic.BlFacade;
 import eus.ehu.sharetrip.domain.Driver;
 import eus.ehu.sharetrip.domain.Ride;
+import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
 import javafx.event.ActionEvent;
@@ -130,8 +131,8 @@ public class CreateRideController implements Controller {
 
                 int inputSeats = Integer.parseInt(txtNumberOfSeats.getText());
                 float price = Float.parseFloat(txtPrice.getText());
-                Driver driver = businessLogic.getCurrentDriver();
-                Ride r = businessLogic.createRide(txtDepartCity.getText(), txtArrivalCity.getText(), Dates.convertToDate(datePicker.getValue()), inputSeats, price, driver.getEmail());
+                User user = businessLogic.getCurrentUser();
+                Ride r = businessLogic.createRide(txtDepartCity.getText(), txtArrivalCity.getText(), Dates.convertToDate(datePicker.getValue()), inputSeats, price, user.getEmail());
                 displayMessage(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.RideCreated"), "success");
 
 
