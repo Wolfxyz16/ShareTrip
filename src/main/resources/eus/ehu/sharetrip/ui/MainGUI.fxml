@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -7,28 +8,31 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="mainWrapper" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.MainGUIController">
+<BorderPane fx:id="mainWrapper" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.MainGUIController">
    <center>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="617.0" style="-fx-background-color: #999999; -fx-background-radius: 25;">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1000.0" style="-fx-background-color: #999999;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="166.0" fitWidth="180.0" layoutX="127.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="401.0" fitWidth="883.0" layoutX="61.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@ShareTrip logo.png" />
                </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
             </ImageView>
-            <Label alignment="CENTER" layoutX="102.0" layoutY="302.0" prefHeight="51.0" prefWidth="230.0" style="-fx-text-fill: red; -fx-font-size: 14; -fx-font-weight: bold;" text="ARE YOU READY FOR SHARETRIP" />
+            <Label alignment="CENTER" layoutX="369.0" layoutY="515.0" prefHeight="50.0" style="-fx-text-fill: red; -fx-font-size: 14; -fx-font-weight: bold;" text="ARE YOU READY FOR SHARETRIP" />
          </children></AnchorPane>
    </center>
    <left>
-      <AnchorPane prefHeight="453.0" prefWidth="166.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="740.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="logInBtn" layoutX="16.0" layoutY="65.0" mnemonicParsing="false" onAction="#logIn" prefHeight="20.0" prefWidth="132.0" style="-fx-background-radius: 25;" text="Log-In" />
-            <Button fx:id="registerBtn" layoutX="16.0" layoutY="105.0" mnemonicParsing="false" onAction="#register" prefHeight="25.0" prefWidth="132.0" style="-fx-background-radius: 25;" text="Register" />
-            <Button fx:id="queryRidesBtn" layoutX="16.0" layoutY="210.0" mnemonicParsing="false" onAction="#queryRides" prefHeight="20.0" prefWidth="132.0" style="-fx-background-radius: 25;" text="QueryRides" />
-            <Button fx:id="createRidesBtn" layoutX="16.0" layoutY="250.0" mnemonicParsing="false" onAction="#createRide" prefHeight="20.0" prefWidth="132.0" style="-fx-background-radius: 25;" text="CreateRide" />
-            <Button fx:id="mesasgesBtn" layoutX="16.0" layoutY="290.0" mnemonicParsing="false" onAction="#viewMessages" prefHeight="20.0" prefWidth="132.0" style="-fx-background-radius: 25;" text="ViewMessages" />
-            <Button fx:id="favoritesBtn" layoutX="16.0" layoutY="330.0" mnemonicParsing="false" onAction="#viewFavorites" prefHeight="20.0" prefWidth="132.0" style="-fx-background-radius: 25;" text="ViewFavorites" />
-            <Button fx:id="alertsBtn" layoutX="16.0" layoutY="370.0" mnemonicParsing="false" onAction="#viewAlerts" prefHeight="20.0" prefWidth="132.0" style="-fx-background-radius: 25;" text="ViewAlerts" />
+            <Button fx:id="logInBtn" layoutX="25.0" layoutY="66.0" mnemonicParsing="false" onAction="#logIn" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 25;" text="Log-In" />
+            <Button fx:id="registerBtn" layoutX="25.0" layoutY="106.0" mnemonicParsing="false" onAction="#register" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 25;" text="Register" />
+            <Button fx:id="queryRidesBtn" layoutX="25.0" layoutY="179.0" mnemonicParsing="false" onAction="#queryRides" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 25;" text="QueryRides" />
+            <Button fx:id="createRidesBtn" layoutX="25.0" layoutY="251.0" mnemonicParsing="false" onAction="#createRide" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 25;" text="CreateRide" />
+            <Button fx:id="mesasgesBtn" layoutX="25.0" layoutY="291.0" mnemonicParsing="false" onAction="#viewMessages" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 25;" text="ViewMessages" />
+            <Button fx:id="favoritesBtn" layoutX="25.0" layoutY="331.0" mnemonicParsing="false" onAction="#viewFavorites" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 25;" text="ViewFavorites" />
+            <Button fx:id="alertsBtn" layoutX="25.0" layoutY="371.0" mnemonicParsing="false" onAction="#viewAlerts" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 25;" text="ViewAlerts" />
          </children>
       </AnchorPane>
    </left>
