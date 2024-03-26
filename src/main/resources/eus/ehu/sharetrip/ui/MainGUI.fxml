@@ -22,10 +22,10 @@
    <left>
       <AnchorPane prefHeight="453.0" prefWidth="166.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="queryRidesBtn" layoutX="16.0" layoutY="210.0" mnemonicParsing="false" onAction="#queryRides" prefHeight="20.0" prefWidth="132.0" style="-fx-background-radius: 25;" text="QueryRides" />
-            <Button fx:id="createRidesBtn" layoutX="16.0" layoutY="250.0" mnemonicParsing="false" onAction="#createRide" prefHeight="20.0" prefWidth="132.0" style="-fx-background-radius: 25;" text="CreateRide" />
             <Button fx:id="logInBtn" layoutX="16.0" layoutY="65.0" mnemonicParsing="false" onAction="#logIn" prefHeight="20.0" prefWidth="132.0" style="-fx-background-radius: 25;" text="Log-In" />
             <Button fx:id="registerBtn" layoutX="16.0" layoutY="105.0" mnemonicParsing="false" onAction="#register" prefHeight="25.0" prefWidth="132.0" style="-fx-background-radius: 25;" text="Register" />
+            <Button fx:id="queryRidesBtn" layoutX="16.0" layoutY="210.0" mnemonicParsing="false" onAction="#queryRides" prefHeight="20.0" prefWidth="132.0" style="-fx-background-radius: 25;" text="QueryRides" />
+            <Button fx:id="createRidesBtn" layoutX="16.0" layoutY="250.0" mnemonicParsing="false" onAction="#createRide" prefHeight="20.0" prefWidth="132.0" style="-fx-background-radius: 25;" text="CreateRide" />
             <Button fx:id="mesasgesBtn" layoutX="16.0" layoutY="290.0" mnemonicParsing="false" onAction="#viewMessages" prefHeight="20.0" prefWidth="132.0" style="-fx-background-radius: 25;" text="ViewMessages" />
             <Button fx:id="favoritesBtn" layoutX="16.0" layoutY="330.0" mnemonicParsing="false" onAction="#viewFavorites" prefHeight="20.0" prefWidth="132.0" style="-fx-background-radius: 25;" text="ViewFavorites" />
             <Button fx:id="alertsBtn" layoutX="16.0" layoutY="370.0" mnemonicParsing="false" onAction="#viewAlerts" prefHeight="20.0" prefWidth="132.0" style="-fx-background-radius: 25;" text="ViewAlerts" />

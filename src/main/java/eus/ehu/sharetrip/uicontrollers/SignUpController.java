@@ -22,13 +22,13 @@ public class SignUpController implements Controller{
     private TextField email;
 
     @FXML
+    private TextField username;
+
+    @FXML
     private PasswordField password;
 
     @FXML
     private ComboBox<String> roles;
-
-    @FXML
-    private TextField username;
 
 
     public SignUpController(BlFacade bl) {
