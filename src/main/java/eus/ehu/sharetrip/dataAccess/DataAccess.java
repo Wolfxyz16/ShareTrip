@@ -303,22 +303,23 @@ public class DataAccess {
   }
 
   public User signup(String email, String userName, String password, String role) {
-    if (role.equals("Driver")) {
-      Driver driver = new Driver(email, userName, password);
-      db.getTransaction().begin();
-      db.persist(driver);
-      db.getTransaction().commit();
-      return driver;
-    } else if (role.equals("Traveler")) {
-      Traveler traveler = new Traveler(email, userName, password);
-      db.getTransaction().begin();
-      db.persist(traveler);
-      db.getTransaction().commit();
-      return traveler;
-    }else {
-      return null;
+      if (role.equals("Driver")) {
+        Driver driver = new Driver(email, userName, password);
+        db.getTransaction().begin();
+        db.persist(driver);
+        db.getTransaction().commit();
+        return driver;
+      } else if (role.equals("Traveler")) {
+        Traveler traveler = new Traveler(email, userName, password);
+        db.getTransaction().begin();
+        db.persist(traveler);
+        db.getTransaction().commit();
+        return traveler;
+      }else {
+        return null;
+      }
     }
-  }
+
 
   public void close() {
     db.close();

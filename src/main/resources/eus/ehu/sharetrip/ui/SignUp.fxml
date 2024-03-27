@@ -17,7 +17,7 @@
         <Label layoutX="85.0" layoutY="142.0" text="Password:" />
         <PasswordField fx:id="password" layoutX="164.0" layoutY="139.0" />
       <Label layoutX="38.0" layoutY="181.0" prefHeight="18.0" prefWidth="102.0" text="Confirm password:" />
-      <PasswordField fx:id="password1" layoutX="164.0" layoutY="177.0" />
+      <PasswordField fx:id="confirmPasswd" layoutX="164.0" layoutY="177.0" />
         <Label layoutX="113.0" layoutY="220.0" text="Role:" />
         <ComboBox fx:id="roles" layoutX="166.0" layoutY="216.0" prefWidth="150.0" />
         <Button layoutX="209.0" layoutY="253.0" mnemonicParsing="false" onAction="#signUp" text="Register" />
