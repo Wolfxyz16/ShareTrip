@@ -28,6 +28,9 @@ public class SignUpController implements Controller{
     private PasswordField password;
 
     @FXML
+    private PasswordField confirmPasswd;
+
+    @FXML
     private ComboBox<String> roles;
 
 
@@ -42,7 +45,13 @@ public class SignUpController implements Controller{
         String userPassword = password.getText();
         String userRole = roles.getValue();
         String userName = username.getText();
+        String confirmPassword = confirmPasswd.getText();
 
+
+        if (!userPassword.equals(confirmPassword)) {
+            errorsLabel.setText("Passwords do not match");
+            return;
+        }
         if (userEmail.isEmpty() || userPassword.isEmpty() || userRole == null || userName.isEmpty()) {
             errorsLabel.setText("Please fill in all the fields");
             return;
