@@ -1,6 +1,7 @@
 package eus.ehu.sharetrip.uicontrollers;
 
 import eus.ehu.sharetrip.exceptions.UnknownUser;
+import eus.ehu.sharetrip.exceptions.UserAlreadyExistException;
 import eus.ehu.sharetrip.ui.MainGUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -49,7 +50,7 @@ public class SignUpController implements Controller{
 
 
         if (!userPassword.equals(confirmPassword)) {
-            errorsLabel.setText("Passwords do not match");
+            errorsLabel.setText("ERROR! Passwords do not match");
             return;
         }
         if (userEmail.isEmpty() || userPassword.isEmpty() || userRole == null || userName.isEmpty()) {
@@ -62,6 +63,8 @@ public class SignUpController implements Controller{
             errorsLabel.setText("Registered successfully!");
         } catch (UnknownUser e) {
             throw new RuntimeException(e);
+        } catch (UserAlreadyExistException e) {
+            errorsLabel.setText("ERROR! User already exists.");
         }
 
     }
