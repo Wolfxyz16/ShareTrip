@@ -7,6 +7,7 @@ import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
 import eus.ehu.sharetrip.exceptions.UnknownUser;
+import eus.ehu.sharetrip.exceptions.UserAlreadyExistException;
 
 import java.util.Date;
 import java.util.List;
@@ -117,7 +118,7 @@ public List<String> getDestinationCities(String from){
 		dbManager.login(username, password);
 	}
 
-	public void signup(String email, String username, String password, String role) {
+	public void signup(String email, String username, String password, String role) throws UserAlreadyExistException {
 		dbManager.signup(email, username, password, role);
 	}
 
