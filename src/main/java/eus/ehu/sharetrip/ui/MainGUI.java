@@ -19,8 +19,6 @@ import static javafx.application.Application.launch;
 
 public class MainGUI {
 
-    private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin, favoriteOverviewWin, chatOverviewWin, alertOverviewWin;
-
     private BlFacade businessLogic;
     private Stage stage;
     private Scene scene;
@@ -28,8 +26,6 @@ public class MainGUI {
     public BlFacade getBusinessLogic() {
         return businessLogic;
     }
-
-
 
     public void setBusinessLogic(BlFacade afi) {
         businessLogic = afi;
@@ -49,14 +45,10 @@ public class MainGUI {
 
 
 
-    class Window {
-        Controller c;
-        Parent ui;
-    }
+    public void init(Stage stage) throws IOException {
 
-    private Window load(String fxmlfile) throws IOException {
-        Window window = new Window();
-        FXMLLoader loader = new FXMLLoader(MainGUI.class.getResource(fxmlfile), ResourceBundle.getBundle("Etiquetas", Locale.getDefault()));
+        FXMLLoader loader = new FXMLLoader(MainGUI.class.getResource("MainGUI.fxml"), ResourceBundle.getBundle("Etiquetas", Locale.getDefault()));
+
         loader.setControllerFactory(controllerClass -> {
             try {
                 return controllerClass
@@ -66,114 +58,15 @@ public class MainGUI {
                 throw new RuntimeException(e);
             }
         });
-        window.ui = loader.load();
-        ((Controller) loader.getController()).setMainApp(this);
-        window.c = loader.getController();
-        return window;
-    }
 
-    public void init(Stage stage) throws IOException {
-
-        this.stage = stage;
-
-        mainWin = load("MainGUI.fxml");
-
-
-        showMain();
-
-    }
-
-//  public void start(Stage stage) throws IOException {
-//      init(stage);
-//  }
-
-
-    public void showMain() {
-        setupScene(mainWin.ui, "MainTitle", 1200, 740);
-    }
-
-    public void showAlertOverview() {
-        try {
-            alertOverviewWin = load("AlertOverview.fxml");
-            BorderPane.setAlignment(alertOverviewWin.ui, Pos.CENTER);
-            ((BorderPane) scene.getRoot()).setCenter(alertOverviewWin.ui);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void showFavoriteOverview() {
-        try {
-            favoriteOverviewWin = load("FavoriteOverview.fxml");
-            BorderPane.setAlignment(favoriteOverviewWin.ui, Pos.CENTER);
-            ((BorderPane) scene.getRoot()).setCenter(favoriteOverviewWin.ui);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void showChatOverview() {
-        try {
-            chatOverviewWin = load("ChatOverview.fxml");
-            BorderPane.setAlignment(chatOverviewWin.ui, Pos.CENTER);
-            ((BorderPane) scene.getRoot()).setCenter(chatOverviewWin.ui);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void showQueryRides() {
-        try {
-            queryRidesWin = load("QueryRides.fxml");
-            BorderPane.setAlignment(queryRidesWin.ui, Pos.CENTER);
-            ((BorderPane) scene.getRoot()).setCenter(queryRidesWin.ui);
-        } catch (IOException e) {
-           e.printStackTrace();
-        }
-    }
-
-    public void showCreateRide() {
-        try {
-            createRideWin = load("CreateRide.fxml");
-            BorderPane.setAlignment(createRideWin.ui, Pos.CENTER);
-            ((BorderPane) scene.getRoot()).setCenter(createRideWin.ui);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void showLogin() {
-        try {
-            loginWin = load("SignIn.fxml");
-            BorderPane.setAlignment(loginWin.ui, Pos.CENTER);
-            ((BorderPane) scene.getRoot()).setCenter(loginWin.ui);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void showRegister() {
-        try {
-            registerWin = load("SignUp.fxml");
-            BorderPane.setAlignment(registerWin.ui, Pos.CENTER);
-            ((BorderPane) scene.getRoot()).setCenter(registerWin.ui);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void setupScene(Parent ui, String title, int width, int height) {
-        if (scene == null) {
-            scene = new Scene(ui, width, height);
-            scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
-            stage.setScene(scene);
-        }
-        stage.setWidth(width);
-        stage.setHeight(height);
-        stage.setTitle(ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString(title));
-        scene.setRoot(ui);
+        Scene scene = new Scene(loader.load());
+        stage.setTitle("ShareTrip BorderLayout");
+        stage.setScene(scene);
+        stage.setHeight(740.0);
+        stage.setWidth(1200.0);
         stage.show();
     }
+
 
 
       public static void main(String[] args) {
