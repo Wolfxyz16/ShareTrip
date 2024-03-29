@@ -74,6 +74,6 @@ public interface BlFacade {
     List<Date> getDatesWithRides(String value, String value1);
 
     public User getUser(String username);
-    public void login(String username, String password) throws UnknownUser;
+    public User login(String username, String password) throws UnknownUser;
     public void signup(String email, String username, String password, String role) throws UnknownUser, UserAlreadyExistException;
 }

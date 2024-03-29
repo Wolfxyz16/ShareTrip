@@ -56,6 +56,7 @@ public class SignInController implements Controller {
             loginStatus.setText("Logged in");
         } catch (UnknownUser unknownUser) {
             loginStatus.setText("Unknown user");
+            mainGUI.setLabel("Unknown user");
             System.out.println("Unknown user");
         }
 
