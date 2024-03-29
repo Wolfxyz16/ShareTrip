@@ -129,6 +129,6 @@ public class MainGUI {
     }
 
     public void setLabel(String label) {
-
+        ((MainGUIController)mainWin.c).setLabel(label);
     }
 }

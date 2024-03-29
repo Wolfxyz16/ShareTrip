@@ -118,4 +118,8 @@ public class MainGUIController implements Controller{
     public BorderPane getMainWrapper() {
         return mainWrapper;
     }
+
+    public void setLabel(String label) {
+        userLbl.setText(label);
+    }
 }
