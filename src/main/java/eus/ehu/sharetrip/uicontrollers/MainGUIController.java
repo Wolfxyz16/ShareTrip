@@ -57,12 +57,15 @@ public class MainGUIController implements Controller{
 
     private BlFacade businessLogic;
 
-
     public MainGUIController(){};
 
     public MainGUIController(BlFacade blFacade){
         businessLogic = blFacade;
     }
+
+
+    @FXML
+    private BorderPane mainWrapper;
 
 
     @FXML
@@ -110,5 +113,9 @@ public class MainGUIController implements Controller{
     @Override
     public void setMainApp(MainGUI mainGUI) {
         this.mainGUI = mainGUI;
+    }
+
+    public BorderPane getMainWrapper() {
+        return mainWrapper;
     }
 }

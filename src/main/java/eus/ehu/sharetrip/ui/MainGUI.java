@@ -1,6 +1,7 @@
 package eus.ehu.sharetrip.ui;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
+import eus.ehu.sharetrip.uicontrollers.MainGUIController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,9 +24,7 @@ public class MainGUI {
 
     private BlFacade businessLogic;
 
-    @FXML
     private BorderPane mainWrapper;
-
 
     public BlFacade getBusinessLogic() {
         return businessLogic;
@@ -69,10 +68,12 @@ public class MainGUI {
 
             Parent ui = loader.load();
             Controller controller = loader.getController();
+            controller.setMainApp(this);
 
             Window window = new Window();
             window.c = controller;
             window.ui = ui;
+
             return window;
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -81,6 +82,7 @@ public class MainGUI {
     }
 
     public void showScene(String scene) {
+
         switch (scene) {
             case "View Alert" -> mainWrapper.setCenter(alertOverviewWin.ui);
             case "View Messages" -> mainWrapper.setCenter(chatOverviewWin.ui);
@@ -96,6 +98,8 @@ public class MainGUI {
     public void init(Stage stage) throws IOException {
 
         mainWin = load("MainGUI.fxml");
+        mainWrapper = ((MainGUIController)mainWin.c).getMainWrapper();
+
         createRideWin = load("CreateRide.fxml");
         queryRidesWin = load("QueryRides.fxml");
         loginWin = load("SignIn.fxml");
@@ -108,8 +112,11 @@ public class MainGUI {
     }
 
     private void showMain(Stage stage) {
-        mainWrapper.setCenter(mainWin.ui);
 
+        // set stage's scene
+        Scene scene = new Scene(mainWin.ui);
+        scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+        stage.setScene(scene);
         stage.setTitle("ShareTrip BorderLayout");
         stage.setHeight(740.0);
         stage.setWidth(1200.0);
