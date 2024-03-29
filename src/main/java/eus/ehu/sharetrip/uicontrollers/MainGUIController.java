@@ -25,6 +25,7 @@ public class MainGUIController implements Controller{
     }
 
     private Window load(String fxml) {
+        /**
         try {
             FXMLLoader loader = new FXMLLoader( getClass().getResource(fxml) );
             Parent ui = loader.load();
@@ -38,6 +39,30 @@ public class MainGUIController implements Controller{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+         **/
+        try {
+            FXMLLoader loader = new FXMLLoader( MainGUI.class.getResource(fxml), ResourceBundle.getBundle("Etiquetas", Locale.getDefault() ));
+            loader.setControllerFactory( controllerClass -> {
+                try {
+                    return controllerClass
+                            .getConstructor(BlFacade.class)
+                            .newInstance(businessLogic);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+            Parent ui = loader.load();
+            Controller controller = loader.getController();
+
+            Window window = new Window();
+            window.c = controller;
+            window.ui = ui;
+            return window;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @FXML
@@ -132,10 +157,10 @@ public class MainGUIController implements Controller{
          * With every new view should be loaded in this method
          */
         mainWin = load("MainGUI.fxml");
-        createRideWin = load("CreateRide.fxml");
-        queryRidesWin = load("QueryRides.fxml");
-        loginWin = load("SignIn.fxml");
-        registerWin = load("SignUp.fxml");
+        // createRideWin = load("CreateRide.fxml");
+        // queryRidesWin = load("QueryRides.fxml");
+        // loginWin = load("SignIn.fxml");
+        // registerWin = load("SignUp.fxml");
         // favoriteOverviewWin = load("xxxx");
         // chatOverviewWin = load("xxxx");
         // alertOverviewWin = load("xxxx");
