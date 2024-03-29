@@ -20,8 +20,8 @@ import static javafx.application.Application.launch;
 public class MainGUI {
 
     private BlFacade businessLogic;
-    private Stage stage;
     private Scene scene;
+    private Stage stage;
 
     public BlFacade getBusinessLogic() {
         return businessLogic;
@@ -58,6 +58,7 @@ public class MainGUI {
                 throw new RuntimeException(e);
             }
         });
+
 
         Scene scene = new Scene(loader.load());
         stage.setTitle("ShareTrip BorderLayout");

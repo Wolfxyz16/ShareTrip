@@ -153,25 +153,23 @@ public class MainGUIController implements Controller{
 
     @FXML
     void initialize() {
-        /**
-         * With every new view should be loaded in this method
-         */
-        mainWin = load("MainGUI.fxml");
-        // createRideWin = load("CreateRide.fxml");
-        // queryRidesWin = load("QueryRides.fxml");
-        // loginWin = load("SignIn.fxml");
-        // registerWin = load("SignUp.fxml");
-        // favoriteOverviewWin = load("xxxx");
-        // chatOverviewWin = load("xxxx");
-        // alertOverviewWin = load("xxxx");
 
-        showScene("mainWin");
+
+        createRideWin = load("CreateRide.fxml");
+        queryRidesWin = load("QueryRides.fxml");
+        loginWin = load("SignIn.fxml");
+        registerWin = load("SignUp.fxml");
+        favoriteOverviewWin = load("FavoriteOverview.fxml");
+        chatOverviewWin = load("ChatOverview.fxml");
+        alertOverviewWin = load("AlertOverview.fxml");
+
 
 
     }
 
     private void showScene(String scene) {
         switch (scene) {
+
             case "View Alert" -> mainWrapper.setCenter(alertOverviewWin.ui);
             case "View Messages" -> mainWrapper.setCenter(chatOverviewWin.ui);
             case "View Favorites" -> mainWrapper.setCenter(favoriteOverviewWin.ui);
