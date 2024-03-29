@@ -24,9 +24,6 @@ public class ApplicationLauncher {
         businessLogic = new BlFacadeImplementation();
 
 
-      Driver driver=new Driver("driver3@gmail.com","Test Driver","1234");
-      businessLogic.setCurrentDriver(driver);
-
       new MainGUI(businessLogic);
       }
     }

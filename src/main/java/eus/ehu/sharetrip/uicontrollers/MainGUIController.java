@@ -3,14 +3,55 @@ package eus.ehu.sharetrip.uicontrollers;
 import eus.ehu.sharetrip.businessLogic.BlFacade;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import eus.ehu.sharetrip.ui.MainGUI;
+import javafx.scene.layout.BorderPane;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class MainGUIController implements Controller{
+
+    private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin, favoriteOverviewWin, chatOverviewWin, alertOverviewWin;
+
+    class Window {
+        Controller c;
+        Parent ui;
+    }
+
+    private Window load(String fxml) {
+        try {
+            FXMLLoader loader = new FXMLLoader( MainGUI.class.getResource(fxml), ResourceBundle.getBundle("Etiquetas", Locale.getDefault() ));
+            loader.setControllerFactory( controllerClass -> {
+                try {
+                    return controllerClass
+                            .getConstructor(BlFacade.class)
+                            .newInstance(businessLogic);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+            Parent ui = loader.load();
+            Controller controller = loader.getController();
+
+            Window window = new Window();
+            window.c = controller;
+            window.ui = ui;
+            return window;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    @FXML
+    private BorderPane mainWrapper;
 
     @FXML
     public Button createRidesBtn;
@@ -20,6 +61,12 @@ public class MainGUIController implements Controller{
 
     @FXML
     public Button registerBtn;
+
+    @FXML
+    public Label userLbl;
+
+    @FXML
+    public Label userNameLbl;
 
 
     @FXML
@@ -46,6 +93,7 @@ public class MainGUIController implements Controller{
 
     private BlFacade businessLogic;
 
+
     public MainGUIController(){};
 
     public MainGUIController(BlFacade blFacade){
@@ -54,45 +102,60 @@ public class MainGUIController implements Controller{
 
     @FXML
     void viewAlerts(ActionEvent event) {
-        mainGUI.showAlertOverview();
+        showScene("View Alert");
     }
 
     @FXML
     void viewMessages(ActionEvent event) {
-        mainGUI.showChatOverview();
+        showScene("View Messages");
     }
 
     @FXML
     void viewFavorites(ActionEvent event) {
-        mainGUI.showFavoriteOverview();
+        showScene("View Favorites");
     }
 
     @FXML
     void queryRides(ActionEvent event) {
-        mainGUI.showQueryRides();
+        showScene("Query Rides");
     }
 
     @FXML
     void createRide(ActionEvent event) {
-        mainGUI.showCreateRide();
+        showScene("Create Ride");
     }
 
     @FXML
     void logIn(ActionEvent actionEvent) {
-        mainGUI.showLogin();
+        showScene("Log in");
     }
 
     @FXML
     void register(ActionEvent actionEvent) {
-        mainGUI.showRegister();
+        showScene("Register");
     }
-
 
     @FXML
     void initialize() {
+        createRideWin = load("CreateRide.fxml");
+        queryRidesWin = load("QueryRides.fxml");
+        loginWin = load("SignIn.fxml");
+        registerWin = load("SignUp.fxml");
+        favoriteOverviewWin = load("FavoriteOverview.fxml");
+        chatOverviewWin = load("ChatOverview.fxml");
+        alertOverviewWin = load("AlertOverview.fxml");
+    }
 
-            // set current driver name
-            // lblDriver.setText(businessLogic.getCurrentDriver().getName());
+    private void showScene(String scene) {
+        switch (scene) {
+            case "View Alert" -> mainWrapper.setCenter(alertOverviewWin.ui);
+            case "View Messages" -> mainWrapper.setCenter(chatOverviewWin.ui);
+            case "View Favorites" -> mainWrapper.setCenter(favoriteOverviewWin.ui);
+            case "Query Rides" -> mainWrapper.setCenter(queryRidesWin.ui);
+            case "Create Ride" -> mainWrapper.setCenter(createRideWin.ui);
+            case "Log in" -> mainWrapper.setCenter(loginWin.ui);
+            case "Register" -> mainWrapper.setCenter(registerWin.ui);
+        }
     }
 
     @Override

@@ -4,6 +4,7 @@ import eus.ehu.sharetrip.configuration.Config;
 import eus.ehu.sharetrip.dataAccess.DataAccess;
 import eus.ehu.sharetrip.domain.Driver;
 import eus.ehu.sharetrip.domain.Ride;
+import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
 import eus.ehu.sharetrip.exceptions.UnknownUser;
@@ -21,7 +22,7 @@ public class BlFacadeImplementation implements BlFacade {
 
 	DataAccess dbManager;
 	Config config = Config.getInstance();
-	private Driver currentDriver;
+	private User currentUser;
 
 	public BlFacadeImplementation()  {
 		System.out.println("Creating BlFacadeImplementation instance");
@@ -76,14 +77,13 @@ public class BlFacadeImplementation implements BlFacade {
 		return dates;
 	}
 
-	@Override
-	public void setCurrentDriver(Driver driver) {
-		this.currentDriver = driver;
+	public void setCurrentUser(User user) {
+		this.currentUser = user;
 	}
 
 	@Override
-	public Driver getCurrentDriver() {
-		return this.currentDriver;
+	public User getCurrentUser() {
+		return this.currentUser;
 	}
 
 	public void close() {
@@ -114,8 +114,12 @@ public List<String> getDestinationCities(String from){
 		return dates;
 	}
 
-	public void login(String username, String password) throws UnknownUser {
-		dbManager.login(username, password);
+	public User login(String username, String password) throws UnknownUser {
+		return dbManager.login(username, password);
+	}
+
+	public User getUser(String username) {
+		return dbManager.getUser(username);
 	}
 
 	public void signup(String email, String username, String password, String role) throws UserAlreadyExistException {
