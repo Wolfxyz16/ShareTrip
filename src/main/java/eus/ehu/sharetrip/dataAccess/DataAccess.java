@@ -9,8 +9,10 @@ import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
 import eus.ehu.sharetrip.exceptions.UnknownUser;
+import eus.ehu.sharetrip.exceptions.UserAlreadyExistException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -302,23 +304,34 @@ public class DataAccess {
     return user;
   }
 
-  public User signup(String email, String userName, String password, String role) {
-    if (role.equals("Driver")) {
-      Driver driver = new Driver(email, userName, password);
-      db.getTransaction().begin();
-      db.persist(driver);
-      db.getTransaction().commit();
-      return driver;
-    } else if (role.equals("Traveler")) {
-      Traveler traveler = new Traveler(email, userName, password);
-      db.getTransaction().begin();
-      db.persist(traveler);
-      db.getTransaction().commit();
-      return traveler;
-    }else {
-      return null;
+  public User signup(String email, String userName, String password, String role) throws UserAlreadyExistException {
+    TypedQuery<User> query = db.createQuery(
+            "SELECT u FROM User u WHERE u.email = :email OR u.userName = :userName", User.class);
+    query.setParameter("email", email);
+    query.setParameter("userName", userName);
+
+    try {
+      User existingUser = query.getSingleResult();
+      throw new UserAlreadyExistException();
+    } catch (NoResultException e) {
+        if (role.equals("Driver")) {
+          Driver driver = new Driver(email, userName, password);
+          db.getTransaction().begin();
+          db.persist(driver);
+          db.getTransaction().commit();
+          return driver;
+        } else if (role.equals("Traveler")) {
+          Traveler traveler = new Traveler(email, userName, password);
+          db.getTransaction().begin();
+          db.persist(traveler);
+          db.getTransaction().commit();
+          return traveler;
+        } else {
+          return null;
+        }
+      }
     }
-  }
+
 
   public void close() {
     db.close();
