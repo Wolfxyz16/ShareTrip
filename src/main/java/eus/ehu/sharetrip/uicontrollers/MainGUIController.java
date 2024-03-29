@@ -25,21 +25,6 @@ public class MainGUIController implements Controller{
     }
 
     private Window load(String fxml) {
-        /**
-        try {
-            FXMLLoader loader = new FXMLLoader( getClass().getResource(fxml) );
-            Parent ui = loader.load();
-            Controller controller = loader.getController();
-
-            Window window = new Window();
-            window.c = controller;
-            window.ui = ui;
-            return window;
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-         **/
         try {
             FXMLLoader loader = new FXMLLoader( MainGUI.class.getResource(fxml), ResourceBundle.getBundle("Etiquetas", Locale.getDefault() ));
             loader.setControllerFactory( controllerClass -> {
@@ -150,11 +135,8 @@ public class MainGUIController implements Controller{
         showScene("Register");
     }
 
-
     @FXML
     void initialize() {
-
-
         createRideWin = load("CreateRide.fxml");
         queryRidesWin = load("QueryRides.fxml");
         loginWin = load("SignIn.fxml");
@@ -162,14 +144,10 @@ public class MainGUIController implements Controller{
         favoriteOverviewWin = load("FavoriteOverview.fxml");
         chatOverviewWin = load("ChatOverview.fxml");
         alertOverviewWin = load("AlertOverview.fxml");
-
-
-
     }
 
     private void showScene(String scene) {
         switch (scene) {
-
             case "View Alert" -> mainWrapper.setCenter(alertOverviewWin.ui);
             case "View Messages" -> mainWrapper.setCenter(chatOverviewWin.ui);
             case "View Favorites" -> mainWrapper.setCenter(favoriteOverviewWin.ui);

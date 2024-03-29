@@ -31,7 +31,6 @@ public class MainGUI {
         businessLogic = afi;
     }
 
-
     public MainGUI(BlFacade bl) {
         Platform.startup(() -> {
             try {
@@ -42,8 +41,6 @@ public class MainGUI {
             }
         });
     }
-
-
 
     public void init(Stage stage) throws IOException {
 
@@ -59,7 +56,6 @@ public class MainGUI {
             }
         });
 
-
         Scene scene = new Scene(loader.load());
         stage.setTitle("ShareTrip BorderLayout");
         stage.setScene(scene);
@@ -67,8 +63,6 @@ public class MainGUI {
         stage.setWidth(1200.0);
         stage.show();
     }
-
-
 
       public static void main(String[] args) {
        launch();
