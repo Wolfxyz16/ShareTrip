@@ -57,7 +57,7 @@ public class MainGUIController implements Controller{
 
     private BlFacade businessLogic;
 
-    public MainGUIController(){};
+    //public MainGUIController(){};
 
     public MainGUIController(BlFacade blFacade){
         businessLogic = blFacade;
@@ -119,7 +119,7 @@ public class MainGUIController implements Controller{
         return mainWrapper;
     }
 
-    public void setLabel(String label) {
+    public void setUserName(String label) {
         userLbl.setText(label);
     }
 }

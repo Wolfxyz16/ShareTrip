@@ -128,7 +128,7 @@ public class MainGUI {
        launch();
     }
 
-    public void setLabel(String label) {
-        ((MainGUIController)mainWin.c).setLabel(label);
+    public void setUserName(String label) {
+        ((MainGUIController)mainWin.c).setUserName(label);
     }
 }
