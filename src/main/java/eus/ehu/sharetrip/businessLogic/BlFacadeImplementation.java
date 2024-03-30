@@ -3,6 +3,7 @@ package eus.ehu.sharetrip.businessLogic;
 import eus.ehu.sharetrip.configuration.Config;
 import eus.ehu.sharetrip.dataAccess.DataAccess;
 import eus.ehu.sharetrip.domain.Driver;
+import eus.ehu.sharetrip.domain.Message;
 import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
@@ -126,4 +127,7 @@ public List<String> getDestinationCities(String from){
 		dbManager.signup(email, username, password, role);
 	}
 
+	public List<Message> getMessages() {
+		return dbManager.getMessages();
+	}
 }

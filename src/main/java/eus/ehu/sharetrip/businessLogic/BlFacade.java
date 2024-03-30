@@ -1,5 +1,6 @@
 package eus.ehu.sharetrip.businessLogic;
 
+import eus.ehu.sharetrip.domain.Message;
 import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
@@ -76,4 +77,6 @@ public interface BlFacade {
     public User getUser(String username);
     public User login(String username, String password) throws UnknownUser;
     public void signup(String email, String username, String password, String role) throws UnknownUser, UserAlreadyExistException;
+
+    public  List<Message> getMessages();
 }
