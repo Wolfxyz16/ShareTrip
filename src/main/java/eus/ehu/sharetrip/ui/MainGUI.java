@@ -1,7 +1,10 @@
 package eus.ehu.sharetrip.ui;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
+import eus.ehu.sharetrip.uicontrollers.MainGUIController;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -20,8 +23,8 @@ import static javafx.application.Application.launch;
 public class MainGUI {
 
     private BlFacade businessLogic;
-    private Scene scene;
-    private Stage stage;
+
+    private BorderPane mainWrapper;
 
     public BlFacade getBusinessLogic() {
         return businessLogic;
@@ -42,29 +45,90 @@ public class MainGUI {
         });
     }
 
+
+    private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin, favoriteOverviewWin, chatOverviewWin, alertOverviewWin;
+
+    class Window {
+        Controller c;
+        Parent ui;
+    }
+
+    private Window load(String fxml) {
+        try {
+            FXMLLoader loader = new FXMLLoader( MainGUI.class.getResource(fxml), ResourceBundle.getBundle("Etiquetas", Locale.getDefault() ));
+            loader.setControllerFactory( controllerClass -> {
+                try {
+                    return controllerClass
+                            .getConstructor(BlFacade.class)
+                            .newInstance(businessLogic);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+            Parent ui = loader.load();
+            Controller controller = loader.getController();
+            controller.setMainApp(this);
+
+            Window window = new Window();
+            window.c = controller;
+            window.ui = ui;
+
+            return window;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void showScene(String scene) {
+
+        switch (scene) {
+            case "View Alert" -> mainWrapper.setCenter(alertOverviewWin.ui);
+            case "View Messages" -> mainWrapper.setCenter(chatOverviewWin.ui);
+            case "View Favorites" -> mainWrapper.setCenter(favoriteOverviewWin.ui);
+            case "Query Rides" -> mainWrapper.setCenter(queryRidesWin.ui);
+            case "Create Ride" -> mainWrapper.setCenter(createRideWin.ui);
+            case "Log in" -> mainWrapper.setCenter(loginWin.ui);
+            case "Register" -> mainWrapper.setCenter(registerWin.ui);
+        }
+    }
+
+
     public void init(Stage stage) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(MainGUI.class.getResource("MainGUI.fxml"), ResourceBundle.getBundle("Etiquetas", Locale.getDefault()));
+        mainWin = load("MainGUI.fxml");
+        mainWrapper = ((MainGUIController)mainWin.c).getMainWrapper();
 
-        loader.setControllerFactory(controllerClass -> {
-            try {
-                return controllerClass
-                        .getConstructor(BlFacade.class)
-                        .newInstance(businessLogic);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
+        createRideWin = load("CreateRide.fxml");
+        queryRidesWin = load("QueryRides.fxml");
+        loginWin = load("SignIn.fxml");
+        registerWin = load("SignUp.fxml");
+        favoriteOverviewWin = load("FavoriteOverview.fxml");
+        chatOverviewWin = load("ChatOverview.fxml");
+        alertOverviewWin = load("AlertOverview.fxml");
 
-        Scene scene = new Scene(loader.load());
-        stage.setTitle("ShareTrip BorderLayout");
+        showMain(stage);
+    }
+
+    private void showMain(Stage stage) {
+
+        // set stage's scene
+        Scene scene = new Scene(mainWin.ui);
+        scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
         stage.setScene(scene);
+        stage.setTitle("ShareTrip BorderLayout");
         stage.setHeight(740.0);
         stage.setWidth(1200.0);
+
         stage.show();
     }
 
-      public static void main(String[] args) {
+    public static void main(String[] args) {
        launch();
+    }
+
+    public void setUserName(String label) {
+        ((MainGUIController)mainWin.c).setUserName(label);
     }
 }
