@@ -18,6 +18,15 @@ import java.util.ResourceBundle;
 public class MainGUIController implements Controller{
 
     @FXML
+    private Button alertsBtn;
+
+    @FXML
+    private Button favoritesBtn;
+
+    @FXML
+    private Button mesasgesBtn;
+
+    @FXML
     public Button createRidesBtn;
 
     @FXML
@@ -25,6 +34,9 @@ public class MainGUIController implements Controller{
 
     @FXML
     public Button registerBtn;
+
+    @FXML
+    public Button signOutBtn;
 
     @FXML
     public Label userLbl;
@@ -44,10 +56,6 @@ public class MainGUIController implements Controller{
     private Button queryRidesBtn;
 
     @FXML
-    private Button createRideBtn;
-
-
-    @FXML
     private ResourceBundle resources;
 
     @FXML
@@ -56,6 +64,9 @@ public class MainGUIController implements Controller{
     private MainGUI mainGUI;
 
     private BlFacade businessLogic;
+
+    private boolean isLoggedIn;
+
 
     //public MainGUIController(){};
 
@@ -109,6 +120,12 @@ public class MainGUIController implements Controller{
         mainGUI.showScene("Register");
     }
 
+    @FXML
+    void signOut(ActionEvent actionEvent) {
+        mainGUI.setIsLoggedIn(false);
+        mainGUI.setUserName("");
+    }
+
 
     @Override
     public void setMainApp(MainGUI mainGUI) {
@@ -121,5 +138,30 @@ public class MainGUIController implements Controller{
 
     public void setUserName(String label) {
         userLbl.setText(label);
+    }
+
+    public void initializeButtonVisibility() {
+        logInBtn.setVisible(true);
+        registerBtn.setVisible(true);
+        queryRidesBtn.setVisible(true);
+        createRidesBtn.setVisible(false);
+        alertsBtn.setVisible(false);
+        favoritesBtn.setVisible(false);
+        mesasgesBtn.setVisible(false);
+        signOutBtn.setVisible(false);
+    }
+    public void setIsLoggedIn(boolean isLoggedIn) {
+        this.isLoggedIn = isLoggedIn;
+        updateButtonVisibility();
+    }
+    private void updateButtonVisibility() {
+        logInBtn.setVisible(!isLoggedIn);
+        registerBtn.setVisible(!isLoggedIn);
+        queryRidesBtn.setVisible(isLoggedIn);
+        createRidesBtn.setVisible(isLoggedIn);
+        alertsBtn.setVisible(isLoggedIn);
+        favoritesBtn.setVisible(isLoggedIn);
+        mesasgesBtn.setVisible(isLoggedIn);
+        signOutBtn.setVisible(isLoggedIn);
     }
 }

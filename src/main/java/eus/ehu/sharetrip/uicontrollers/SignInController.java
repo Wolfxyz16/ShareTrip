@@ -56,6 +56,7 @@ public class SignInController implements Controller {
             mainGUI.setUserName(bl.getCurrentUser().getName());
             loginStatus.setText("Logged in");
             loginStatus.getStyleClass().setAll("label", "lbl-success");
+            mainGUI.setIsLoggedIn(true);
         } catch (UnknownUser unknownUser) {
             loginStatus.setText("Unknown user");
             loginStatus.getStyleClass().setAll("label", "lbl-danger");

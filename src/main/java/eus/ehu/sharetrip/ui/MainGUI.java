@@ -108,6 +108,8 @@ public class MainGUI {
         chatOverviewWin = load("ChatOverview.fxml");
         alertOverviewWin = load("AlertOverview.fxml");
 
+        ((MainGUIController)mainWin.c).initializeButtonVisibility();
+
         showMain(stage);
     }
 
@@ -130,5 +132,9 @@ public class MainGUI {
 
     public void setUserName(String label) {
         ((MainGUIController)mainWin.c).setUserName(label);
+    }
+
+    public void setIsLoggedIn(boolean isLoggedIn) {
+        ((MainGUIController)mainWin.c).setIsLoggedIn(isLoggedIn);
     }
 }
