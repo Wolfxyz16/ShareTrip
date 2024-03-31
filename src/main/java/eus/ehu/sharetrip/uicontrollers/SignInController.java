@@ -53,7 +53,7 @@ public class SignInController implements Controller {
             return;
         try {
             bl.setCurrentUser(bl.login(login.getText(), password.getText()));
-            mainGUI.setUserName(bl.getCurrentUser().getName());
+            mainGUI.setUserName(login.getText());
             loginStatus.setText("Logged in");
             loginStatus.getStyleClass().setAll("label", "lbl-success");
             mainGUI.setIsLoggedIn(true);

@@ -137,7 +137,7 @@ public class MainGUIController implements Controller{
     }
 
     public void setUserName(String label) {
-        userLbl.setText(label);
+        userNameLbl.setText(label);
     }
 
     public void initializeButtonVisibility() {
@@ -163,5 +163,7 @@ public class MainGUIController implements Controller{
         favoritesBtn.setVisible(isLoggedIn);
         mesasgesBtn.setVisible(isLoggedIn);
         signOutBtn.setVisible(isLoggedIn);
+        userNameLbl.setVisible(isLoggedIn);
+        userLbl.setVisible(isLoggedIn);
     }
 }

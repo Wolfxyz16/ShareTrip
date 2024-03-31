@@ -35,7 +35,7 @@
             <Button fx:id="favoritesBtn" layoutX="16.0" layoutY="330.0" mnemonicParsing="false" onAction="#viewFavorites" prefHeight="20.0" prefWidth="132.0" style="-fx-background-radius: 25;" text="ViewFavorites" />
             <Button fx:id="alertsBtn" layoutX="16.0" layoutY="370.0" mnemonicParsing="false" onAction="#viewAlerts" prefHeight="20.0" prefWidth="132.0" style="-fx-background-radius: 25;" text="ViewAlerts" />
             <Label fx:id="userLbl" layoutX="16.0" layoutY="403.0" text="User:" />
-            <Label fx:id="userNameLbl" layoutX="16.0" layoutY="420.0" />
+            <Label fx:id="userNameLbl" layoutX="16.0" layoutY="420.0" text=" "/>
             <Button fx:id="signOutBtn" layoutX="16.0" layoutY="653.0" mnemonicParsing="false" onAction="#signOut" prefHeight="20.0" prefWidth="132.0" style="-fx-background-radius: 25;" text="SignOut" />
          </children>
       </AnchorPane>
