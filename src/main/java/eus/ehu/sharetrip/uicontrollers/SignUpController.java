@@ -51,20 +51,24 @@ public class SignUpController implements Controller{
 
         if (!userPassword.equals(confirmPassword)) {
             errorsLabel.setText("ERROR! Passwords do not match");
+            errorsLabel.getStyleClass().setAll("label", "lbl-danger");
             return;
         }
         if (userEmail.isEmpty() || userPassword.isEmpty() || userRole == null || userName.isEmpty()) {
             errorsLabel.setText("Please fill in all the fields");
+            errorsLabel.getStyleClass().setAll("label", "lbl-danger");
             return;
         }
         // Call the business logic to sign up the use
         try {
             bl.signup(userEmail, userName, userPassword, userRole);
             errorsLabel.setText("Registered successfully!");
+            errorsLabel.getStyleClass().setAll("label", "lbl-success");
         } catch (UnknownUser e) {
             throw new RuntimeException(e);
         } catch (UserAlreadyExistException e) {
             errorsLabel.setText("ERROR! User already exists.");
+            errorsLabel.getStyleClass().setAll("label", "lbl-danger");
         }
 
     }
