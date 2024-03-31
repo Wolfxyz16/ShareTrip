@@ -36,6 +36,9 @@ public class MainGUIController implements Controller{
     public Button registerBtn;
 
     @FXML
+    public Button signOutBtn;
+
+    @FXML
     public Label userLbl;
 
     @FXML
@@ -117,6 +120,12 @@ public class MainGUIController implements Controller{
         mainGUI.showScene("Register");
     }
 
+    @FXML
+    void signOut(ActionEvent actionEvent) {
+        mainGUI.setIsLoggedIn(false);
+        mainGUI.setUserName("");
+    }
+
 
     @Override
     public void setMainApp(MainGUI mainGUI) {
@@ -139,6 +148,7 @@ public class MainGUIController implements Controller{
         alertsBtn.setVisible(false);
         favoritesBtn.setVisible(false);
         mesasgesBtn.setVisible(false);
+        signOutBtn.setVisible(false);
     }
     public void setIsLoggedIn(boolean isLoggedIn) {
         this.isLoggedIn = isLoggedIn;
@@ -152,5 +162,6 @@ public class MainGUIController implements Controller{
         alertsBtn.setVisible(isLoggedIn);
         favoritesBtn.setVisible(isLoggedIn);
         mesasgesBtn.setVisible(isLoggedIn);
+        signOutBtn.setVisible(isLoggedIn);
     }
 }

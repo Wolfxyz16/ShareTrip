@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="mainWrapper" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.MainGUIController">
+<BorderPane fx:id="mainWrapper" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.MainGUIController">
    <center>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1000.0" style="-fx-background-color: #999999;" BorderPane.alignment="CENTER">
          <children>
@@ -21,7 +21,8 @@
                </viewport>
             </ImageView>
             <Label alignment="CENTER" layoutX="369.0" layoutY="515.0" prefHeight="50.0" style="-fx-text-fill: red; -fx-font-size: 14; -fx-font-weight: bold;" text="ARE YOU READY FOR SHARETRIP" />
-         </children></AnchorPane>
+         </children>
+      </AnchorPane>
    </center>
    <left>
       <AnchorPane prefHeight="740.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -35,6 +36,7 @@
             <Button fx:id="alertsBtn" layoutX="16.0" layoutY="370.0" mnemonicParsing="false" onAction="#viewAlerts" prefHeight="20.0" prefWidth="132.0" style="-fx-background-radius: 25;" text="ViewAlerts" />
             <Label fx:id="userLbl" layoutX="16.0" layoutY="403.0" text="User:" />
             <Label fx:id="userNameLbl" layoutX="16.0" layoutY="420.0" />
+            <Button fx:id="signOutBtn" layoutX="16.0" layoutY="653.0" mnemonicParsing="false" onAction="#signOut" prefHeight="20.0" prefWidth="132.0" style="-fx-background-radius: 25;" text="SignOut" />
          </children>
       </AnchorPane>
    </left>
