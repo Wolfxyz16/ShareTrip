@@ -6,6 +6,7 @@ import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.domain.Driver;
 import eus.ehu.sharetrip.domain.Traveler;
 import eus.ehu.sharetrip.domain.User;
+import eus.ehu.sharetrip.domain.Message;
 import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
 import eus.ehu.sharetrip.exceptions.UnknownUser;
@@ -104,6 +105,8 @@ public class DataAccess {
       }
 
 
+
+
       //Create drivers
       Driver driver1 = new Driver("driver1@gmail.com", "Aitor Fernandez", "1234");
       Driver driver2 = new Driver("driver2@gmail.com", "Ane Gaztañaga", "1234");
@@ -126,9 +129,18 @@ public class DataAccess {
       driver3.addRide("Bilbo", "Donostia", UtilDate.newDate(year, month, 14), 1, 3);
 
 
+      //Create users
+      User user1 = new User("user1@gmail.com", "User1", "1234");
+      User user2 = new User("user2@gmail.com", "User2", "1234");
+      //CREATE MESSAGES
+      Message message1 = new Message("Hello",  user1, user2);
+
       db.persist(driver1);
       db.persist(driver2);
       db.persist(driver3);
+      db.persist(user1);
+      db.persist(user2);
+      db.persist(message1);
 
 
       db.getTransaction().commit();
@@ -338,4 +350,8 @@ public class DataAccess {
     System.out.println("DataBase is closed");
   }
 
+  public List<Message> getMessages() {
+    TypedQuery<Message> query = db.createQuery("SELECT m FROM Message m", Message.class);
+    return query.getResultList();
+  }
 }

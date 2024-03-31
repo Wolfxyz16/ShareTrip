@@ -1,12 +1,17 @@
 package eus.ehu.sharetrip.domain;
 
 import jakarta.persistence.*;
+import org.apache.logging.log4j.spi.MessageFactory2Adapter;
+
+import java.util.ArrayList;
+import java.util.Vector;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "USERS") // Renames the table to avoid using a reserved keyword
 @DiscriminatorColumn(name = "USER_TYPE", discriminatorType = DiscriminatorType.STRING)
-public abstract class User {
+public class User {
+
 
     private String email;
     @Id
@@ -44,6 +49,8 @@ public abstract class User {
         this.userName = name;
         this.password = password;
         this.email = email;
+
+
     }
 
 
@@ -58,4 +65,6 @@ public abstract class User {
     public String getEmail() {
         return email;
     }
+
+
 }
