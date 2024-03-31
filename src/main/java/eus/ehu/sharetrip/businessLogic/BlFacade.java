@@ -1,7 +1,8 @@
 package eus.ehu.sharetrip.businessLogic;
 
-import eus.ehu.sharetrip.domain.Driver;
+import eus.ehu.sharetrip.domain.Message;
 import eus.ehu.sharetrip.domain.Ride;
+import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
 import eus.ehu.sharetrip.exceptions.UnknownUser;
@@ -46,9 +47,9 @@ public interface BlFacade {
     public Vector<Date> getEventsMonth(Date date);
 
 
-    void setCurrentDriver(Driver driver);
+    void setCurrentUser(User user);
 
-    Driver getCurrentDriver();
+    User getCurrentUser();
 
     Ride createRide(String text, String text1, Date date, int inputSeats, float price, String email) throws RideMustBeLaterThanTodayException, RideAlreadyExistException;
 
@@ -73,6 +74,9 @@ public interface BlFacade {
 
     List<Date> getDatesWithRides(String value, String value1);
 
-    public void login(String username, String password) throws UnknownUser;
+    public User getUser(String username);
+    public User login(String username, String password) throws UnknownUser;
     public void signup(String email, String username, String password, String role) throws UnknownUser, UserAlreadyExistException;
+
+    public  List<Message> getMessages();
 }

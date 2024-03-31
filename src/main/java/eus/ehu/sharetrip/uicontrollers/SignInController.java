@@ -1,6 +1,7 @@
 package eus.ehu.sharetrip.uicontrollers;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
+import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.exceptions.UnknownUser;
 import eus.ehu.sharetrip.ui.MainGUI;
 import javafx.collections.FXCollections;
@@ -51,12 +52,14 @@ public class SignInController implements Controller {
                 || password.getText() == null)
             return;
         try {
-            bl.login(login.getText(), password.getText());
+            bl.setCurrentUser(bl.login(login.getText(), password.getText()));
+            mainGUI.setUserName(bl.getCurrentUser().getName());
             loginStatus.setText("Logged in");
             loginStatus.getStyleClass().setAll("label", "lbl-success");
         } catch (UnknownUser unknownUser) {
             loginStatus.setText("Unknown user");
             loginStatus.getStyleClass().setAll("label", "lbl-danger");
+            mainGUI.setUserName("Unknown user");
             System.out.println("Unknown user");
 
         }

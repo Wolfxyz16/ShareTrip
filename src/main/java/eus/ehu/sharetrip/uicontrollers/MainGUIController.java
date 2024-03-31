@@ -3,11 +3,16 @@ package eus.ehu.sharetrip.uicontrollers;
 import eus.ehu.sharetrip.businessLogic.BlFacade;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import eus.ehu.sharetrip.ui.MainGUI;
+import javafx.scene.layout.BorderPane;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class MainGUIController implements Controller{
@@ -20,6 +25,12 @@ public class MainGUIController implements Controller{
 
     @FXML
     public Button registerBtn;
+
+    @FXML
+    public Label userLbl;
+
+    @FXML
+    public Label userNameLbl;
 
 
     @FXML
@@ -46,57 +57,69 @@ public class MainGUIController implements Controller{
 
     private BlFacade businessLogic;
 
-    public MainGUIController(){};
+    //public MainGUIController(){};
 
     public MainGUIController(BlFacade blFacade){
         businessLogic = blFacade;
     }
 
-    @FXML
-    void viewAlerts(ActionEvent event) {
-        mainGUI.showAlertOverview();
-    }
 
     @FXML
-    void viewMessages(ActionEvent event) {
-        mainGUI.showChatOverview();
-    }
-
-    @FXML
-    void viewFavorites(ActionEvent event) {
-        mainGUI.showFavoriteOverview();
-    }
-
-    @FXML
-    void queryRides(ActionEvent event) {
-        mainGUI.showQueryRides();
-    }
-
-    @FXML
-    void createRide(ActionEvent event) {
-        mainGUI.showCreateRide();
-    }
-
-    @FXML
-    void logIn(ActionEvent actionEvent) {
-        mainGUI.showLogin();
-    }
-
-    @FXML
-    void register(ActionEvent actionEvent) {
-        mainGUI.showRegister();
-    }
+    private BorderPane mainWrapper;
 
 
     @FXML
     void initialize() {
 
-            // set current driver name
-            // lblDriver.setText(businessLogic.getCurrentDriver().getName());
     }
+
+
+    @FXML
+    void viewAlerts(ActionEvent event) {
+        mainGUI.showScene("View Alert");
+    }
+
+    @FXML
+    void viewMessages(ActionEvent event) {
+        mainGUI.showScene("View Messages");
+    }
+
+    @FXML
+    void viewFavorites(ActionEvent event) {
+        mainGUI.showScene("View Favorites");
+    }
+
+    @FXML
+    void queryRides(ActionEvent event) {
+        mainGUI.showScene("Query Rides");
+    }
+
+    @FXML
+    void createRide(ActionEvent event) {
+        mainGUI.showScene("Create Ride");
+    }
+
+    @FXML
+    void logIn(ActionEvent actionEvent) {
+        mainGUI.showScene("Log in");
+    }
+
+    @FXML
+    void register(ActionEvent actionEvent) {
+        mainGUI.showScene("Register");
+    }
+
 
     @Override
     public void setMainApp(MainGUI mainGUI) {
         this.mainGUI = mainGUI;
+    }
+
+    public BorderPane getMainWrapper() {
+        return mainWrapper;
+    }
+
+    public void setUserName(String label) {
+        userLbl.setText(label);
     }
 }

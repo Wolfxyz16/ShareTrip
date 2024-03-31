@@ -1,7 +1,10 @@
 package eus.ehu.sharetrip.ui;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
+import eus.ehu.sharetrip.uicontrollers.MainGUIController;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -19,11 +22,9 @@ import static javafx.application.Application.launch;
 
 public class MainGUI {
 
-    private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin, favoriteOverviewWin, chatOverviewWin, alertOverviewWin;
-
     private BlFacade businessLogic;
-    private Stage stage;
-    private Scene scene;
+
+    private BorderPane mainWrapper;
 
     public BlFacade getBusinessLogic() {
         return businessLogic;
@@ -44,133 +45,90 @@ public class MainGUI {
         });
     }
 
+
+    private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin, favoriteOverviewWin, chatOverviewWin, alertOverviewWin;
+
     class Window {
         Controller c;
         Parent ui;
     }
 
-    private Window load(String fxmlfile) throws IOException {
-        Window window = new Window();
-        FXMLLoader loader = new FXMLLoader(MainGUI.class.getResource(fxmlfile), ResourceBundle.getBundle("Etiquetas", Locale.getDefault()));
-        loader.setControllerFactory(controllerClass -> {
-            try {
-                return controllerClass
-                        .getConstructor(BlFacade.class)
-                        .newInstance(businessLogic);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
-        window.ui = loader.load();
-        ((Controller) loader.getController()).setMainApp(this);
-        window.c = loader.getController();
-        return window;
+    private Window load(String fxml) {
+        try {
+            FXMLLoader loader = new FXMLLoader( MainGUI.class.getResource(fxml), ResourceBundle.getBundle("Etiquetas", Locale.getDefault() ));
+            loader.setControllerFactory( controllerClass -> {
+                try {
+                    return controllerClass
+                            .getConstructor(BlFacade.class)
+                            .newInstance(businessLogic);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+            Parent ui = loader.load();
+            Controller controller = loader.getController();
+            controller.setMainApp(this);
+
+            Window window = new Window();
+            window.c = controller;
+            window.ui = ui;
+
+            return window;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
+
+    public void showScene(String scene) {
+
+        switch (scene) {
+            case "View Alert" -> mainWrapper.setCenter(alertOverviewWin.ui);
+            case "View Messages" -> mainWrapper.setCenter(chatOverviewWin.ui);
+            case "View Favorites" -> mainWrapper.setCenter(favoriteOverviewWin.ui);
+            case "Query Rides" -> mainWrapper.setCenter(queryRidesWin.ui);
+            case "Create Ride" -> mainWrapper.setCenter(createRideWin.ui);
+            case "Log in" -> mainWrapper.setCenter(loginWin.ui);
+            case "Register" -> mainWrapper.setCenter(registerWin.ui);
+        }
+    }
+
 
     public void init(Stage stage) throws IOException {
 
-        this.stage = stage;
-
         mainWin = load("MainGUI.fxml");
+        mainWrapper = ((MainGUIController)mainWin.c).getMainWrapper();
 
+        createRideWin = load("CreateRide.fxml");
+        queryRidesWin = load("QueryRides.fxml");
+        loginWin = load("SignIn.fxml");
+        registerWin = load("SignUp.fxml");
+        favoriteOverviewWin = load("FavoriteOverview.fxml");
+        chatOverviewWin = load("ChatOverview.fxml");
+        alertOverviewWin = load("AlertOverview.fxml");
 
-        showMain();
-
+        showMain(stage);
     }
 
-//  public void start(Stage stage) throws IOException {
-//      init(stage);
-//  }
+    private void showMain(Stage stage) {
 
+        // set stage's scene
+        Scene scene = new Scene(mainWin.ui);
+        scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+        stage.setScene(scene);
+        stage.setTitle("ShareTrip BorderLayout");
+        stage.setHeight(740.0);
+        stage.setWidth(1200.0);
 
-    public void showMain() {
-        setupScene(mainWin.ui, "MainTitle", 1200, 740);
-    }
-
-    public void showAlertOverview() {
-        try {
-            alertOverviewWin = load("AlertOverview.fxml");
-            BorderPane.setAlignment(alertOverviewWin.ui, Pos.CENTER);
-            ((BorderPane) scene.getRoot()).setCenter(alertOverviewWin.ui);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void showFavoriteOverview() {
-        try {
-            favoriteOverviewWin = load("FavoriteOverview.fxml");
-            BorderPane.setAlignment(favoriteOverviewWin.ui, Pos.CENTER);
-            ((BorderPane) scene.getRoot()).setCenter(favoriteOverviewWin.ui);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void showChatOverview() {
-        try {
-            chatOverviewWin = load("ChatOverview.fxml");
-            BorderPane.setAlignment(chatOverviewWin.ui, Pos.CENTER);
-            ((BorderPane) scene.getRoot()).setCenter(chatOverviewWin.ui);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void showQueryRides() {
-        try {
-            queryRidesWin = load("QueryRides.fxml");
-            BorderPane.setAlignment(queryRidesWin.ui, Pos.CENTER);
-            ((BorderPane) scene.getRoot()).setCenter(queryRidesWin.ui);
-        } catch (IOException e) {
-           e.printStackTrace();
-        }
-    }
-
-    public void showCreateRide() {
-        try {
-            createRideWin = load("CreateRide.fxml");
-            BorderPane.setAlignment(createRideWin.ui, Pos.CENTER);
-            ((BorderPane) scene.getRoot()).setCenter(createRideWin.ui);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void showLogin() {
-        try {
-            loginWin = load("SignIn.fxml");
-            BorderPane.setAlignment(loginWin.ui, Pos.CENTER);
-            ((BorderPane) scene.getRoot()).setCenter(loginWin.ui);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void showRegister() {
-        try {
-            registerWin = load("SignUp.fxml");
-            BorderPane.setAlignment(registerWin.ui, Pos.CENTER);
-            ((BorderPane) scene.getRoot()).setCenter(registerWin.ui);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void setupScene(Parent ui, String title, int width, int height) {
-        if (scene == null) {
-            scene = new Scene(ui, width, height);
-            scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
-            stage.setScene(scene);
-        }
-        stage.setWidth(width);
-        stage.setHeight(height);
-        stage.setTitle(ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString(title));
-        scene.setRoot(ui);
         stage.show();
     }
 
-      public static void main(String[] args) {
+    public static void main(String[] args) {
        launch();
+    }
+
+    public void setUserName(String label) {
+        ((MainGUIController)mainWin.c).setUserName(label);
     }
 }
