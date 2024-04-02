@@ -12,6 +12,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import eus.ehu.sharetrip.businessLogic.BlFacade;
 
+import java.util.InputMismatchException;
+import java.util.regex.Pattern;
+
 public class SignUpController implements Controller{
 
     private final BlFacade bl;
@@ -48,17 +51,33 @@ public class SignUpController implements Controller{
         String userName = username.getText();
         String confirmPassword = confirmPasswd.getText();
 
+        /**
+         * Checks that there are not empty fields
+         */
+        if (userEmail.isEmpty() || userPassword.isEmpty() || userRole == null || userName.isEmpty()) {
+            errorsLabel.setText("ERROR! Please fill in all the fields");
+            errorsLabel.getStyleClass().setAll("label", "lbl-danger");
+            return;
+        }
 
+        /**
+         * We check that both passwords are the same
+         */
         if (!userPassword.equals(confirmPassword)) {
             errorsLabel.setText("ERROR! Passwords do not match");
             errorsLabel.getStyleClass().setAll("label", "lbl-danger");
             return;
         }
-        if (userEmail.isEmpty() || userPassword.isEmpty() || userRole == null || userName.isEmpty()) {
-            errorsLabel.setText("Please fill in all the fields");
+
+        /**
+         * Check that the email has a valid format
+         */
+        if (!userEmail.matches("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$") ) {
+            errorsLabel.setText("ERROR! Invalid email format");
             errorsLabel.getStyleClass().setAll("label", "lbl-danger");
             return;
         }
+
         // Call the business logic to sign up the use
         try {
             bl.signup(userEmail, userName, userPassword, userRole);
