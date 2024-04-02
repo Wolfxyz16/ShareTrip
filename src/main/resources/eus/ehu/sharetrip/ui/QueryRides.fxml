@@ -34,7 +34,7 @@
          <graphic>
             <ImageView fx:id="heartView" fitHeight="31.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@heart.png" />
+                  <Image url="@assets/heart.png" />
                </image>
             </ImageView>
          </graphic>

@@ -226,7 +226,7 @@ public class QueryRidesController implements Controller {
         }
          */
 
-        Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/redHeart.png"));
+        Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/redHeart.png"));
         heartView.setImage(image);
 
     }
