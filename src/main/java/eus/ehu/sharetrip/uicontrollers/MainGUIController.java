@@ -17,14 +17,12 @@ import java.util.ResourceBundle;
 
 public class MainGUIController implements Controller{
 
+    public Button messagesBtn;
     @FXML
     private Button alertsBtn;
 
     @FXML
     private Button favoritesBtn;
-
-    @FXML
-    private Button mesasgesBtn;
 
     @FXML
     public Button createRidesBtn;
@@ -147,7 +145,7 @@ public class MainGUIController implements Controller{
         createRidesBtn.setVisible(false);
         alertsBtn.setVisible(false);
         favoritesBtn.setVisible(false);
-        mesasgesBtn.setVisible(false);
+        messagesBtn.setVisible(false);
         signOutBtn.setVisible(false);
     }
     public void setIsLoggedIn(boolean isLoggedIn) {
@@ -161,7 +159,7 @@ public class MainGUIController implements Controller{
         createRidesBtn.setVisible(isLoggedIn);
         alertsBtn.setVisible(isLoggedIn);
         favoritesBtn.setVisible(isLoggedIn);
-        mesasgesBtn.setVisible(isLoggedIn);
+        messagesBtn.setVisible(isLoggedIn);
         signOutBtn.setVisible(isLoggedIn);
         userNameLbl.setVisible(isLoggedIn);
         userLbl.setVisible(isLoggedIn);
