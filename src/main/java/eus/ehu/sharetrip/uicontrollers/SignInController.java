@@ -48,9 +48,11 @@ public class SignInController implements Controller {
     @FXML
     void onClick(ActionEvent event) {
 
-        if (login.getText() == null
-                || password.getText() == null)
+        // Checks that no field is null
+        if (login.getText() == null || password.getText() == null) {
             return;
+        }
+
         try {
             bl.setCurrentUser(bl.login(login.getText(), password.getText()));
             mainGUI.setUserName(login.getText());
