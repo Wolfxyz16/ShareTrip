@@ -53,19 +53,23 @@ public class SignInController implements Controller {
             return;
         }
 
+        String username = login.getText();
+        String pass = password.getText();
+
         try {
-            bl.setCurrentUser(bl.login(login.getText(), password.getText()));
-            mainGUI.setUserName(login.getText());
+            bl.login(username, pass);
+            mainGUI.setUserName(username);
+            mainGUI.setIsLoggedIn(true);
             loginStatus.setText("Logged in");
             loginStatus.getStyleClass().setAll("label", "lbl-success");
-            mainGUI.setIsLoggedIn(true);
         } catch (UnknownUser unknownUser) {
             loginStatus.setText("Unknown user");
             loginStatus.getStyleClass().setAll("label", "lbl-danger");
+            // Should we delete this?
             mainGUI.setUserName("Unknown user");
-            System.out.println("Unknown user");
-
         }
+
+        mainGUI.showScene("Query Rides");
 
     }
 
