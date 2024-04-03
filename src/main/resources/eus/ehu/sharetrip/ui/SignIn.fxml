@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1000.0" stylesheets="@styles/bootstrapfx.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.SignInController">
     <children>
-      <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#f2cb05" height="300.0" layoutX="201.0" layoutY="252.0" opacity="0.7" stroke="BLACK" strokeType="INSIDE" width="600.0" />
+      <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#f2cb05" height="300.0" layoutX="201.0" layoutY="252.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
       <Group layoutX="161.0" layoutY="303.0">
          <children>
               <Label layoutX="139.0" layoutY="6.0" styleClass="h4" text="Username:" />
