@@ -117,7 +117,10 @@ public class BlFacadeImplementation implements BlFacade {
     }
 
     public User login(String username, String password) throws UnknownUser {
-        return dbManager.login(username, password);
+        User loginUser = dbManager.login(username, password);
+        setCurrentUser(loginUser);
+
+        return loginUser;
     }
 
     public User getUser(String username) {
