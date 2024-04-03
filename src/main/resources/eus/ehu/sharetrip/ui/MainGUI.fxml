@@ -3,6 +3,7 @@
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -89,14 +90,20 @@
                   </Button>
                </children>
             </VBox>
-            <Label fx:id="userLbl" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="25.0" layoutY="421.0" prefHeight="20.0" prefWidth="150.0" text="Welcome">
-               <font>
-                  <Font size="22.0" />
-               </font></Label>
-            <Label fx:id="userNameLbl" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="31.0" layoutY="457.0" prefHeight="20.0" prefWidth="139.0" text=" ">
-               <font>
-                  <Font size="25.0" />
-               </font></Label>
+            <Group layoutX="26.0" layoutY="574.0">
+               <children>
+                  <Label fx:id="userLbl" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="20.0" prefHeight="20.0" styleClass="h3" text="Welcome" textAlignment="CENTER">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="userNameLbl" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="6.0" layoutY="36.0" prefHeight="20.0" prefWidth="139.0" text=" ">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
             <Button fx:id="signOutBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="652.0" mnemonicParsing="false" onAction="#signOut" prefHeight="20.0" prefWidth="180.0" text="Sign Out">
                <styleClass>
                   <String fx:value="split-menu-btn-lg" />
