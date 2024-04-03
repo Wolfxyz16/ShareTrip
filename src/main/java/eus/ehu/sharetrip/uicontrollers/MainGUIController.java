@@ -118,10 +118,15 @@ public class MainGUIController implements Controller{
         mainGUI.showScene("Register");
     }
 
+    /**
+     * Sign out logic, just 3 lines, we do not need another SignOutController
+     * @param actionEvent
+     */
     @FXML
     void signOut(ActionEvent actionEvent) {
         mainGUI.setIsLoggedIn(false);
         mainGUI.setUserName("");
+        mainGUI.showScene("Home");
     }
 
 
