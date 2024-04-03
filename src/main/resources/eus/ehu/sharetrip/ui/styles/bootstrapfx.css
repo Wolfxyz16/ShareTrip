@@ -65,7 +65,7 @@
     -fx-font-size: 75%; }
 
 .h1 {
-    -fx-font-size: 2em; }
+    -fx-font-size: 36px; }
 
 .h2 {
     -fx-font-size: 30px; }
@@ -479,7 +479,7 @@ a.bg-danger:hover,
 
 .btn-lg {
     -fx-padding: 10px 16px 10px 16px;
-    -fx-font-size: 16px;
+    -fx-font-size: 24px;
     -fx-border-radius: 6px;
     -fx-background-radius: 6px; }
 
