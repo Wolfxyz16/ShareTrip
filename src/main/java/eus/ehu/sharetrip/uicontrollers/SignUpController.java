@@ -37,9 +37,15 @@ public class SignUpController implements Controller{
     @FXML
     private ComboBox<String> roles;
 
+    private MainGUI mainGUI;
+
 
     public SignUpController(BlFacade bl) {
         this.bl = bl;
+    }
+
+    public void setMainApp(MainGUI mainGUI) {
+        this.mainGUI = mainGUI;
     }
 
 
@@ -90,6 +96,20 @@ public class SignUpController implements Controller{
             errorsLabel.getStyleClass().setAll("label", "lbl-danger");
         }
 
+        this.autoLogin(userName, userPassword);
+
+        mainGUI.showScene("Query Rides");
+
+    }
+
+    private void autoLogin(String username, String password) {
+        try {
+            bl.login(username, password);
+            mainGUI.setUserName(username);
+            mainGUI.setIsLoggedIn(true);
+        } catch (UnknownUser unknownUser) {
+            System.out.println("Unknown user");
+        }
     }
 
     @FXML
@@ -98,9 +118,4 @@ public class SignUpController implements Controller{
         roles.setItems(options);
     }
 
-
-
-    public void setMainApp(MainGUI mainGUI) {
-
-    }
 }
