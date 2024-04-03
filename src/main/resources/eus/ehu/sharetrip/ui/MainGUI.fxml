@@ -92,12 +92,12 @@
             </VBox>
             <Group layoutX="26.0" layoutY="574.0">
                <children>
-                  <Label fx:id="userLbl" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="20.0" prefHeight="20.0" styleClass="h3" text="Welcome" textAlignment="CENTER">
+                  <Label fx:id="welcome" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="20.0" prefHeight="20.0" styleClass="h3" text="Welcome" textAlignment="CENTER">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <Label fx:id="userNameLbl" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="6.0" layoutY="36.0" prefHeight="20.0" prefWidth="139.0" text=" ">
+                  <Label fx:id="userLbl" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="6.0" layoutY="36.0" prefHeight="20.0" prefWidth="139.0" text=" ">
                      <font>
                         <Font size="25.0" />
                      </font>

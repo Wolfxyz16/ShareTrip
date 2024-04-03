@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 public class MainGUIController implements Controller{
 
     public Button messagesBtn;
+    
     @FXML
     private Button alertsBtn;
 
@@ -40,14 +41,10 @@ public class MainGUIController implements Controller{
     public Label userLbl;
 
     @FXML
-    public Label userNameLbl;
-
-
-    @FXML
     private Label selectOptionLbl;
 
     @FXML
-    private Label lblDriver;
+    private Label welcome;
 
 
     @FXML
@@ -140,7 +137,7 @@ public class MainGUIController implements Controller{
     }
 
     public void setUserName(String label) {
-        userNameLbl.setText(label);
+        userLbl.setText(label);
     }
 
     public void initializeButtonVisibility() {
@@ -152,6 +149,7 @@ public class MainGUIController implements Controller{
         favoritesBtn.setVisible(false);
         messagesBtn.setVisible(false);
         signOutBtn.setVisible(false);
+        welcome.setVisible(false);
     }
     public void setIsLoggedIn(boolean isLoggedIn) {
         this.isLoggedIn = isLoggedIn;
@@ -166,7 +164,7 @@ public class MainGUIController implements Controller{
         favoritesBtn.setVisible(isLoggedIn);
         messagesBtn.setVisible(isLoggedIn);
         signOutBtn.setVisible(isLoggedIn);
-        userNameLbl.setVisible(isLoggedIn);
         userLbl.setVisible(isLoggedIn);
+        welcome.setVisible(isLoggedIn);
     }
 }
