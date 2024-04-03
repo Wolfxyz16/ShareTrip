@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -8,43 +10,95 @@
 
 <BorderPane fx:id="mainWrapper" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.MainGUIController">
    <center>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1000.0" style="-fx-background-color: #999999;" BorderPane.alignment="CENTER">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1000.0" styleClass="panel-body" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="401.0" fitWidth="883.0" layoutX="61.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="401.0" fitWidth="883.0" layoutX="61.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true" styleClass="panel-info">
                <image>
-                  <Image url="@assets/ShareTrip logo.png" />
+                  <Image url="@assets/ShareTrip.webp" />
                </image>
                <viewport>
                   <Rectangle2D />
                </viewport>
             </ImageView>
-            <Label alignment="CENTER" layoutX="274.0" layoutY="512.0" prefHeight="50.0" prefWidth="450.0" style="-fx-text-fill: red; -fx-font-size: 14; -fx-font-weight: bold;" text="ARE YOU READY FOR SHARETRIP" textAlignment="CENTER">
+            <Label alignment="CENTER" layoutX="274.0" layoutY="512.0" prefHeight="50.0" prefWidth="450.0" styleClass="h1" text="ARE YOU READY FOR SHARETRIP" textAlignment="CENTER">
                <font>
                   <Font size="46.0" />
-               </font></Label>
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>
    <left>
-      <AnchorPane prefHeight="740.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="740.0" prefWidth="200.0" styleClass="btn-block" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="logInBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="36.0" mnemonicParsing="false" onAction="#logIn" prefHeight="20.0" prefWidth="150.0" style="-fx-background-radius: 25;" text="Log-In" />
-            <Button fx:id="registerBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="76.0" mnemonicParsing="false" onAction="#register" prefHeight="20.0" prefWidth="150.0" style="-fx-background-radius: 25;" text="Register" />
-            <Button fx:id="queryRidesBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="209.0" mnemonicParsing="false" onAction="#queryRides" prefHeight="20.0" prefWidth="150.0" style="-fx-background-radius: 25;" text="QueryRides" />
-            <Button fx:id="createRidesBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="249.0" mnemonicParsing="false" onAction="#createRide" prefHeight="20.0" prefWidth="150.0" style="-fx-background-radius: 25;" text="CreateRide" />
-            <Button fx:id="mesasgesBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="289.0" mnemonicParsing="false" onAction="#viewMessages" prefHeight="20.0" prefWidth="150.0" style="-fx-background-radius: 25;" text="ViewMessages" />
-            <Button fx:id="favoritesBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="329.0" mnemonicParsing="false" onAction="#viewFavorites" prefHeight="20.0" prefWidth="150.0" style="-fx-background-radius: 25;" text="ViewFavorites" />
-            <Button fx:id="alertsBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="369.0" mnemonicParsing="false" onAction="#viewAlerts" prefHeight="20.0" prefWidth="150.0" style="-fx-background-radius: 25;" text="ViewAlerts" />
-            <Label fx:id="userLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="421.0" prefHeight="20.0" prefWidth="150.0" text="Welcome">
+            <VBox layoutX="9.0" layoutY="45.0" spacing="10.0" styleClass="split-menu-btn">
+               <children>
+                  <Button fx:id="logInBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#logIn" prefHeight="20.0" prefWidth="180.0" text="Sign In">
+                     <styleClass>
+                        <String fx:value="split-menu-btn-lg" />
+                        <String fx:value="btn-primary" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="registerBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#register" prefHeight="20.0" prefWidth="180.0" text="Create account">
+                     <styleClass>
+                        <String fx:value="split-menu-btn-lg" />
+                        <String fx:value="btn-primary" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="queryRidesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#queryRides" prefHeight="20.0" prefWidth="180.0" text="QueryRides">
+                     <styleClass>
+                        <String fx:value="split-menu-btn-lg" />
+                        <String fx:value="btn-primary" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox layoutX="11.0" layoutY="227.0" spacing="10.0">
+               <children>
+                  <Button fx:id="createRidesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#createRide" prefHeight="20.0" prefWidth="180.0" text="CreateRide">
+                     <styleClass>
+                        <String fx:value="split-menu-btn-lg" />
+                        <String fx:value="btn-primary" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="messagesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#viewMessages" prefHeight="20.0" prefWidth="180.0" text="ViewMessages">
+                     <styleClass>
+                        <String fx:value="split-menu-btn-lg" />
+                        <String fx:value="btn-primary" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="favoritesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#viewFavorites" prefHeight="20.0" prefWidth="180.0" text="ViewFavorites">
+                     <styleClass>
+                        <String fx:value="split-menu-btn-lg" />
+                        <String fx:value="btn-primary" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="alertsBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#viewAlerts" prefHeight="20.0" prefWidth="180.0" text="ViewAlerts">
+                     <styleClass>
+                        <String fx:value="split-menu-btn-lg" />
+                        <String fx:value="btn-primary" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </VBox>
+            <Label fx:id="userLbl" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="25.0" layoutY="421.0" prefHeight="20.0" prefWidth="150.0" text="Welcome">
                <font>
                   <Font size="22.0" />
                </font></Label>
-            <Label fx:id="userNameLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="457.0" prefHeight="20.0" prefWidth="139.0" text=" ">
+            <Label fx:id="userNameLbl" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="31.0" layoutY="457.0" prefHeight="20.0" prefWidth="139.0" text=" ">
                <font>
                   <Font size="25.0" />
                </font></Label>
-            <Button fx:id="signOutBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="652.0" mnemonicParsing="false" onAction="#signOut" prefHeight="20.0" prefWidth="150.0" style="-fx-background-radius: 25;" text="SignOut" />
+            <Button fx:id="signOutBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="652.0" mnemonicParsing="false" onAction="#signOut" prefHeight="20.0" prefWidth="180.0" text="Sign Out">
+               <styleClass>
+                  <String fx:value="split-menu-btn-lg" />
+                  <String fx:value="btn-primary" />
+               </styleClass></Button>
          </children>
       </AnchorPane>
    </left>
+   <stylesheets>
+      <!-- <URL value="@styles/main.css" /> -->
+      <URL value="@styles/bootstrapfx.css" />
+   </stylesheets>
 </BorderPane>
