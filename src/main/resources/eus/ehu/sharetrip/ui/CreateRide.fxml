@@ -13,40 +13,40 @@
             <String fx:value="btn-primary" />
             <String fx:value="btn-lg" />
          </styleClass></Button>
-      <VBox layoutX="348.0" layoutY="230.0" spacing="10.0">
+      <VBox layoutX="347.0" layoutY="201.0" spacing="20.0">
          <children>
             <Group>
                <children>
-                  <DatePicker fx:id="datePicker" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" />
-                  <Label layoutY="4.0" text="%RideDate" />
+                  <DatePicker fx:id="datePicker" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" promptText="Pick a date" />
+                  <Label layoutY="4.0" styleClass="h4" text="%RideDate" />
                </children>
             </Group>
             <Group>
                <children>
-                  <Label layoutY="4.0" text="%DepartCity" />
-                  <TextField fx:id="txtDepartCity" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" />
+                  <Label layoutY="4.0" styleClass="h4" text="%DepartCity" />
+                  <TextField fx:id="txtDepartCity" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" promptText="From where" />
                </children>
             </Group>
             <Group>
                <children>
-                  <TextField fx:id="txtArrivalCity" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" />
-                  <Label layoutY="5.0" text="%ArrivalCity" />
+                  <TextField fx:id="txtArrivalCity" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" promptText="Destination" />
+                  <Label layoutY="5.0" styleClass="h4" text="%ArrivalCity" />
                </children>
             </Group>
             <Group>
                <children>
-                  <Label layoutY="5.0" text="%NumberOfSeats" />
-                  <TextField fx:id="txtNumberOfSeats" layoutX="5.0" layoutY="25.0" prefHeight="30.0" prefWidth="300.0" />
+                  <Label layoutY="5.0" styleClass="h4" text="%NumberOfSeats" />
+                  <TextField fx:id="txtNumberOfSeats" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" promptText="How many people" />
                </children>
             </Group>
             <Group>
                <children>
-                  <Label layoutY="5.0" text="%Price" />
-                  <TextField fx:id="txtPrice" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" />
+                  <Label layoutY="5.0" styleClass="h4" text="%Price" />
+                  <TextField fx:id="txtPrice" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" promptText="How much?" />
                </children>
             </Group>
          </children>
       </VBox>
-      <Label layoutX="339.0" layoutY="103.0" styleClass="h1" text="Create a new ride" />
+      <Label layoutX="344.0" layoutY="70.0" styleClass="h1" text="\%CreateRideTitle" />
    </children>
 </AnchorPane>
