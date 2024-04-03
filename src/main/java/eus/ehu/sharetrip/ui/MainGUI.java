@@ -84,6 +84,7 @@ public class MainGUI {
     public void showScene(String scene) {
 
         switch (scene) {
+            case "Home" -> mainWrapper.setCenter(mainWin.ui);
             case "View Alert" -> mainWrapper.setCenter(alertOverviewWin.ui);
             case "View Messages" -> mainWrapper.setCenter(chatOverviewWin.ui);
             case "View Favorites" -> mainWrapper.setCenter(favoriteOverviewWin.ui);
