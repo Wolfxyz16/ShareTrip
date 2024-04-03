@@ -126,7 +126,7 @@ public class MainGUIController implements Controller{
     void signOut(ActionEvent actionEvent) {
         mainGUI.setIsLoggedIn(false);
         mainGUI.setUserName("");
-        mainGUI.showScene("Home");
+        mainGUI.showScene("Query Ride");
     }
 
 
