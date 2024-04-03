@@ -20,7 +20,8 @@
                   <Rectangle2D />
                </viewport>
             </ImageView>
-            <Label alignment="CENTER" layoutX="274.0" layoutY="512.0" prefHeight="50.0" prefWidth="450.0" styleClass="h1" text="ARE YOU READY FOR SHARETRIP" textAlignment="CENTER">
+            <Label layoutX="725.0" layoutY="710.0" text="Created with &lt;3 by Orquesta Guayacan" />
+            <Label alignment="CENTER" layoutX="204.0" layoutY="510.0" prefHeight="50.0" styleClass="h1" text="ARE YOU READY FOR SHARETRIP?" textAlignment="CENTER">
                <font>
                   <Font size="46.0" />
                </font>
