@@ -16,6 +16,11 @@ ShareTrip is an open source carpooling application between users that aims to be
 * Create an alert 
 * Send messages between users so you can organize the trip
 
+## Extra features ⭐⭐
+
+* You can add your favourite ride for easy searching
+* More to come...
+
 ## How can (*must*) I contribute
 
 First thing to be done is to clone the repository. Go to the directory where you want to clone this repository. IE ``~/IdeaProjects``. Then copy the ssh URL and paste the next command on your terminal
