@@ -13,9 +13,9 @@
    <center>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1000.0" styleClass="panel-body" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="401.0" fitWidth="883.0" layoutX="61.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true" styleClass="panel-info">
+            <ImageView fitHeight="401.0" fitWidth="883.0" layoutX="300.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" styleClass="panel-info">
                <image>
-                  <Image url="@assets/ShareTrip%20logo.png" />
+                  <Image url="@assets/sharetrip_ia_logo.jpeg" />
                </image>
                <viewport>
                   <Rectangle2D />
