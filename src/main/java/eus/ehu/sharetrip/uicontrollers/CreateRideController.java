@@ -59,12 +59,10 @@ public class CreateRideController implements Controller {
     private TextField txtDepartCity;
 
     @FXML
-    private TextField txtNumberOfSeats;
+    private TextField txtSeats;
 
     @FXML
     private TextField txtPrice;
-
-
 
 
     private void clearErrorLabels() {
@@ -78,12 +76,12 @@ public class CreateRideController implements Controller {
     private String field_Errors() {
 
         try {
-            if ((txtDepartCity.getText().length() == 0) || (txtArrivalCity.getText().length() == 0) || (txtNumberOfSeats.getText().length() == 0) || (txtPrice.getText().length() == 0))
+            if ((txtDepartCity.getText().length() == 0) || (txtArrivalCity.getText().length() == 0) || (txtSeats.getText().length() == 0) || (txtPrice.getText().length() == 0))
                 return ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.ErrorQuery");
             else {
 
                 // trigger an exception if the introduced string is not a number
-                int inputSeats = Integer.parseInt(txtNumberOfSeats.getText());
+                int inputSeats = Integer.parseInt(txtSeats.getText());
 
                 if (inputSeats <= 0) {
                     return ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.SeatsMustBeGreaterThan0");
@@ -129,7 +127,7 @@ public class CreateRideController implements Controller {
         } else {
             try {
 
-                int inputSeats = Integer.parseInt(txtNumberOfSeats.getText());
+                int inputSeats = Integer.parseInt(txtSeats.getText());
                 float price = Float.parseFloat(txtPrice.getText());
                 User user = businessLogic.getCurrentUser();
                 Ride r = businessLogic.createRide(txtDepartCity.getText(), txtArrivalCity.getText(), Dates.convertToDate(datePicker.getValue()), inputSeats, price, user.getEmail());
