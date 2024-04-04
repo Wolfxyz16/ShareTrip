@@ -158,7 +158,7 @@ public class MainGUIController implements Controller{
     private void updateButtonVisibility() {
         logInBtn.setVisible(!isLoggedIn);
         registerBtn.setVisible(!isLoggedIn);
-        queryRidesBtn.setVisible(isLoggedIn);
+        //queryRidesBtn.setVisible(isLoggedIn);
         createRidesBtn.setVisible(isLoggedIn);
         alertsBtn.setVisible(isLoggedIn);
         favoritesBtn.setVisible(isLoggedIn);
