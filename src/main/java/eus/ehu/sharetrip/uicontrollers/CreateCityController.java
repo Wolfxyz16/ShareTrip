@@ -29,8 +29,12 @@ public class CreateCityController implements Controller {
         try {
             businessLogic.createCity(city);
             newCityStatusMessage.setText("City created successfully");
+            newCityStatusMessage.getStyleClass().setAll("label", "lbl-success");
+
         } catch (CityAlreadyExistException e) {
             newCityStatusMessage.setText("City already exists");
+            newCityStatusMessage.getStyleClass().setAll("label", "lbl-danger");
+
         }
 
 
