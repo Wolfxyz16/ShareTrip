@@ -41,10 +41,36 @@ With this method we will guarantee that the `main` branch will be always working
 
 ## What about the sprints?
 1. feb 28 - mar 19
-2. mar 20 - apr 9
-3. apr 10 - may 1
+2. mar 20 - apr 12
+3. apr 3 - may 4
 
 ## How can I pull a single git branch?
 1. `git fetch <remote_name> <branch_name>`
 2. `git branch <branch_name> FETCH_HEAD`
 3. `git checkout <branch_name>`
+
+## Documentation
+
+## Requirements Analysis
+
+[Use Case Model](pages/use_case_model.md)
+
+[Event Flow for Search Ride Offer](pages/uc_search_ride_offer.md)
+
+[Event Flow for Request Booking for Ride]
+[Event Flow for View Ride Bookings]
+[Event Flow for Create Alert](pages/uc_create_alert.md)
+[Event Flow for View Alerts](pages/uc_view_alerts.md)
+[Event Flow for Delete Alert]
+[Event Flow for Create Favorite](pages/uc_create_favorite.md)
+[Event Flow for View Favorites](pages/uc_view_favorites.md)
+[Event Flow for Delete Favorites]
+
+[Event Flow for Send a Message](pages/uc_send_a_message.md)
+[Event Flow for View Messages](pages/uc_view_messages.md)
+
+[Event Flow for Create a City](pages/uc_create_a_city.md)
+[Event Flow for Offer a Ride](pages/uc_offer_a_ride.md)
+[Event Flow for View Booking Requests]
+[Event Flow for Decide Bookin Requests]
+
