@@ -353,20 +353,21 @@ public class DataAccess {
   public List<Message> getSentMessages(User currentUser) {
     TypedQuery<Message> query = db.createQuery("SELECT m FROM Message m WHERE m.sender = :user", Message.class);
     query.setParameter("user", currentUser);
-
+    System.out.println("Messages received: " + query.getResultList());
     return query.getResultList();
   }
 
     public void saveMessage(Message message) {
         db.getTransaction().begin();
         db.persist(message);
+        System.out.println("Message saved: " + message.toString());
         db.getTransaction().commit();
     }
 
   public List<Message> getReceivedMessages(User user) {
     TypedQuery<Message> query = db.createQuery("SELECT m FROM Message m WHERE m.receiver = :user", Message.class);
     query.setParameter("user", user);
-
+    System.out.println("Messages received: " + query.getResultList());
     return query.getResultList();
   }
 }

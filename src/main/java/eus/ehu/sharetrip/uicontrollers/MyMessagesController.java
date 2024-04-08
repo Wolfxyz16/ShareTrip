@@ -25,6 +25,7 @@ public class MyMessagesController implements Controller{
         System.out.println("ViewMessages button is working");
         setReceivedMessages();
         setSentMessages();
+        System.out.println("Received messages: ");
     }
 
     private void setSentMessages() {
@@ -37,6 +38,10 @@ public class MyMessagesController implements Controller{
         receivedListView.getItems().addAll(businessLogic.getReceivedMessages(businessLogic.getCurrentUser()).toString());
     }
 
+    public void onShow() {
+        setSentMessages();
+        setReceivedMessages();
+    }
     @Override
     public void setMainApp(MainGUI mainGUI) {
         this.mainGUI = mainGUI;
