@@ -85,13 +85,6 @@
                         <String fx:value="btn" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="messagesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#viewMessages" prefHeight="20.0" prefWidth="180.0" text="View Messages">
-                     <styleClass>
-                        <String fx:value="split-menu-btn-lg" />
-                        <String fx:value="btn-primary" />
-                        <String fx:value="btn" />
-                     </styleClass>
-                  </Button>
                   <Button fx:id="favoritesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#viewFavorites" prefHeight="20.0" prefWidth="180.0" text="View Favorites">
                      <styleClass>
                         <String fx:value="split-menu-btn-lg" />
