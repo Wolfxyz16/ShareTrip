@@ -186,14 +186,14 @@ public class DataAccess {
     TypedQuery<City> query = db.createQuery("SELECT c FROM City c", City.class);
     List<City> cities =query.getResultList();
     for (City c:cities){
-      citiesNames.add(c.getName());
+      citiesNames.add(c.getName().toLowerCase());
     }
     return citiesNames;
   }
 
   public City createCity(String city) throws CityAlreadyExistException {
     try {
-        if (getCities().contains(city)) {
+        if (getCities().contains(city.toLowerCase())) {
           throw new CityAlreadyExistException(ResourceBundle.getBundle("Etiquetas").getString("CreateCityGUI.CityAlreadyExist"));
         }
         City newCity = new City(city);
