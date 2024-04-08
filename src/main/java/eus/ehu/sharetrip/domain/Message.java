@@ -66,8 +66,8 @@ public class Message {
 
     public String toString() {
         return  "message='" + message + '\'' + " " +
-                receiver.getName() + " from " +
-                sender.getName() + " to " +
+                receiver.getUsername() + " from " +
+                sender.getUsername() + " to " +
                 ", id=" + id + '\'';
     }
 }
