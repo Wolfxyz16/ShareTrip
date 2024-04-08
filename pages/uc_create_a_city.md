@@ -1,5 +1,3 @@
-# Create a City/ Flow of events
-
 ## Title: Create a City
 
 ## Primary Actors: Driver

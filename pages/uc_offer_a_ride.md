@@ -1,18 +1,16 @@
-#Offer a Ride / Flow of events
+## Title: Offer a Ride
 
-##Title: Offer a Ride
+## Primary Actors: Driver
+## Secondary Actors: None
 
-##Primary Actors: Driver
-##Secondary Actors: None
-
-##Preconditions:
+## Preconditions:
 - The actor must be registered and logged into the system.
 
-##Postconditions:
+## Postconditions:
 - The ride is registered in the system and is visible to other users.
 - If a new city was created, it is now available in the system.
 
-##Flow:
+## Flow:
 1. The driver selects the "Offer a Ride" option in the system.
 2. The system loads and shows the form for offering a ride.
 3. The driver fills out the form with the origin and destination cities, date, number of seats, and price per passenger.
@@ -21,5 +19,5 @@
 
 ## Alternative Flows:
 3a.  If the origin or destination city does not exist in the system, the driver is offered the option to create a new city.
-    1. The driver enters the "Create a City" flow of events
-    2. After that flow is finished, go to 2.
+1. The driver enters the "Create a City" flow of events
+2. After that flow is finished, go to 2.

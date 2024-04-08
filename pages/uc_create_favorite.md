@@ -1,5 +1,3 @@
-# Create Favorite / Flow of events
-
 ## Title: Create Favorite
 
 ## Primary Actors: Traveler

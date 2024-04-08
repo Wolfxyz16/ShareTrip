@@ -1,5 +1,3 @@
-# View Favorites / Flow of events
-
 ## Title: View Favorites
 
 ## Primary Actors: Traveler

@@ -1,5 +1,3 @@
-# Create Alert/ Flow of events
-
 ## Title: Create Alert
 
 ## Primary Actors: Traveler
@@ -23,4 +21,4 @@
 
 ## Alternative Flows:
 7a. The inputs are invalid
-    1.  The system shows an error message indicating the invalid inputs. Go to 3.
+1.  The system shows an error message indicating the invalid inputs. Go to 3.

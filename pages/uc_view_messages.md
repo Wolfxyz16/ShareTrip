@@ -1,5 +1,3 @@
-# View Messages / Flow of events
-
 ## Title: View Messages
 
 ## Primary Actors: Messenger
@@ -18,4 +16,4 @@
 
 ## Alternative Flows:
 2a. If the actor has no messages yet.
-    1. The system informs the user that there no messages for him and breaks.
+1. The system informs the user that there no messages for him and breaks.

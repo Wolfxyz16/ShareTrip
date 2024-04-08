@@ -1,5 +1,3 @@
-# Send a Message / Flow of events
-
 ## Title: Send a Message 
 
 ## Primary Actors: Messenger
@@ -23,7 +21,7 @@
 
 ## Alternative Flows:
 2a. If the actor has no messages yet.
-    1. The system informs the user that there no messages for him and breaks.
+1. The system informs the user that there no messages for him and breaks.
 5a. If the actor wants to cancel the reply after typing a message:
-    1. The actor selects the "Cancel" option.
-    2. The system discards the written message and does not send it.
+1. The actor selects the "Cancel" option.
+2. The system discards the written message and does not send it.

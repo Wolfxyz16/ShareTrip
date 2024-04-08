@@ -57,20 +57,20 @@ With this method we will guarantee that the `main` branch will be always working
 
 [Event Flow for Search Ride Offer](pages/uc_search_ride_offer.md)
 
-[Event Flow for Request Booking for Ride]
-[Event Flow for View Ride Bookings]
-[Event Flow for Create Alert](pages/uc_create_alert.md)
-[Event Flow for View Alerts](pages/uc_view_alerts.md)
-[Event Flow for Delete Alert]
-[Event Flow for Create Favorite](pages/uc_create_favorite.md)
-[Event Flow for View Favorites](pages/uc_view_favorites.md)
-[Event Flow for Delete Favorites]
+[Event Flow for Request Booking for Ride]\
+[Event Flow for View Ride Bookings]\
+[Event Flow for Create Alert](pages/uc_create_alert.md)\
+[Event Flow for View Alerts](pages/uc_view_alerts.md)\
+[Event Flow for Delete Alert]\
+[Event Flow for Create Favorite](pages/uc_create_favorite.md)\
+[Event Flow for View Favorites](pages/uc_view_favorites.md)\
+[Event Flow for Delete Favorites]\
 
-[Event Flow for Send a Message](pages/uc_send_a_message.md)
+[Event Flow for Send a Message](pages/uc_send_a_message.md)\
 [Event Flow for View Messages](pages/uc_view_messages.md)
 
-[Event Flow for Create a City](pages/uc_create_a_city.md)
-[Event Flow for Offer a Ride](pages/uc_offer_a_ride.md)
-[Event Flow for View Booking Requests]
+[Event Flow for Create a City](pages/uc_create_a_city.md)\
+[Event Flow for Offer a Ride](pages/uc_offer_a_ride.md)\
+[Event Flow for View Booking Requests]\
 [Event Flow for Decide Bookin Requests]
 

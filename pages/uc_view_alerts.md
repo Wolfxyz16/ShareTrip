@@ -1,5 +1,3 @@
-# View Alerts/ Flow of events
-
 ## Title: View Alerts
 
 ## Primary Actors: Traveler
