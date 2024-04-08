@@ -49,8 +49,6 @@ With this method we will guarantee that the `main` branch will be always working
 2. `git branch <branch_name> FETCH_HEAD`
 3. `git checkout <branch_name>`
 
-## Documentation
-
 ## Requirements Analysis
 
 [Use Case Model](pages/use_case_model.md)
