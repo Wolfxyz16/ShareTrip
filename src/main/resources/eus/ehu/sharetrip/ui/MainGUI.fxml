@@ -19,7 +19,7 @@
          <children>
             <ImageView fitHeight="401.0" fitWidth="883.0" layoutX="61.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true" styleClass="panel-info">
                <image>
-                  <Image url="@assets/ShareTrip%20logo.png" />
+                  <Image url="@assets/ShareTrip logo.png" />
                </image>
                <viewport>
                   <Rectangle2D />
@@ -53,7 +53,7 @@
                         <String fx:value="btn" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="queryRidesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#queryRides" prefHeight="20.0" prefWidth="180.0" text="QueryRides">
+                  <Button fx:id="queryRidesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#queryRides" prefHeight="20.0" prefWidth="180.0" text="Query Rides">
                      <styleClass>
                         <String fx:value="split-menu-btn-lg" />
                         <String fx:value="btn-primary" />
@@ -64,7 +64,14 @@
             </VBox>
             <VBox layoutX="11.0" layoutY="227.0" spacing="10.0">
                <children>
-                  <Button fx:id="createRidesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#createRide" prefHeight="20.0" prefWidth="180.0" text="CreateRide">
+                  <Button fx:id="createRidesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#createRide" prefHeight="20.0" prefWidth="180.0" text="Create Ride">
+                     <styleClass>
+                        <String fx:value="split-menu-btn-lg" />
+                        <String fx:value="btn-primary" />
+                        <String fx:value="btn" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="createCityBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#createCity" prefHeight="20.0" prefWidth="180.0" text="Create City">
                      <styleClass>
                         <String fx:value="split-menu-btn-lg" />
                         <String fx:value="btn-primary" />
@@ -78,14 +85,21 @@
                         <String fx:value="btn" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="favoritesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#viewFavorites" prefHeight="20.0" prefWidth="180.0" text="ViewFavorites">
+                  <Button fx:id="messagesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#viewMessages" prefHeight="20.0" prefWidth="180.0" text="View Messages">
                      <styleClass>
                         <String fx:value="split-menu-btn-lg" />
                         <String fx:value="btn-primary" />
                         <String fx:value="btn" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="alertsBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#viewAlerts" prefHeight="20.0" prefWidth="180.0" text="ViewAlerts">
+                  <Button fx:id="favoritesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#viewFavorites" prefHeight="20.0" prefWidth="180.0" text="View Favorites">
+                     <styleClass>
+                        <String fx:value="split-menu-btn-lg" />
+                        <String fx:value="btn-primary" />
+                        <String fx:value="btn" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="alertsBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#viewAlerts" prefHeight="20.0" prefWidth="180.0" text="View Alerts">
                      <styleClass>
                         <String fx:value="split-menu-btn-lg" />
                         <String fx:value="btn-primary" />

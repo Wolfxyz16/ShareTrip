@@ -2,15 +2,8 @@ package eus.ehu.sharetrip.dataAccess;
 
 import eus.ehu.sharetrip.configuration.Config;
 import eus.ehu.sharetrip.configuration.UtilDate;
-import eus.ehu.sharetrip.domain.Ride;
-import eus.ehu.sharetrip.domain.Driver;
-import eus.ehu.sharetrip.domain.Traveler;
-import eus.ehu.sharetrip.domain.User;
-import eus.ehu.sharetrip.domain.Message;
-import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
-import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
-import eus.ehu.sharetrip.exceptions.UnknownUser;
-import eus.ehu.sharetrip.exceptions.UserAlreadyExistException;
+import eus.ehu.sharetrip.domain.*;
+import eus.ehu.sharetrip.exceptions.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.NoResultException;
@@ -104,14 +97,21 @@ public class DataAccess {
         year += 1;
       }
 
-
-
-
       //Create drivers
       Driver driver1 = new Driver("driver1@gmail.com", "Aitor Fernandez", "1234");
       Driver driver2 = new Driver("driver2@gmail.com", "Ane Gaztañaga", "1234");
       Driver driver3 = new Driver("driver3@gmail.com", "Test driver", "1234");
 
+      /*
+      //Create Cities
+      City city1 = new City("Donostia");
+      City city2 = new City("Bilbo");
+      City city3 = new City("Gasteiz");
+
+        db.persist(city1);
+        db.persist(city2);
+        db.persist(city3);
+      */
 
       //Create rides
       driver1.addRide("Donostia", "Bilbo", UtilDate.newDate(year, month, 15), 4, 7);
@@ -135,12 +135,14 @@ public class DataAccess {
       //CREATE MESSAGES
       Message message1 = new Message("Hello",  user1, user2);
 
+
       db.persist(driver1);
       db.persist(driver2);
       db.persist(driver3);
       db.persist(user1);
       db.persist(user2);
       db.persist(message1);
+
 
 
       db.getTransaction().commit();
@@ -177,6 +179,32 @@ public class DataAccess {
       res.add(d);
     }
     return res;
+  }
+
+  public List<String> getCities(){
+    List<String> citiesNames = new ArrayList<>();
+    TypedQuery<City> query = db.createQuery("SELECT c FROM City c", City.class);
+    List<City> cities =query.getResultList();
+    for (City c:cities){
+      citiesNames.add(c.getName());
+    }
+    return citiesNames;
+  }
+
+  public City createCity(String city) throws CityAlreadyExistException {
+    try {
+        if (getCities().contains(city)) {
+          throw new CityAlreadyExistException(ResourceBundle.getBundle("Etiquetas").getString("CreateCityGUI.CityAlreadyExist"));
+        }
+        City newCity = new City(city);
+        db.getTransaction().begin();
+        db.persist(newCity);
+        db.getTransaction().commit();
+        return newCity;
+      } catch (NullPointerException e) {
+        db.getTransaction().commit();
+        return null;
+      }
   }
 
 

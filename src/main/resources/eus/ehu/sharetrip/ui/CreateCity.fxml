@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.CreateCityController">
+   <children>
+      <Label alignment="CENTER" layoutX="180.0" layoutY="85.0" text="%CreateCityGUI.Title">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Label>
+      <Label layoutX="87.0" layoutY="191.0" text="%CreateCityGUI.EnterNameMess">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="newCity" layoutX="220.0" layoutY="187.0" />
+      <Button layoutX="257.0" layoutY="256.0" mnemonicParsing="false" onAction="#createCityClick" prefHeight="26.0" prefWidth="85.0" text="%CreateCityGUI.Btn" />
+      <Label fx:id="newCityStatusMessage" alignment="CENTER" layoutX="220.0" layoutY="305.0" prefHeight="17.0" prefWidth="160.0" />
+   </children>
+</AnchorPane>

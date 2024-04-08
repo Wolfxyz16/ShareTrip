@@ -17,6 +17,7 @@
         <mapping class="eus.ehu.sharetrip.domain.User" />
         <mapping class="eus.ehu.sharetrip.domain.Traveler" />
         <mapping class="eus.ehu.sharetrip.domain.Message" />
+        <mapping class="eus.ehu.sharetrip.domain.City" />
 
     </session-factory>
 </hibernate-configuration>
