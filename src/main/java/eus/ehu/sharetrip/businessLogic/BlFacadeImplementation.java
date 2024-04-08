@@ -129,7 +129,17 @@ public class BlFacadeImplementation implements BlFacade {
         dbManager.signup(email, username, password, role);
     }
 
-    public List<Message> getMessages() {
-        return dbManager.getMessages();
+    public List<Message> getSentMessages(User user) {
+        return dbManager.getSentMessages(user);
+    }
+
+    public List<Message> getReceivedMessages(User user) {
+        return dbManager.getReceivedMessages(user);
+    }
+
+
+    @Override
+    public void saveMessage(Message message) {
+        dbManager.saveMessage(message);
     }
 }

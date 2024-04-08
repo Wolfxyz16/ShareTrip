@@ -45,8 +45,7 @@ public class MainGUI {
         });
     }
 
-
-    private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin, favoriteOverviewWin, chatOverviewWin, alertOverviewWin, createCityWin;
+    private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin, favoriteOverviewWin, chatOverviewWin, alertOverviewWin, createCityWin, alertOverviewWin;
 
     class Window {
         Controller c;
@@ -86,7 +85,9 @@ public class MainGUI {
         switch (scene) {
             case "Home" -> mainWrapper.setCenter(mainWin.ui);
             case "View Alert" -> mainWrapper.setCenter(alertOverviewWin.ui);
-            case "View Messages" -> mainWrapper.setCenter(chatOverviewWin.ui);
+            case "Message Overview" -> mainWrapper.setCenter(messagesOverviewWin.ui);
+            case "Send message" -> mainWrapper.setCenter(sendMessageWin.ui);
+            case "View messages" -> mainWrapper.setCenter(viewMessagesWin.ui);
             case "View Favorites" -> mainWrapper.setCenter(favoriteOverviewWin.ui);
             case "Query Rides" -> mainWrapper.setCenter(queryRidesWin.ui);
             case "Create Ride" -> mainWrapper.setCenter(createRideWin.ui);
@@ -109,9 +110,12 @@ public class MainGUI {
         loginWin = load("SignIn.fxml");
         registerWin = load("SignUp.fxml");
         favoriteOverviewWin = load("FavoriteOverview.fxml");
-        chatOverviewWin = load("ChatOverview.fxml");
+        messagesOverviewWin = load("MessagesOverview.fxml");
+        sendMessageWin = load("SendMessage.fxml");
+        viewMessagesWin = load("MyMessagesOverview.fxml");
         alertOverviewWin = load("AlertOverview.fxml");
         createCityWin = load("CreateCity.fxml");
+
 
 
         ((MainGUIController)mainWin.c).initializeButtonVisibility();

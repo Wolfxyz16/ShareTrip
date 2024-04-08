@@ -378,8 +378,23 @@ public class DataAccess {
     System.out.println("DataBase is closed");
   }
 
-  public List<Message> getMessages() {
-    TypedQuery<Message> query = db.createQuery("SELECT m FROM Message m", Message.class);
+  public List<Message> getSentMessages(User currentUser) {
+    TypedQuery<Message> query = db.createQuery("SELECT m FROM Message m WHERE m.sender = :user", Message.class);
+    query.setParameter("user", currentUser);
+
+    return query.getResultList();
+  }
+
+    public void saveMessage(Message message) {
+        db.getTransaction().begin();
+        db.persist(message);
+        db.getTransaction().commit();
+    }
+
+  public List<Message> getReceivedMessages(User user) {
+    TypedQuery<Message> query = db.createQuery("SELECT m FROM Message m WHERE m.receiver = :user", Message.class);
+    query.setParameter("user", user);
+
     return query.getResultList();
   }
 }
