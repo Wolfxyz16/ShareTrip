@@ -3852,17 +3852,18 @@
 									"model": {
 										"$ref": "AAAAAAGOWCPKYPe1ENU="
 									},
-									"visible": false,
 									"font": "Arial;13;0",
-									"left": 551,
+									"left": 536,
 									"top": 644,
+									"width": 59.73779296875,
 									"height": 13,
-									"alpha": 0.5235987755982988,
-									"distance": 30,
+									"alpha": 0.3145454096825611,
+									"distance": 41.182520563948,
 									"hostEdge": {
 										"$ref": "AAAAAAGOWCPKYPe4vto="
 									},
-									"edgePosition": 2
+									"edgePosition": 2,
+									"text": "-offeredBy"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -5878,9 +5879,11 @@
 								"_parent": {
 									"$ref": "AAAAAAGOWCPKYPe0V/4="
 								},
+								"name": "offeredBy",
 								"reference": {
 									"$ref": "AAAAAAGOVzytVDkEiRY="
 								},
+								"visibility": "private",
 								"multiplicity": "1"
 							},
 							"end2": {
