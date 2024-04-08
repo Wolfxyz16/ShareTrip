@@ -13,6 +13,8 @@ import eus.ehu.sharetrip.utils.Dates;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class CreateRideController implements Controller {
@@ -88,13 +90,22 @@ public class CreateRideController implements Controller {
     @FXML
     void createRideClick(ActionEvent e) {
 
-        LocalDate date = datePicker.getValue();
+        LocalDate localDate = datePicker.getValue();
+        Date date = Date.from(localDate.atStartOfDay( ZoneId.systemDefault() ).toInstant());
         String departCity = txtDepartCity.getText();
         String arrivalCity = txtArrivalCity.getText();
         int numSeats = Integer.parseInt( txtSeats.getText() );
         float price = Float.parseFloat( txtPrice.getText() );
 
-        bl.createRide( departCity , arrivalCity , date , numSeats , price , bl.getCurrentUser().getEmail() );
+        try {
+            bl.createRide(departCity, arrivalCity, date, numSeats, price, bl.getCurrentUser().getEmail());
+        } catch (RideAlreadyExistException ex) {
+            // set the corresponding error labels
+            throw new RuntimeException(ex);
+        } catch (RideMustBeLaterThanTodayException ex) {
+            // set the corresponding error labels
+            throw new RuntimeException(ex);
+        }
 
         //  Event event = comboEvents.getSelectionModel().getSelectedItem();
         String errors = field_Errors();
