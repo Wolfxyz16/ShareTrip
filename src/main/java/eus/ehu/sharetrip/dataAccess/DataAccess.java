@@ -110,7 +110,7 @@ public class DataAccess {
       //Create drivers
       Driver driver1 = new Driver("driver1@gmail.com", "Aitor Fernandez", "1234");
       Driver driver2 = new Driver("driver2@gmail.com", "Ane Gaztañaga", "1234");
-      Driver driver3 = new Driver("driver3@gmail.com", "Test driver", "1234");
+      Driver driver3 = new Driver("driver3@gmail.com", "test", "test");
 
 
       //Create rides
@@ -180,15 +180,15 @@ public class DataAccess {
   }
 
 
-  public Ride createRide(String from, String to, Date date, int nPlaces, float price, String driverEmail) throws RideAlreadyExistException, RideMustBeLaterThanTodayException {
-    System.out.println(">> DataAccess: createRide=> from= " + from + " to= " + to + " driver=" + driverEmail + " date " + date);
+  public Ride createRide(String from, String to, Date date, int nPlaces, float price, long driverID) throws RideAlreadyExistException, RideMustBeLaterThanTodayException {
+    System.out.println(">> DataAccess: createRide=> from= " + from + " to= " + to + " driver=" + driverID + " date " + date);
     try {
       if (new Date().compareTo(date) > 0) {
         throw new RideMustBeLaterThanTodayException(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.ErrorRideMustBeLaterThanToday"));
       }
       db.getTransaction().begin();
 
-      Driver driver = db.find(Driver.class, driverEmail);
+      Driver driver = db.find(Driver.class, driverID);
       if (driver.doesRideExists(from, to, date)) {
         db.getTransaction().commit();
         throw new RideAlreadyExistException(ResourceBundle.getBundle("Etiquetas").getString("DataAccess.RideAlreadyExist"));
@@ -294,7 +294,7 @@ public class DataAccess {
   public User getUser(String username) {
     try {
       TypedQuery<User> query = db.createQuery(
-              "SELECT u FROM User u WHERE u.userName = :username", User.class);
+              "SELECT u FROM User u WHERE u.username = :username", User.class);
       query.setParameter("username", username);
       return query.getSingleResult();
     } catch (jakarta.persistence.NoResultException e) {
@@ -303,8 +303,7 @@ public class DataAccess {
   }
   public User login(String username, String password) throws UnknownUser {
     User user;
-    TypedQuery<User> query = db.createQuery("SELECT u FROM User u WHERE u.userName =?1 AND u.password =?2",
-            User.class);
+    TypedQuery<User> query = db.createQuery("SELECT u FROM User u WHERE u.username =?1 AND u.password =?2", User.class);
     query.setParameter(1, username);
     query.setParameter(2, password);
     try {
@@ -318,7 +317,7 @@ public class DataAccess {
 
   public User signup(String email, String userName, String password, String role) throws UserAlreadyExistException {
     TypedQuery<User> query = db.createQuery(
-            "SELECT u FROM User u WHERE u.email = :email OR u.userName = :userName", User.class);
+            "SELECT u FROM User u WHERE u.email = :email OR u.username = :userName", User.class);
     query.setParameter("email", email);
     query.setParameter("userName", userName);
 
