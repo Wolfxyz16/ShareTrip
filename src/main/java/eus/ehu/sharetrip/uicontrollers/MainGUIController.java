@@ -87,7 +87,7 @@ public class MainGUIController implements Controller{
 
     @FXML
     void viewMessages(ActionEvent event) {
-        mainGUI.showScene("View Messages");
+        mainGUI.showScene("Message Overview");
     }
 
     @FXML

@@ -78,5 +78,10 @@ public interface BlFacade {
     public User login(String username, String password) throws UnknownUser;
     public void signup(String email, String username, String password, String role) throws UnknownUser, UserAlreadyExistException;
 
-    public  List<Message> getMessages();
+    void saveMessage(Message message);
+
+    public  List<Message> getSentMessages(User currentUser);
+
+    public  List<Message> getReceivedMessages(User currentUser);
+
 }
