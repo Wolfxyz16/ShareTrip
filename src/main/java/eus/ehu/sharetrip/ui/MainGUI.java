@@ -46,7 +46,7 @@ public class MainGUI {
     }
 
 
-    private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin, favoriteOverviewWin, chatOverviewWin, alertOverviewWin;
+    private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin, favoriteOverviewWin, chatOverviewWin, alertOverviewWin, createCityWin;
 
     class Window {
         Controller c;
@@ -92,6 +92,9 @@ public class MainGUI {
             case "Create Ride" -> mainWrapper.setCenter(createRideWin.ui);
             case "Log in" -> mainWrapper.setCenter(loginWin.ui);
             case "Register" -> mainWrapper.setCenter(registerWin.ui);
+            case "Create City" -> mainWrapper.setCenter(createCityWin.ui);
+
+
         }
     }
 
@@ -108,6 +111,8 @@ public class MainGUI {
         favoriteOverviewWin = load("FavoriteOverview.fxml");
         chatOverviewWin = load("ChatOverview.fxml");
         alertOverviewWin = load("AlertOverview.fxml");
+        createCityWin = load("CreateCity.fxml");
+
 
         ((MainGUIController)mainWin.c).initializeButtonVisibility();
 

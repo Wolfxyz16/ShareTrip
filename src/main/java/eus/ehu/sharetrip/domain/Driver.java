@@ -14,7 +14,7 @@ public class Driver extends User implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+
 
 	@Id 
 	private String email;
