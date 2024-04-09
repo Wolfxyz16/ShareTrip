@@ -157,8 +157,8 @@ a.text-danger:focused {
     -fx-fill: #843534; }
 
 .bg-primary {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff; }
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2; }
 
 .bg-primary {
     -fx-background-color: #337ab7; }
@@ -210,7 +210,7 @@ a.bg-danger:hover,
 .btn-default {
     -fx-text-fill: #333;
     -fx-fill: #333;
-    -fx-background-color: #fff;
+    -fx-background-color: #F2F2F2;
     -fx-border-color: #ccc; }
 .btn-default:focused, .btn-default.focused {
     -fx-text-fill: #333;
@@ -245,46 +245,46 @@ a.bg-danger:hover,
 .btn-default:pressed, .btn-default.pressed, .open > .btn-default.dropdown-toggle {
     background-image: none; }
 .btn-default.disabled, .btn-default.disabled:hover, .btn-default.disabled:focused, .btn-default.disabled.focused, .btn-default.disabled:pressed, .btn-default.disabled.pressed, .btn-default[disabled], .btn-default[disabled]:hover, .btn-default[disabled]:focused, .btn-default[disabled].focused, .btn-default[disabled]:pressed, .btn-default[disabled].pressed, fieldset[disabled] .btn-default, fieldset[disabled] .btn-default:hover, fieldset[disabled] .btn-default:focused, fieldset[disabled] .btn-default.focused, fieldset[disabled] .btn-default:pressed, fieldset[disabled] .btn-default.pressed {
-    -fx-background-color: #fff;
+    -fx-background-color: #F2F2F2;
     -fx-border-color: #ccc; }
 .btn-default .badge {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #333; }
 
 .btn-primary {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;;
+    -fx-fill: #F2F2F2;;
     -fx-background-color: #1BAFBF;
     -fx-border-color: #2e6da4; }
 .btn-primary:focused, .btn-primary.focused {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #286090;
     -fx-border-color: #122b40; }
 .btn-primary:hover {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #286090;
     -fx-border-color: #204d74; }
 .btn-primary:pressed, .btn-primary.pressed, .open > .btn-primary.dropdown-toggle {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #286090;
     -fx-border-color: #204d74; }
 .btn-primary:pressed:hover, .btn-primary:pressed:focused, .btn-primary:pressed.focused, .btn-primary.pressed:hover, .btn-primary.pressed:focused, .btn-primary.pressed.focused, .open > .btn-primary.dropdown-toggle:hover, .open > .btn-primary.dropdown-toggle:focused, .open > .btn-primary.dropdown-toggle.focused {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #204d74;
     -fx-border-color: #122b40; }
 .btn-primary:selected, .btn-primary.selected {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #286090;
     -fx-border-color: #204d74; }
 .btn-primary:selected:hover, .btn-primary:selected:focused, .btn-primary:selected.focused, .btn-primary.selected:hover, .btn-primary.selected:focused, .btn-primary.selected.focused {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #204d74;
     -fx-border-color: #122b40; }
 .btn-primary:pressed, .btn-primary.pressed, .open > .btn-primary.dropdown-toggle {
@@ -295,41 +295,41 @@ a.bg-danger:hover,
 .btn-primary .badge {
     -fx-text-fill: #337ab7;
     -fx-fill: #337ab7;
-    -fx-background-color: #fff; }
+    -fx-background-color: #F2F2F2; }
 
 .btn-success {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #5cb85c;
     -fx-border-color: #4cae4c; }
 .btn-success:focused, .btn-success.focused {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #449d44;
     -fx-border-color: #255625; }
 .btn-success:hover {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #449d44;
     -fx-border-color: #398439; }
 .btn-success:pressed, .btn-success.pressed, .open > .btn-success.dropdown-toggle {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #449d44;
     -fx-border-color: #398439; }
 .btn-success:pressed:hover, .btn-success:pressed:focused, .btn-success:pressed.focused, .btn-success.pressed:hover, .btn-success.pressed:focused, .btn-success.pressed.focused, .open > .btn-success.dropdown-toggle:hover, .open > .btn-success.dropdown-toggle:focused, .open > .btn-success.dropdown-toggle.focused {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #398439;
     -fx-border-color: #255625; }
 .btn-success:selected, .btn-success.selected {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #449d44;
     -fx-border-color: #398439; }
 .btn-success:selected:hover, .btn-success:selected:focused, .btn-success:selected.focused, .btn-success.selected:hover, .btn-success.selected:focused, .btn-success.selected.focused {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #398439;
     -fx-border-color: #255625; }
 .btn-success:pressed, .btn-success.pressed, .open > .btn-success.dropdown-toggle {
@@ -340,41 +340,41 @@ a.bg-danger:hover,
 .btn-success .badge {
     -fx-text-fill: #5cb85c;
     -fx-fill: #5cb85c;
-    -fx-background-color: #fff; }
+    -fx-background-color: #F2F2F2; }
 
 .btn-info {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #5bc0de;
     -fx-border-color: #46b8da; }
 .btn-info:focused, .btn-info.focused {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #31b0d5;
     -fx-border-color: #1b6d85; }
 .btn-info:hover {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #31b0d5;
     -fx-border-color: #269abc; }
 .btn-info:pressed, .btn-info.pressed, .open > .btn-info.dropdown-toggle {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #31b0d5;
     -fx-border-color: #269abc; }
 .btn-info:pressed:hover, .btn-info:pressed:focused, .btn-info:pressed.focused, .btn-info.pressed:hover, .btn-info.pressed:focused, .btn-info.pressed.focused, .open > .btn-info.dropdown-toggle:hover, .open > .btn-info.dropdown-toggle:focused, .open > .btn-info.dropdown-toggle.focused {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #269abc;
     -fx-border-color: #1b6d85; }
 .btn-info:selected, .btn-info.selected {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #31b0d5;
     -fx-border-color: #269abc; }
 .btn-info:selected:hover, .btn-info:selected:focused, .btn-info:selected.focused, .btn-info.selected:hover, .btn-info.selected:focused, .btn-info.selected.focused {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #269abc;
     -fx-border-color: #1b6d85; }
 .btn-info:pressed, .btn-info.pressed, .open > .btn-info.dropdown-toggle {
@@ -385,41 +385,41 @@ a.bg-danger:hover,
 .btn-info .badge {
     -fx-text-fill: #5bc0de;
     -fx-fill: #5bc0de;
-    -fx-background-color: #fff; }
+    -fx-background-color: #F2F2F2; }
 
 .btn-warning {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #f0ad4e;
     -fx-border-color: #eea236; }
 .btn-warning:focused, .btn-warning.focused {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #ec971f;
     -fx-border-color: #985f0d; }
 .btn-warning:hover {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #ec971f;
     -fx-border-color: #d58512; }
 .btn-warning:pressed, .btn-warning.pressed, .open > .btn-warning.dropdown-toggle {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #ec971f;
     -fx-border-color: #d58512; }
 .btn-warning:pressed:hover, .btn-warning:pressed:focused, .btn-warning:pressed.focused, .btn-warning.pressed:hover, .btn-warning.pressed:focused, .btn-warning.pressed.focused, .open > .btn-warning.dropdown-toggle:hover, .open > .btn-warning.dropdown-toggle:focused, .open > .btn-warning.dropdown-toggle.focused {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #d58512;
     -fx-border-color: #985f0d; }
 .btn-warning:selected, .btn-warning.selected {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #ec971f;
     -fx-border-color: #d58512; }
 .btn-warning:selected:hover, .btn-warning:selected:focused, .btn-warning:selected.focused, .btn-warning.selected:hover, .btn-warning.selected:focused, .btn-warning.selected.focused {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #d58512;
     -fx-border-color: #985f0d; }
 .btn-warning:pressed, .btn-warning.pressed, .open > .btn-warning.dropdown-toggle {
@@ -430,41 +430,41 @@ a.bg-danger:hover,
 .btn-warning .badge {
     -fx-text-fill: #f0ad4e;
     -fx-fill: #f0ad4e;
-    -fx-background-color: #fff; }
+    -fx-background-color: #F2F2F2; }
 
 .btn-danger {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #d9534f;
     -fx-border-color: #d43f3a; }
 .btn-danger:focused, .btn-danger.focused {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #c9302c;
     -fx-border-color: #761c19; }
 .btn-danger:hover {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #c9302c;
     -fx-border-color: #ac2925; }
 .btn-danger:pressed, .btn-danger.pressed, .open > .btn-danger.dropdown-toggle {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #c9302c;
     -fx-border-color: #ac2925; }
 .btn-danger:pressed:hover, .btn-danger:pressed:focused, .btn-danger:pressed.focused, .btn-danger.pressed:hover, .btn-danger.pressed:focused, .btn-danger.pressed.focused, .open > .btn-danger.dropdown-toggle:hover, .open > .btn-danger.dropdown-toggle:focused, .open > .btn-danger.dropdown-toggle.focused {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #ac2925;
     -fx-border-color: #761c19; }
 .btn-danger:selected, .btn-danger.selected {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #c9302c;
     -fx-border-color: #ac2925; }
 .btn-danger:selected:hover, .btn-danger:selected:focused, .btn-danger:selected.focused, .btn-danger.selected:hover, .btn-danger.selected:focused, .btn-danger.selected.focused {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #ac2925;
     -fx-border-color: #761c19; }
 .btn-danger:pressed, .btn-danger.pressed, .open > .btn-danger.dropdown-toggle {
@@ -475,7 +475,7 @@ a.bg-danger:hover,
 .btn-danger .badge {
     -fx-text-fill: #d9534f;
     -fx-fill: #d9534f;
-    -fx-background-color: #fff; }
+    -fx-background-color: #F2F2F2; }
 
 .btn-lg {
     -fx-padding: 10px 16px 10px 16px;
@@ -537,8 +537,8 @@ a.bg-danger:hover,
 .split-menu-btn-default > .label, .split-menu-btn-default > .arrow-button {
     -fx-text-fill: #333;
     -fx-fill: #333;
-    -fx-background-color: #fff;
-    -fx-border-color: #fff; }
+    -fx-background-color: #F2F2F2;
+    -fx-border-color: #F2F2F2; }
 
 .split-menu-btn-default:focused > .label, .split-menu-btn-default:focused > .arrow-button, .split-menu-btn-default.focused > .label, .split-menu-btn-default.focused > .arrow-button {
     -fx-text-fill: #333;
@@ -580,52 +580,52 @@ a.bg-danger:hover,
     background-image: none; }
 
 .split-menu-btn-default.disabled > .label, .split-menu-btn-default.disabled > .arrow-button, .split-menu-btn-default.disabled:hover > .label, .split-menu-btn-default.disabled:hover > .arrow-button, .split-menu-btn-default.disabled:focused > .label, .split-menu-btn-default.disabled:focused > .arrow-button, .split-menu-btn-default.disabled.focused > .label, .split-menu-btn-default.disabled.focused > .arrow-button, .split-menu-btn-default.disabled:pressed > .label, .split-menu-btn-default.disabled:pressed > .arrow-button, .split-menu-btn-default.disabled.pressed > .label, .split-menu-btn-default.disabled.pressed > .arrow-button, .split-menu-btn-default[disabled] > .label, .split-menu-btn-default[disabled] > .arrow-button, .split-menu-btn-default[disabled]:hover > .label, .split-menu-btn-default[disabled]:hover > .arrow-button, .split-menu-btn-default[disabled]:focused > .label, .split-menu-btn-default[disabled]:focused > .arrow-button, .split-menu-btn-default[disabled].focused > .label, .split-menu-btn-default[disabled].focused > .arrow-button, .split-menu-btn-default[disabled]:pressed > .label, .split-menu-btn-default[disabled]:pressed > .arrow-button, .split-menu-btn-default[disabled].pressed > .label, .split-menu-btn-default[disabled].pressed > .arrow-button, fieldset[disabled] .split-menu-btn-default > .label, fieldset[disabled] .split-menu-btn-default > .arrow-button, fieldset[disabled] .split-menu-btn-default:hover > .label, fieldset[disabled] .split-menu-btn-default:hover > .arrow-button, fieldset[disabled] .split-menu-btn-default:focused > .label, fieldset[disabled] .split-menu-btn-default:focused > .arrow-button, fieldset[disabled] .split-menu-btn-default.focused > .label, fieldset[disabled] .split-menu-btn-default.focused > .arrow-button, fieldset[disabled] .split-menu-btn-default:pressed > .label, fieldset[disabled] .split-menu-btn-default:pressed > .arrow-button, fieldset[disabled] .split-menu-btn-default.pressed > .label, fieldset[disabled] .split-menu-btn-default.pressed > .arrow-button {
-    -fx-background-color: #fff;
+    -fx-background-color: #F2F2F2;
     -fx-border-color: #ccc; }
 
 .split-menu-btn-primary > .arrow {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff; }
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2; }
 
 .split-menu-btn-primary > .label, .split-menu-btn-primary > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #337ab7;
     -fx-border-color: #337ab7; }
 
 .split-menu-btn-primary:focused > .label, .split-menu-btn-primary:focused > .arrow-button, .split-menu-btn-primary.focused > .label, .split-menu-btn-primary.focused > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #286090;
     -fx-border-color: #122b40; }
 
 .split-menu-btn-primary:hover > .label, .split-menu-btn-primary:hover > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #286090;
     -fx-border-color: #204d74; }
 
 .split-menu-btn-primary:pressed > .label, .split-menu-btn-primary:pressed > .arrow-button, .split-menu-btn-primary.pressed > .label, .split-menu-btn-primary.pressed > .arrow-button, .open > .split-menu-btn-primary.dropdown-toggle > .label, .open > .split-menu-btn-primary.dropdown-toggle > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #286090;
     -fx-border-color: #204d74; }
 
 .split-menu-btn-primary:pressed:hover > .label, .split-menu-btn-primary:pressed:hover > .arrow-button, .split-menu-btn-primary:pressed:focused > .label, .split-menu-btn-primary:pressed:focused > .arrow-button, .split-menu-btn-primary:pressed.focused > .label, .split-menu-btn-primary:pressed.focused > .arrow-button, .split-menu-btn-primary.pressed:hover > .label, .split-menu-btn-primary.pressed:hover > .arrow-button, .split-menu-btn-primary.pressed:focused > .label, .split-menu-btn-primary.pressed:focused > .arrow-button, .split-menu-btn-primary.pressed.focused > .label, .split-menu-btn-primary.pressed.focused > .arrow-button, .open > .split-menu-btn-primary.dropdown-toggle:hover > .label, .open > .split-menu-btn-primary.dropdown-toggle:hover > .arrow-button, .open > .split-menu-btn-primary.dropdown-toggle:focused > .label, .open > .split-menu-btn-primary.dropdown-toggle:focused > .arrow-button, .open > .split-menu-btn-primary.dropdown-toggle.focused > .label, .open > .split-menu-btn-primary.dropdown-toggle.focused > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #204d74;
     -fx-border-color: #122b40; }
 
 .split-menu-btn-primary:selected > .label, .split-menu-btn-primary:selected > .arrow-button, .split-menu-btn-primary.selected > .label, .split-menu-btn-primary.selected > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #286090;
     -fx-border-color: #204d74; }
 
 .split-menu-btn-primary:selected:hover > .label, .split-menu-btn-primary:selected:hover > .arrow-button, .split-menu-btn-primary:selected:focused > .label, .split-menu-btn-primary:selected:focused > .arrow-button, .split-menu-btn-primary:selected.focused > .label, .split-menu-btn-primary:selected.focused > .arrow-button, .split-menu-btn-primary.selected:hover > .label, .split-menu-btn-primary.selected:hover > .arrow-button, .split-menu-btn-primary.selected:focused > .label, .split-menu-btn-primary.selected:focused > .arrow-button, .split-menu-btn-primary.selected.focused > .label, .split-menu-btn-primary.selected.focused > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #204d74;
     -fx-border-color: #122b40; }
 
@@ -637,48 +637,48 @@ a.bg-danger:hover,
     -fx-border-color: #2e6da4; }
 
 .split-menu-btn-success > .arrow {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff; }
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2; }
 
 .split-menu-btn-success > .label, .split-menu-btn-success > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #5cb85c;
     -fx-border-color: #5cb85c; }
 
 .split-menu-btn-success:focused > .label, .split-menu-btn-success:focused > .arrow-button, .split-menu-btn-success.focused > .label, .split-menu-btn-success.focused > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #449d44;
     -fx-border-color: #255625; }
 
 .split-menu-btn-success:hover > .label, .split-menu-btn-success:hover > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #449d44;
     -fx-border-color: #398439; }
 
 .split-menu-btn-success:pressed > .label, .split-menu-btn-success:pressed > .arrow-button, .split-menu-btn-success.pressed > .label, .split-menu-btn-success.pressed > .arrow-button, .open > .split-menu-btn-success.dropdown-toggle > .label, .open > .split-menu-btn-success.dropdown-toggle > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #449d44;
     -fx-border-color: #398439; }
 
 .split-menu-btn-success:pressed:hover > .label, .split-menu-btn-success:pressed:hover > .arrow-button, .split-menu-btn-success:pressed:focused > .label, .split-menu-btn-success:pressed:focused > .arrow-button, .split-menu-btn-success:pressed.focused > .label, .split-menu-btn-success:pressed.focused > .arrow-button, .split-menu-btn-success.pressed:hover > .label, .split-menu-btn-success.pressed:hover > .arrow-button, .split-menu-btn-success.pressed:focused > .label, .split-menu-btn-success.pressed:focused > .arrow-button, .split-menu-btn-success.pressed.focused > .label, .split-menu-btn-success.pressed.focused > .arrow-button, .open > .split-menu-btn-success.dropdown-toggle:hover > .label, .open > .split-menu-btn-success.dropdown-toggle:hover > .arrow-button, .open > .split-menu-btn-success.dropdown-toggle:focused > .label, .open > .split-menu-btn-success.dropdown-toggle:focused > .arrow-button, .open > .split-menu-btn-success.dropdown-toggle.focused > .label, .open > .split-menu-btn-success.dropdown-toggle.focused > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #398439;
     -fx-border-color: #255625; }
 
 .split-menu-btn-success:selected > .label, .split-menu-btn-success:selected > .arrow-button, .split-menu-btn-success.selected > .label, .split-menu-btn-success.selected > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #449d44;
     -fx-border-color: #398439; }
 
 .split-menu-btn-success:selected:hover > .label, .split-menu-btn-success:selected:hover > .arrow-button, .split-menu-btn-success:selected:focused > .label, .split-menu-btn-success:selected:focused > .arrow-button, .split-menu-btn-success:selected.focused > .label, .split-menu-btn-success:selected.focused > .arrow-button, .split-menu-btn-success.selected:hover > .label, .split-menu-btn-success.selected:hover > .arrow-button, .split-menu-btn-success.selected:focused > .label, .split-menu-btn-success.selected:focused > .arrow-button, .split-menu-btn-success.selected.focused > .label, .split-menu-btn-success.selected.focused > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #398439;
     -fx-border-color: #255625; }
 
@@ -690,48 +690,48 @@ a.bg-danger:hover,
     -fx-border-color: #4cae4c; }
 
 .split-menu-btn-info > .arrow {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff; }
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2; }
 
 .split-menu-btn-info > .label, .split-menu-btn-info > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #5bc0de;
     -fx-border-color: #5bc0de; }
 
 .split-menu-btn-info:focused > .label, .split-menu-btn-info:focused > .arrow-button, .split-menu-btn-info.focused > .label, .split-menu-btn-info.focused > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #31b0d5;
     -fx-border-color: #1b6d85; }
 
 .split-menu-btn-info:hover > .label, .split-menu-btn-info:hover > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #31b0d5;
     -fx-border-color: #269abc; }
 
 .split-menu-btn-info:pressed > .label, .split-menu-btn-info:pressed > .arrow-button, .split-menu-btn-info.pressed > .label, .split-menu-btn-info.pressed > .arrow-button, .open > .split-menu-btn-info.dropdown-toggle > .label, .open > .split-menu-btn-info.dropdown-toggle > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #31b0d5;
     -fx-border-color: #269abc; }
 
 .split-menu-btn-info:pressed:hover > .label, .split-menu-btn-info:pressed:hover > .arrow-button, .split-menu-btn-info:pressed:focused > .label, .split-menu-btn-info:pressed:focused > .arrow-button, .split-menu-btn-info:pressed.focused > .label, .split-menu-btn-info:pressed.focused > .arrow-button, .split-menu-btn-info.pressed:hover > .label, .split-menu-btn-info.pressed:hover > .arrow-button, .split-menu-btn-info.pressed:focused > .label, .split-menu-btn-info.pressed:focused > .arrow-button, .split-menu-btn-info.pressed.focused > .label, .split-menu-btn-info.pressed.focused > .arrow-button, .open > .split-menu-btn-info.dropdown-toggle:hover > .label, .open > .split-menu-btn-info.dropdown-toggle:hover > .arrow-button, .open > .split-menu-btn-info.dropdown-toggle:focused > .label, .open > .split-menu-btn-info.dropdown-toggle:focused > .arrow-button, .open > .split-menu-btn-info.dropdown-toggle.focused > .label, .open > .split-menu-btn-info.dropdown-toggle.focused > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #269abc;
     -fx-border-color: #1b6d85; }
 
 .split-menu-btn-info:selected > .label, .split-menu-btn-info:selected > .arrow-button, .split-menu-btn-info.selected > .label, .split-menu-btn-info.selected > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #31b0d5;
     -fx-border-color: #269abc; }
 
 .split-menu-btn-info:selected:hover > .label, .split-menu-btn-info:selected:hover > .arrow-button, .split-menu-btn-info:selected:focused > .label, .split-menu-btn-info:selected:focused > .arrow-button, .split-menu-btn-info:selected.focused > .label, .split-menu-btn-info:selected.focused > .arrow-button, .split-menu-btn-info.selected:hover > .label, .split-menu-btn-info.selected:hover > .arrow-button, .split-menu-btn-info.selected:focused > .label, .split-menu-btn-info.selected:focused > .arrow-button, .split-menu-btn-info.selected.focused > .label, .split-menu-btn-info.selected.focused > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #269abc;
     -fx-border-color: #1b6d85; }
 
@@ -743,48 +743,48 @@ a.bg-danger:hover,
     -fx-border-color: #46b8da; }
 
 .split-menu-btn-warning > .arrow {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff; }
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2; }
 
 .split-menu-btn-warning > .label, .split-menu-btn-warning > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #f0ad4e;
     -fx-border-color: #f0ad4e; }
 
 .split-menu-btn-warning:focused > .label, .split-menu-btn-warning:focused > .arrow-button, .split-menu-btn-warning.focused > .label, .split-menu-btn-warning.focused > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #ec971f;
     -fx-border-color: #985f0d; }
 
 .split-menu-btn-warning:hover > .label, .split-menu-btn-warning:hover > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #ec971f;
     -fx-border-color: #d58512; }
 
 .split-menu-btn-warning:pressed > .label, .split-menu-btn-warning:pressed > .arrow-button, .split-menu-btn-warning.pressed > .label, .split-menu-btn-warning.pressed > .arrow-button, .open > .split-menu-btn-warning.dropdown-toggle > .label, .open > .split-menu-btn-warning.dropdown-toggle > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #ec971f;
     -fx-border-color: #d58512; }
 
 .split-menu-btn-warning:pressed:hover > .label, .split-menu-btn-warning:pressed:hover > .arrow-button, .split-menu-btn-warning:pressed:focused > .label, .split-menu-btn-warning:pressed:focused > .arrow-button, .split-menu-btn-warning:pressed.focused > .label, .split-menu-btn-warning:pressed.focused > .arrow-button, .split-menu-btn-warning.pressed:hover > .label, .split-menu-btn-warning.pressed:hover > .arrow-button, .split-menu-btn-warning.pressed:focused > .label, .split-menu-btn-warning.pressed:focused > .arrow-button, .split-menu-btn-warning.pressed.focused > .label, .split-menu-btn-warning.pressed.focused > .arrow-button, .open > .split-menu-btn-warning.dropdown-toggle:hover > .label, .open > .split-menu-btn-warning.dropdown-toggle:hover > .arrow-button, .open > .split-menu-btn-warning.dropdown-toggle:focused > .label, .open > .split-menu-btn-warning.dropdown-toggle:focused > .arrow-button, .open > .split-menu-btn-warning.dropdown-toggle.focused > .label, .open > .split-menu-btn-warning.dropdown-toggle.focused > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #d58512;
     -fx-border-color: #985f0d; }
 
 .split-menu-btn-warning:selected > .label, .split-menu-btn-warning:selected > .arrow-button, .split-menu-btn-warning.selected > .label, .split-menu-btn-warning.selected > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #ec971f;
     -fx-border-color: #d58512; }
 
 .split-menu-btn-warning:selected:hover > .label, .split-menu-btn-warning:selected:hover > .arrow-button, .split-menu-btn-warning:selected:focused > .label, .split-menu-btn-warning:selected:focused > .arrow-button, .split-menu-btn-warning:selected.focused > .label, .split-menu-btn-warning:selected.focused > .arrow-button, .split-menu-btn-warning.selected:hover > .label, .split-menu-btn-warning.selected:hover > .arrow-button, .split-menu-btn-warning.selected:focused > .label, .split-menu-btn-warning.selected:focused > .arrow-button, .split-menu-btn-warning.selected.focused > .label, .split-menu-btn-warning.selected.focused > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #d58512;
     -fx-border-color: #985f0d; }
 
@@ -796,48 +796,48 @@ a.bg-danger:hover,
     -fx-border-color: #eea236; }
 
 .split-menu-btn-danger > .arrow {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff; }
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2; }
 
 .split-menu-btn-danger > .label, .split-menu-btn-danger > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #d9534f;
     -fx-border-color: #d9534f; }
 
 .split-menu-btn-danger:focused > .label, .split-menu-btn-danger:focused > .arrow-button, .split-menu-btn-danger.focused > .label, .split-menu-btn-danger.focused > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #c9302c;
     -fx-border-color: #761c19; }
 
 .split-menu-btn-danger:hover > .label, .split-menu-btn-danger:hover > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #c9302c;
     -fx-border-color: #ac2925; }
 
 .split-menu-btn-danger:pressed > .label, .split-menu-btn-danger:pressed > .arrow-button, .split-menu-btn-danger.pressed > .label, .split-menu-btn-danger.pressed > .arrow-button, .open > .split-menu-btn-danger.dropdown-toggle > .label, .open > .split-menu-btn-danger.dropdown-toggle > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #c9302c;
     -fx-border-color: #ac2925; }
 
 .split-menu-btn-danger:pressed:hover > .label, .split-menu-btn-danger:pressed:hover > .arrow-button, .split-menu-btn-danger:pressed:focused > .label, .split-menu-btn-danger:pressed:focused > .arrow-button, .split-menu-btn-danger:pressed.focused > .label, .split-menu-btn-danger:pressed.focused > .arrow-button, .split-menu-btn-danger.pressed:hover > .label, .split-menu-btn-danger.pressed:hover > .arrow-button, .split-menu-btn-danger.pressed:focused > .label, .split-menu-btn-danger.pressed:focused > .arrow-button, .split-menu-btn-danger.pressed.focused > .label, .split-menu-btn-danger.pressed.focused > .arrow-button, .open > .split-menu-btn-danger.dropdown-toggle:hover > .label, .open > .split-menu-btn-danger.dropdown-toggle:hover > .arrow-button, .open > .split-menu-btn-danger.dropdown-toggle:focused > .label, .open > .split-menu-btn-danger.dropdown-toggle:focused > .arrow-button, .open > .split-menu-btn-danger.dropdown-toggle.focused > .label, .open > .split-menu-btn-danger.dropdown-toggle.focused > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #ac2925;
     -fx-border-color: #761c19; }
 
 .split-menu-btn-danger:selected > .label, .split-menu-btn-danger:selected > .arrow-button, .split-menu-btn-danger.selected > .label, .split-menu-btn-danger.selected > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #c9302c;
     -fx-border-color: #ac2925; }
 
 .split-menu-btn-danger:selected:hover > .label, .split-menu-btn-danger:selected:hover > .arrow-button, .split-menu-btn-danger:selected:focused > .label, .split-menu-btn-danger:selected:focused > .arrow-button, .split-menu-btn-danger:selected.focused > .label, .split-menu-btn-danger:selected.focused > .arrow-button, .split-menu-btn-danger.selected:hover > .label, .split-menu-btn-danger.selected:hover > .arrow-button, .split-menu-btn-danger.selected:focused > .label, .split-menu-btn-danger.selected:focused > .arrow-button, .split-menu-btn-danger.selected.focused > .label, .split-menu-btn-danger.selected.focused > .arrow-button {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: #ac2925;
     -fx-border-color: #761c19; }
 
@@ -893,8 +893,8 @@ a.bg-danger:hover,
     -fx-padding: .2em .6em .3em .6em;
     -fx-font-size: 75%;
     -fx-font-weight: bold;
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-text-alignment: center;
     -fx-alignment: baseline-center;
     -fx-border-radius: .25em;
@@ -935,8 +935,8 @@ a.bg-danger:hover,
     -fx-padding: 3px 7px 3px 7px;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-alignment: center;
     -fx-text-alignment: center;
     -fx-background-color: #777777;
@@ -947,11 +947,11 @@ a.bg-danger:hover,
 .list-group-item.active > .badge, .nav-pills > .active > a > .badge {
     -fx-text-fill: #337ab7;
     -fx-fill: #337ab7;
-    -fx-background-color: #fff; }
+    -fx-background-color: #F2F2F2; }
 
 a.badge:hover, a.badge:focused {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-cursor: default; }
 
 .alert {
@@ -1006,7 +1006,7 @@ a.badge:hover, a.badge:focused {
     -fx-background-insets: 0;
     -fx-background-color: #337ab7;
     -fx-progress-color: #337ab7;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #F2F2F2;
     -fx-text-alignment: center;
     -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.15), -1, 0, 0, 0); }
 
@@ -1020,7 +1020,7 @@ a.badge:hover, a.badge:focused {
     -fx-background-insets: 0;
     -fx-background-color: #5cb85c;
     -fx-progress-color: #5cb85c;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #F2F2F2;
     -fx-text-alignment: center;
     -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.15), -1, 0, 0, 0); }
 
@@ -1034,7 +1034,7 @@ a.badge:hover, a.badge:focused {
     -fx-background-insets: 0;
     -fx-background-color: #5bc0de;
     -fx-progress-color: #5bc0de;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #F2F2F2;
     -fx-text-alignment: center;
     -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.15), -1, 0, 0, 0); }
 
@@ -1048,7 +1048,7 @@ a.badge:hover, a.badge:focused {
     -fx-background-insets: 0;
     -fx-background-color: #f0ad4e;
     -fx-progress-color: #f0ad4e;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #F2F2F2;
     -fx-text-alignment: center;
     -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.15), -1, 0, 0, 0); }
 
@@ -1062,7 +1062,7 @@ a.badge:hover, a.badge:focused {
     -fx-background-insets: 0;
     -fx-background-color: #d9534f;
     -fx-progress-color: #d9534f;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #F2F2F2;
     -fx-text-alignment: center;
     -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.15), -1, 0, 0, 0); }
 
@@ -1075,7 +1075,7 @@ a.badge:hover, a.badge:focused {
 .tooltip-primary {
     -fx-background: #337ab7;
     -fx-background-color: #337ab7;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #F2F2F2;
     -fx-border-color: #3175af;
     -fx-background-radius: 4px;
     -fx-border-radius: 4px;
@@ -1088,7 +1088,7 @@ a.badge:hover, a.badge:focused {
 .tooltip-success {
     -fx-background: #5cb85c;
     -fx-background-color: #5cb85c;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #F2F2F2;
     -fx-border-color: #55b555;
     -fx-background-radius: 4px;
     -fx-border-radius: 4px;
@@ -1101,7 +1101,7 @@ a.badge:hover, a.badge:focused {
 .tooltip-info {
     -fx-background: #5bc0de;
     -fx-background-color: #5bc0de;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #F2F2F2;
     -fx-border-color: #53bddc;
     -fx-background-radius: 4px;
     -fx-border-radius: 4px;
@@ -1114,7 +1114,7 @@ a.badge:hover, a.badge:focused {
 .tooltip-warning {
     -fx-background: #f0ad4e;
     -fx-background-color: #f0ad4e;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #F2F2F2;
     -fx-border-color: #efa945;
     -fx-background-radius: 4px;
     -fx-border-radius: 4px;
@@ -1127,7 +1127,7 @@ a.badge:hover, a.badge:focused {
 .tooltip-danger {
     -fx-background: #d9534f;
     -fx-background-color: #d9534f;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #F2F2F2;
     -fx-border-color: #d74b47;
     -fx-background-radius: 4px;
     -fx-border-radius: 4px;
@@ -1138,7 +1138,7 @@ a.badge:hover, a.badge:focused {
     -fx-font-size: 0.85em; }
 
 .panel {
-    -fx-background-color: #fff;
+    -fx-background-color: #F2F2F2;;
     -fx-border-width: 1px;
     -fx-border-style: solid;
     -fx-border-color: transparent;
@@ -1184,17 +1184,17 @@ a.badge:hover, a.badge:focused {
 .panel-primary {
     -fx-border-color: #337ab7; }
 .panel-primary > .panel-heading {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff;
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2;
     -fx-background-color: linear-gradient(to bottom, #337ab7 0px, #2b669a 100%);
     -fx-border-color: #337ab7; }
 .panel-primary > .panel-heading * {
-    -fx-text-fill: #fff;
-    -fx-fill: #fff; }
+    -fx-text-fill: #F2F2F2;
+    -fx-fill: #F2F2F2; }
 .panel-primary > .panel-heading .badge {
     -fx-text-fill: #337ab7;
     -fx-fill: #337ab7;
-    -fx-background-color: #fff; }
+    -fx-background-color: #F2F2F2; }
 
 .panel-success {
     -fx-border-color: #d6e9c6; }
