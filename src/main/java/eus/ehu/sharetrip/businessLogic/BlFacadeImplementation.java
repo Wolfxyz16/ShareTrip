@@ -2,14 +2,8 @@ package eus.ehu.sharetrip.businessLogic;
 
 import eus.ehu.sharetrip.configuration.Config;
 import eus.ehu.sharetrip.dataAccess.DataAccess;
-import eus.ehu.sharetrip.domain.Driver;
-import eus.ehu.sharetrip.domain.Message;
-import eus.ehu.sharetrip.domain.Ride;
-import eus.ehu.sharetrip.domain.User;
-import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
-import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
-import eus.ehu.sharetrip.exceptions.UnknownUser;
-import eus.ehu.sharetrip.exceptions.UserAlreadyExistException;
+import eus.ehu.sharetrip.domain.*;
+import eus.ehu.sharetrip.exceptions.*;
 
 import java.util.Date;
 import java.util.List;
@@ -53,6 +47,10 @@ public class BlFacadeImplementation implements BlFacade {
     public List<Ride> getRides(String origin, String destination, Date date) {
         List<Ride> events = dbManager.getRides(origin, destination, date);
         return events;
+    }
+
+    public City createCity(String city) throws CityAlreadyExistException {
+        return dbManager.createCity(city);
     }
 
 
@@ -138,7 +136,17 @@ public class BlFacadeImplementation implements BlFacade {
         dbManager.signup(email, username, password, role);
     }
 
-    public List<Message> getMessages() {
-        return dbManager.getMessages();
+    public List<Message> getSentMessages(User user) {
+        return dbManager.getSentMessages(user);
+    }
+
+    public List<Message> getReceivedMessages(User user) {
+        return dbManager.getReceivedMessages(user);
+    }
+
+
+    @Override
+    public void saveMessage(Message message) {
+        dbManager.saveMessage(message);
     }
 }

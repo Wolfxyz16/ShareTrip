@@ -10,7 +10,6 @@ import java.util.Vector;
 @Entity
 @DiscriminatorValue("DRIVER")
 public class Driver extends User implements Serializable {
-
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private List<Ride> rides=new Vector<Ride>();
 

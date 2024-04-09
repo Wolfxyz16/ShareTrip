@@ -1,12 +1,10 @@
 package eus.ehu.sharetrip.businessLogic;
 
+import eus.ehu.sharetrip.domain.City;
 import eus.ehu.sharetrip.domain.Message;
 import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.domain.User;
-import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
-import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
-import eus.ehu.sharetrip.exceptions.UnknownUser;
-import eus.ehu.sharetrip.exceptions.UserAlreadyExistException;
+import eus.ehu.sharetrip.exceptions.*;
 
 import java.util.Date;
 import java.util.List;
@@ -53,6 +51,7 @@ public interface BlFacade {
 
     Ride createRide(String text, String text1, Date date, int inputSeats, float price, long driverID) throws RideMustBeLaterThanTodayException, RideAlreadyExistException;
 
+    City createCity(String name) throws CityAlreadyExistException;
 
     /**
      * This method returns all the cities where rides depart
@@ -78,5 +77,10 @@ public interface BlFacade {
     public User login(String username, String password) throws UnknownUser;
     public void signup(String email, String username, String password, String role) throws UnknownUser, UserAlreadyExistException;
 
-    public  List<Message> getMessages();
+    void saveMessage(Message message);
+
+    public  List<Message> getSentMessages(User currentUser);
+
+    public  List<Message> getReceivedMessages(User currentUser);
+
 }

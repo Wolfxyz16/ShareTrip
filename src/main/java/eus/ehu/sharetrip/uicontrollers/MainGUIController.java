@@ -23,6 +23,9 @@ public class MainGUIController implements Controller{
     private Button alertsBtn;
 
     @FXML
+    private Button createCityBtn;
+
+    @FXML
     private Button favoritesBtn;
 
     @FXML
@@ -87,7 +90,7 @@ public class MainGUIController implements Controller{
 
     @FXML
     void viewMessages(ActionEvent event) {
-        mainGUI.showScene("View Messages");
+        mainGUI.showScene("Message Overview");
     }
 
     @FXML
@@ -113,6 +116,11 @@ public class MainGUIController implements Controller{
     @FXML
     void register(ActionEvent actionEvent) {
         mainGUI.showScene("Register");
+    }
+
+    @FXML
+    void createCity(ActionEvent event) {
+        mainGUI.showScene("Create City");
     }
 
     /**
@@ -150,6 +158,7 @@ public class MainGUIController implements Controller{
         messagesBtn.setVisible(false);
         signOutBtn.setVisible(false);
         welcome.setVisible(false);
+        createCityBtn.setVisible(false);
     }
     public void setIsLoggedIn(boolean isLoggedIn) {
         this.isLoggedIn = isLoggedIn;
@@ -158,7 +167,7 @@ public class MainGUIController implements Controller{
     private void updateButtonVisibility() {
         logInBtn.setVisible(!isLoggedIn);
         registerBtn.setVisible(!isLoggedIn);
-        queryRidesBtn.setVisible(isLoggedIn);
+        //queryRidesBtn.setVisible(isLoggedIn);
         createRidesBtn.setVisible(isLoggedIn);
         alertsBtn.setVisible(isLoggedIn);
         favoritesBtn.setVisible(isLoggedIn);
@@ -166,5 +175,6 @@ public class MainGUIController implements Controller{
         signOutBtn.setVisible(isLoggedIn);
         userLbl.setVisible(isLoggedIn);
         welcome.setVisible(isLoggedIn);
+        createCityBtn.setVisible(isLoggedIn);
     }
 }

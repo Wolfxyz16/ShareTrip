@@ -2,34 +2,41 @@ package eus.ehu.sharetrip.uicontrollers;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
 import eus.ehu.sharetrip.ui.MainGUI;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
-public class ViewMessagesController implements Controller {
+public class MessagesController implements Controller {
 
-    @FXML
-    public ListView chatListView;
     private MainGUI mainGUI;
 
     private BlFacade businessLogic;
 
-    public ViewMessagesController(BlFacade bl) {
+    public MessagesController(BlFacade bl) {
         businessLogic = bl;
     }
 
     @FXML
     void initialize() {
-        System.out.println("ViewMessages button is working");
-        setMessages();
+        System.out.println("Messages button is working");
     }
 
-    public void setMessages() {
-        chatListView.getItems().clear();
-        chatListView.getItems().addAll(businessLogic.getMessages().toString());
-    }
 
     @Override
     public void setMainApp(MainGUI mainGUI) {
         this.mainGUI = mainGUI;
     }
+
+
+    @FXML
+    void sendMessage(ActionEvent event) {
+        mainGUI.showScene("Send message");
+    }
+
+    @FXML
+    void viewMessages(ActionEvent event) {
+        mainGUI.showScene("View messages");
+    }
+
+
 }
