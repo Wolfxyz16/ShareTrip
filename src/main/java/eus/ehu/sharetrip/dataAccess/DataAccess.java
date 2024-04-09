@@ -135,29 +135,12 @@ public class DataAccess {
         city3.addRideArr(ride3);
         city1.addRideArr(ride4);
         city4.addRideArr(ride5);
-        city1.addRideArr(ride6);
-        city2.addRideArr(ride7);
+        city2.addRideArr(ride6);
+        city1.addRideArr(ride7);
         city3.addRideArr(ride8);
         city1.addRideArr(ride9);
 
 
-
-/*
-      //Create rides
-      driver1.addRide(city1, city2, UtilDate.newDate(year, month, 15), 4, 7);
-      driver1.addRide(city1, city2, UtilDate.newDate(year, month + 1, 15), 4, 7);
-
-      driver1.addRide(city1, city3, UtilDate.newDate(year, month, 6), 4, 8);
-      driver1.addRide(city2, city1, UtilDate.newDate(year, month, 25), 4, 4);
-
-      driver1.addRide(city1, city4, UtilDate.newDate(year, month, 7), 4, 8);
-
-      driver2.addRide(city1, city2, UtilDate.newDate(year, month, 15), 3, 3);
-      driver2.addRide(city2, city1, UtilDate.newDate(year, month, 25), 2, 5);
-      driver2.addRide(city5, city3, UtilDate.newDate(year, month, 6), 2, 5);
-
-      driver3.addRide(city2, city1, UtilDate.newDate(year, month, 14), 1, 3);
-*/
       driver1.addRide(ride1);
         driver1.addRide(ride2);
         driver1.addRide(ride3);
@@ -167,6 +150,11 @@ public class DataAccess {
         driver2.addRide(ride7);
         driver2.addRide(ride8);
         driver3.addRide(ride9);
+
+
+        System.out.println(driver1.getRides());
+        System.out.println(city1.getRidesArrival());
+        System.out.println(city1.getRidesDeparture());
 
 
       //Create users
@@ -277,21 +265,25 @@ public class DataAccess {
         throw new RideAlreadyExistException(ResourceBundle.getBundle("Etiquetas").getString("DataAccess.RideAlreadyExist"));
       }
 
-      //City depart = getCity(from.getName());
-      //City arrival = getCity(to.getName());
-
-      //depart.addRideDep(from, to, date, nPlaces, price, driver);
-      //arrival.addRideArr(new Ride(depart, arrival, date, nPlaces, price, driver));
-
       Ride ride = new Ride(from, to, date, nPlaces, price, driver);
+      City depart = getCity(from.getName());
+      City arrival = getCity(to.getName());
+
+      depart.addRideDep(ride);
+      arrival.addRideArr(ride);
+
       String email = driver.getEmail();
       TypedQuery<Driver> driverByEmail = db.createQuery("SELECT d FROM Driver d WHERE d.email = :email", Driver.class);
         driverByEmail.setParameter("email", email);
       Driver driver1 = driverByEmail.getSingleResult();
       driver1.addRide(ride);
 
+      System.out.println(driver1.getRides());
+        System.out.println(getCity(depart.getName()).getRidesDeparture());
+        System.out.println(getCity(arrival.getName()).getRidesArrival());
+
       //next instruction can be obviated
-      db.persist(driver);
+      db.persist(driver1);
       db.getTransaction().commit();
 
       return ride;
@@ -300,7 +292,10 @@ public class DataAccess {
       db.getTransaction().commit();
       return null;
     }// catch (CityDoesNotExistExeception e) {
-     //   throw new RuntimeException(e);
+    catch (CityDoesNotExistExeception e) {
+        throw new RuntimeException(e);
+    }
+      //   throw new RuntimeException(e);
     //}
 
 

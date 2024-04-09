@@ -11,6 +11,7 @@ import java.util.Vector;
 @DiscriminatorValue("DRIVER")
 public class Driver extends User implements Serializable {
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	//@OneToMany(mappedBy = "driver")
 	private List<Ride> rides=new Vector<Ride>();
 
 	public Driver(String email, String userName, String password) {
@@ -31,6 +32,10 @@ public class Driver extends User implements Serializable {
 
 	public String getUsername() {
 		return username;
+	}
+
+	public List<Ride> getRides() {
+		return rides;
 	}
 
 	public String toString(){

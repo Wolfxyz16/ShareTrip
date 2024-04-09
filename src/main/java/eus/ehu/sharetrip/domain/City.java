@@ -12,11 +12,11 @@ public class City {
     @Id
     private String name;
 
-    //@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST)
+    //@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
     @OneToMany(mappedBy = "fromLocation")
     private List<Ride> ridesDeparture;
 
-    //@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST)
+    //@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
     @OneToMany(mappedBy = "toLocation")
     private List<Ride> ridesArrival ;
 
@@ -38,7 +38,13 @@ public class City {
         this.name = name;
     }
 
+    public List<Ride> getRidesDeparture() {
+        return ridesDeparture;
+    }
 
+    public List<Ride> getRidesArrival() {
+        return ridesArrival;
+    }
     public Ride addRideDep(Ride rideToAdd) {
         this.ridesDeparture.add(rideToAdd);
         return rideToAdd;
@@ -54,9 +60,10 @@ public class City {
         return rideToAdd;
     }
 
+
     @Override
     public String toString() {
-        return "City name: " + name + "\n";
+        return name;
     }
 
 }
