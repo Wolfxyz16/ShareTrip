@@ -45,7 +45,7 @@ public class MainGUI {
         });
     }
 
-    private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin, favoriteOverviewWin, chatOverviewWin, alertOverviewWin, createCityWin, messagesOverviewWin, sendMessageWin, viewMessagesWin;
+    private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin, favoriteOverviewWin, alertOverviewWin, createCityWin, messagesOverviewWin, sendMessageWin, viewMessagesWin;
 
     class Window {
         Controller c;
