@@ -52,6 +52,7 @@ With this method we will guarantee that the `main` branch will be always working
 ## Requirements Analysis
 
 [Use Case Model](pages/use_case_model.md)
+[Domain Model](pages/domain_model.md)
 
 [Event Flow for Search Ride Offer](pages/uc_search_ride_offer.md)
 
