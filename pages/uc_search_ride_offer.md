@@ -18,9 +18,5 @@
 6. The user can view the details of each ride offer.
 
 ## Alternative Flows:
-2a. If no rides match the search criteria:
-1. The system informs the user that there are no available rides matching the criteria.
-2. The user can modify the search criteria and try again. Go to 2.
-
 5a. The inputs are invalid
 1.  The system shows an error message indicating the invalid inputs. Go to 3.
