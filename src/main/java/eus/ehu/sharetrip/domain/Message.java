@@ -20,7 +20,6 @@ public class Message {
     private User sender;
 
 
-
     public Message() {
 
     }
