@@ -38,8 +38,8 @@ public class BlFacadeImplementation implements BlFacade {
         dbManager = dam;
     }
 
-    public Ride createRide(String from, String to, Date date, int nPlaces, float price, String driverEmail) throws RideMustBeLaterThanTodayException, RideAlreadyExistException {
-        Ride ride = dbManager.createRide(from, to, date, nPlaces, price, driverEmail);
+    public Ride createRide(String from, String to, Date date, int nPlaces, float price, long driverID) throws RideMustBeLaterThanTodayException, RideAlreadyExistException {
+        Ride ride = dbManager.createRide(from, to, date, nPlaces, price, driverID);
         return ride;
     }
 
@@ -121,6 +121,13 @@ public class BlFacadeImplementation implements BlFacade {
         return loginUser;
     }
 
+    /**
+     * Searchs for a user by his username and returns it as a object
+     * WARNING: we should only query users by his ID. Should be fixed
+     * @param username
+     * @return user
+     * @author Yeray C
+     */
     public User getUser(String username) {
         return dbManager.getUser(username);
     }

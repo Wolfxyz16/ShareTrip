@@ -1,10 +1,6 @@
 package eus.ehu.sharetrip.domain;
 
 import jakarta.persistence.*;
-import org.apache.logging.log4j.spi.MessageFactory2Adapter;
-
-import java.util.ArrayList;
-import java.util.Vector;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -12,18 +8,34 @@ import java.util.Vector;
 @DiscriminatorColumn(name = "USER_TYPE", discriminatorType = DiscriminatorType.STRING)
 public class User {
 
-
-    private String email;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String userName;
-    private String password;
+    protected String email;
+    protected String username;
+    protected String password;
 
+    public User() {
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    }
+
+    public User(String email, String name, String password) {
+        this.username = name;
+        this.password = password;
+        this.email = email;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -34,37 +46,27 @@ public class User {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userName='" + userName + '\'' +
-                '}';
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public User(String email, String name, String password) {
-        this.userName = name;
-        this.password = password;
-        this.email = email;
-
-
-    }
-
-
-    public User() {
-
-    }
-
-    public String getName() {
-        return userName;
-    }
-
     public String getEmail() {
         return email;
     }
 
+    @Override
+    public String toString() {
+        return "User{" + "username='" + username + '\'' + '}';
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        return id.equals(user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }

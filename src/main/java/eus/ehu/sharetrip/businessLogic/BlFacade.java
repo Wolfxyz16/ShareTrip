@@ -49,7 +49,7 @@ public interface BlFacade {
 
     User getCurrentUser();
 
-    Ride createRide(String text, String text1, Date date, int inputSeats, float price, String email) throws RideMustBeLaterThanTodayException, RideAlreadyExistException;
+    Ride createRide(String text, String text1, Date date, int inputSeats, float price, long driverID) throws RideMustBeLaterThanTodayException, RideAlreadyExistException;
 
     City createCity(String name) throws CityAlreadyExistException;
 

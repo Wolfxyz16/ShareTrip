@@ -10,28 +10,17 @@ import java.util.Vector;
 @Entity
 @DiscriminatorValue("DRIVER")
 public class Driver extends User implements Serializable {
-	
-	/**
-	 * 
-	 */
-
-
-	@Id 
-	private String email;
-	private String name;
-
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private List<Ride> rides=new Vector<Ride>();
+
+	public Driver(String email, String userName, String password) {
+		super(email, userName, password);
+	}
 
 	public Driver() {
 		super();
 	}
 
-	public Driver(String email, String userName, String password) {
-		super(email, userName, password);
-	}
-	
-	
 	public String getEmail() {
 		return email;
 	}
@@ -40,17 +29,12 @@ public class Driver extends User implements Serializable {
 		this.email = email;
 	}
 
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 
 	public String toString(){
-		return email+";"+name+rides;
+		return email+";"+username+rides;
 	}
 	
 	/**
