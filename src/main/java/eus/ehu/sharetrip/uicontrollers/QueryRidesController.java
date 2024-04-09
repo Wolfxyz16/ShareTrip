@@ -3,6 +3,7 @@ package eus.ehu.sharetrip.uicontrollers;
 import eus.ehu.sharetrip.businessLogic.BlFacade;
 import eus.ehu.sharetrip.domain.Driver;
 import eus.ehu.sharetrip.domain.Ride;
+import eus.ehu.sharetrip.exceptions.CityDoesNotExistExeception;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -146,7 +147,11 @@ public class QueryRidesController implements Controller {
         // when the user selects a departure city, update the arrival cities
         comboDepartCity.setOnAction(e -> {
             arrivalCities.clear();
-            arrivalCities.setAll(businessLogic.getDestinationCities(comboDepartCity.getValue()));
+            try {
+                arrivalCities.setAll(businessLogic.getDestinationCities(businessLogic.getCity(comboDepartCity.getValue())));
+            } catch (CityDoesNotExistExeception ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         // a date has been chosen, update the combobox of Rides
@@ -154,7 +159,12 @@ public class QueryRidesController implements Controller {
 
             tblRides.getItems().clear();
             // Vector<domain.Ride> events = businessLogic.getEvents(Dates.convertToDate(datepicker.getValue()));
-            List<Ride> rides = businessLogic.getRides(comboDepartCity.getValue(), comboArrivalCity.getValue(), Dates.convertToDate(datepicker.getValue()));
+            List<Ride> rides = null;
+            try {
+                rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()));
+            } catch (CityDoesNotExistExeception e) {
+                throw new RuntimeException(e);
+            }
             // List<Ride> rides = Arrays.asList(new Ride("Bilbao", "Donostia", Dates.convertToDate(datepicker.getValue()), 3, 3.5f, new Driver("pepe@pepe.com", "pepe")));
             for (Ride ride : rides) {
                 tblRides.getItems().add(ride);

@@ -1,8 +1,10 @@
 package eus.ehu.sharetrip.uicontrollers;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
+import eus.ehu.sharetrip.domain.City;
 import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.domain.User;
+import eus.ehu.sharetrip.exceptions.CityDoesNotExistExeception;
 import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
 import javafx.event.ActionEvent;
@@ -99,12 +101,16 @@ public class CreateRideController implements Controller {
         User user = bl.getCurrentUser();
 
         try {
-            bl.createRide(departCity, arrivalCity, date, numSeats, price, user.getId());
+            City depart = bl.getCity(departCity);
+            City arrival = bl.getCity(arrivalCity);
+            bl.createRide(depart, arrival, date, numSeats, price, user.getId());
         } catch (RideAlreadyExistException ex) {
             // set the corresponding error labels
             throw new RuntimeException(ex);
         } catch (RideMustBeLaterThanTodayException ex) {
             // set the corresponding error labels
+            throw new RuntimeException(ex);
+        } catch (CityDoesNotExistExeception ex) {
             throw new RuntimeException(ex);
         }
 
@@ -116,12 +122,16 @@ public class CreateRideController implements Controller {
 
         } else {
             try {
-                Ride r = bl.createRide(txtDepartCity.getText(), txtArrivalCity.getText(), Dates.convertToDate(datePicker.getValue()), numSeats, price, user.getId());
+                City depart = bl.getCity(departCity);
+                City arrival = bl.getCity(arrivalCity);
+                Ride r = bl.createRide(depart, arrival, Dates.convertToDate(datePicker.getValue()), numSeats, price, user.getId());
 
             } catch (RideMustBeLaterThanTodayException e1) {
 
             } catch (RideAlreadyExistException e1) {
 
+            } catch (CityDoesNotExistExeception ex) {
+                throw new RuntimeException(ex);
             }
         }
     }

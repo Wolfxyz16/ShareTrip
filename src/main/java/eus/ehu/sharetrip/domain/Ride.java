@@ -12,20 +12,25 @@ public class Ride implements Serializable {
 	@Id 
 	@GeneratedValue
 	private Integer rideNumber;
-	private String fromLocation;
-	private String toLocation;
+
+	@ManyToOne
+	@JoinColumn(name="FROMLOCATION_NAME")
+	private City fromLocation;
+	@ManyToOne
+	@JoinColumn(name="TOLOCATION_NAME")
+	private City toLocation;
 	private int numPlaces;
 	private Date date;
 	private float price;
 
 	@ManyToOne
-	private Driver driver;  
+	private Driver driver;
 	
 	public Ride(){
 		super();
 	}
 	
-	public Ride(Integer rideNumber, String from, String to, Date date, int numPlaces, float price, Driver driver) {
+	public Ride(Integer rideNumber, City from, City to, Date date, int numPlaces, float price, Driver driver) {
 		super();
 		this.rideNumber = rideNumber;
 		this.fromLocation = from;
@@ -38,7 +43,7 @@ public class Ride implements Serializable {
 
 	
 
-	public Ride(String from, String to,  Date date, int numPlaces, float price, Driver driver) {
+	public Ride(City from, City to,  Date date, int numPlaces, float price, Driver driver) {
 		super();
 		this.fromLocation = from;
 		this.toLocation = to;
@@ -74,7 +79,7 @@ public class Ride implements Serializable {
 	 * @return the origin location
 	 */
 
-	public String getFromLocation() {
+	public City getFromLocation() {
 		return fromLocation;
 	}
 
@@ -85,7 +90,7 @@ public class Ride implements Serializable {
 	 * @param origin to be set
 	 */	
 	
-	public void setFromLocation(String origin) {
+	public void setFromLocation(City origin) {
 		this.fromLocation = origin;
 	}
 
@@ -95,7 +100,7 @@ public class Ride implements Serializable {
 	 * @return the destination location
 	 */
 
-	public String getToLocation() {
+	public City getToLocation() {
 		return toLocation;
 	}
 
@@ -105,7 +110,7 @@ public class Ride implements Serializable {
 	 * 
 	 * @param destination to be set
 	 */	
-	public void setToLocation(String destination) {
+	public void setToLocation(City destination) {
 		this.toLocation = destination;
 	}
 

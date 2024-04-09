@@ -38,13 +38,13 @@ public class BlFacadeImplementation implements BlFacade {
         dbManager = dam;
     }
 
-    public Ride createRide(String from, String to, Date date, int nPlaces, float price, long driverID) throws RideMustBeLaterThanTodayException, RideAlreadyExistException {
+    public Ride createRide(City from, City to, Date date, int nPlaces, float price, long driverID) throws RideMustBeLaterThanTodayException, RideAlreadyExistException {
         Ride ride = dbManager.createRide(from, to, date, nPlaces, price, driverID);
         return ride;
     }
 
     @Override
-    public List<Ride> getRides(String origin, String destination, Date date) {
+    public List<Ride> getRides(City origin, City destination, Date date) {
         List<Ride> events = dbManager.getRides(origin, destination, date);
         return events;
     }
@@ -53,12 +53,21 @@ public class BlFacadeImplementation implements BlFacade {
         return dbManager.createCity(city);
     }
 
+    public List<String> getCities() {
+        return dbManager.getCities();
+    }
+
+    public City getCity(String name) throws CityDoesNotExistExeception {
+        return dbManager.getCity(name);
+    }
+
+
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<Date> getThisMonthDatesWithRides(String from, String to, Date date) {
+    public List<Date> getThisMonthDatesWithRides(City from, City to, Date date) {
         List<Date> dates = dbManager.getThisMonthDatesWithRides(from, to, date);
         return dates;
     }
@@ -103,7 +112,7 @@ public class BlFacadeImplementation implements BlFacade {
     /**
      * {@inheritDoc}
      */
-    public List<String> getDestinationCities(String from) {
+    public List<String> getDestinationCities(City from) {
         List<String> targetCities = dbManager.getArrivalCities(from);
         return targetCities;
     }
