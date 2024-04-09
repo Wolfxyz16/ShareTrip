@@ -70,5 +70,5 @@ With this method we will guarantee that the `main` branch will be always working
 [Event Flow for Create a City](pages/uc_create_a_city.md)\
 [Event Flow for Offer a Ride](pages/uc_offer_a_ride.md)\
 [Event Flow for View Booking Requests]\
-[Event Flow for Decide Bookin Requests]
+[Event Flow for Decide Booking Requests]
 
