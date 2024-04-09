@@ -96,9 +96,10 @@ public class CreateRideController implements Controller {
         String arrivalCity = txtArrivalCity.getText();
         int numSeats = Integer.parseInt( txtSeats.getText() );
         float price = Float.parseFloat( txtPrice.getText() );
+        User user = bl.getCurrentUser();
 
         try {
-            bl.createRide(departCity, arrivalCity, date, numSeats, price, bl.getCurrentUser().getEmail());
+            bl.createRide(departCity, arrivalCity, date, numSeats, price, user.getId());
         } catch (RideAlreadyExistException ex) {
             // set the corresponding error labels
             throw new RuntimeException(ex);
@@ -115,8 +116,7 @@ public class CreateRideController implements Controller {
 
         } else {
             try {
-                User user = bl.getCurrentUser();
-                Ride r = bl.createRide(txtDepartCity.getText(), txtArrivalCity.getText(), Dates.convertToDate(datePicker.getValue()), numSeats, price, user.getEmail());
+                Ride r = bl.createRide(txtDepartCity.getText(), txtArrivalCity.getText(), Dates.convertToDate(datePicker.getValue()), numSeats, price, user.getId());
 
             } catch (RideMustBeLaterThanTodayException e1) {
 
