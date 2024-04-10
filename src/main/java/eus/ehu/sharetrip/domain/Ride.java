@@ -14,10 +14,8 @@ public class Ride implements Serializable {
 	private Integer rideNumber;
 
 	@ManyToOne
-	//@JoinColumn(name="FROMLOCATION_NAME")
 	private City fromLocation;
 	@ManyToOne
-	//@JoinColumn(name="TOLOCATION_NAME")
 	private City toLocation;
 	private int numPlaces;
 	private Date date;
