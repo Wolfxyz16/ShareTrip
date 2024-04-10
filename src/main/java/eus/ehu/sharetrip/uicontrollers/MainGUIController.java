@@ -23,6 +23,9 @@ public class MainGUIController implements Controller{
     private Button alertsBtn;
 
     @FXML
+    private Button createCityBtn;
+
+    @FXML
     private Button favoritesBtn;
 
     @FXML
@@ -115,6 +118,11 @@ public class MainGUIController implements Controller{
         mainGUI.showScene("Register");
     }
 
+    @FXML
+    void createCity(ActionEvent event) {
+        mainGUI.showScene("Create City");
+    }
+
     /**
      * Sign out logic, just 3 lines, we do not need another SignOutController
      * @param actionEvent
@@ -123,6 +131,7 @@ public class MainGUIController implements Controller{
     void signOut(ActionEvent actionEvent) {
         mainGUI.setIsLoggedIn(false);
         mainGUI.setUserName("");
+        businessLogic.setCurrentUser(null);
         mainGUI.showScene("Query Ride");
     }
 
@@ -150,18 +159,28 @@ public class MainGUIController implements Controller{
         messagesBtn.setVisible(false);
         signOutBtn.setVisible(false);
         welcome.setVisible(false);
+        createCityBtn.setVisible(false);
     }
     public void setIsLoggedIn(boolean isLoggedIn) {
         this.isLoggedIn = isLoggedIn;
-        updateButtonVisibility();
+        updateButtonVisibilityDependingOnUserType();
     }
-    private void updateButtonVisibility() {
+    private void updateButtonVisibilityDependingOnUserType() {
+        //Deactivate login and register buttons
         logInBtn.setVisible(!isLoggedIn);
         registerBtn.setVisible(!isLoggedIn);
-        //queryRidesBtn.setVisible(isLoggedIn);
-        createRidesBtn.setVisible(isLoggedIn);
-        alertsBtn.setVisible(isLoggedIn);
-        favoritesBtn.setVisible(isLoggedIn);
+
+        //Different buttons will be visible for Drivers or for Travelers
+        if (businessLogic.getCurrentUserType().equals("TRAVELER")) {
+            alertsBtn.setVisible(isLoggedIn);
+            favoritesBtn.setVisible(isLoggedIn);
+
+        } else if (businessLogic.getCurrentUserType().equals("DRIVER")) {
+            createRidesBtn.setVisible(isLoggedIn);
+            createCityBtn.setVisible(isLoggedIn);
+        }
+
+        //These will be shown for both drivers and travelers
         messagesBtn.setVisible(isLoggedIn);
         signOutBtn.setVisible(isLoggedIn);
         userLbl.setVisible(isLoggedIn);

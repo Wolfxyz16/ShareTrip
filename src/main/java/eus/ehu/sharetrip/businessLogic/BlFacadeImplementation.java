@@ -2,14 +2,8 @@ package eus.ehu.sharetrip.businessLogic;
 
 import eus.ehu.sharetrip.configuration.Config;
 import eus.ehu.sharetrip.dataAccess.DataAccess;
-import eus.ehu.sharetrip.domain.Driver;
-import eus.ehu.sharetrip.domain.Message;
-import eus.ehu.sharetrip.domain.Ride;
-import eus.ehu.sharetrip.domain.User;
-import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
-import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
-import eus.ehu.sharetrip.exceptions.UnknownUser;
-import eus.ehu.sharetrip.exceptions.UserAlreadyExistException;
+import eus.ehu.sharetrip.domain.*;
+import eus.ehu.sharetrip.exceptions.*;
 
 import java.util.Date;
 import java.util.List;
@@ -44,23 +38,36 @@ public class BlFacadeImplementation implements BlFacade {
         dbManager = dam;
     }
 
-    public Ride createRide(String from, String to, Date date, int nPlaces, float price, String driverEmail) throws RideMustBeLaterThanTodayException, RideAlreadyExistException {
-        Ride ride = dbManager.createRide(from, to, date, nPlaces, price, driverEmail);
+    public Ride createRide(City from, City to, Date date, int nPlaces, float price, long driverID) throws RideMustBeLaterThanTodayException, RideAlreadyExistException {
+        Ride ride = dbManager.createRide(from, to, date, nPlaces, price, driverID);
         return ride;
     }
 
     @Override
-    public List<Ride> getRides(String origin, String destination, Date date) {
+    public List<Ride> getRides(City origin, City destination, Date date) {
         List<Ride> events = dbManager.getRides(origin, destination, date);
         return events;
     }
+
+    public City createCity(String city) throws CityAlreadyExistException {
+        return dbManager.createCity(city);
+    }
+
+    public List<String> getCities() {
+        return dbManager.getCities();
+    }
+
+    public City getCity(City name) {
+        return dbManager.getCity(name);
+    }
+
 
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<Date> getThisMonthDatesWithRides(String from, String to, Date date) {
+    public List<Date> getThisMonthDatesWithRides(City from, City to, Date date) {
         List<Date> dates = dbManager.getThisMonthDatesWithRides(from, to, date);
         return dates;
     }
@@ -96,8 +103,8 @@ public class BlFacadeImplementation implements BlFacade {
      * It is invoked only when the option "initialize" is declared in the tag dataBaseOpenMode of resources/config.xml file
      */
 
-    public List<String> getDepartCities() {
-        List<String> departLocations = dbManager.getDepartCities();
+    public List<City> getDepartCities() {
+        List<City> departLocations = dbManager.getDepartCities();
         return departLocations;
 
     }
@@ -105,13 +112,13 @@ public class BlFacadeImplementation implements BlFacade {
     /**
      * {@inheritDoc}
      */
-    public List<String> getDestinationCities(String from) {
-        List<String> targetCities = dbManager.getArrivalCities(from);
+    public List<City> getDestinationCities(City from) {
+        List<City> targetCities = dbManager.getArrivalCities(from);
         return targetCities;
     }
 
     @Override
-    public List<Date> getDatesWithRides(String value, String value1) {
+    public List<Date> getDatesWithRides(City value, City value1) {
         List<Date> dates = dbManager.getDatesWithRides(value, value1);
         return dates;
     }
@@ -123,6 +130,13 @@ public class BlFacadeImplementation implements BlFacade {
         return loginUser;
     }
 
+    /**
+     * Searchs for a user by his username and returns it as a object
+     * WARNING: we should only query users by his ID. Should be fixed
+     * @param username
+     * @return user
+     * @author Yeray C
+     */
     public User getUser(String username) {
         return dbManager.getUser(username);
     }
@@ -139,9 +153,18 @@ public class BlFacadeImplementation implements BlFacade {
         return dbManager.getReceivedMessages(user);
     }
 
+    public String getCurrentUserType() {
+        return dbManager.getUserType(currentUser.getUsername());
+    }
+
+    public List<Alert> getAlerts() {
+        return dbManager.getAlerts();
+    }
+
 
     @Override
     public void saveMessage(Message message) {
         dbManager.saveMessage(message);
     }
+
 }
