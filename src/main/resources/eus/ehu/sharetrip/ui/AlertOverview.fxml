@@ -10,8 +10,10 @@
     <children>
         <TableView fx:id="tblAlerts" layoutX="78.0" layoutY="100.0" prefHeight="200.0" prefWidth="445.0">
             <columns>
-                <TableColumn fx:id="qc1" prefWidth="150" text="Ride" />
-                <TableColumn fx:id="qc2" prefWidth="150" text="Alert message " />
+                <TableColumn fx:id="originCol" prefWidth="150" text="Origin" />
+                <TableColumn fx:id="destinyCol" prefWidth="150" text="destiny" />
+            <TableColumn fx:id="rideDateCol" prefWidth="75.0" text="rideDate" />
+            <TableColumn fx:id="numSeatsCol" prefWidth="75.0" text="numSeats" />
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

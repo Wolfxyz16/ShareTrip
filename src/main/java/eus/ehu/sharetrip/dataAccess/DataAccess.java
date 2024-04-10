@@ -137,17 +137,40 @@ public class DataAccess {
       //CREATE MESSAGES
       Message message1 = new Message("Hello",  traveler1, traveler2);
 
-        //Persist the objects
+
+
+      //Create users
+      User user1 = new User("user1@gmail.com", "User1", "1234");
+      User user2 = new User("user2@gmail.com", "User2", "1234");
+
+      //CREATE ALERTS
+      Alert alert1 = new Alert(city1, city2, UtilDate.newDate(year, month, 15), 4);
+      Alert alert2 = new Alert(city3, city4, UtilDate.newDate(year, month + 1, 15), 4);
+      Alert alert3 = new Alert(city5,city1, UtilDate.newDate(year, month, 6), 4);
+      Alert alert4 = new Alert(city3, city5, UtilDate.newDate(year, month, 25), 4);
+      
+      //Persist the objects
+      db.persist(alert1);
+      db.persist(alert2);
+      db.persist(alert3);
+      db.persist(alert4);
+      
       db.persist(city1);
       db.persist(city2);
       db.persist(city3);
       db.persist(city4);
       db.persist(city5);
+      
       db.persist(driver1);
       db.persist(driver2);
       db.persist(driver3);
+      
       db.persist(traveler1);
       db.persist(traveler2);
+      
+      db.persist(user1);
+      db.persist(user2);
+
       db.persist(message1);
 
       db.getTransaction().commit();
@@ -425,5 +448,10 @@ public class DataAccess {
             "SELECT u.userType FROM User u WHERE u.username = :username", String.class);
     query.setParameter("username", username);
     return query.getSingleResult();
+  }
+
+  public List<Alert> getAlerts() {
+    TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a", Alert.class);
+    return query.getResultList();
   }
 }

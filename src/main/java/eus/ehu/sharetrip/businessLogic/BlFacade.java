@@ -1,9 +1,6 @@
 package eus.ehu.sharetrip.businessLogic;
 
-import eus.ehu.sharetrip.domain.City;
-import eus.ehu.sharetrip.domain.Message;
-import eus.ehu.sharetrip.domain.Ride;
-import eus.ehu.sharetrip.domain.User;
+import eus.ehu.sharetrip.domain.*;
 import eus.ehu.sharetrip.exceptions.*;
 
 import java.util.Date;
@@ -87,5 +84,9 @@ public interface BlFacade {
 
     public  List<Message> getReceivedMessages(User currentUser);
 
+
     String getCurrentUserType();
+
+    List<Alert> getAlerts();
+
 }
