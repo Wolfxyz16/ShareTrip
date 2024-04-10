@@ -19479,7 +19479,7 @@
 											"left": 306,
 											"top": 456,
 											"width": 14,
-											"height": 160
+											"height": 192
 										}
 									],
 									"font": "Arial;13;0",
@@ -19590,7 +19590,7 @@
 											"left": 588,
 											"top": 477,
 											"width": 14,
-											"height": 83
+											"height": 155
 										}
 									],
 									"font": "Arial;13;0",
@@ -19701,7 +19701,7 @@
 											"left": 846,
 											"top": 491,
 											"width": 14,
-											"height": 53
+											"height": 109
 										}
 									],
 									"font": "Arial;13;0",
@@ -19812,7 +19812,7 @@
 											"left": 1092,
 											"top": 504,
 											"width": 14,
-											"height": 28
+											"height": 64
 										}
 									],
 									"font": "Arial;13;0",
