@@ -144,6 +144,9 @@ public class BlFacadeImplementation implements BlFacade {
         return dbManager.getReceivedMessages(user);
     }
 
+    public String getCurrentUserType() {
+        return dbManager.getUserType(currentUser.getUsername());
+    }
 
     @Override
     public void saveMessage(Message message) {

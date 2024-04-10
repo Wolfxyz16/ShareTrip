@@ -12,6 +12,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "USER_TYPE", insertable = false, updatable = false)
+    private String userType;
+
     protected String email;
     protected String username;
     protected String password;

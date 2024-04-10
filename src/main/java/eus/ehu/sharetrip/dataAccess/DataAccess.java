@@ -129,18 +129,18 @@ public class DataAccess {
       driver3.addRide("Bilbo", "Donostia", UtilDate.newDate(year, month, 14), 1, 3);
 
 
-      //Create users
-      User user1 = new User("user1@gmail.com", "User1", "1234");
-      User user2 = new User("user2@gmail.com", "User2", "1234");
+      //Create travelers
+      Traveler traveler1 = new Traveler("user1@gmail.com", "User1", "1234");
+      Traveler traveler2 = new Traveler("user2@gmail.com", "User2", "1234");
       //CREATE MESSAGES
-      Message message1 = new Message("Hello",  user1, user2);
+      Message message1 = new Message("Hello",  traveler1, traveler2);
 
 
       db.persist(driver1);
       db.persist(driver2);
       db.persist(driver3);
-      db.persist(user1);
-      db.persist(user2);
+      db.persist(traveler1);
+      db.persist(traveler2);
       db.persist(message1);
 
 
@@ -397,5 +397,12 @@ public class DataAccess {
     query.setParameter("user", user);
 
     return query.getResultList();
+  }
+
+  public String getUserType(String username) {
+    TypedQuery<String> query = db.createQuery(
+            "SELECT u.userType FROM User u WHERE u.username = :username", String.class);
+    query.setParameter("username", username);
+    return query.getSingleResult();
   }
 }
