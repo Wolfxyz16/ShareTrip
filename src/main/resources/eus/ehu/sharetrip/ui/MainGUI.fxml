@@ -17,7 +17,7 @@
    <center>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1000.0" styleClass="panel-body" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="401.0" fitWidth="883.0" layoutX="300.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" styleClass="panel-info">
+            <ImageView fitHeight="1004.0" fitWidth="1006.0" layoutY="-140.0" pickOnBounds="true" preserveRatio="true" styleClass="panel-info">
                <image>
                   <Image url="@assets/sharetrip_ia_logo.jpeg" />
                </image>
@@ -25,12 +25,10 @@
                   <Rectangle2D />
                </viewport>
             </ImageView>
-            <Label layoutX="725.0" layoutY="710.0" text="Created with &lt;3 by Orquesta Guayacan" />
-            <Label alignment="CENTER" layoutX="204.0" layoutY="510.0" prefHeight="50.0" styleClass="h1" text="ARE YOU READY FOR SHARETRIP?" textAlignment="CENTER">
+            <Label layoutX="774.0" layoutY="20.0" text="Created with &lt;3 by Orquesta Guayacan" textFill="WHITE">
                <font>
-                  <Font size="46.0" />
-               </font>
-            </Label>
+                  <Font name="System Italic" size="12.0" />
+               </font></Label>
          </children>
       </AnchorPane>
    </center>
