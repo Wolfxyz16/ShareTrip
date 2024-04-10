@@ -239,4 +239,13 @@ public class QueryRidesController implements Controller {
         heartView.setImage(image);
 
     }
+
+    @FXML
+    public void createNewAlert(ActionEvent actionEvent) {
+        if(comboDepartCity.getValue() != null && comboArrivalCity.getValue() != null && datepicker.getValue() != null){
+            businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), 1);
+            System.out.println("Alert created");
+        }
+
+    }
 }

@@ -48,6 +48,8 @@ public interface BlFacade {
 
     Ride createRide(City dep, City arr, Date date, int inputSeats, float price, long driverID) throws RideMustBeLaterThanTodayException, RideAlreadyExistException;
 
+    Alert createAlert(City from, City to, Date date, int nPlaces);
+
     City createCity(String name) throws CityAlreadyExistException;
 
     List<String> getCities();
