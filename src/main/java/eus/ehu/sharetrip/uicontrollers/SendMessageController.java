@@ -6,6 +6,7 @@ import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.ui.MainGUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -21,6 +22,9 @@ public class SendMessageController implements Controller{
 
     @FXML
     private TextField txtRecipient;
+
+    @FXML
+    public Button backBtn2;
 
     private MainGUI mainGUI;
 
@@ -64,4 +68,7 @@ public class SendMessageController implements Controller{
     }
 
 
+    public void backToMessageController(ActionEvent actionEvent) {
+        mainGUI.showScene("Message Overview");
+    }
 }

@@ -4,6 +4,12 @@ import eus.ehu.sharetrip.businessLogic.BlFacade;
 import eus.ehu.sharetrip.domain.Message;
 import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.ui.MainGUI;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.image.ImageView;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,9 +32,12 @@ public class MyMessagesController implements Controller{
     private TableColumn<Message, String> receivedSenderNameCol;
 
     @FXML
+    private ListView sentListView;
+
+    @FXML
+    public Button backBtn;
     private TableView<Message> receivedTableView;
 
-    //SENT table
     @FXML
     private TableColumn<Message, String> recipientNameCol;
 
@@ -84,5 +93,9 @@ public class MyMessagesController implements Controller{
     @Override
     public void setMainApp(MainGUI mainGUI) {
         this.mainGUI = mainGUI;
+    }
+
+    public void backToMessageController(ActionEvent actionEvent) {
+        mainGUI.showScene("Message Overview");
     }
 }

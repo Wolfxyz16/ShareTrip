@@ -4,24 +4,36 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="740.0" prefWidth="1000.0" stylesheets="@styles/bootstrapfx.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.SendMessageController">
 
     <children>
-         <TextField fx:id="txtRecipient" layoutX="271.0" layoutY="221.0" prefHeight="38.0" prefWidth="166.0" promptText="Recipient" />
-         <TextArea fx:id="txtMessage" layoutX="271.0" layoutY="296.0" prefHeight="200" prefWidth="400" promptText="Type your message here" />
-         <Button layoutX="364.0" layoutY="550.0" onAction="#sendMessage" prefHeight="52.0" prefWidth="213.0" text="Send">
+         <TextField fx:id="txtRecipient" layoutX="301.0" layoutY="221.0" prefHeight="38.0" prefWidth="166.0" promptText="Recipient" />
+         <TextArea fx:id="txtMessage" layoutX="301.0" layoutY="296.0" prefHeight="200" prefWidth="400" promptText="Type your message here" />
+         <Button layoutX="394.0" layoutY="550.0" onAction="#sendMessage" prefHeight="52.0" prefWidth="213.0" text="Send">
          <font>
             <Font size="24.0" />
          </font></Button>
+
       <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="301.0" layoutY="657.0" prefHeight="25.0" prefWidth="339.0" />
       <Label layoutX="380.0" layoutY="75.0" prefHeight="91.0" prefWidth="182.0" text="Send message">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
+        <Button fx:id="backBtn2" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#backToMessageController" prefHeight="17.0" prefWidth="20.0">
+            <graphic>
+                <ImageView fitHeight="36.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@assets/Back_Arrow.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
     </children>
 
 </AnchorPane>
