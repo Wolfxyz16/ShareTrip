@@ -10,7 +10,7 @@ public class Message {
     private Long id;
 
     @Column(name = "MESSAGE")
-    private String message;
+    private String messageText;
 
 
     @ManyToOne
@@ -19,16 +19,21 @@ public class Message {
     @ManyToOne
     private User sender;
 
+    private String senderName;
+
+    private String recipientName;
 
 
     public Message() {
 
     }
 
-    public Message(String message, User sender, User receiver) {
-        this.message = message;
+    public Message(String messageText, User sender, User receiver) {
+        this.messageText = messageText;
         this.sender = sender;
         this.receiver = receiver;
+        this.senderName = sender.getUserName();
+        this.recipientName = receiver.getUserName();
     }
 
     // Getters and setters
@@ -40,12 +45,12 @@ public class Message {
         this.id = id;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMessageText() {
+        return messageText;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
     }
 
     public User getSender() {
@@ -64,10 +69,29 @@ public class Message {
         this.receiver = receiver;
     }
 
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
+
+    public String getRecipientName() {
+        return recipientName;
+    }
+
+    public void setRecipientName(String recipientName) {
+        this.recipientName = recipientName;
+    }
+
     public String toString() {
-        return  "message='" + message + '\'' + " " +
-                receiver.getUsername() + " from " +
-                sender.getUsername() + " to " +
-                ", id=" + id + '\'';
+        return "Message{" +
+                "id=" + id +
+                ", message='" + messageText + '\'' +
+                ", from=" + sender +
+                ", to=" + receiver +
+                '}';
+
     }
 }

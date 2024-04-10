@@ -1,6 +1,8 @@
 package eus.ehu.sharetrip.uicontrollers;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
+import eus.ehu.sharetrip.domain.Message;
+import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.ui.MainGUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,20 +10,51 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.util.List;
+
 public class MyMessagesController implements Controller{
 
+    // RECEIVED TABLE
     @FXML
-    private ListView receivedListView;
+    private TableColumn<Message, String> receivedMessageTextCol;
+
+    @FXML
+    private TableColumn<Message, String> receivedSenderNameCol;
 
     @FXML
     private ListView sentListView;
 
     @FXML
     public Button backBtn;
+    private TableView<Message> receivedTableView;
+
+    @FXML
+    private TableColumn<Message, String> recipientNameCol;
+
+    @FXML
+    private TableColumn<Message, String> sentMessageTextCol;
+
+    @FXML
+    private TableView<Message> sentTableView;
+
+    private ObservableList<Message> receivedMessages;
+
+    private ObservableList<Message> sentMessages;
 
     private MainGUI mainGUI;
 
     private BlFacade businessLogic;
+
 
     public MyMessagesController(BlFacade bl) {
         businessLogic = bl;
@@ -30,19 +63,32 @@ public class MyMessagesController implements Controller{
     @FXML
     void initialize() {
         System.out.println("ViewMessages button is working");
-        setReceivedMessages();
-        setSentMessages();
+        sentMessageTextCol.setCellValueFactory(new PropertyValueFactory<>("messageText"));
+        recipientNameCol.setCellValueFactory(new PropertyValueFactory<>("recipientName"));
+
+        receivedMessageTextCol.setCellValueFactory(new PropertyValueFactory<>("messageText"));
+        receivedSenderNameCol.setCellValueFactory(new PropertyValueFactory<>("senderName"));
+
+        receivedMessages = FXCollections.observableArrayList();
+        sentMessages = FXCollections.observableArrayList();
+        receivedTableView.setItems(receivedMessages);
+        sentTableView.setItems(sentMessages);
     }
 
-    private void setSentMessages() {
-        sentListView.getItems().clear();
-        sentListView.getItems().addAll(businessLogic.getSentMessages(businessLogic.getCurrentUser()).toString());
-    }
 
-    public void setReceivedMessages() {
-        receivedListView.getItems().clear();
-        receivedListView.getItems().addAll(businessLogic.getReceivedMessages(businessLogic.getCurrentUser()).toString());
-    }
+
+
+    public void updateTables() {
+        receivedMessages.clear();
+        sentMessages.clear();
+        User currentUser = businessLogic.getCurrentUser();
+        List<Message> receivedMessages = businessLogic.getReceivedMessages(currentUser);
+        List<Message> sentMessages = businessLogic.getSentMessages(currentUser);
+        this.receivedMessages.addAll(receivedMessages);
+        this.sentMessages.addAll(sentMessages);
+        }
+
+
 
     @Override
     public void setMainApp(MainGUI mainGUI) {

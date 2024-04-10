@@ -18,8 +18,9 @@
          <font>
             <Font size="24.0" />
          </font></Button>
-      <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="331.0" layoutY="630.0" prefHeight="25.0" prefWidth="339.0" />
-      <Label alignment="CENTER" layoutX="394.0" layoutY="75.0" prefHeight="91.0" prefWidth="213.0" text="Send message">
+
+      <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="301.0" layoutY="657.0" prefHeight="25.0" prefWidth="339.0" />
+      <Label layoutX="380.0" layoutY="75.0" prefHeight="91.0" prefWidth="182.0" text="Send message">
          <font>
             <Font size="25.0" />
          </font>

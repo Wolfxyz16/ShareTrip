@@ -142,6 +142,8 @@ public class DataAccess {
       //Create users
       User user1 = new User("user1@gmail.com", "User1", "1234");
       User user2 = new User("user2@gmail.com", "User2", "1234");
+      //CREATE MESSAGES
+      Message message2 = new Message("Hello", user1, user2);
 
       //CREATE ALERTS
       Alert alert1 = new Alert(city1, city2, UtilDate.newDate(year, month, 15), 4);
@@ -426,20 +428,21 @@ public class DataAccess {
   public List<Message> getSentMessages(User currentUser) {
     TypedQuery<Message> query = db.createQuery("SELECT m FROM Message m WHERE m.sender = :user", Message.class);
     query.setParameter("user", currentUser);
-
+    System.out.println("Messages received: " + query.getResultList());
     return query.getResultList();
   }
 
     public void saveMessage(Message message) {
         db.getTransaction().begin();
         db.persist(message);
+        System.out.println("Message saved: " + message.toString());
         db.getTransaction().commit();
     }
 
   public List<Message> getReceivedMessages(User user) {
     TypedQuery<Message> query = db.createQuery("SELECT m FROM Message m WHERE m.receiver = :user", Message.class);
     query.setParameter("user", user);
-
+    System.out.println("Messages received: " + query.getResultList());
     return query.getResultList();
   }
 
