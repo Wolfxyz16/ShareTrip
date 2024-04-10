@@ -1,7 +1,11 @@
 package eus.ehu.sharetrip.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.persistence.ManyToOne;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Vector;
 
 @Entity
 public class City {
@@ -25,7 +29,7 @@ public class City {
 
     @Override
     public String toString() {
-        return "City name: " + name + "\n";
+        return name;
     }
 
 }

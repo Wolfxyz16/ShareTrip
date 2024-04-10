@@ -1,6 +1,7 @@
 package eus.ehu.sharetrip.uicontrollers;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
+import eus.ehu.sharetrip.domain.City;
 import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
@@ -92,14 +93,17 @@ public class CreateRideController implements Controller {
 
         LocalDate localDate = datePicker.getValue();
         Date date = Date.from(localDate.atStartOfDay( ZoneId.systemDefault() ).toInstant());
-        String departCity = txtDepartCity.getText();
-        String arrivalCity = txtArrivalCity.getText();
+        City departCity = new City (txtDepartCity.getText());
+        City arrivalCity = new City(txtArrivalCity.getText());
         int numSeats = Integer.parseInt( txtSeats.getText() );
         float price = Float.parseFloat( txtPrice.getText() );
         User user = bl.getCurrentUser();
 
         try {
-            bl.createRide(departCity, arrivalCity, date, numSeats, price, user.getId());
+
+            City depart = bl.getCity(departCity);
+            City arrival = bl.getCity(arrivalCity);
+            bl.createRide(depart, arrival, date, numSeats, price, user.getId());
         } catch (RideAlreadyExistException ex) {
             // set the corresponding error labels
             throw new RuntimeException(ex);
@@ -116,7 +120,9 @@ public class CreateRideController implements Controller {
 
         } else {
             try {
-                Ride r = bl.createRide(txtDepartCity.getText(), txtArrivalCity.getText(), Dates.convertToDate(datePicker.getValue()), numSeats, price, user.getId());
+                City depart = bl.getCity(departCity);
+                City arrival = bl.getCity(arrivalCity);
+                Ride r = bl.createRide(depart, arrival, Dates.convertToDate(datePicker.getValue()), numSeats, price, user.getId());
 
             } catch (RideMustBeLaterThanTodayException e1) {
 

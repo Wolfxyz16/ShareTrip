@@ -23,7 +23,7 @@ public interface BlFacade {
      * @param date the date of the ride
      * @return collection of rides
      */
-    List<Ride> getRides(String from, String to, Date date);
+    List<Ride> getRides(City from, City to, Date date);
 
     /**
      * This method retrieves from the database the dates a month for which there are events
@@ -33,7 +33,7 @@ public interface BlFacade {
      * @param date of the month for which days with rides want to be retrieved
      * @return collection of rides
      */
-    public List<Date> getThisMonthDatesWithRides(String from, String to, Date date);
+    public List<Date> getThisMonthDatesWithRides(City from, City to, Date date);
 
 
     /**
@@ -49,9 +49,13 @@ public interface BlFacade {
 
     User getCurrentUser();
 
-    Ride createRide(String text, String text1, Date date, int inputSeats, float price, long driverID) throws RideMustBeLaterThanTodayException, RideAlreadyExistException;
+    Ride createRide(City dep, City arr, Date date, int inputSeats, float price, long driverID) throws RideMustBeLaterThanTodayException, RideAlreadyExistException;
 
     City createCity(String name) throws CityAlreadyExistException;
+
+    List<String> getCities();
+
+    City getCity(City name);
 
     /**
      * This method returns all the cities where rides depart
@@ -59,7 +63,7 @@ public interface BlFacade {
      * @return collection of cities
      */
 
-    public List<String> getDepartCities();
+    public List<City> getDepartCities();
 
     /**
      * This method returns all the arrival destinations, from all rides that depart from a given city
@@ -68,10 +72,10 @@ public interface BlFacade {
      * @return all the arrival destinations
      */
 
-    public List<String> getDestinationCities(String from);
+    public List<City> getDestinationCities(City from);
 
 
-    List<Date> getDatesWithRides(String value, String value1);
+    List<Date> getDatesWithRides(City value, City value1);
 
     public User getUser(String username);
     public User login(String username, String password) throws UnknownUser;
