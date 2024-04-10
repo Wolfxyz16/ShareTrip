@@ -49,8 +49,8 @@ public class BlFacadeImplementation implements BlFacade {
     }
 
     @Override
-    public List<Ride> getRides(City origin, City destination, Date date) {
-        List<Ride> events = dbManager.getRides(origin, destination, date);
+    public List<Ride> getRides(City origin, City destination, Date date, int numSeats) {
+        List<Ride> events = dbManager.getRides(origin, destination, date, numSeats);
         return events;
     }
 
