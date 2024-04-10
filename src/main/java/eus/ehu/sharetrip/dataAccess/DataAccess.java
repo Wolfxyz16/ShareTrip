@@ -107,26 +107,36 @@ public class DataAccess {
       City city1 = new City("Donostia");
       City city2 = new City("Bilbo");
       City city3 = new City("Gasteiz");
+      City city4 = new City("Iruña");
+      City city5 = new City("Eibar");
 
-      db.persist(city1);
-      db.persist(city2);
-      db.persist(city3);
+      Ride ride1 = new Ride(city1, city2, UtilDate.newDate(year, month, 15), 4, 7, driver1);
+      Ride ride2 = new Ride(city1, city2, UtilDate.newDate(year, month + 1, 15), 4, 7, driver1);
+      Ride ride3 = new Ride(city1, city3, UtilDate.newDate(year, month, 6), 4, 8, driver1);
+      Ride ride4 = new Ride(city2, city1, UtilDate.newDate(year, month, 25), 4, 4, driver1);
+      Ride ride5 = new Ride(city1, city4, UtilDate.newDate(year, month, 7), 4, 8, driver1);
+      Ride ride6 = new Ride(city1, city2, UtilDate.newDate(year, month, 15), 3, 3, driver2);
+      Ride ride7 = new Ride(city2, city1, UtilDate.newDate(year, month, 25), 2, 5, driver2);
+      Ride ride8 = new Ride(city5, city3, UtilDate.newDate(year, month, 6), 2, 5, driver2);
+      Ride ride9 = new Ride(city2, city1, UtilDate.newDate(year, month, 14), 1, 3, driver3);
+
+      driver1.addRide(ride1);
+        driver1.addRide(ride2);
+        driver1.addRide(ride3);
+        driver1.addRide(ride4);
+        driver1.addRide(ride5);
+        driver2.addRide(ride6);
+        driver2.addRide(ride7);
+        driver2.addRide(ride8);
+        driver3.addRide(ride9);
 
 
-      //Create rides
-      driver1.addRide("Donostia", "Bilbo", UtilDate.newDate(year, month, 15), 4, 7);
-      driver1.addRide("Donostia", "Bilbo", UtilDate.newDate(year, month + 1, 15), 4, 7);
+      //Create travelers
+      Traveler traveler1 = new Traveler("user1@gmail.com", "User1", "1234");
+      Traveler traveler2 = new Traveler("user2@gmail.com", "User2", "1234");
+      //CREATE MESSAGES
+      Message message1 = new Message("Hello",  traveler1, traveler2);
 
-      driver1.addRide("Donostia", "Gasteiz", UtilDate.newDate(year, month, 6), 4, 8);
-      driver1.addRide("Bilbo", "Donostia", UtilDate.newDate(year, month, 25), 4, 4);
-
-      driver1.addRide("Donostia", "Iruña", UtilDate.newDate(year, month, 7), 4, 8);
-
-      driver2.addRide("Donostia", "Bilbo", UtilDate.newDate(year, month, 15), 3, 3);
-      driver2.addRide("Bilbo", "Donostia", UtilDate.newDate(year, month, 25), 2, 5);
-      driver2.addRide("Eibar", "Gasteiz", UtilDate.newDate(year, month, 6), 2, 5);
-
-      driver3.addRide("Bilbo", "Donostia", UtilDate.newDate(year, month, 14), 1, 3);
 
 
       //Create users
@@ -139,21 +149,30 @@ public class DataAccess {
       Alert alert2 = new Alert(this.getCity("Donostia"), this.getCity("Gasteiz"), UtilDate.newDate(year, month + 1, 15), 4);
       Alert alert3 = new Alert(this.getCity("Gasteiz"), this.getCity("Donostia"), UtilDate.newDate(year, month, 6), 4);
       Alert alert4 = new Alert(this.getCity("Bilbo"), this.getCity("Gasteiz"), UtilDate.newDate(year, month, 25), 4);
-
+      
+      //Persist the objects
       db.persist(alert1);
       db.persist(alert2);
       db.persist(alert3);
       db.persist(alert4);
-
-
+      
+      db.persist(city1);
+      db.persist(city2);
+      db.persist(city3);
+      db.persist(city4);
+      db.persist(city5);
+      
+      db.persist(driver1);
       db.persist(driver2);
       db.persist(driver3);
+      
+      db.persist(traveler1);
+      db.persist(traveler2);
+      
       db.persist(user1);
       db.persist(user2);
-      db.persist(driver1);
+
       db.persist(message1);
-
-
 
       db.getTransaction().commit();
       System.out.println("Db initialized");
@@ -162,7 +181,6 @@ public class DataAccess {
     }
 
   }
-
 
 
   /**
@@ -201,6 +219,14 @@ public class DataAccess {
     return citiesNames;
   }
 
+  public City getCity(City name) {
+
+      TypedQuery<City> query = db.createQuery("SELECT c FROM City c WHERE c.name = :name", City.class);
+      query.setParameter("name", name.getName());
+      City res = query.getSingleResult();
+    return res;
+  }
+
   public City createCity(String city) throws CityAlreadyExistException {
     try {
         if (getCities().contains(city.toLowerCase())) {
@@ -218,7 +244,7 @@ public class DataAccess {
   }
 
 
-  public Ride createRide(String from, String to, Date date, int nPlaces, float price, long driverID) throws RideAlreadyExistException, RideMustBeLaterThanTodayException {
+  public Ride createRide(City from, City to, Date date, int nPlaces, float price, long driverID) throws RideAlreadyExistException, RideMustBeLaterThanTodayException {
     System.out.println(">> DataAccess: createRide=> from= " + from + " to= " + to + " driver=" + driverID + " date " + date);
     try {
       if (new Date().compareTo(date) > 0) {
@@ -231,9 +257,20 @@ public class DataAccess {
         db.getTransaction().commit();
         throw new RideAlreadyExistException(ResourceBundle.getBundle("Etiquetas").getString("DataAccess.RideAlreadyExist"));
       }
-      Ride ride = driver.addRide(from, to, date, nPlaces, price);
+
+      Ride ride = new Ride(from, to, date, nPlaces, price, driver);
+
+      String email = driver.getEmail();
+      TypedQuery<Driver> driverByEmail = db.createQuery("SELECT d FROM Driver d WHERE d.email = :email", Driver.class);
+        driverByEmail.setParameter("email", email);
+      Driver driver1 = driverByEmail.getSingleResult();
+      driver1.addRide(ride);
+
+
+
       //next instruction can be obviated
-      db.persist(driver);
+      db.persist(driver1);
+      //db.persist(ride);
       db.getTransaction().commit();
 
       return ride;
@@ -246,18 +283,17 @@ public class DataAccess {
 
   }
 
-  public List<Ride> getRides(String origin, String destination, Date date) {
+  public List<Ride> getRides(City origin, City destination, Date date) {
     System.out.println(">> DataAccess: getRides origin/dest/date");
-    Vector<Ride> res = new Vector<>();
 
     TypedQuery<Ride> query = db.createQuery("SELECT ride FROM Ride ride "
-            + "WHERE ride.date=?1 and ride.fromLocation=?2 and ride.toLocation=?3 ", Ride.class);
-    query.setParameter(1, date);
-    query.setParameter(2, origin);
-    query.setParameter(3, destination);
+            + "WHERE ride.fromLocation=?1 AND ride.toLocation=?2 AND ride.date=?3 ", Ride.class);
+    query.setParameter(1, origin);
+    query.setParameter(2, destination);
+    query.setParameter(3, date);
 
-
-    return query.getResultList();
+    List<Ride> rides = query.getResultList();
+    return rides;
   }
 
 
@@ -265,11 +301,11 @@ public class DataAccess {
    * This method returns all the cities where rides depart
    * @return collection of cities
    */
-  public List<String> getDepartCities(){
-    TypedQuery<String> query = db.createQuery("SELECT DISTINCT r.fromLocation FROM Ride r ORDER BY r.fromLocation", String.class);
-    List<String> cities = query.getResultList();
+  public List<City> getDepartCities(){
+    List<City> depCities = new ArrayList<>();
+    TypedQuery<City> query = db.createQuery("SELECT DISTINCT r.fromLocation FROM Ride r", City.class);
+    List<City> cities =query.getResultList();
     return cities;
-
   }
   /**
    * This method returns all the arrival destinations, from all rides that depart from a given city
@@ -277,12 +313,11 @@ public class DataAccess {
    * @param from the departure location of a ride
    * @return all the arrival destinations
    */
-  public List<String> getArrivalCities(String from){
-    TypedQuery<String> query = db.createQuery("SELECT DISTINCT r.toLocation FROM Ride r WHERE r.fromLocation=?1 ORDER BY r.toLocation",String.class);
+  public List<City> getArrivalCities(City from){
+    TypedQuery<City> query = db.createQuery("SELECT DISTINCT r.toLocation FROM Ride r WHERE r.fromLocation=?1", City.class);
     query.setParameter(1, from);
-    List<String> arrivingCities = query.getResultList();
-    return arrivingCities;
-
+    List<City> cities =query.getResultList();
+    return cities;
   }
 
   /**
@@ -292,7 +327,7 @@ public class DataAccess {
    * @param date of the month for which days with rides want to be retrieved
    * @return collection of rides
    */
-  public List<Date> getThisMonthDatesWithRides(String from, String to, Date date) {
+  public List<Date> getThisMonthDatesWithRides(City from, City to, Date date) {
     System.out.println(">> DataAccess: getEventsMonth");
     List<Date> res = new ArrayList<>();
 
@@ -313,7 +348,7 @@ public class DataAccess {
     return res;
   }
 
-  public List<Date> getDatesWithRides(String from, String to) {
+  public List<Date> getDatesWithRides(City from, City to) {
     System.out.println(">> DataAccess: getEventsFromTo");
     List<Date> res = new ArrayList<>();
 
@@ -409,16 +444,11 @@ public class DataAccess {
     return query.getResultList();
   }
 
-  public City getCity(String city) {
-    try {
-      TypedQuery<City> query = db.createQuery(
-              "SELECT c FROM City c WHERE c.name = :city", City.class);
-      query.setParameter("city", city);
-      return query.getSingleResult();
-    } catch (jakarta.persistence.NoResultException e) {
-      return null; // Or handle it in another appropriate way
-    }
-  }
+  public String getUserType(String username) {
+    TypedQuery<String> query = db.createQuery(
+            "SELECT u.userType FROM User u WHERE u.username = :username", String.class);
+    query.setParameter("username", username);
+    return query.getSingleResult();
 
   public List<Alert> getAlerts() {
     TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a", Alert.class);

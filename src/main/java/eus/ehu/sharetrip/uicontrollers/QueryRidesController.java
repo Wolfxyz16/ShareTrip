@@ -1,6 +1,7 @@
 package eus.ehu.sharetrip.uicontrollers;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
+import eus.ehu.sharetrip.domain.City;
 import eus.ehu.sharetrip.domain.Driver;
 import eus.ehu.sharetrip.domain.Ride;
 import javafx.beans.property.SimpleStringProperty;
@@ -54,10 +55,10 @@ public class QueryRidesController implements Controller {
     private TableColumn<Ride, Float> qc3;
 
     @FXML
-    private ComboBox<String> comboArrivalCity;
+    private ComboBox<City> comboArrivalCity;
 
     @FXML
-    private ComboBox<String> comboDepartCity;
+    private ComboBox<City> comboDepartCity;
 
 //  @FXML
 //  private TableView<Event> tblEvents;
@@ -135,31 +136,37 @@ public class QueryRidesController implements Controller {
         comboArrivalCity.valueProperty().addListener(
                 (obs, oldVal, newVal) -> updateDatePickerCellFactory(datepicker));
 
-        ObservableList<String> departureCities = FXCollections.observableArrayList(new ArrayList<>());
+        ObservableList<City> departureCities = FXCollections.observableArrayList(new ArrayList<>());
         departureCities.setAll(businessLogic.getDepartCities());
 
-        ObservableList<String> arrivalCities = FXCollections.observableArrayList(new ArrayList<>());
+        ObservableList<City> arrivalCities = FXCollections.observableArrayList(new ArrayList<>());
 
         comboDepartCity.setItems(departureCities);
         comboArrivalCity.setItems(arrivalCities);
 
         // when the user selects a departure city, update the arrival cities
+
+        //City depCity = businessLogic.getCity(comboDepartCity.getValue());
+        //City arrCity = businessLogic.getCity(comboArrivalCity.getValue());
+
         comboDepartCity.setOnAction(e -> {
-            arrivalCities.clear();
-            arrivalCities.setAll(businessLogic.getDestinationCities(comboDepartCity.getValue()));
+                arrivalCities.clear();
+                arrivalCities.setAll(businessLogic.getDestinationCities(businessLogic.getCity(comboDepartCity.getValue())));
         });
+
 
         // a date has been chosen, update the combobox of Rides
         datepicker.setOnAction(actionEvent -> {
             if(comboDepartCity.getValue() != null && comboArrivalCity.getValue() != null) {
 
                 tblRides.getItems().clear();
-                // Vector<domain.Ride> events = businessLogic.getEvents(Dates.convertToDate(datepicker.getValue()));
-                List<Ride> rides = businessLogic.getRides(comboDepartCity.getValue(), comboArrivalCity.getValue(), Dates.convertToDate(datepicker.getValue()));
+
+                    List<Ride> rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()));
                 // List<Ride> rides = Arrays.asList(new Ride("Bilbao", "Donostia", Dates.convertToDate(datepicker.getValue()), 3, 3.5f, new Driver("pepe@pepe.com", "pepe")));
-                for (Ride ride : rides) {
-                    tblRides.getItems().add(ride);
-                }
+                    for (Ride ride : rides) {
+                        tblRides.getItems().add(ride);
+                    }
+
             }
         });
 

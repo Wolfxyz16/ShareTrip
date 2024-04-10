@@ -38,13 +38,13 @@ public class BlFacadeImplementation implements BlFacade {
         dbManager = dam;
     }
 
-    public Ride createRide(String from, String to, Date date, int nPlaces, float price, long driverID) throws RideMustBeLaterThanTodayException, RideAlreadyExistException {
+    public Ride createRide(City from, City to, Date date, int nPlaces, float price, long driverID) throws RideMustBeLaterThanTodayException, RideAlreadyExistException {
         Ride ride = dbManager.createRide(from, to, date, nPlaces, price, driverID);
         return ride;
     }
 
     @Override
-    public List<Ride> getRides(String origin, String destination, Date date) {
+    public List<Ride> getRides(City origin, City destination, Date date) {
         List<Ride> events = dbManager.getRides(origin, destination, date);
         return events;
     }
@@ -53,12 +53,21 @@ public class BlFacadeImplementation implements BlFacade {
         return dbManager.createCity(city);
     }
 
+    public List<String> getCities() {
+        return dbManager.getCities();
+    }
+
+    public City getCity(City name) {
+        return dbManager.getCity(name);
+    }
+
+
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<Date> getThisMonthDatesWithRides(String from, String to, Date date) {
+    public List<Date> getThisMonthDatesWithRides(City from, City to, Date date) {
         List<Date> dates = dbManager.getThisMonthDatesWithRides(from, to, date);
         return dates;
     }
@@ -94,8 +103,8 @@ public class BlFacadeImplementation implements BlFacade {
      * It is invoked only when the option "initialize" is declared in the tag dataBaseOpenMode of resources/config.xml file
      */
 
-    public List<String> getDepartCities() {
-        List<String> departLocations = dbManager.getDepartCities();
+    public List<City> getDepartCities() {
+        List<City> departLocations = dbManager.getDepartCities();
         return departLocations;
 
     }
@@ -103,13 +112,13 @@ public class BlFacadeImplementation implements BlFacade {
     /**
      * {@inheritDoc}
      */
-    public List<String> getDestinationCities(String from) {
-        List<String> targetCities = dbManager.getArrivalCities(from);
+    public List<City> getDestinationCities(City from) {
+        List<City> targetCities = dbManager.getArrivalCities(from);
         return targetCities;
     }
 
     @Override
-    public List<Date> getDatesWithRides(String value, String value1) {
+    public List<Date> getDatesWithRides(City value, City value1) {
         List<Date> dates = dbManager.getDatesWithRides(value, value1);
         return dates;
     }
@@ -142,6 +151,10 @@ public class BlFacadeImplementation implements BlFacade {
 
     public List<Message> getReceivedMessages(User user) {
         return dbManager.getReceivedMessages(user);
+    }
+
+    public String getCurrentUserType() {
+        return dbManager.getUserType(currentUser.getUsername());
     }
 
     public List<Alert> getAlerts() {

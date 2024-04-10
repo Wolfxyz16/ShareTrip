@@ -163,19 +163,27 @@ public class MainGUIController implements Controller{
     }
     public void setIsLoggedIn(boolean isLoggedIn) {
         this.isLoggedIn = isLoggedIn;
-        updateButtonVisibility();
+        updateButtonVisibilityDependingOnUserType();
     }
-    private void updateButtonVisibility() {
+    private void updateButtonVisibilityDependingOnUserType() {
+        //Deactivate login and register buttons
         logInBtn.setVisible(!isLoggedIn);
         registerBtn.setVisible(!isLoggedIn);
-        //queryRidesBtn.setVisible(isLoggedIn);
-        createRidesBtn.setVisible(isLoggedIn);
-        alertsBtn.setVisible(isLoggedIn);
-        favoritesBtn.setVisible(isLoggedIn);
+
+        //Different buttons will be visible for Drivers or for Travelers
+        if (businessLogic.getCurrentUserType().equals("TRAVELER")) {
+            alertsBtn.setVisible(isLoggedIn);
+            favoritesBtn.setVisible(isLoggedIn);
+
+        } else if (businessLogic.getCurrentUserType().equals("DRIVER")) {
+            createRidesBtn.setVisible(isLoggedIn);
+            createCityBtn.setVisible(isLoggedIn);
+        }
+
+        //These will be shown for both drivers and travelers
         messagesBtn.setVisible(isLoggedIn);
         signOutBtn.setVisible(isLoggedIn);
         userLbl.setVisible(isLoggedIn);
         welcome.setVisible(isLoggedIn);
-        createCityBtn.setVisible(isLoggedIn);
     }
 }
