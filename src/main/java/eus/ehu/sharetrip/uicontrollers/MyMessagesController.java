@@ -23,14 +23,14 @@ public class MyMessagesController implements Controller{
     private TableColumn<Message, String> receivedMessageTextCol;
 
     @FXML
-    private TableColumn<Message, User> receivedSenderNameCol;
+    private TableColumn<Message, String> receivedSenderNameCol;
 
     @FXML
     private TableView<Message> receivedTableView;
 
     //SENT table
     @FXML
-    private TableColumn<Message, User> recipientNameCol;
+    private TableColumn<Message, String> recipientNameCol;
 
     @FXML
     private TableColumn<Message, String> sentMessageTextCol;
@@ -55,28 +55,30 @@ public class MyMessagesController implements Controller{
     void initialize() {
         System.out.println("ViewMessages button is working");
         sentMessageTextCol.setCellValueFactory(new PropertyValueFactory<>("messageText"));
-        recipientNameCol.setCellValueFactory(new PropertyValueFactory<>("receiver"));
+        recipientNameCol.setCellValueFactory(new PropertyValueFactory<>("recipientName"));
+
         receivedMessageTextCol.setCellValueFactory(new PropertyValueFactory<>("messageText"));
-        receivedSenderNameCol.setCellValueFactory(new PropertyValueFactory<>("sender"));
+        receivedSenderNameCol.setCellValueFactory(new PropertyValueFactory<>("senderName"));
 
         receivedMessages = FXCollections.observableArrayList();
         sentMessages = FXCollections.observableArrayList();
-
-        //receivedMessages = (ObservableList<Message>) businessLogic.getReceivedMessages(businessLogic.getCurrentUser());
-        //sentMessages = (ObservableList<Message>) businessLogic.getSentMessages(businessLogic.getCurrentUser());
-
         receivedTableView.setItems(receivedMessages);
         sentTableView.setItems(sentMessages);
     }
 
 
-    private void setSentMessages() {
-    }
 
 
-    private void setReceivedMessages() {
-        receivedMessages.setAll(businessLogic.getReceivedMessages(businessLogic.getCurrentUser()));
-    }
+    public void updateTables() {
+        receivedMessages.clear();
+        sentMessages.clear();
+        User currentUser = businessLogic.getCurrentUser();
+        List<Message> receivedMessages = businessLogic.getReceivedMessages(currentUser);
+        List<Message> sentMessages = businessLogic.getSentMessages(currentUser);
+        this.receivedMessages.addAll(receivedMessages);
+        this.sentMessages.addAll(sentMessages);
+        }
+
 
 
     @Override

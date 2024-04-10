@@ -133,7 +133,7 @@ public class DataAccess {
       User user1 = new User("user1@gmail.com", "User1", "1234");
       User user2 = new User("user2@gmail.com", "User2", "1234");
       //CREATE MESSAGES
-      Message message1 = new Message("Hello",  user1, user2);
+      Message message1 = new Message("Hello", user1, user2);
 
       db.persist(driver1);
       db.persist(driver2);

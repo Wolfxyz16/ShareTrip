@@ -19,6 +19,10 @@ public class Message {
     @ManyToOne
     private User sender;
 
+    private String senderName;
+
+    private String recipientName;
+
 
     public Message() {
 
@@ -28,6 +32,8 @@ public class Message {
         this.messageText = messageText;
         this.sender = sender;
         this.receiver = receiver;
+        this.senderName = sender.getUserName();
+        this.recipientName = receiver.getUserName();
     }
 
     // Getters and setters
@@ -61,6 +67,22 @@ public class Message {
 
     public void setReceiver(User receiver) {
         this.receiver = receiver;
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
+
+    public String getRecipientName() {
+        return recipientName;
+    }
+
+    public void setRecipientName(String recipientName) {
+        this.recipientName = recipientName;
     }
 
     public String toString() {

@@ -13,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.kordamp.bootstrapfx.BootstrapFX;
 import eus.ehu.sharetrip.uicontrollers.Controller;
+import eus.ehu.sharetrip.uicontrollers.*;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -86,7 +87,10 @@ public class MainGUI {
         switch (scene) {
             case "Home" -> mainWrapper.setCenter(mainWin.ui);
             case "View Alert" -> mainWrapper.setCenter(alertOverviewWin.ui);
-            case "Message Overview" -> mainWrapper.setCenter(messagesOverviewWin.ui);
+            case "Message Overview" -> {
+                mainWrapper.setCenter(messagesOverviewWin.ui);
+                ((MyMessagesController)viewMessagesWin.c).updateTables();
+            }
             case "Send message" -> mainWrapper.setCenter(sendMessageWin.ui);
             case "View messages" -> mainWrapper.setCenter(viewMessagesWin.ui);
             case "View Favorites" -> mainWrapper.setCenter(favoriteOverviewWin.ui);
