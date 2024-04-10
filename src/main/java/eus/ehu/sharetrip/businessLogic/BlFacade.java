@@ -83,4 +83,5 @@ public interface BlFacade {
 
     public  List<Message> getReceivedMessages(User currentUser);
 
+    String getCurrentUserType();
 }
