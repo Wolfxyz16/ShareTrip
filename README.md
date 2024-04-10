@@ -51,12 +51,13 @@ With this method we will guarantee that the `main` branch will be always working
 
 ## Requirements Analysis
 
-[Use Case Model](pages/use_case_model.md)
+[Use Case Model](pages/use_case_model.md)\
+[Domain Model](pages/domain_model.md)
 
 [Event Flow for Search Ride Offer](pages/uc_search_ride_offer.md)
 
-[Event Flow for Request Booking for Ride]\
-[Event Flow for View Ride Bookings]\
+[Event Flow for Request Booking for Ride](pages/uc_request_booking_for_ride.md)\
+[Event Flow for View Ride Bookings](pages/uc_view_ride_bookings.md)\
 [Event Flow for Create Alert](pages/uc_create_alert.md)\
 [Event Flow for View Alerts](pages/uc_view_alerts.md)\
 [Event Flow for Delete Alert](pages/uc_delete_alert.md)\
@@ -69,6 +70,6 @@ With this method we will guarantee that the `main` branch will be always working
 
 [Event Flow for Create a City](pages/uc_create_a_city.md)\
 [Event Flow for Offer a Ride](pages/uc_offer_a_ride.md)\
-[Event Flow for View Booking Requests]\
-[Event Flow for Decide Booking Requests]
+[Event Flow for View Booking Requests](pages/uc_view_booking_requests.md)\
+[Event Flow for Decide Booking Requests](pages/uc_decide_booking_requests.md)
 

@@ -9,11 +9,9 @@
 ## Postconditions: None
 
 ## Flow:
-1. The actor selects the "View Messages" option in the system.
-2. The system shows the actors chats in a overview.
-3. The actor selects a chat from the overview and clicks on it.
-4. The system opens the chat history.
+1. The actor selects the "Messages" option in the system.
+2. The system shows a menu whether the actor wants to view his messages or wants to send a message.
+3. The actor chooses to view his messages.
+4. The system loads and shows the received and sent messages of the actor.
 
-## Alternative Flows:
-2a. If the actor has no messages yet.
-1. The system informs the user that there no messages for him and breaks.
+## Alternative Flows: None

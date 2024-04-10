@@ -1,6 +1,7 @@
 package eus.ehu.sharetrip.uicontrollers;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
+import eus.ehu.sharetrip.domain.City;
 import eus.ehu.sharetrip.domain.Driver;
 import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.exceptions.CityDoesNotExistExeception;
@@ -145,29 +146,32 @@ public class QueryRidesController implements Controller {
         comboArrivalCity.setItems(arrivalCities);
 
         // when the user selects a departure city, update the arrival cities
-        comboDepartCity.setOnAction(e -> {
-            arrivalCities.clear();
-            try {
-                arrivalCities.setAll(businessLogic.getDestinationCities(businessLogic.getCity(comboDepartCity.getValue())));
-            } catch (CityDoesNotExistExeception ex) {
-                throw new RuntimeException(ex);
-            }
-        });
+        try{
+            City depCity = businessLogic.getCity(comboDepartCity.getValue());
+            comboDepartCity.setOnAction(e -> {
+                arrivalCities.clear();
+                arrivalCities.setAll(businessLogic.getDestinationCities(depCity));
+            });
+        } catch (CityDoesNotExistExeception e) {
+            throw new RuntimeException(e);
+        };
 
         // a date has been chosen, update the combobox of Rides
         datepicker.setOnAction(actionEvent -> {
+            if(comboDepartCity.getValue() != null && comboArrivalCity.getValue() != null) {
 
-            tblRides.getItems().clear();
-            // Vector<domain.Ride> events = businessLogic.getEvents(Dates.convertToDate(datepicker.getValue()));
-            List<Ride> rides = null;
-            try {
-                rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()));
-            } catch (CityDoesNotExistExeception e) {
-                throw new RuntimeException(e);
-            }
-            // List<Ride> rides = Arrays.asList(new Ride("Bilbao", "Donostia", Dates.convertToDate(datepicker.getValue()), 3, 3.5f, new Driver("pepe@pepe.com", "pepe")));
-            for (Ride ride : rides) {
-                tblRides.getItems().add(ride);
+                tblRides.getItems().clear();
+                try {
+                    City depCity = businessLogic.getCity(comboDepartCity.getValue());
+                    City arrCity = businessLogic.getCity(comboArrivalCity.getValue());
+                    List<Ride> rides = businessLogic.getRides(depCity, arrCity, Dates.convertToDate(datepicker.getValue()));
+                // List<Ride> rides = Arrays.asList(new Ride("Bilbao", "Donostia", Dates.convertToDate(datepicker.getValue()), 3, 3.5f, new Driver("pepe@pepe.com", "pepe")));
+                    for (Ride ride : rides) {
+                        tblRides.getItems().add(ride);
+                    }
+                } catch (CityDoesNotExistExeception e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
