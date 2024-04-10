@@ -36,6 +36,8 @@ public class MyMessagesController implements Controller{
 
     @FXML
     public Button backBtn;
+
+    @FXML
     private TableView<Message> receivedTableView;
 
     @FXML

@@ -32,8 +32,8 @@ public class Message {
         this.messageText = messageText;
         this.sender = sender;
         this.receiver = receiver;
-        this.senderName = sender.getUserName();
-        this.recipientName = receiver.getUserName();
+        this.senderName = sender.getUsername();
+        this.recipientName = receiver.getUsername();
     }
 
     // Getters and setters
