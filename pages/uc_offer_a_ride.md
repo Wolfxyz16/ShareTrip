@@ -7,7 +7,7 @@
 - The actor must be registered and logged into the system.
 
 ## Postconditions:
-- The ride is registered in the system and is visible to other users.
+- The ride offer is registered in the system and is visible to other users.
 - If a new city was created, it is now available in the system.
 
 ## Flow:
