@@ -195,16 +195,11 @@ public class DataAccess {
     return citiesNames;
   }
 
-  public City getCity(String name) throws CityDoesNotExistExeception {
+  public City getCity(City name) {
+
       TypedQuery<City> query = db.createQuery("SELECT c FROM City c WHERE c.name = :name", City.class);
-      query.setParameter("name", name);
+      query.setParameter("name", name.getName());
       City res = query.getSingleResult();
-
-      if(res == null) {
-        throw new CityDoesNotExistExeception(ResourceBundle.getBundle("Etiquetas").getString("GetCity.CityDoesNotExist"));
-      }
-
-
     return res;
   }
 
@@ -282,14 +277,11 @@ public class DataAccess {
    * This method returns all the cities where rides depart
    * @return collection of cities
    */
-  public List<String> getDepartCities(){
-    List<String> depCities = new ArrayList<>();
+  public List<City> getDepartCities(){
+    List<City> depCities = new ArrayList<>();
     TypedQuery<City> query = db.createQuery("SELECT DISTINCT r.fromLocation FROM Ride r", City.class);
     List<City> cities =query.getResultList();
-    for (City c:cities){
-      depCities.add(c.getName());
-    }
-    return depCities;
+    return cities;
   }
   /**
    * This method returns all the arrival destinations, from all rides that depart from a given city
@@ -297,15 +289,11 @@ public class DataAccess {
    * @param from the departure location of a ride
    * @return all the arrival destinations
    */
-  public List<String> getArrivalCities(City from){
-    List<String> arrCities = new ArrayList<>();
+  public List<City> getArrivalCities(City from){
     TypedQuery<City> query = db.createQuery("SELECT DISTINCT r.toLocation FROM Ride r WHERE r.fromLocation=?1", City.class);
     query.setParameter(1, from);
     List<City> cities =query.getResultList();
-    for (City c:cities){
-      arrCities.add(c.getName());
-    }
-    return arrCities;
+    return cities;
   }
 
   /**
@@ -336,7 +324,7 @@ public class DataAccess {
     return res;
   }
 
-  public List<Date> getDatesWithRides(String from, String to) {
+  public List<Date> getDatesWithRides(City from, City to) {
     System.out.println(">> DataAccess: getEventsFromTo");
     List<Date> res = new ArrayList<>();
 

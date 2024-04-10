@@ -57,7 +57,7 @@ public class BlFacadeImplementation implements BlFacade {
         return dbManager.getCities();
     }
 
-    public City getCity(String name) throws CityDoesNotExistExeception {
+    public City getCity(City name) {
         return dbManager.getCity(name);
     }
 
@@ -103,8 +103,8 @@ public class BlFacadeImplementation implements BlFacade {
      * It is invoked only when the option "initialize" is declared in the tag dataBaseOpenMode of resources/config.xml file
      */
 
-    public List<String> getDepartCities() {
-        List<String> departLocations = dbManager.getDepartCities();
+    public List<City> getDepartCities() {
+        List<City> departLocations = dbManager.getDepartCities();
         return departLocations;
 
     }
@@ -112,13 +112,13 @@ public class BlFacadeImplementation implements BlFacade {
     /**
      * {@inheritDoc}
      */
-    public List<String> getDestinationCities(City from) {
-        List<String> targetCities = dbManager.getArrivalCities(from);
+    public List<City> getDestinationCities(City from) {
+        List<City> targetCities = dbManager.getArrivalCities(from);
         return targetCities;
     }
 
     @Override
-    public List<Date> getDatesWithRides(String value, String value1) {
+    public List<Date> getDatesWithRides(City value, City value1) {
         List<Date> dates = dbManager.getDatesWithRides(value, value1);
         return dates;
     }

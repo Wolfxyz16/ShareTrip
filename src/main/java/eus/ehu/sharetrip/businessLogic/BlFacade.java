@@ -55,7 +55,7 @@ public interface BlFacade {
 
     List<String> getCities();
 
-    City getCity(String name) throws CityDoesNotExistExeception;
+    City getCity(City name);
 
     /**
      * This method returns all the cities where rides depart
@@ -63,7 +63,7 @@ public interface BlFacade {
      * @return collection of cities
      */
 
-    public List<String> getDepartCities();
+    public List<City> getDepartCities();
 
     /**
      * This method returns all the arrival destinations, from all rides that depart from a given city
@@ -72,10 +72,10 @@ public interface BlFacade {
      * @return all the arrival destinations
      */
 
-    public List<String> getDestinationCities(City from);
+    public List<City> getDestinationCities(City from);
 
 
-    List<Date> getDatesWithRides(String value, String value1);
+    List<Date> getDatesWithRides(City value, City value1);
 
     public User getUser(String username);
     public User login(String username, String password) throws UnknownUser;

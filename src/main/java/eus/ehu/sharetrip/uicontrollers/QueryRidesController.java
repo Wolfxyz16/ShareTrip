@@ -4,7 +4,6 @@ import eus.ehu.sharetrip.businessLogic.BlFacade;
 import eus.ehu.sharetrip.domain.City;
 import eus.ehu.sharetrip.domain.Driver;
 import eus.ehu.sharetrip.domain.Ride;
-import eus.ehu.sharetrip.exceptions.CityDoesNotExistExeception;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -56,10 +55,10 @@ public class QueryRidesController implements Controller {
     private TableColumn<Ride, Float> qc3;
 
     @FXML
-    private ComboBox<String> comboArrivalCity;
+    private ComboBox<City> comboArrivalCity;
 
     @FXML
-    private ComboBox<String> comboDepartCity;
+    private ComboBox<City> comboDepartCity;
 
 //  @FXML
 //  private TableView<Event> tblEvents;
@@ -137,41 +136,37 @@ public class QueryRidesController implements Controller {
         comboArrivalCity.valueProperty().addListener(
                 (obs, oldVal, newVal) -> updateDatePickerCellFactory(datepicker));
 
-        ObservableList<String> departureCities = FXCollections.observableArrayList(new ArrayList<>());
+        ObservableList<City> departureCities = FXCollections.observableArrayList(new ArrayList<>());
         departureCities.setAll(businessLogic.getDepartCities());
 
-        ObservableList<String> arrivalCities = FXCollections.observableArrayList(new ArrayList<>());
+        ObservableList<City> arrivalCities = FXCollections.observableArrayList(new ArrayList<>());
 
         comboDepartCity.setItems(departureCities);
         comboArrivalCity.setItems(arrivalCities);
 
         // when the user selects a departure city, update the arrival cities
-        try{
-            City depCity = businessLogic.getCity(comboDepartCity.getValue());
-            comboDepartCity.setOnAction(e -> {
+
+        //City depCity = businessLogic.getCity(comboDepartCity.getValue());
+        //City arrCity = businessLogic.getCity(comboArrivalCity.getValue());
+
+        comboDepartCity.setOnAction(e -> {
                 arrivalCities.clear();
-                arrivalCities.setAll(businessLogic.getDestinationCities(depCity));
-            });
-        } catch (CityDoesNotExistExeception e) {
-            throw new RuntimeException(e);
-        };
+                arrivalCities.setAll(businessLogic.getDestinationCities(businessLogic.getCity(comboDepartCity.getValue())));
+        });
+
 
         // a date has been chosen, update the combobox of Rides
         datepicker.setOnAction(actionEvent -> {
             if(comboDepartCity.getValue() != null && comboArrivalCity.getValue() != null) {
 
                 tblRides.getItems().clear();
-                try {
-                    City depCity = businessLogic.getCity(comboDepartCity.getValue());
-                    City arrCity = businessLogic.getCity(comboArrivalCity.getValue());
-                    List<Ride> rides = businessLogic.getRides(depCity, arrCity, Dates.convertToDate(datepicker.getValue()));
+
+                    List<Ride> rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()));
                 // List<Ride> rides = Arrays.asList(new Ride("Bilbao", "Donostia", Dates.convertToDate(datepicker.getValue()), 3, 3.5f, new Driver("pepe@pepe.com", "pepe")));
                     for (Ride ride : rides) {
                         tblRides.getItems().add(ride);
                     }
-                } catch (CityDoesNotExistExeception e) {
-                    throw new RuntimeException(e);
-                }
+
             }
         });
 

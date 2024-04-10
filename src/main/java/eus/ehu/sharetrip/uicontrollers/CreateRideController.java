@@ -4,7 +4,6 @@ import eus.ehu.sharetrip.businessLogic.BlFacade;
 import eus.ehu.sharetrip.domain.City;
 import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.domain.User;
-import eus.ehu.sharetrip.exceptions.CityDoesNotExistExeception;
 import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
 import javafx.event.ActionEvent;
@@ -94,13 +93,14 @@ public class CreateRideController implements Controller {
 
         LocalDate localDate = datePicker.getValue();
         Date date = Date.from(localDate.atStartOfDay( ZoneId.systemDefault() ).toInstant());
-        String departCity = txtDepartCity.getText();
-        String arrivalCity = txtArrivalCity.getText();
+        City departCity = new City (txtDepartCity.getText());
+        City arrivalCity = new City(txtArrivalCity.getText());
         int numSeats = Integer.parseInt( txtSeats.getText() );
         float price = Float.parseFloat( txtPrice.getText() );
         User user = bl.getCurrentUser();
 
         try {
+
             City depart = bl.getCity(departCity);
             City arrival = bl.getCity(arrivalCity);
             bl.createRide(depart, arrival, date, numSeats, price, user.getId());
@@ -109,8 +109,6 @@ public class CreateRideController implements Controller {
             throw new RuntimeException(ex);
         } catch (RideMustBeLaterThanTodayException ex) {
             // set the corresponding error labels
-            throw new RuntimeException(ex);
-        } catch (CityDoesNotExistExeception ex) {
             throw new RuntimeException(ex);
         }
 
@@ -130,8 +128,6 @@ public class CreateRideController implements Controller {
 
             } catch (RideAlreadyExistException e1) {
 
-            } catch (CityDoesNotExistExeception ex) {
-                throw new RuntimeException(ex);
             }
         }
     }
