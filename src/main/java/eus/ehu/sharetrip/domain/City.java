@@ -25,7 +25,7 @@ public class City {
 
     @Override
     public String toString() {
-        return "City name: " + name + "\n";
+        return name;
     }
 
 }

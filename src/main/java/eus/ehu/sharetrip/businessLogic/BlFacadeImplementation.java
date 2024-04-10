@@ -144,9 +144,14 @@ public class BlFacadeImplementation implements BlFacade {
         return dbManager.getReceivedMessages(user);
     }
 
+    public List<Alert> getAlerts() {
+        return dbManager.getAlerts();
+    }
+
 
     @Override
     public void saveMessage(Message message) {
         dbManager.saveMessage(message);
     }
+
 }

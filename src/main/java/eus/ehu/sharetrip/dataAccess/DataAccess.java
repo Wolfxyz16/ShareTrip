@@ -102,16 +102,16 @@ public class DataAccess {
       Driver driver2 = new Driver("driver2@gmail.com", "Ane Gaztañaga", "1234");
       Driver driver3 = new Driver("driver3@gmail.com", "test", "test");
 
-      /*
+
       //Create Cities
       City city1 = new City("Donostia");
       City city2 = new City("Bilbo");
       City city3 = new City("Gasteiz");
 
-        db.persist(city1);
-        db.persist(city2);
-        db.persist(city3);
-      */
+      db.persist(city1);
+      db.persist(city2);
+      db.persist(city3);
+
 
       //Create rides
       driver1.addRide("Donostia", "Bilbo", UtilDate.newDate(year, month, 15), 4, 7);
@@ -134,13 +134,23 @@ public class DataAccess {
       User user2 = new User("user2@gmail.com", "User2", "1234");
       //CREATE MESSAGES
       Message message1 = new Message("Hello",  user1, user2);
+      //CREATE ALERTS
+      Alert alert1 = new Alert(this.getCity("Donostia"), this.getCity("Bilbo"), UtilDate.newDate(year, month, 15), 4);
+      Alert alert2 = new Alert(this.getCity("Donostia"), this.getCity("Gasteiz"), UtilDate.newDate(year, month + 1, 15), 4);
+      Alert alert3 = new Alert(this.getCity("Gasteiz"), this.getCity("Donostia"), UtilDate.newDate(year, month, 6), 4);
+      Alert alert4 = new Alert(this.getCity("Bilbo"), this.getCity("Gasteiz"), UtilDate.newDate(year, month, 25), 4);
+
+      db.persist(alert1);
+      db.persist(alert2);
+      db.persist(alert3);
+      db.persist(alert4);
 
 
-      db.persist(driver1);
       db.persist(driver2);
       db.persist(driver3);
       db.persist(user1);
       db.persist(user2);
+      db.persist(driver1);
       db.persist(message1);
 
 
@@ -396,6 +406,22 @@ public class DataAccess {
     TypedQuery<Message> query = db.createQuery("SELECT m FROM Message m WHERE m.receiver = :user", Message.class);
     query.setParameter("user", user);
 
+    return query.getResultList();
+  }
+
+  public City getCity(String city) {
+    try {
+      TypedQuery<City> query = db.createQuery(
+              "SELECT c FROM City c WHERE c.name = :city", City.class);
+      query.setParameter("city", city);
+      return query.getSingleResult();
+    } catch (jakarta.persistence.NoResultException e) {
+      return null; // Or handle it in another appropriate way
+    }
+  }
+
+  public List<Alert> getAlerts() {
+    TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a", Alert.class);
     return query.getResultList();
   }
 }
