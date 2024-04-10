@@ -10,7 +10,7 @@ public class Message {
     private Long id;
 
     @Column(name = "MESSAGE")
-    private String message;
+    private String messageText;
 
 
     @ManyToOne
@@ -24,8 +24,8 @@ public class Message {
 
     }
 
-    public Message(String message, User sender, User receiver) {
-        this.message = message;
+    public Message(String messageText, User sender, User receiver) {
+        this.messageText = messageText;
         this.sender = sender;
         this.receiver = receiver;
     }
@@ -39,12 +39,12 @@ public class Message {
         this.id = id;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMessageText() {
+        return messageText;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
     }
 
     public User getSender() {
@@ -66,7 +66,7 @@ public class Message {
     public String toString() {
         return "Message{" +
                 "id=" + id +
-                ", message='" + message + '\'' +
+                ", message='" + messageText + '\'' +
                 ", from=" + sender +
                 ", to=" + receiver +
                 '}';
