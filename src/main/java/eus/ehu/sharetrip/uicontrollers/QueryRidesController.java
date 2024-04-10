@@ -145,10 +145,6 @@ public class QueryRidesController implements Controller {
         comboArrivalCity.setItems(arrivalCities);
 
         // when the user selects a departure city, update the arrival cities
-
-        //City depCity = businessLogic.getCity(comboDepartCity.getValue());
-        //City arrCity = businessLogic.getCity(comboArrivalCity.getValue());
-
         comboDepartCity.setOnAction(e -> {
                 arrivalCities.clear();
                 arrivalCities.setAll(businessLogic.getDestinationCities(businessLogic.getCity(comboDepartCity.getValue())));
