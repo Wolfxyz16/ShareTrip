@@ -1,22 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.MessagesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.MyMessagesController">
     <children>
-        <Label fx:id="titleLabel" layoutX="88.0" layoutY="30.0" text="Received messages">
-             <font>
+        <Label fx:id="titleLabel" layoutX="155.0" layoutY="57.0" text="Received messages">
+            <font>
                 <Font size="18.0" />
-             </font></Label>
-        <ListView fx:id="receivedListView" layoutX="54.0" layoutY="80.0" prefHeight="281.0" prefWidth="221.0" />
-      <ListView fx:id="sentListView" layoutX="336.0" layoutY="80.0" prefHeight="281.0" prefWidth="213.0" />
-      <Label fx:id="titleLabel1" layoutX="384.0" layoutY="30.0" text="Sent messages">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
+            </font>
+        </Label>
+        <Label fx:id="titleLabel1" layoutX="681.0" layoutY="57.0" text="Sent messages">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+      <TableView fx:id="receivedTableView" layoutX="63.0" layoutY="139.0" prefHeight="461.0" prefWidth="356.0">
+        <columns>
+          <TableColumn fx:id="receivedSenderNameCol" prefWidth="120.79998779296875" text="Sender" />
+            <TableColumn fx:id="receivedMessageTextCol" prefWidth="234.4000244140625" text="Message" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <TableView fx:id="sentTableView" layoutX="562.0" layoutY="139.0" prefHeight="461.0" prefWidth="356.0">
+         <columns>
+            <TableColumn fx:id="recipientNameCol" prefWidth="120.79998779296875" text="Recipient" />
+            <TableColumn fx:id="sentMessageTextCol" prefWidth="234.4000244140625" text="Message" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
     </children>
 </AnchorPane>
