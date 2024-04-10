@@ -10,7 +10,8 @@ import java.util.Vector;
 @Entity
 @DiscriminatorValue("DRIVER")
 public class Driver extends User implements Serializable {
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	//@OneToMany(mappedBy = "driver")
 	private List<Ride> rides=new Vector<Ride>();
 
 	public Driver(String email, String userName, String password) {
@@ -33,6 +34,10 @@ public class Driver extends User implements Serializable {
 		return username;
 	}
 
+	public List<Ride> getRides() {
+		return rides;
+	}
+
 	public String toString(){
 		return email+";"+username+rides;
 	}
@@ -44,8 +49,7 @@ public class Driver extends User implements Serializable {
 	 * @param
 	 * @return
 	 */
-	public Ride addRide(String from, String to, Date date, int nPlaces, float price)  {
-        Ride ride=new Ride(from,to,date,nPlaces,price, this);
+	public Ride addRide(Ride ride) {
         rides.add(ride);
         return ride;
 	}
@@ -58,7 +62,7 @@ public class Driver extends User implements Serializable {
 	 * @param date the date of the ride 
 	 * @return true if the ride exists and false in other case
 	 */
-	public boolean doesRideExists(String from, String to, Date date)  {	
+	public boolean doesRideExists(City from, City to, Date date)  {
 		for (Ride r:rides)
 			if ( (java.util.Objects.equals(r.getFromLocation(),from)) && (java.util.Objects.equals(r.getToLocation(),to)) && (java.util.Objects.equals(r.getDate(),date)) )
 			 return true;
