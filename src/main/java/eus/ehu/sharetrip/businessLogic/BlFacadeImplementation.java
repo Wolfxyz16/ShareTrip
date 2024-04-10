@@ -157,8 +157,14 @@ public class BlFacadeImplementation implements BlFacade {
         return dbManager.getUserType(currentUser.getUsername());
     }
 
+    public List<Alert> getAlerts() {
+        return dbManager.getAlerts();
+    }
+
+
     @Override
     public void saveMessage(Message message) {
         dbManager.saveMessage(message);
     }
+
 }
