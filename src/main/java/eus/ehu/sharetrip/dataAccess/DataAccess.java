@@ -241,8 +241,10 @@ public class DataAccess {
     Vector<Ride> res = new Vector<>();
 
     TypedQuery<Ride> query = db.createQuery("SELECT ride FROM Ride ride "
-            + "WHERE ride.date=?1 ", Ride.class);
+            + "WHERE ride.date=?1 and ride.fromLocation=?2 and ride.toLocation=?3 ", Ride.class);
     query.setParameter(1, date);
+    query.setParameter(2, origin);
+    query.setParameter(3, destination);
 
 
     return query.getResultList();

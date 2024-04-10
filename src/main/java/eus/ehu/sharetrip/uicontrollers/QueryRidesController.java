@@ -151,13 +151,15 @@ public class QueryRidesController implements Controller {
 
         // a date has been chosen, update the combobox of Rides
         datepicker.setOnAction(actionEvent -> {
+            if(comboDepartCity.getValue() != null && comboArrivalCity.getValue() != null) {
 
-            tblRides.getItems().clear();
-            // Vector<domain.Ride> events = businessLogic.getEvents(Dates.convertToDate(datepicker.getValue()));
-            List<Ride> rides = businessLogic.getRides(comboDepartCity.getValue(), comboArrivalCity.getValue(), Dates.convertToDate(datepicker.getValue()));
-            // List<Ride> rides = Arrays.asList(new Ride("Bilbao", "Donostia", Dates.convertToDate(datepicker.getValue()), 3, 3.5f, new Driver("pepe@pepe.com", "pepe")));
-            for (Ride ride : rides) {
-                tblRides.getItems().add(ride);
+                tblRides.getItems().clear();
+                // Vector<domain.Ride> events = businessLogic.getEvents(Dates.convertToDate(datepicker.getValue()));
+                List<Ride> rides = businessLogic.getRides(comboDepartCity.getValue(), comboArrivalCity.getValue(), Dates.convertToDate(datepicker.getValue()));
+                // List<Ride> rides = Arrays.asList(new Ride("Bilbao", "Donostia", Dates.convertToDate(datepicker.getValue()), 3, 3.5f, new Driver("pepe@pepe.com", "pepe")));
+                for (Ride ride : rides) {
+                    tblRides.getItems().add(ride);
+                }
             }
         });
 
