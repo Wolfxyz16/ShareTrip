@@ -48,6 +48,8 @@ public class MainGUI {
 
     private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin, favoriteOverviewWin, alertOverviewWin, createCityWin, messagesOverviewWin, sendMessageWin, viewMessagesWin;
 
+
+
     class Window {
         Controller c;
         Parent ui;

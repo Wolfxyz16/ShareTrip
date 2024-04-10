@@ -43,6 +43,11 @@ public class BlFacadeImplementation implements BlFacade {
         return ride;
     }
 
+    public Alert createAlert(City from, City to, Date date, int nPlaces) {
+        Alert alert = dbManager.createAlert(from, to, date, nPlaces);
+        return alert;
+    }
+
     @Override
     public List<Ride> getRides(City origin, City destination, Date date) {
         List<Ride> events = dbManager.getRides(origin, destination, date);
