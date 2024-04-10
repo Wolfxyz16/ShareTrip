@@ -56,7 +56,7 @@ With this method we will guarantee that the `main` branch will be always working
 
 [Event Flow for Search Ride Offer](pages/uc_search_ride_offer.md)
 
-[Event Flow for Request Booking for Ride](pages/uc_request_booking_for_ride.md)]\
+[Event Flow for Request Booking for Ride](pages/uc_request_booking_for_ride.md)\
 [Event Flow for View Ride Bookings](pages/uc_view_ride_bookings.md)\
 [Event Flow for Create Alert](pages/uc_create_alert.md)\
 [Event Flow for View Alerts](pages/uc_view_alerts.md)\
