@@ -12,7 +12,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import eus.ehu.sharetrip.businessLogic.BlFacade;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class SignUpController implements Controller{
@@ -67,6 +69,15 @@ public class SignUpController implements Controller{
         }
 
         /**
+         * Check that the password is valid
+         */
+        if (!isValid(userPassword, confirmPassword)) {
+            System.out.println("The password entered here  is invalid");
+            errorsLabel.setText("Passwd needs 8+ chars, uppercase, lowercase, digits, and special chars.");
+            errorsLabel.getStyleClass().setAll("label", "lbl-danger");
+            return;
+        }
+        /**
          * We check that both passwords are the same
          */
         if (!userPassword.equals(confirmPassword)) {
@@ -118,4 +129,25 @@ public class SignUpController implements Controller{
         roles.setItems(options);
     }
 
-}
+    public static boolean isValid(String passwordhere, String confirmhere) {
+
+        Pattern specailCharPatten = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Pattern UpperCasePatten = Pattern.compile("[A-Z ]");
+        Pattern lowerCasePatten = Pattern.compile("[a-z ]");
+        Pattern digitCasePatten = Pattern.compile("[0-9 ]");
+
+        boolean flag = true;
+
+        if (!passwordhere.equals(confirmhere) ||
+                passwordhere.length() < 8 ||
+                !specailCharPatten.matcher(passwordhere).find() ||
+                !UpperCasePatten.matcher(passwordhere).find() ||
+                !lowerCasePatten.matcher(passwordhere).find() ||
+                !digitCasePatten.matcher(passwordhere).find()) {
+            flag = false;
+        }
+
+        return flag;
+    }
+
+    }

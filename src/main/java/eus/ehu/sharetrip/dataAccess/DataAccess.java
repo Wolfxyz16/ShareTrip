@@ -244,6 +244,15 @@ public class DataAccess {
       }
   }
 
+  public Alert createAlert(City from, City to, Date date, int nPlaces) {
+    db.getTransaction().begin();
+    Alert alert = new Alert(from, to, date, nPlaces);
+    db.persist(alert);
+    db.getTransaction().commit();
+    return alert;
+
+  }
+
 
   public Ride createRide(City from, City to, Date date, int nPlaces, float price, long driverID) throws RideAlreadyExistException, RideMustBeLaterThanTodayException {
     System.out.println(">> DataAccess: createRide=> from= " + from + " to= " + to + " driver=" + driverID + " date " + date);
