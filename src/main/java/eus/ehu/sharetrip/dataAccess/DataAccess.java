@@ -399,12 +399,6 @@ public class DataAccess {
     return query.getResultList();
   }
 
-  /**
-   * Ruft den Wert der Discriminator-Spalte (USER_TYPE) für einen bestimmten Benutzernamen ab.
-   *
-   * @param username Der Benutzername, nach dem gesucht werden soll.
-   * @return Der Wert der Discriminator-Spalte (Benutzertyp) oder null, wenn nicht gefunden.
-   */
   public String getUserType(String username) {
     TypedQuery<String> query = db.createQuery(
             "SELECT u.userType FROM User u WHERE u.username = :username", String.class);
