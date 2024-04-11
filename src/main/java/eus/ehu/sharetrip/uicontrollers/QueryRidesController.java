@@ -184,9 +184,6 @@ public class QueryRidesController implements Controller {
                 tblRides.getItems().clear();
                 try{
                   List<Ride> rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), Integer.parseInt(numSeats.getText()));
-                }catch(CityDoesNotExistException ex) {
-                  //it's not supposed to happen ever
-                }
                 // If the search result is empty, show a message and return
                 if (rides.isEmpty()) {
                     outputLabel.setText("No rides available for you with the selected date, cities and number of seats.");
@@ -200,6 +197,9 @@ public class QueryRidesController implements Controller {
 
                 for (Ride ride : rides) {
                     tblRides.getItems().add(ride);
+                }
+                }catch(CityDoesNotExistException ex) {
+                    //it's not supposed to happen ever
                 }
             }
         });

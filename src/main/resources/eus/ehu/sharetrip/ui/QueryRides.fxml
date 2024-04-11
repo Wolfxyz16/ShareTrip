@@ -12,6 +12,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1000.0" stylesheets="@styles/bootstrapfx.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.QueryRidesController">
     <children>
@@ -33,7 +34,7 @@
               <DatePicker fx:id="datepicker" layoutX="145.0" layoutY="-1.0" prefHeight="25.0" prefWidth="155.0" />
          </children>
       </Group>
-        <TableView fx:id="tblRides" layoutX="125.0" layoutY="320.0" prefWidth="750.0">
+        <TableView fx:id="tblRides" layoutX="125.0" layoutY="376.0" prefHeight="342.0" prefWidth="750.0">
             <columns>
                 <TableColumn fx:id="qc1" prefWidth="223.5" text="%FindRidesGUI.Driver" />
                 <TableColumn fx:id="qc2" prefWidth="97.5" text="%FindRidesGUI.NPlaces" />
@@ -47,7 +48,7 @@
          </effect>
         </TableView>
         <Label layoutX="358.0" layoutY="49.0" text="  " />
-        <Label layoutX="126.0" layoutY="289.0" styleClass="h4" text="%RideDate" />
+        <Label layoutX="125.0" layoutY="343.0" styleClass="h4" text="%RideDate" />
       <Button fx:id="loveBtn" layoutX="825.0" layoutY="194.0" mnemonicParsing="false" onAction="#addToFavorite" prefHeight="50.0" prefWidth="50.0">
          <graphic>
             <ImageView fx:id="heartView" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
@@ -57,7 +58,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Label layoutX="274.0" layoutY="27.0" styleClass="h1" text="Where are we travelling?" />
+      <Label layoutX="313.0" layoutY="28.0" styleClass="h1" text="Where are we travelling?" />
       <Button fx:id="bellBtn" layoutX="763.0" layoutY="196.0" mnemonicParsing="false" onAction="#createNewAlert" prefHeight="50.0" prefWidth="50.0">
          <graphic>
             <ImageView fx:id="bellView" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
@@ -69,8 +70,11 @@
       </Button>
       <Label layoutX="576.0" layoutY="174.0" styleClass="h4" text="%NumSeats" />
       <TextField fx:id="numSeats" layoutX="576.0" layoutY="196.0" prefHeight="25.0" prefWidth="166.0" />
-        <Label fx:id="outputLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="297.0" layoutY="277.0" prefHeight="25.0" prefWidth="407.0" />
-      <Button fx:id="searchBtn" layoutX="473.0" layoutY="247.0" mnemonicParsing="false" text="Search" />
+        <Label fx:id="outputLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="229.0" layoutY="302.0" prefHeight="25.0" prefWidth="551.0" />
+      <Button fx:id="searchBtn" layoutX="463.0" layoutY="257.0" mnemonicParsing="false" text="Search">
+         <font>
+            <Font size="17.0" />
+         </font></Button>
 
     </children>
 </AnchorPane>
