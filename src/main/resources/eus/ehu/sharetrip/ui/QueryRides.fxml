@@ -69,7 +69,7 @@
       </Button>
       <Label layoutX="576.0" layoutY="174.0" styleClass="h4" text="%NumSeats" />
       <TextField fx:id="numSeats" layoutX="576.0" layoutY="196.0" prefHeight="25.0" prefWidth="166.0" />
-        <Label fx:id="outputLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="331.0" layoutY="277.0" prefHeight="25.0" prefWidth="339.0" />
+        <Label fx:id="outputLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="297.0" layoutY="277.0" prefHeight="25.0" prefWidth="407.0" />
       <Button fx:id="searchBtn" layoutX="473.0" layoutY="247.0" mnemonicParsing="false" text="Search" />
 
     </children>

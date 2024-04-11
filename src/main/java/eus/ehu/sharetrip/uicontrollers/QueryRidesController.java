@@ -182,13 +182,13 @@ public class QueryRidesController implements Controller {
 
                 // If the search result is empty, show a message and return
                 if (rides.isEmpty()) {
-                    outputLabel.setText("No rides available for you with the selected date and cities.");
+                    outputLabel.setText("No rides available for you with the selected date, cities and number of seats.");
                     outputLabel.getStyleClass().setAll("label", "lbl-warning");
                     return;
                 }
 
                 // If the search is successful, show a success message and not empty
-                outputLabel.setText("These are the available rides for you with the selected date and cities.");
+                outputLabel.setText("These are the available rides for you:");
                 outputLabel.getStyleClass().setAll("label", "lbl-success");
 
                 for (Ride ride : rides) {
@@ -239,6 +239,13 @@ public class QueryRidesController implements Controller {
         // Check if date is later than today
         if (datepicker.getValue().isBefore(LocalDate.now())) {
             outputLabel.setText("The date must be later than today.");
+            outputLabel.getStyleClass().setAll("label", "lbl-danger");
+            return false;
+        }
+
+        // A date is selected and not only a number input or something added to the datepicker
+        if (datepicker.getValue() == null) {
+            outputLabel.setText("Please select a date.");
             outputLabel.getStyleClass().setAll("label", "lbl-danger");
             return false;
         }
