@@ -139,12 +139,6 @@ public class DataAccess {
 
 
 
-      //Create users
-      User user1 = new User("user1@gmail.com", "User1", "1234");
-      User user2 = new User("user2@gmail.com", "User2", "1234");
-      //CREATE MESSAGES
-      Message message2 = new Message("Hello", user1, user2);
-
       //CREATE ALERTS
       Alert alert1 = new Alert(city1, city2, UtilDate.newDate(year, month, 15), 4);
       Alert alert2 = new Alert(city3, city4, UtilDate.newDate(year, month + 1, 15), 4);
@@ -169,9 +163,6 @@ public class DataAccess {
       
       db.persist(traveler1);
       db.persist(traveler2);
-      
-      db.persist(user1);
-      db.persist(user2);
 
       db.persist(message1);
 
