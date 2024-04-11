@@ -254,8 +254,8 @@ public class QueryRidesController implements Controller {
 
     @FXML
     public void createNewAlert(ActionEvent actionEvent) throws AlertAlreadyExistException {
-        if(comboDepartCity.getValue() != null && comboArrivalCity.getValue() != null && datepicker.getValue() != null){
-            businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), 1);
+        if(comboDepartCity.getValue() != null && comboArrivalCity.getValue() != null && datepicker.getValue() != null && numSeats.getText() != null){
+            businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  Integer.parseInt(numSeats.getText()));
             System.out.println("Alert created");
         }
 
