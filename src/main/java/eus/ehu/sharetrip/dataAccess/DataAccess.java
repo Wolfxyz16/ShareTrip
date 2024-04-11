@@ -138,8 +138,6 @@ public class DataAccess {
       Message message1 = new Message("Hello",  traveler1, traveler2);
 
 
-
-
       //CREATE ALERTS
       Alert alert1 = new Alert(city1, city2, UtilDate.newDate(year, month, 15), 4);
       Alert alert2 = new Alert(city3, city4, UtilDate.newDate(year, month + 1, 15), 4);
@@ -164,7 +162,6 @@ public class DataAccess {
       
       db.persist(traveler1);
       db.persist(traveler2);
-      
 
 
       db.persist(message1);
@@ -297,14 +294,15 @@ public class DataAccess {
 
   }
 
-  public List<Ride> getRides(City origin, City destination, Date date) {
+  public List<Ride> getRides(City origin, City destination, Date date, int numSeats) {
     System.out.println(">> DataAccess: getRides origin/dest/date");
 
     TypedQuery<Ride> query = db.createQuery("SELECT ride FROM Ride ride "
-            + "WHERE ride.fromLocation=?1 AND ride.toLocation=?2 AND ride.date=?3 ", Ride.class);
+            + "WHERE ride.fromLocation=?1 AND ride.toLocation=?2 AND ride.date=?3 AND ride.numPlaces>=?4", Ride.class);
     query.setParameter(1, origin);
     query.setParameter(2, destination);
     query.setParameter(3, date);
+    query.setParameter(4, numSeats);
 
     List<Ride> rides = query.getResultList();
     return rides;

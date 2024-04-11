@@ -20,7 +20,7 @@ public interface BlFacade {
      * @param date the date of the ride
      * @return collection of rides
      */
-    List<Ride> getRides(City from, City to, Date date);
+    List<Ride> getRides(City from, City to, Date date, int numSeats);
 
     /**
      * This method retrieves from the database the dates a month for which there are events

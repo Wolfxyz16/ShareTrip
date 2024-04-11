@@ -61,6 +61,9 @@ public class QueryRidesController implements Controller {
     @FXML
     private ComboBox<City> comboDepartCity;
 
+    @FXML
+    private TextField numSeats;
+
 //  @FXML
 //  private TableView<Event> tblEvents;
 
@@ -146,23 +149,31 @@ public class QueryRidesController implements Controller {
         comboArrivalCity.setItems(arrivalCities);
 
         // when the user selects a departure city, update the arrival cities
-
-        //City depCity = businessLogic.getCity(comboDepartCity.getValue());
-        //City arrCity = businessLogic.getCity(comboArrivalCity.getValue());
-
         comboDepartCity.setOnAction(e -> {
                 arrivalCities.clear();
                 arrivalCities.setAll(businessLogic.getDestinationCities(businessLogic.getCity(comboDepartCity.getValue())));
         });
 
-
-        // a date has been chosen, update the combobox of Rides
-        datepicker.setOnAction(actionEvent -> {
-            if(comboDepartCity.getValue() != null && comboArrivalCity.getValue() != null) {
+        numSeats.setOnAction(actionEvent -> {
+            if(comboDepartCity.getValue() != null && comboArrivalCity.getValue() != null && numSeats.getText() != null && datepicker.getValue() != null) {
 
                 tblRides.getItems().clear();
 
-                    List<Ride> rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()));
+                List<Ride> rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), Integer.parseInt(numSeats.getText()));
+                // List<Ride> rides = Arrays.asList(new Ride("Bilbao", "Donostia", Dates.convertToDate(datepicker.getValue()), 3, 3.5f, new Driver("
+                for (Ride ride : rides) {
+                    tblRides.getItems().add(ride);
+                }
+            }
+        });
+        /*
+        // a date has been chosen, update the combobox of Rides
+        datepicker.setOnAction(actionEvent -> {
+            if(comboDepartCity.getValue() != null && comboArrivalCity.getValue() != null && numSeats.getText() != null && datepicker.getValue() != null){
+
+                tblRides.getItems().clear();
+
+                    List<Ride> rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), Integer.parseInt(numSeats.getText()));
                 // List<Ride> rides = Arrays.asList(new Ride("Bilbao", "Donostia", Dates.convertToDate(datepicker.getValue()), 3, 3.5f, new Driver("pepe@pepe.com", "pepe")));
                     for (Ride ride : rides) {
                         tblRides.getItems().add(ride);
@@ -170,7 +181,7 @@ public class QueryRidesController implements Controller {
 
             }
         });
-
+        */
         datepicker.setOnMouseClicked(e -> {
             // get a reference to datepicker inner content
             // attach a listener to the  << and >> buttons
