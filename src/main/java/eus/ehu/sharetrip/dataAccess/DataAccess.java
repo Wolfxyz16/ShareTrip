@@ -211,12 +211,16 @@ public class DataAccess {
     return citiesNames;
   }
 
-  public City getCity(City name) {
+  public City getCity(City name) throws CityDoesNotExistException {
 
       TypedQuery<City> query = db.createQuery("SELECT c FROM City c WHERE c.name = :name", City.class);
       query.setParameter("name", name.getName());
-      City res = query.getSingleResult();
-    return res;
+      try {
+        City res = query.getSingleResult();
+        return res;
+      } catch (NoResultException e) {
+        throw new CityDoesNotExistException();
+      }
   }
 
   public City createCity(String city) throws CityAlreadyExistException {
@@ -259,14 +263,14 @@ public class DataAccess {
     System.out.println(">> DataAccess: createRide=> from= " + from + " to= " + to + " driver=" + driverID + " date " + date);
     try {
       if (new Date().compareTo(date) > 0) {
-        throw new RideMustBeLaterThanTodayException(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.ErrorRideMustBeLaterThanToday"));
+        throw new RideMustBeLaterThanTodayException();
       }
       db.getTransaction().begin();
 
       Driver driver = db.find(Driver.class, driverID);
       if (driver.doesRideExists(from, to, date)) {
         db.getTransaction().commit();
-        throw new RideAlreadyExistException(ResourceBundle.getBundle("Etiquetas").getString("DataAccess.RideAlreadyExist"));
+        throw new RideAlreadyExistException();
       }
 
       Ride ride = new Ride(from, to, date, nPlaces, price, driver);

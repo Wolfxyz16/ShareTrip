@@ -54,7 +54,7 @@ public interface BlFacade {
 
     List<String> getCities();
 
-    City getCity(City name);
+    City getCity(City name) throws CityDoesNotExistException;
 
     /**
      * This method returns all the cities where rides depart

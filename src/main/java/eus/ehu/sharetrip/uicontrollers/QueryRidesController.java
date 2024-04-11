@@ -5,6 +5,7 @@ import eus.ehu.sharetrip.domain.City;
 import eus.ehu.sharetrip.domain.Driver;
 import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.exceptions.AlertAlreadyExistException;
+import eus.ehu.sharetrip.exceptions.CityDoesNotExistException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -151,7 +152,11 @@ public class QueryRidesController implements Controller {
         // when the user selects a departure city, update the arrival cities
         comboDepartCity.setOnAction(e -> {
                 arrivalCities.clear();
+            try {
                 arrivalCities.setAll(businessLogic.getDestinationCities(businessLogic.getCity(comboDepartCity.getValue())));
+            } catch (CityDoesNotExistException ex) {
+
+            }
         });
 
         numSeats.setOnAction(actionEvent -> {
@@ -159,7 +164,12 @@ public class QueryRidesController implements Controller {
 
                 tblRides.getItems().clear();
 
-                List<Ride> rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), Integer.parseInt(numSeats.getText()));
+                List<Ride> rides = null;
+                try {
+                    rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), Integer.parseInt(numSeats.getText()));
+                } catch (CityDoesNotExistException e) {
+                    throw new RuntimeException(e);
+                }
                 // List<Ride> rides = Arrays.asList(new Ride("Bilbao", "Donostia", Dates.convertToDate(datepicker.getValue()), 3, 3.5f, new Driver("
                 for (Ride ride : rides) {
                     tblRides.getItems().add(ride);
@@ -253,7 +263,7 @@ public class QueryRidesController implements Controller {
     }
 
     @FXML
-    public void createNewAlert(ActionEvent actionEvent) throws AlertAlreadyExistException {
+    public void createNewAlert(ActionEvent actionEvent) throws AlertAlreadyExistException, CityDoesNotExistException {
         if(comboDepartCity.getValue() != null && comboArrivalCity.getValue() != null && datepicker.getValue() != null && numSeats.getText() != null){
             businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  Integer.parseInt(numSeats.getText()));
             System.out.println("Alert created");
