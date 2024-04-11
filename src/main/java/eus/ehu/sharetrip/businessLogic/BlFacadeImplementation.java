@@ -62,7 +62,7 @@ public class BlFacadeImplementation implements BlFacade {
         return dbManager.getCities();
     }
 
-    public City getCity(City name) {
+    public City getCity(City name) throws CityDoesNotExistException {
         return dbManager.getCity(name);
     }
 

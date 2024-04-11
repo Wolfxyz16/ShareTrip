@@ -5,6 +5,7 @@ import eus.ehu.sharetrip.domain.City;
 import eus.ehu.sharetrip.domain.Driver;
 import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.exceptions.AlertAlreadyExistException;
+import eus.ehu.sharetrip.exceptions.CityDoesNotExistException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -141,7 +142,11 @@ public class QueryRidesController implements Controller {
         // when the user selects a departure city, update the arrival cities
         comboDepartCity.setOnAction(e -> {
                 arrivalCities.clear();
+            try {
                 arrivalCities.setAll(businessLogic.getDestinationCities(businessLogic.getCity(comboDepartCity.getValue())));
+            } catch (CityDoesNotExistException ex) {
+                  //it's not supposed to happen ever
+            }
         });
 
         datepicker.setOnMouseClicked(e -> {
@@ -177,9 +182,11 @@ public class QueryRidesController implements Controller {
             if (noErrorsInInputFields()) {
                 // Clear the table
                 tblRides.getItems().clear();
-
-                List<Ride> rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), Integer.parseInt(numSeats.getText()));
-
+                try{
+                  List<Ride> rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), Integer.parseInt(numSeats.getText()));
+                }catch(CityDoesNotExistException ex) {
+                  //it's not supposed to happen ever
+                }
                 // If the search result is empty, show a message and return
                 if (rides.isEmpty()) {
                     outputLabel.setText("No rides available for you with the selected date, cities and number of seats.");
@@ -311,7 +318,11 @@ public class QueryRidesController implements Controller {
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
                 return;
             }
-            businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  Integer.parseInt(numSeats.getText()));
+            try{
+              businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  Integer.parseInt(numSeats.getText()));
+            }catch(CityDoesNotExistException ex){
+                  //it's not supposed to happen ever
+            }
             System.out.println("Alert created");
         }
     }

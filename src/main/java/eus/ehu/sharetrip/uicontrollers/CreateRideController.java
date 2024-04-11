@@ -4,6 +4,7 @@ import eus.ehu.sharetrip.businessLogic.BlFacade;
 import eus.ehu.sharetrip.domain.City;
 import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.domain.User;
+import eus.ehu.sharetrip.exceptions.CityDoesNotExistException;
 import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
 import javafx.event.ActionEvent;
@@ -50,6 +51,9 @@ public class CreateRideController implements Controller {
     private TextField txtSeats;
 
     @FXML
+    private Label warningsInfo;
+
+    @FXML
     private TextField txtPrice;
 
     private String field_Errors() {
@@ -90,46 +94,50 @@ public class CreateRideController implements Controller {
      */
     @FXML
     void createRideClick(ActionEvent e) {
-
-        LocalDate localDate = datePicker.getValue();
-        Date date = Date.from(localDate.atStartOfDay( ZoneId.systemDefault() ).toInstant());
-        City departCity = new City (txtDepartCity.getText());
-        City arrivalCity = new City(txtArrivalCity.getText());
-        int numSeats = Integer.parseInt( txtSeats.getText() );
-        float price = Float.parseFloat( txtPrice.getText() );
-        User user = bl.getCurrentUser();
-
-        try {
-
-            City depart = bl.getCity(departCity);
-            City arrival = bl.getCity(arrivalCity);
-            bl.createRide(depart, arrival, date, numSeats, price, user.getId());
-        } catch (RideAlreadyExistException ex) {
-            // set the corresponding error labels
-            throw new RuntimeException(ex);
-        } catch (RideMustBeLaterThanTodayException ex) {
-            // set the corresponding error labels
-            throw new RuntimeException(ex);
-        }
-
         //  Event event = comboEvents.getSelectionModel().getSelectedItem();
+        warningsInfo.setText("");
+        warningsInfo.getStyleClass().setAll("label", "lbl-default");
         String errors = field_Errors();
 
         if (errors != null) {
-            // businessLogic.createQuestion(event, inputQuestion, inputPrice);
+            warningsInfo.setText(errors);
+            warningsInfo.getStyleClass().setAll("label", "lbl-danger");
 
         } else {
-            try {
+            LocalDate localDate = datePicker.getValue();
+            Date date = Date.from(localDate.atStartOfDay( ZoneId.systemDefault() ).toInstant());
+            City departCity = new City (txtDepartCity.getText());
+            City arrivalCity = new City(txtArrivalCity.getText());
+            int numSeats = Integer.parseInt( txtSeats.getText() );
+            float price = Float.parseFloat( txtPrice.getText() );
+            User user = bl.getCurrentUser();
+
+            try{
                 City depart = bl.getCity(departCity);
-                City arrival = bl.getCity(arrivalCity);
-                Ride r = bl.createRide(depart, arrival, Dates.convertToDate(datePicker.getValue()), numSeats, price, user.getId());
-
-            } catch (RideMustBeLaterThanTodayException e1) {
-
-            } catch (RideAlreadyExistException e1) {
-
+                try {
+                    City arrival = bl.getCity(arrivalCity);
+                    bl.createRide(depart, arrival, Dates.convertToDate(datePicker.getValue()), numSeats, price, user.getId());
+                    warningsInfo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.RideCreated"));
+                    warningsInfo.getStyleClass().setAll("label", "lbl-success");
+                } catch (RideMustBeLaterThanTodayException e1) {
+                    warningsInfo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.ErrorRideMustBeLaterThanToday"));
+                    warningsInfo.getStyleClass().setAll("label", "lbl-danger");
+                } catch (RideAlreadyExistException e1) {
+                    warningsInfo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.RideAlreadyExist"));
+                    warningsInfo.getStyleClass().setAll("label", "lbl-danger");
+                }catch (CityDoesNotExistException e1) {
+                    warningsInfo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.DestinationCityDoesNotExist"));
+                    warningsInfo.getStyleClass().setAll("label", "lbl-danger");
+                }
+            }catch (CityDoesNotExistException e1) {
+                warningsInfo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.DepartureCityDoesNotExist"));
+                warningsInfo.getStyleClass().setAll("label", "lbl-danger");
             }
+
         }
+
+
+
     }
 
     @FXML
