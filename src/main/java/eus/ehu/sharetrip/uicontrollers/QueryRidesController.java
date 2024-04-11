@@ -4,6 +4,7 @@ import eus.ehu.sharetrip.businessLogic.BlFacade;
 import eus.ehu.sharetrip.domain.City;
 import eus.ehu.sharetrip.domain.Driver;
 import eus.ehu.sharetrip.domain.Ride;
+import eus.ehu.sharetrip.exceptions.AlertAlreadyExistException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -252,7 +253,7 @@ public class QueryRidesController implements Controller {
     }
 
     @FXML
-    public void createNewAlert(ActionEvent actionEvent) {
+    public void createNewAlert(ActionEvent actionEvent) throws AlertAlreadyExistException {
         if(comboDepartCity.getValue() != null && comboArrivalCity.getValue() != null && datepicker.getValue() != null){
             businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), 1);
             System.out.println("Alert created");
