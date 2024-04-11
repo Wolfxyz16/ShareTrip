@@ -87,7 +87,10 @@ public class MainGUI {
 
         switch (scene) {
             case "Home" -> mainWrapper.setCenter(mainWin.ui);
-            case "View Alert" -> mainWrapper.setCenter(alertOverviewWin.ui);
+            case "View Alert" -> {
+                    mainWrapper.setCenter(alertOverviewWin.ui);
+                    ((ViewAlertsController)alertOverviewWin.c).updateTables();
+            }
             case "Message Overview" -> {
                 mainWrapper.setCenter(messagesOverviewWin.ui);
                 ((MyMessagesController)viewMessagesWin.c).updateTables();

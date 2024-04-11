@@ -108,4 +108,9 @@ public class ViewAlertsController implements Controller {
     public void setTlbAlerts(ObservableList<Alert> alerts) {
         this.alerts = alerts;
     }
+
+    public void updateTables() {
+        alerts.clear();
+        alerts.addAll(businessLogic.getAlerts());
+    }
 }
