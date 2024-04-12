@@ -62,14 +62,14 @@ public class SignInController implements Controller {
             mainGUI.setIsLoggedIn(true);
             loginStatus.setText("Logged in");
             loginStatus.getStyleClass().setAll("label", "lbl-success");
+            mainGUI.showScene("Query Rides");
         } catch (UnknownUser unknownUser) {
             loginStatus.setText("Unknown user");
             loginStatus.getStyleClass().setAll("label", "lbl-danger");
-            // Should we delete this?
-            mainGUI.setUserName("Unknown user");
+            //mainGUI.setUserName("Unknown user");
         }
 
-        mainGUI.showScene("Query Rides");
+        //mainGUI.showScene("Query Rides");
 
     }
 
