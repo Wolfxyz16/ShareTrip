@@ -73,3 +73,6 @@ With this method we will guarantee that the `main` branch will be always working
 [Event Flow for View Booking Requests](pages/uc_view_booking_requests.md)\
 [Event Flow for Decide Booking Requests](pages/uc_decide_booking_requests.md)
 
+## Design
+
+[Sequence Diagram "Query Rides"](pages/sequence_diagramm_query_rides.md)

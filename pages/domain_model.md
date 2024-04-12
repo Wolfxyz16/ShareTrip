@@ -1,3 +1,3 @@
 # Domain Model
 
-![](../figures/domain_view.jpg)
+![](../figures/domain_model.jpg)
