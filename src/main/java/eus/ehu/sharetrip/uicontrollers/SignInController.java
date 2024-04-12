@@ -77,4 +77,10 @@ public class SignInController implements Controller {
     void initialize() {
     }
 
+    public void clearFields() {
+        login.setText("");
+        password.setText("");
+        loginStatus.setText("");
+        loginStatus.getStyleClass().setAll("label");
+    }
 }

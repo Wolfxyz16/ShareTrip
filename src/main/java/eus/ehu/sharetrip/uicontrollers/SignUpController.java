@@ -72,7 +72,6 @@ public class SignUpController implements Controller{
          * Check that the password is valid
          */
         if (!isValid(userPassword, confirmPassword)) {
-            System.out.println("The password entered here  is invalid");
             errorsLabel.setText("Passwd needs 8+ chars, uppercase, lowercase, digits, and special chars.");
             errorsLabel.getStyleClass().setAll("label", "lbl-danger");
             return;
@@ -138,7 +137,7 @@ public class SignUpController implements Controller{
 
         boolean flag = true;
 
-        if (!passwordhere.equals(confirmhere) ||
+        if (
                 passwordhere.length() < 8 ||
                 !specailCharPatten.matcher(passwordhere).find() ||
                 !UpperCasePatten.matcher(passwordhere).find() ||
