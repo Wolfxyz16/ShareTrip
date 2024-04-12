@@ -1,7 +1,7 @@
 ## Title: View Ride Bookings
 
 ## Primary Actors: Traveler
-## Secondary Actors: ShareTrip System
+## Secondary Actors: None
 
 ## Preconditions:
 - The actor must be registered and logged into the system.

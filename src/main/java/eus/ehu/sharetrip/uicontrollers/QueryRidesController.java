@@ -4,6 +4,8 @@ import eus.ehu.sharetrip.businessLogic.BlFacade;
 import eus.ehu.sharetrip.domain.City;
 import eus.ehu.sharetrip.domain.Driver;
 import eus.ehu.sharetrip.domain.Ride;
+import eus.ehu.sharetrip.exceptions.AlertAlreadyExistException;
+import eus.ehu.sharetrip.exceptions.CityDoesNotExistException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -20,7 +22,6 @@ import javafx.util.Callback;
 import eus.ehu.sharetrip.ui.MainGUI;
 import eus.ehu.sharetrip.utils.Dates;
 
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.*;
@@ -34,13 +35,10 @@ public class QueryRidesController implements Controller {
     public Button loveBtn;
 
     @FXML
-    private ResourceBundle resources;
+    public Button searchBtn;
 
     @FXML
-    private URL location;
-
-    @FXML
-    private Button btnClose;
+    private Label outputLabel;
 
     @FXML
     private DatePicker datepicker;
@@ -63,25 +61,16 @@ public class QueryRidesController implements Controller {
     @FXML
     private TextField numSeats;
 
-//  @FXML
-//  private TableView<Event> tblEvents;
-
     @FXML
     private TableView<Ride> tblRides;
 
-
-    private MainGUI mainGUI;
-
     private List<LocalDate> datesWithBooking = new ArrayList<>();
 
-    private BlFacade businessLogic;
+    private final BlFacade businessLogic;
 
     public QueryRidesController(BlFacade bl) {
         businessLogic = bl;
     }
-
-
-
 
     private void setEvents(int year, int month) {
         Date date = Dates.toDate(year, month);
@@ -111,6 +100,7 @@ public class QueryRidesController implements Controller {
             datesWithBooking.add(Dates.convertToLocalDateViaInstant(day));
         }
 
+        // update the DatePicker cells
         datePicker.setDayCellFactory(new Callback<>() {
             @Override
             public DateCell call(DatePicker param) {
@@ -120,7 +110,9 @@ public class QueryRidesController implements Controller {
                         super.updateItem(item, empty);
 
                         if (!empty && item != null) {
-                            if (datesWithBooking.contains(item)) {
+                            if (item.equals(LocalDate.now())) {
+                                this.setStyle("-fx-background-color: #ADD8E6");
+                            } else if (datesWithBooking.contains(item)) {
                                 this.setStyle("-fx-background-color: pink");
                             } else {
                                 this.setStyle("-fx-background-color: rgb(235, 235, 235)");
@@ -150,37 +142,13 @@ public class QueryRidesController implements Controller {
         // when the user selects a departure city, update the arrival cities
         comboDepartCity.setOnAction(e -> {
                 arrivalCities.clear();
+            try {
                 arrivalCities.setAll(businessLogic.getDestinationCities(businessLogic.getCity(comboDepartCity.getValue())));
-        });
-
-        numSeats.setOnAction(actionEvent -> {
-            if(comboDepartCity.getValue() != null && comboArrivalCity.getValue() != null && numSeats.getText() != null && datepicker.getValue() != null) {
-
-                tblRides.getItems().clear();
-
-                List<Ride> rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), Integer.parseInt(numSeats.getText()));
-                // List<Ride> rides = Arrays.asList(new Ride("Bilbao", "Donostia", Dates.convertToDate(datepicker.getValue()), 3, 3.5f, new Driver("
-                for (Ride ride : rides) {
-                    tblRides.getItems().add(ride);
-                }
+            } catch (CityDoesNotExistException ex) {
+                  //it's not supposed to happen ever
             }
         });
-        /*
-        // a date has been chosen, update the combobox of Rides
-        datepicker.setOnAction(actionEvent -> {
-            if(comboDepartCity.getValue() != null && comboArrivalCity.getValue() != null && numSeats.getText() != null && datepicker.getValue() != null){
 
-                tblRides.getItems().clear();
-
-                    List<Ride> rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), Integer.parseInt(numSeats.getText()));
-                // List<Ride> rides = Arrays.asList(new Ride("Bilbao", "Donostia", Dates.convertToDate(datepicker.getValue()), 3, 3.5f, new Driver("pepe@pepe.com", "pepe")));
-                    for (Ride ride : rides) {
-                        tblRides.getItems().add(ride);
-                    }
-
-            }
-        });
-        */
         datepicker.setOnMouseClicked(e -> {
             // get a reference to datepicker inner content
             // attach a listener to the  << and >> buttons
@@ -203,6 +171,39 @@ public class QueryRidesController implements Controller {
             });
         });
 
+        // Query Rides logic
+        searchBtn.setOnAction(actionEvent -> {
+
+            // Clear the output label
+            outputLabel.setText("");
+            outputLabel.getStyleClass().setAll("label");
+
+            // Check if all fields are not empty and logically correct
+            if (noErrorsInInputFields()) {
+                // Clear the table
+                tblRides.getItems().clear();
+                try{
+                  List<Ride> rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), Integer.parseInt(numSeats.getText()));
+                // If the search result is empty, show a message and return
+                if (rides.isEmpty()) {
+                    outputLabel.setText("No rides available for you with the selected date, cities and number of seats.");
+                    outputLabel.getStyleClass().setAll("label", "lbl-warning");
+                    return;
+                }
+
+                // If the search is successful, show a success message and not empty
+                outputLabel.setText("These are the available rides for you:");
+                outputLabel.getStyleClass().setAll("label", "lbl-success");
+
+                for (Ride ride : rides) {
+                    tblRides.getItems().add(ride);
+                }
+                }catch(CityDoesNotExistException ex) {
+                    //it's not supposed to happen ever
+                }
+            }
+        });
+
         // show just the driver's name in column1
         qc1.setCellValueFactory(new Callback<>() {
             @Override
@@ -215,6 +216,63 @@ public class QueryRidesController implements Controller {
         qc2.setCellValueFactory(new PropertyValueFactory<>("numPlaces"));
         qc3.setCellValueFactory(new PropertyValueFactory<>("price"));
 
+    }
+
+    private boolean noErrorsInInputFields() {
+        // Check if all fields are filled
+        if (comboDepartCity.getValue() == null) {
+            outputLabel.setText("Please select a departure city.");
+            outputLabel.getStyleClass().setAll("label", "lbl-danger");
+            return false;
+        }
+        if (comboArrivalCity.getValue() == null) {
+            outputLabel.setText("Please select an arrival city.");
+            outputLabel.getStyleClass().setAll("label", "lbl-danger");
+            return false;
+        }
+        if (datepicker.getValue() == null) {
+            outputLabel.setText("Please select a date.");
+            outputLabel.getStyleClass().setAll("label", "lbl-danger");
+            return false;
+        }
+        if (numSeats.getText() == null || numSeats.getText().isEmpty()) {
+            outputLabel.setText("Please enter the number of seats.");
+            outputLabel.getStyleClass().setAll("label", "lbl-danger");
+            return false;
+        }
+
+        // Check if all fields are logically correct
+
+        // Check if date is later than today
+        if (datepicker.getValue().isBefore(LocalDate.now())) {
+            outputLabel.setText("The date must be later than today.");
+            outputLabel.getStyleClass().setAll("label", "lbl-danger");
+            return false;
+        }
+
+        // A date is selected and not only a number input or something added to the datepicker
+        if (datepicker.getValue() == null) {
+            outputLabel.setText("Please select a date.");
+            outputLabel.getStyleClass().setAll("label", "lbl-danger");
+            return false;
+        }
+
+        // Check if the number of seats is a positive integer
+        try {
+            int seats = Integer.parseInt(numSeats.getText());
+            if (seats <= 0) {
+                outputLabel.setText("The number of seats must be a positive integer.");
+                outputLabel.getStyleClass().setAll("label", "lbl-danger");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            outputLabel.setText("The number of seats must be a positive integer.");
+            outputLabel.getStyleClass().setAll("label", "lbl-danger");
+            return false;
+        }
+
+        // If all checks pass, return true
+        return true;
     }
 
 
@@ -235,12 +293,12 @@ public class QueryRidesController implements Controller {
 
     @Override
     public void setMainApp(MainGUI mainGUI) {
-        this.mainGUI = mainGUI;
     }
 
     @FXML
     public void addToFavorite(ActionEvent actionEvent) {
-        /**Ride ride = tblRides.getSelectionModel().getSelectedItem();
+        //TODO: Implement add to Favorites logic
+        /*Ride ride = tblRides.getSelectionModel().getSelectedItem();
         if (ride != null) {
             businessLogic.addToFavorite(ride);
         }
@@ -252,11 +310,20 @@ public class QueryRidesController implements Controller {
     }
 
     @FXML
-    public void createNewAlert(ActionEvent actionEvent) {
-        if(comboDepartCity.getValue() != null && comboArrivalCity.getValue() != null && datepicker.getValue() != null){
-            businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), 1);
+    public void createNewAlert(ActionEvent actionEvent) throws AlertAlreadyExistException {
+        if (noErrorsInInputFields()) {
+            // check if user is logged in
+            if (businessLogic.getCurrentUser() == null) {
+                outputLabel.setText("You must be logged in to create an alert.");
+                outputLabel.getStyleClass().setAll("label", "lbl-danger");
+                return;
+            }
+            try{
+              businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  Integer.parseInt(numSeats.getText()));
+            }catch(CityDoesNotExistException ex){
+                  //it's not supposed to happen ever
+            }
             System.out.println("Alert created");
         }
-
     }
 }

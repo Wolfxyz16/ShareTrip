@@ -1,6 +1,6 @@
 # Use Case Model
 
-![](../figures/use_case_view.jpg)
+![](../figures/use_case_model.jpg)
 
 (Search Ride Offer) A not logged-in users can search for available ride offers.
 

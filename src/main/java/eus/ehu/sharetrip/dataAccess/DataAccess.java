@@ -138,13 +138,6 @@ public class DataAccess {
       Message message1 = new Message("Hello",  traveler1, traveler2);
 
 
-
-      //Create users
-      User user1 = new User("user1@gmail.com", "User1", "1234");
-      User user2 = new User("user2@gmail.com", "User2", "1234");
-      //CREATE MESSAGES
-      Message message2 = new Message("Hello", user1, user2);
-
       //CREATE ALERTS
       Alert alert1 = new Alert(city1, city2, UtilDate.newDate(year, month, 15), 4);
       Alert alert2 = new Alert(city3, city4, UtilDate.newDate(year, month + 1, 15), 4);
@@ -169,9 +162,7 @@ public class DataAccess {
       
       db.persist(traveler1);
       db.persist(traveler2);
-      
-      db.persist(user1);
-      db.persist(user2);
+
 
       db.persist(message1);
 
@@ -220,12 +211,16 @@ public class DataAccess {
     return citiesNames;
   }
 
-  public City getCity(City name) {
+  public City getCity(City name) throws CityDoesNotExistException {
 
       TypedQuery<City> query = db.createQuery("SELECT c FROM City c WHERE c.name = :name", City.class);
       query.setParameter("name", name.getName());
-      City res = query.getSingleResult();
-    return res;
+      try {
+        City res = query.getSingleResult();
+        return res;
+      } catch (NoResultException e) {
+        throw new CityDoesNotExistException();
+      }
   }
 
   public City createCity(String city) throws CityAlreadyExistException {
@@ -244,12 +239,22 @@ public class DataAccess {
       }
   }
 
-  public Alert createAlert(City from, City to, Date date, int nPlaces) {
-    db.getTransaction().begin();
-    Alert alert = new Alert(from, to, date, nPlaces);
-    db.persist(alert);
-    db.getTransaction().commit();
-    return alert;
+  public Alert createAlert(City from, City to, Date date, int nPlaces) throws AlertAlreadyExistException {
+    try{
+      if (!getAlerts(from, to, date, nPlaces).isEmpty()) {
+        throw new AlertAlreadyExistException(ResourceBundle.getBundle("Etiquetas").getString("CreateAlertGUI.AlertAlreadyExist"));
+      }
+      db.getTransaction().begin();
+      Alert alert = new Alert(from, to, date, nPlaces);
+      db.persist(alert);
+      db.getTransaction().commit();
+      return alert;
+    } catch (NoResultException e) {
+      db.getTransaction().commit();
+      return null;
+    }
+
+
 
   }
 
@@ -258,14 +263,14 @@ public class DataAccess {
     System.out.println(">> DataAccess: createRide=> from= " + from + " to= " + to + " driver=" + driverID + " date " + date);
     try {
       if (new Date().compareTo(date) > 0) {
-        throw new RideMustBeLaterThanTodayException(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.ErrorRideMustBeLaterThanToday"));
+        throw new RideMustBeLaterThanTodayException();
       }
       db.getTransaction().begin();
 
       Driver driver = db.find(Driver.class, driverID);
       if (driver.doesRideExists(from, to, date)) {
         db.getTransaction().commit();
-        throw new RideAlreadyExistException(ResourceBundle.getBundle("Etiquetas").getString("DataAccess.RideAlreadyExist"));
+        throw new RideAlreadyExistException();
       }
 
       Ride ride = new Ride(from, to, date, nPlaces, price, driver);
@@ -461,6 +466,15 @@ public class DataAccess {
             "SELECT u.userType FROM User u WHERE u.username = :username", String.class);
     query.setParameter("username", username);
     return query.getSingleResult();
+  }
+
+  public List<Alert> getAlerts(City from, City to, Date date, int nPlaces) {
+    TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.fromLocation = :from AND a.toLocation = :to AND a.rideDate = :date AND a.numSeats = :nPlaces", Alert.class);
+    query.setParameter("from", from);
+    query.setParameter("to", to);
+    query.setParameter("date", date);
+    query.setParameter("nPlaces", nPlaces);
+    return query.getResultList();
   }
 
   public List<Alert> getAlerts() {

@@ -10,7 +10,7 @@
 - The favorite gets stored.
 
 ## Flow:
-1. The actor opens the application and navigates to the "Search Ride Offer" section.
+1. The actor opens the application and navigates to the "Query Rides" section.
 2. The system loads and shows the form for searching for ride offers.
 3. The actor inputs the origin and destination cities, the desired date, and the number of seats needed.
 4. The actor confirms the details and submits the form.
