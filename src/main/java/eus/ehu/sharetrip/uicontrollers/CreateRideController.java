@@ -96,7 +96,7 @@ public class CreateRideController implements Controller {
     void createRideClick(ActionEvent e) {
         //  Event event = comboEvents.getSelectionModel().getSelectedItem();
         warningsInfo.setText("");
-        warningsInfo.getStyleClass().setAll("label", "lbl-default");
+        warningsInfo.getStyleClass().setAll("label");
         String errors = field_Errors();
 
         if (errors != null) {
