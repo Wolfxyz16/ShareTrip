@@ -53,17 +53,24 @@
                         <String fx:value="btn" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="queryRidesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#queryRides" prefHeight="20.0" prefWidth="180.0" text="Query Rides">
+               </children>
+            </VBox>
+            <Button fx:id="queryRidesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="136.0" mnemonicParsing="false" onAction="#queryRides" prefHeight="20.0" prefWidth="180.0" text="Query Rides">
+               <styleClass>
+                  <String fx:value="split-menu-btn-lg" />
+                  <String fx:value="btn-primary" />
+                  <String fx:value="btn" />
+               </styleClass>
+            </Button>
+            <VBox layoutX="10.0" layoutY="181.0" spacing="10.0">
+               <children>
+                  <Button fx:id="bookingRequestsBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="55.0" mnemonicParsing="false" onAction="#viewBookingRequests" prefHeight="20.0" prefWidth="180.0" text="Booking Requests">
                      <styleClass>
                         <String fx:value="split-menu-btn-lg" />
                         <String fx:value="btn-primary" />
                         <String fx:value="btn" />
                      </styleClass>
                   </Button>
-               </children>
-            </VBox>
-            <VBox layoutX="11.0" layoutY="227.0" spacing="10.0">
-               <children>
                   <Button fx:id="createRidesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#createRide" prefHeight="20.0" prefWidth="180.0" text="Create Ride">
                      <styleClass>
                         <String fx:value="split-menu-btn-lg" />
@@ -78,21 +85,11 @@
                         <String fx:value="btn" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="messagesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#viewMessages" prefHeight="20.0" prefWidth="180.0" text="Messages">
-                     <styleClass>
-                        <String fx:value="split-menu-btn-lg" />
-                        <String fx:value="btn-primary" />
-                        <String fx:value="btn" />
-                     </styleClass>
-                  </Button>
-                  <Button fx:id="favoritesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#viewFavorites" prefHeight="20.0" prefWidth="180.0" text="View Favorites">
-                     <styleClass>
-                        <String fx:value="split-menu-btn-lg" />
-                        <String fx:value="btn-primary" />
-                        <String fx:value="btn" />
-                     </styleClass>
-                  </Button>
-                  <Button fx:id="alertsBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#viewAlerts" prefHeight="20.0" prefWidth="180.0" text="View Alerts">
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="181.0" spacing="10.0">
+               <children>
+                  <Button fx:id="myBookingsBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#viewMyBookings" prefHeight="20.0" prefWidth="180.0" text="My Bookings">
                      <styleClass>
                         <String fx:value="split-menu-btn-lg" />
                         <String fx:value="btn-primary" />
@@ -101,6 +98,27 @@
                   </Button>
                </children>
             </VBox>
+            <Button fx:id="messagesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="370.0" mnemonicParsing="false" onAction="#viewMessages" prefHeight="20.0" prefWidth="180.0" text="Messages">
+               <styleClass>
+                  <String fx:value="split-menu-btn-lg" />
+                  <String fx:value="btn-primary" />
+                  <String fx:value="btn" />
+               </styleClass>
+            </Button>
+            <Button fx:id="alertsBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="415.0" mnemonicParsing="false" onAction="#viewAlerts" prefHeight="20.0" prefWidth="180.0" text="View Alerts">
+               <styleClass>
+                  <String fx:value="split-menu-btn-lg" />
+                  <String fx:value="btn-primary" />
+                  <String fx:value="btn" />
+               </styleClass>
+            </Button>
+            <Button fx:id="favoritesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="460.0" mnemonicParsing="false" onAction="#viewFavorites" prefHeight="20.0" prefWidth="180.0" text="View Favorites">
+               <styleClass>
+                  <String fx:value="split-menu-btn-lg" />
+                  <String fx:value="btn-primary" />
+                  <String fx:value="btn" />
+               </styleClass>
+            </Button>
             <Group layoutX="26.0" layoutY="574.0">
                <children>
                   <Label fx:id="welcome" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="20.0" prefHeight="20.0" styleClass="h3" text="Welcome" textAlignment="CENTER">
