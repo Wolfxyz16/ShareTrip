@@ -100,7 +100,10 @@ public class MainGUI {
             case "View Favorites" -> mainWrapper.setCenter(favoriteOverviewWin.ui);
             case "Query Rides" -> mainWrapper.setCenter(queryRidesWin.ui);
             case "Create Ride" -> mainWrapper.setCenter(createRideWin.ui);
-            case "Log in" -> mainWrapper.setCenter(loginWin.ui);
+            case "Log in" -> {
+                mainWrapper.setCenter(loginWin.ui);
+                ((SignInController)loginWin.c).clearFields();
+            }
             case "Register" -> mainWrapper.setCenter(registerWin.ui);
             case "Create City" -> mainWrapper.setCenter(createCityWin.ui);
 

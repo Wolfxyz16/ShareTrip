@@ -3,16 +3,12 @@ package eus.ehu.sharetrip.uicontrollers;
 import eus.ehu.sharetrip.businessLogic.BlFacade;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import eus.ehu.sharetrip.ui.MainGUI;
 import javafx.scene.layout.BorderPane;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class MainGUIController implements Controller{
@@ -109,7 +105,7 @@ public class MainGUIController implements Controller{
     }
 
     @FXML
-    void logIn(ActionEvent actionEvent) {
+    void logIn() {
         mainGUI.showScene("Log in");
     }
 
@@ -132,7 +128,7 @@ public class MainGUIController implements Controller{
         mainGUI.setIsLoggedIn(false);
         mainGUI.setUserName("");
         businessLogic.setCurrentUser(null);
-        mainGUI.showScene("Query Ride");
+        this.logIn();
     }
 
 
