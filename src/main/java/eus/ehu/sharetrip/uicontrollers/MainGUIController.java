@@ -13,47 +13,47 @@ import java.util.ResourceBundle;
 
 public class MainGUIController implements Controller{
 
-    public Button messagesBtn;
-    
     @FXML
     private Button alertsBtn;
+
+    @FXML
+    private Button bookingRequestsBtn;
+
+    @FXML
+    private Button myBookingsBtn;
 
     @FXML
     private Button createCityBtn;
 
     @FXML
+    private Button createRidesBtn;
+
+    @FXML
     private Button favoritesBtn;
 
     @FXML
-    public Button createRidesBtn;
+    private Button logInBtn;
 
     @FXML
-    public Button logInBtn;
+    private BorderPane mainWrapper;
 
     @FXML
-    public Button registerBtn;
-
-    @FXML
-    public Button signOutBtn;
-
-    @FXML
-    public Label userLbl;
-
-    @FXML
-    private Label selectOptionLbl;
-
-    @FXML
-    private Label welcome;
-
+    private Button messagesBtn;
 
     @FXML
     private Button queryRidesBtn;
 
     @FXML
-    private ResourceBundle resources;
+    private Button registerBtn;
 
     @FXML
-    private URL location;
+    private Button signOutBtn;
+
+    @FXML
+    private Label userLbl;
+
+    @FXML
+    private Label welcome;
 
     private MainGUI mainGUI;
 
@@ -61,23 +61,13 @@ public class MainGUIController implements Controller{
 
     private boolean isLoggedIn;
 
-
-    //public MainGUIController(){};
-
     public MainGUIController(BlFacade blFacade){
         businessLogic = blFacade;
     }
 
 
     @FXML
-    private BorderPane mainWrapper;
-
-
-    @FXML
-    void initialize() {
-
-    }
-
+    void initialize() {}
 
     @FXML
     void viewAlerts(ActionEvent event) {
@@ -119,6 +109,13 @@ public class MainGUIController implements Controller{
         mainGUI.showScene("Create City");
     }
 
+    @FXML
+    void viewBookingRequests(ActionEvent event) {mainGUI.showScene("BookingRequests");}
+
+    @FXML
+    void viewMyBookings(ActionEvent event) {
+        mainGUI.showScene("MyBookings");}
+
     /**
      * Sign out logic, just 3 lines, we do not need another SignOutController
      * @param actionEvent
@@ -156,6 +153,8 @@ public class MainGUIController implements Controller{
         signOutBtn.setVisible(false);
         welcome.setVisible(false);
         createCityBtn.setVisible(false);
+        myBookingsBtn.setVisible(false);
+        bookingRequestsBtn.setVisible(false);
     }
     public void setIsLoggedIn(boolean isLoggedIn) {
         this.isLoggedIn = isLoggedIn;
@@ -168,15 +167,17 @@ public class MainGUIController implements Controller{
 
         //Different buttons will be visible for Drivers or for Travelers
         if (businessLogic.getCurrentUserType().equals("TRAVELER")) {
-            alertsBtn.setVisible(isLoggedIn);
-            favoritesBtn.setVisible(isLoggedIn);
+            myBookingsBtn.setVisible(isLoggedIn);
 
         } else if (businessLogic.getCurrentUserType().equals("DRIVER")) {
             createRidesBtn.setVisible(isLoggedIn);
             createCityBtn.setVisible(isLoggedIn);
+            bookingRequestsBtn.setVisible(isLoggedIn);
         }
 
         //These will be shown for both drivers and travelers
+        alertsBtn.setVisible(isLoggedIn);
+        favoritesBtn.setVisible(isLoggedIn);
         messagesBtn.setVisible(isLoggedIn);
         signOutBtn.setVisible(isLoggedIn);
         userLbl.setVisible(isLoggedIn);

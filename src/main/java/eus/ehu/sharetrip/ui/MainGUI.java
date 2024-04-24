@@ -46,9 +46,8 @@ public class MainGUI {
         });
     }
 
-    private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin, favoriteOverviewWin, alertOverviewWin, createCityWin, messagesOverviewWin, sendMessageWin, viewMessagesWin;
-
-
+    private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin, favoriteOverviewWin, alertOverviewWin,
+            createCityWin, messagesOverviewWin, sendMessageWin, viewMessagesWin, myBookings, bookingRequests;
 
     class Window {
         Controller c;
@@ -106,11 +105,10 @@ public class MainGUI {
             }
             case "Register" -> mainWrapper.setCenter(registerWin.ui);
             case "Create City" -> mainWrapper.setCenter(createCityWin.ui);
-
-
+            case "MyBookings" -> mainWrapper.setCenter(myBookings.ui);
+            case "BookingRequests" -> mainWrapper.setCenter(bookingRequests.ui);
         }
     }
-
 
     public void init(Stage stage) throws IOException {
 
@@ -127,8 +125,8 @@ public class MainGUI {
         viewMessagesWin = load("MyMessagesOverview.fxml");
         alertOverviewWin = load("AlertOverview.fxml");
         createCityWin = load("CreateCity.fxml");
-
-
+        myBookings = load("MyBookings.fxml");
+        bookingRequests = load("BookingRequests.fxml");
 
         ((MainGUIController)mainWin.c).initializeButtonVisibility();
 
@@ -136,7 +134,6 @@ public class MainGUI {
     }
 
     private void showMain(Stage stage) {
-
         // set stage's scene
         Scene scene = new Scene(mainWin.ui);
         scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
