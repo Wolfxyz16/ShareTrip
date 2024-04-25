@@ -91,4 +91,5 @@ public interface BlFacade {
 
     List<Alert> getAlerts();
 
+    boolean alertAlreadyExist(User currentUser, City city, City city1, Date date, int i);
 }

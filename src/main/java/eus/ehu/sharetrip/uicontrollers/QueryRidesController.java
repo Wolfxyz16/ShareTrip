@@ -323,17 +323,21 @@ public class QueryRidesController implements Controller {
     }
 
     @FXML
-    public void createNewAlert(ActionEvent actionEvent) throws AlertAlreadyExistException {
+    public void createNewAlert(ActionEvent actionEvent) throws AlertAlreadyExistException, CityDoesNotExistException {
         if (noErrorsInInputFields()) {
             // check if user is logged in
             if (businessLogic.getCurrentUser() == null) {
                 outputLabel.setText("You must be logged in to create an alert.");
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
                 return;
+            } else if (businessLogic.alertAlreadyExist(businessLogic.getCurrentUser(), businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  Integer.parseInt(numSeats.getText()))) {
+                outputLabel.setText("You already have this alert for this ride.");
+                outputLabel.getStyleClass().setAll("label", "lbl-danger");
+                return;
             }
-            try{
+            try {
               businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  Integer.parseInt(numSeats.getText()));
-            }catch(CityDoesNotExistException ex){
+            } catch (CityDoesNotExistException ex) {
                   //it's not supposed to happen ever
             }
             System.out.println("Alert created");
