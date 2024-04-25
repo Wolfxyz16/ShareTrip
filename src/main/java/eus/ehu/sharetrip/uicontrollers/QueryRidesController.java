@@ -143,7 +143,10 @@ public class QueryRidesController implements Controller {
         comboDepartCity.setOnAction(e -> {
                 arrivalCities.clear();
             try {
-                arrivalCities.setAll(businessLogic.getDestinationCities(businessLogic.getCity(comboDepartCity.getValue())));
+                if ((comboDepartCity.getValue() != null)) {
+                    arrivalCities.setAll(businessLogic.getDestinationCities(businessLogic.getCity(comboDepartCity.getValue())));
+
+                }
             } catch (CityDoesNotExistException ex) {
                   //it's not supposed to happen ever
             }
@@ -290,6 +293,16 @@ public class QueryRidesController implements Controller {
     });
   }
 */
+
+    public void resetValues() {
+        comboDepartCity.setValue(null);
+        comboArrivalCity.setValue(null);
+        datepicker.setValue(null);
+        numSeats.setText("");
+        tblRides.getItems().clear();
+        outputLabel.setText("");
+        outputLabel.getStyleClass().setAll("label");
+    }
 
     @Override
     public void setMainApp(MainGUI mainGUI) {

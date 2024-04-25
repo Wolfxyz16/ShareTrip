@@ -87,17 +87,20 @@ public class MainGUI {
         switch (scene) {
             case "Home" -> mainWrapper.setCenter(mainWin.ui);
             case "View Alert" -> {
-                    mainWrapper.setCenter(alertOverviewWin.ui);
-                    ((ViewAlertsController)alertOverviewWin.c).updateTables();
+                mainWrapper.setCenter(alertOverviewWin.ui);
+                ((ViewAlertsController) alertOverviewWin.c).updateTables();
             }
             case "Message Overview" -> {
                 mainWrapper.setCenter(messagesOverviewWin.ui);
-                ((MyMessagesController)viewMessagesWin.c).updateTables();
+                ((MyMessagesController) viewMessagesWin.c).updateTables();
             }
             case "Send message" -> mainWrapper.setCenter(sendMessageWin.ui);
             case "View messages" -> mainWrapper.setCenter(viewMessagesWin.ui);
             case "View Favorites" -> mainWrapper.setCenter(favoriteOverviewWin.ui);
-            case "Query Rides" -> mainWrapper.setCenter(queryRidesWin.ui);
+            case "Query Rides" -> {
+                mainWrapper.setCenter(queryRidesWin.ui);
+                ((QueryRidesController) queryRidesWin.c).resetValues();
+        }
             case "Create Ride" -> mainWrapper.setCenter(createRideWin.ui);
             case "Log in" -> {
                 mainWrapper.setCenter(loginWin.ui);
