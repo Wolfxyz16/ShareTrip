@@ -168,8 +168,8 @@ public class BlFacadeImplementation implements BlFacade {
     }
 
     @Override
-    public boolean alertAlreadyExist(User currentUser, City city, City city1, Date date, int i) {
-        return dbManager.alertAlreadyExist(currentUser, city, city1, date, i);
+    public boolean alertAlreadyExist(City city, City city1, Date date, int i) {
+        return dbManager.alertAlreadyExist(city, city1, date, i);
     }
 
     public List<Alert> getAlerts(City from, City to, Date date, int nPlaces) {
