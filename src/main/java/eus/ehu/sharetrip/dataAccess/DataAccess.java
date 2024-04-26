@@ -119,16 +119,20 @@ public class DataAccess {
       Ride ride7 = new Ride(city2, city1, UtilDate.newDate(year, month, 25), 2, 5, driver2);
       Ride ride8 = new Ride(city5, city3, UtilDate.newDate(year, month, 6), 2, 5, driver2);
       Ride ride9 = new Ride(city2, city1, UtilDate.newDate(year, month, 14), 1, 3, driver3);
+      Ride ride10 = new Ride(city1, city2, UtilDate.newDate(year, month, 16), 4, 7, driver1);
+      Ride ride11 = new Ride(city1, city2, UtilDate.newDate(year, month, 17), 4, 7, driver2);
 
       driver1.addRide(ride1);
-        driver1.addRide(ride2);
-        driver1.addRide(ride3);
-        driver1.addRide(ride4);
-        driver1.addRide(ride5);
-        driver2.addRide(ride6);
-        driver2.addRide(ride7);
-        driver2.addRide(ride8);
-        driver3.addRide(ride9);
+      driver1.addRide(ride2);
+      driver1.addRide(ride3);
+      driver1.addRide(ride4);
+      driver1.addRide(ride5);
+      driver2.addRide(ride6);
+      driver2.addRide(ride7);
+      driver2.addRide(ride8);
+      driver3.addRide(ride9);
+      driver1.addRide(ride10);
+      driver2.addRide(ride11);
 
 
       //Create travelers
@@ -481,4 +485,24 @@ public class DataAccess {
     TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a", Alert.class);
     return query.getResultList();
   }
+
+
+  public List<Ride> getFavoriteRides(User user) {
+    TypedQuery<Ride> query = db.createQuery("SELECT r FROM Ride r JOIN r.id u WHERE u = :user", Ride.class);
+    query.setParameter("user", user);
+    return query.getResultList();
+  }
+
+
+  public void addFavoriteRide(User user, Ride ride) {
+    List<Ride> favoriteRides = this.getFavoriteRides(user);
+
+    if (!favoriteRides.contains(ride)) {
+      favoriteRides.add(ride);
+      db.getTransaction().begin();
+      db.merge(user);
+      db.getTransaction().commit();
+    }
+  }
+
 }

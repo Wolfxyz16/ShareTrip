@@ -177,4 +177,15 @@ public class BlFacadeImplementation implements BlFacade {
         dbManager.saveMessage(message);
     }
 
+
+
+    public List<Ride> getFavoriteRides(User user) {
+        return dbManager.getFavoriteRides(user);
+    }
+
+    public void addFavoriteRide(User user, Ride ride) {
+        dbManager.addFavoriteRide(user, ride);
+    }
+
+
 }

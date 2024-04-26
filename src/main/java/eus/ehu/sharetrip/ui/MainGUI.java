@@ -96,7 +96,10 @@ public class MainGUI {
             }
             case "Send message" -> mainWrapper.setCenter(sendMessageWin.ui);
             case "View messages" -> mainWrapper.setCenter(viewMessagesWin.ui);
-            case "View Favorites" -> mainWrapper.setCenter(favoriteOverviewWin.ui);
+            case "View Favorites" -> {
+                mainWrapper.setCenter(favoriteOverviewWin.ui);
+                ((ViewFavoritesController)favoriteOverviewWin.c).updateTables();
+            }
             case "Query Rides" -> mainWrapper.setCenter(queryRidesWin.ui);
             case "Create Ride" -> mainWrapper.setCenter(createRideWin.ui);
             case "Log in" -> {

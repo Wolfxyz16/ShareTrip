@@ -2,6 +2,8 @@ package eus.ehu.sharetrip.domain;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "USERS") // Renames the table to avoid using a reserved keyword
@@ -14,6 +16,10 @@ public class User {
 
     @Column(name = "USER_TYPE", insertable = false, updatable = false)
     private String userType;
+
+
+    @OneToMany(mappedBy = "user")
+    private List<Ride> favRides;
 
     protected String email;
     protected String username;

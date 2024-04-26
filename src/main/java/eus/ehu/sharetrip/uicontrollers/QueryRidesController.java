@@ -298,12 +298,6 @@ public class QueryRidesController implements Controller {
     @FXML
     public void addToFavorite(ActionEvent actionEvent) {
         //TODO: Implement add to Favorites logic
-        /*Ride ride = tblRides.getSelectionModel().getSelectedItem();
-        if (ride != null) {
-            businessLogic.addToFavorite(ride);
-        }
-         */
-
         Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/redHeart.png"));
         heartView.setImage(image);
 
