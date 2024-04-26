@@ -481,4 +481,13 @@ public class DataAccess {
     TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a", Alert.class);
     return query.getResultList();
   }
+
+  public boolean alertAlreadyExist(City city, City city1, Date date, int i) {
+    TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.fromLocation = :from AND a.toLocation = :to AND a.rideDate = :date AND a.numSeats = :nPlaces", Alert.class);
+    query.setParameter("from", city);
+    query.setParameter("to", city1);
+    query.setParameter("date", date);
+    query.setParameter("nPlaces", i);
+    return !query.getResultList().isEmpty();
+  }
 }
