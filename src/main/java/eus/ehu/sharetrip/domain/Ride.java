@@ -39,7 +39,6 @@ public class Ride implements Serializable {
 		this.driver = driver;
 	}
 
-	
 
 	public Ride(City from, City to,  Date date, int numPlaces, float price, Driver driver) {
 		super();
@@ -50,7 +49,59 @@ public class Ride implements Serializable {
 		this.price=price;
 		this.driver = driver;
 	}
-	
+
+	private Ride(Builder builder){
+		this.fromLocation = builder.fromLocation;
+		this.toLocation = builder.toLocation;
+		this.numPlaces = builder.numPlaces;
+		this.date = builder.date;
+		this.price = builder.price;
+		this.driver = builder.driver;
+	}
+
+	public static class Builder{
+		private City fromLocation;
+		private City toLocation;
+		private int numPlaces;
+		private Date date;
+		private float price;
+		private Driver driver;
+
+		public Builder fromLocation(City fromLocation){
+			this.fromLocation = fromLocation;
+			return this;
+		}
+
+		public Builder toLocation(City toLocation){
+			this.toLocation = toLocation;
+			return this;
+		}
+
+		public Builder numPlaces(int numPlaces){
+			this.numPlaces = numPlaces;
+			return this;
+		}
+
+		public Builder date(Date date){
+			this.date = date;
+			return this;
+		}
+
+		public Builder price(float price){
+			this.price = price;
+			return this;
+		}
+
+		public Builder driver(Driver driver){
+			this.driver = driver;
+			return this;
+		}
+
+		public Ride build(){
+			return new Ride(this);
+		}
+
+	}
 	/**
 	 * Get the  number of the ride
 	 * 

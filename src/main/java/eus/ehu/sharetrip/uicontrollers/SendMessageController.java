@@ -58,7 +58,11 @@ public class SendMessageController implements Controller{
             return;
         }
 
-        Message message = new Message(messageContent, sender, receiver);
+        Message message = new Message.Builder()
+                .messageText(messageContent)
+                .sender(sender)
+                .receiver(receiver)
+                .build();
 
         businessLogic.saveMessage(message);
 
