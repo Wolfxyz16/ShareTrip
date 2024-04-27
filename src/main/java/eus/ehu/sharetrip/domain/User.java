@@ -29,6 +29,32 @@ public class User {
         this.email = email;
     }
 
+    // Builder static inner class
+    public static class Builder {
+        private String email;
+        private String username;
+        private String password;
+
+        public Builder email(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder username(String username) {
+            this.username = username;
+            return this;
+        }
+
+        public Builder password(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public User build() {
+            return new User(this);
+        }
+    }
+
     public Long getId() {
         return id;
     }
