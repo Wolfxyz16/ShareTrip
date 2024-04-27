@@ -2,13 +2,18 @@ package eus.ehu.sharetrip.domain;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "USERS") // Renames the table to avoid using a reserved keyword
 @DiscriminatorColumn(name = "USER_TYPE", discriminatorType = DiscriminatorType.STRING)
 public class User {
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ride> favRides = new ArrayList<Ride>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,16 +22,11 @@ public class User {
     @Column(name = "USER_TYPE", insertable = false, updatable = false)
     private String userType;
 
-
-    @OneToMany(mappedBy = "user")
-    private List<Ride> favRides;
-
     protected String email;
     protected String username;
     protected String password;
 
     public User() {
-
     }
 
     public User(String email, String name, String password) {

@@ -84,7 +84,8 @@ public class DataAccess {
 
     this.reset();
 
-    db.getTransaction().begin();
+
+    //db.getTransaction().begin();
 
     try {
 
@@ -102,6 +103,12 @@ public class DataAccess {
       Driver driver2 = new Driver("driver2@gmail.com", "Ane Gaztañaga", "1234");
       Driver driver3 = new Driver("driver3@gmail.com", "test", "test");
 
+      db.getTransaction().begin();
+      db.persist(driver1);
+      db.persist(driver2);
+      db.persist(driver3);
+      db.getTransaction().commit();
+
 
       //Create Cities
       City city1 = new City("Donostia");
@@ -109,6 +116,15 @@ public class DataAccess {
       City city3 = new City("Gasteiz");
       City city4 = new City("Iruña");
       City city5 = new City("Eibar");
+
+      db.getTransaction().begin();
+      db.persist(city1);
+      db.persist(city2);
+      db.persist(city3);
+      db.persist(city4);
+      db.persist(city5);
+      db.getTransaction().commit();
+
 
       Ride ride1 = new Ride(city1, city2, UtilDate.newDate(year, month, 15), 4, 7, driver1);
       Ride ride2 = new Ride(city1, city2, UtilDate.newDate(year, month + 1, 15), 4, 7, driver1);
@@ -136,10 +152,20 @@ public class DataAccess {
 
 
       //Create travelers
+
       Traveler traveler1 = new Traveler("user1@gmail.com", "User1", "1234");
       Traveler traveler2 = new Traveler("user2@gmail.com", "User2", "1234");
+      db.getTransaction().begin();
+      db.persist(traveler1);
+      db.persist(traveler2);
+      db.getTransaction().commit();
+
+
       //CREATE MESSAGES
       Message message1 = new Message("Hello",  traveler1, traveler2);
+      db.getTransaction().begin();
+      db.persist(message1);
+      db.getTransaction().commit();
 
 
       //CREATE ALERTS
@@ -149,28 +175,15 @@ public class DataAccess {
       Alert alert4 = new Alert(city3, city5, UtilDate.newDate(year, month, 25), 4);
       
       //Persist the objects
+      db.getTransaction().begin();
       db.persist(alert1);
       db.persist(alert2);
       db.persist(alert3);
       db.persist(alert4);
-      
-      db.persist(city1);
-      db.persist(city2);
-      db.persist(city3);
-      db.persist(city4);
-      db.persist(city5);
-      
-      db.persist(driver1);
-      db.persist(driver2);
-      db.persist(driver3);
-      
-      db.persist(traveler1);
-      db.persist(traveler2);
-
-
-      db.persist(message1);
-
       db.getTransaction().commit();
+
+
+     // db.getTransaction().commit();
       System.out.println("Db initialized");
     } catch (Exception e) {
       e.printStackTrace();
