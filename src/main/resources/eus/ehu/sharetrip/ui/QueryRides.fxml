@@ -49,7 +49,7 @@
         </TableView>
         <Label layoutX="358.0" layoutY="49.0" text="  " />
         <Label layoutX="125.0" layoutY="343.0" styleClass="h4" text="%RideDate" />
-      <Button fx:id="loveBtn" layoutX="825.0" layoutY="194.0" mnemonicParsing="false" onAction="#addToFavorite" prefHeight="50.0" prefWidth="50.0">
+      <Button fx:id="heartBtn" layoutX="825.0" layoutY="194.0" mnemonicParsing="false" onAction="#addToFavorite" prefHeight="50.0" prefWidth="50.0">
          <graphic>
             <ImageView fx:id="heartView" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -59,11 +59,11 @@
          </graphic>
       </Button>
       <Label layoutX="313.0" layoutY="28.0" styleClass="h1" text="Where are we travelling?" />
-      <Button fx:id="bellBtn" layoutX="763.0" layoutY="196.0" mnemonicParsing="false" onAction="#createNewAlert" prefHeight="50.0" prefWidth="50.0">
+      <Button fx:id="bellBtn" layoutX="763.0" layoutY="194.0" mnemonicParsing="false" onAction="#createNewAlert" prefHeight="50.0" prefWidth="50.0">
          <graphic>
             <ImageView fx:id="bellView" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@assets/campana.png" />
+                  <Image url="@assets/alert.png" />
                </image>
             </ImageView>
          </graphic>
