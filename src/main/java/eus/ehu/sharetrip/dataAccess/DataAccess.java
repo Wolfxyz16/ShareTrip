@@ -344,7 +344,12 @@ public class DataAccess {
         throw new AlertAlreadyExistException(ResourceBundle.getBundle("Etiquetas").getString("CreateAlertGUI.AlertAlreadyExist"));
       }
       db.getTransaction().begin();
-      Alert alert = new Alert(from, to, date, nPlaces);
+      Alert alert = new Alert.Builder()
+              .fromLocation(from)
+              .toLocation(to)
+              .rideDate(date)
+              .numSeats(nPlaces)
+              .build();
       db.persist(alert);
       db.getTransaction().commit();
       return alert;
@@ -372,7 +377,14 @@ public class DataAccess {
         throw new RideAlreadyExistException();
       }
 
-      Ride ride = new Ride(from, to, date, nPlaces, price, driver);
+      Ride ride = new Ride.Builder()
+              .fromLocation(from)
+              .toLocation(to)
+              .numPlaces(nPlaces)
+              .date(date)
+              .price(price)
+              .driver(driver)
+              .build();
 
       String email = driver.getEmail();
       TypedQuery<Driver> driverByEmail = db.createQuery("SELECT d FROM Driver d WHERE d.email = :email", Driver.class);

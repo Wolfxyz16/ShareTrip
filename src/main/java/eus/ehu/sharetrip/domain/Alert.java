@@ -34,13 +34,6 @@ public class Alert {
         this.numSeats = builder.numSeats;
     }
 
-
-    public Alert(City fromLocation, City toLocation, Date rideDate, int numSeats) {
-        this.fromLocation = fromLocation;
-        this.toLocation = toLocation;
-        this.rideDate = rideDate;
-        this.numSeats = numSeats;
-    }
     public static class Builder {
         private City fromLocation;
         private City toLocation;
@@ -86,7 +79,6 @@ public class Alert {
     public void setNumSeats(int numSeats) {
         this.numSeats = numSeats;
     }
-
 
     public City getFromLocation() {
         return fromLocation;

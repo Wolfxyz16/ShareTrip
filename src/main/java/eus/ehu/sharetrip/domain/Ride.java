@@ -28,29 +28,8 @@ public class Ride implements Serializable {
 		super();
 	}
 	
-	public Ride(Integer rideNumber, City from, City to, Date date, int numPlaces, float price, Driver driver) {
-		super();
-		this.rideNumber = rideNumber;
-		this.fromLocation = from;
-		this.toLocation = to;
-		this.numPlaces = numPlaces;
-		this.date=date;
-		this.price=price;
-		this.driver = driver;
-	}
-
-
-	public Ride(City from, City to,  Date date, int numPlaces, float price, Driver driver) {
-		super();
-		this.fromLocation = from;
-		this.toLocation = to;
-		this.numPlaces = numPlaces;
-		this.date=date;
-		this.price=price;
-		this.driver = driver;
-	}
-
 	private Ride(Builder builder){
+		super();
 		this.fromLocation = builder.fromLocation;
 		this.toLocation = builder.toLocation;
 		this.numPlaces = builder.numPlaces;
