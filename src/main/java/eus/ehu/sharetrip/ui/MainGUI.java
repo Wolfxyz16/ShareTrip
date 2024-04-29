@@ -1,6 +1,7 @@
 package eus.ehu.sharetrip.ui;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
+import eus.ehu.sharetrip.domain.City;
 import eus.ehu.sharetrip.uicontrollers.MainGUIController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -146,6 +147,11 @@ public class MainGUI {
         stage.setWidth(1200.0);
 
         stage.show();
+    }
+
+    public void searchFavRide(City from, City to, int numSeats) {
+        mainWrapper.setCenter(queryRidesWin.ui);
+        ((QueryRidesController)queryRidesWin.c).searchFavRide(from, to, numSeats);
     }
 
     public static void main(String[] args) {

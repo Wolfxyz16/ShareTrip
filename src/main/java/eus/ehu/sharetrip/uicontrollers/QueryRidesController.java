@@ -312,12 +312,18 @@ public class QueryRidesController implements Controller {
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
                 return;
             }
-            try{
-              businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  Integer.parseInt(numSeats.getText()));
-            }catch(CityDoesNotExistException ex){
-                  //it's not supposed to happen ever
+            try {
+                businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), Integer.parseInt(numSeats.getText()));
+            } catch (CityDoesNotExistException ex) {
+                //it's not supposed to happen ever
             }
             System.out.println("Alert created");
         }
+    }
+
+    public void searchFavRide(City depCity, City arrCity, int seats) {
+        comboDepartCity.setValue(depCity);
+        comboArrivalCity.setValue(arrCity);
+        numSeats.setText(String.valueOf(seats));
     }
 }

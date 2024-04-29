@@ -70,6 +70,11 @@ public class ViewFavoritesController implements Controller {
 
     }
 
+    @Override
+    public void setMainApp(MainGUI mainGUI) {
+        this.mainGUI = mainGUI;
+    }
+
     @FXML
     void searchFav(ActionEvent event) {
         Ride selectedRide = tblFavorite.getSelectionModel().getSelectedItem();
@@ -77,11 +82,12 @@ public class ViewFavoritesController implements Controller {
         City arrCity = selectedRide.getToLocation();
         Integer seats = selectedRide.getNumPlaces();
 
-
+        if (selectedRide == null) {
+            errorlbl.setText("Please select a ride");
+            errorlbl.getStyleClass().setAll("label", "lbl-danger");
+        } else {
+            mainGUI.searchFavRide(depCity, arrCity, seats);
+        }
     }
 
-    @Override
-    public void setMainApp(MainGUI mainGUI) {
-        this.mainGUI = mainGUI;
-    }
 }

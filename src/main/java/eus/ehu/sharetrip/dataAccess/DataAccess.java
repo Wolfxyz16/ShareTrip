@@ -91,9 +91,9 @@ public class DataAccess {
 
       Calendar today = Calendar.getInstance();
 
-      int month = today.get(Calendar.MONTH);
+      int month = today.get(Calendar.MONTH)+2;
       int year = today.get(Calendar.YEAR);
-      if (month == 12) {
+      if (month == 11) {
         month = 1;
         year += 1;
       }
@@ -501,8 +501,8 @@ public class DataAccess {
 
 
   public List<Ride> getFavoriteRides(User user) {
-    TypedQuery<Ride> query = db.createQuery("SELECT r FROM Ride r JOIN r.id u WHERE u = :user", Ride.class);
-    query.setParameter("user", user);
+    TypedQuery<Ride> query = db.createQuery("SELECT u.favRides FROM User u WHERE u.id = :userId", Ride.class);
+    query.setParameter("userId", user.getId());
     return query.getResultList();
   }
 
