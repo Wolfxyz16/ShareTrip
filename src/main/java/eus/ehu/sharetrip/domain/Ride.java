@@ -22,7 +22,7 @@ public class Ride implements Serializable {
 	private float price;
 
 	@ManyToOne
-	@JoinColumn(name = "driver_id")
+	//@JoinColumn(name = "driver_id")
 	private Driver driver;
 	
 	public Ride(){

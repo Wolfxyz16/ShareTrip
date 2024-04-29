@@ -8,7 +8,10 @@ import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.ui.MainGUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -23,9 +26,6 @@ public class ViewFavoritesController implements Controller {
     private TableColumn<Ride, City> arrCityCol;
 
     @FXML
-    private TableColumn<Ride, Date> dateCol;
-
-    @FXML
     private TableColumn<Ride, City> depCityCol;
 
     @FXML
@@ -33,6 +33,12 @@ public class ViewFavoritesController implements Controller {
 
     @FXML
     private TableView<Ride> tblFavorite;
+
+    @FXML
+    private Label errorlbl;
+
+    @FXML
+    private Button searchbtn;
 
     private ObservableList<Ride> favoriteRides;
 
@@ -50,7 +56,6 @@ public class ViewFavoritesController implements Controller {
         System.out.println("ViewFavorites button is working");
         depCityCol.setCellValueFactory(new PropertyValueFactory<>("fromLocation"));
         arrCityCol.setCellValueFactory(new PropertyValueFactory<>("toLocation"));
-        dateCol.setCellValueFactory(new PropertyValueFactory<>("rideDate"));
         seatsCol.setCellValueFactory(new PropertyValueFactory<>("numSeats"));
 
         favoriteRides = FXCollections.observableArrayList();
@@ -64,6 +69,17 @@ public class ViewFavoritesController implements Controller {
         this.favoriteRides.addAll(favRides);
 
     }
+
+    @FXML
+    void searchFav(ActionEvent event) {
+        Ride selectedRide = tblFavorite.getSelectionModel().getSelectedItem();
+        City depCity = selectedRide.getFromLocation();
+        City arrCity = selectedRide.getToLocation();
+        Integer seats = selectedRide.getNumPlaces();
+
+
+    }
+
     @Override
     public void setMainApp(MainGUI mainGUI) {
         this.mainGUI = mainGUI;
