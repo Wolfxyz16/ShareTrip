@@ -73,7 +73,11 @@
       <Button fx:id="searchBtn" layoutX="449.0" layoutY="244.0" mnemonicParsing="false" text="Search">
          <font>
             <Font size="17.0" />
-         </font></Button>
+         </font>
+         <styleClass>
+            <String fx:value="btn-lg" />
+            <String fx:value="btn" />
+         </styleClass></Button>
       <ComboBox fx:id="numSeats" layoutX="576.0" layoutY="196.0" prefWidth="150.0" />
 
 
