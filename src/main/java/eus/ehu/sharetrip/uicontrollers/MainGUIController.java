@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import eus.ehu.sharetrip.ui.MainGUI;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Popup;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -122,10 +123,8 @@ public class MainGUIController implements Controller{
      */
     @FXML
     void signOut(ActionEvent actionEvent) {
-        mainGUI.setIsLoggedIn(false);
-        mainGUI.setUserName("");
-        businessLogic.setCurrentUser(null);
-        this.logIn();
+
+        mainGUI.showScene("Log Out");
     }
 
 
