@@ -65,7 +65,7 @@ public class QueryRidesController implements Controller {
     private ComboBox<City> comboDepartCity;
 
     @FXML
-    private TextField numSeats;
+    private ComboBox<Integer>  numSeats;
 
     @FXML
     private TableView<Ride> tblRides;
@@ -142,6 +142,7 @@ public class QueryRidesController implements Controller {
 
         ObservableList<City> arrivalCities = FXCollections.observableArrayList(new ArrayList<>());
 
+        numSeats.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
         comboDepartCity.setItems(departureCities);
         comboArrivalCity.setItems(arrivalCities);
 
@@ -192,11 +193,11 @@ public class QueryRidesController implements Controller {
                 // Clear the table
                 tblRides.getItems().clear();
                 try {
-                    List<Ride> rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), Integer.parseInt(numSeats.getText()));
+                    List<Ride> rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue());
 
                     // If for this search there is an alert, show the red alert image
                     try {
-                        if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  Integer.parseInt(numSeats.getText()))) {
+                        if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  numSeats.getValue())){
                             Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/redAlert.png"));
                             bellView.setImage(image);
                         } else {
@@ -267,7 +268,7 @@ public class QueryRidesController implements Controller {
             outputLabel.getStyleClass().setAll("label", "lbl-danger");
             return false;
         }
-        if (numSeats.getText() == null || numSeats.getText().isEmpty()) {
+        if (numSeats.getValue() == null) {
             outputLabel.setText("Please enter the number of seats.");
             outputLabel.getStyleClass().setAll("label", "lbl-danger");
             return false;
@@ -291,7 +292,7 @@ public class QueryRidesController implements Controller {
 
         // Check if the number of seats is a positive integer
         try {
-            int seats = Integer.parseInt(numSeats.getText());
+            int seats = numSeats.getValue();
             if (seats <= 0) {
                 outputLabel.setText("The number of seats must be a positive integer.");
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
@@ -327,7 +328,7 @@ public class QueryRidesController implements Controller {
         comboDepartCity.setValue(null);
         comboArrivalCity.setValue(null);
         datepicker.setValue(null);
-        numSeats.setText("");
+        numSeats.setValue(null);
         tblRides.getItems().clear();
         outputLabel.setText("");
         outputLabel.getStyleClass().setAll("label");
@@ -364,13 +365,13 @@ public class QueryRidesController implements Controller {
                 outputLabel.setText("You must be logged in to create an alert.");
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
                 return;
-            } else if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  Integer.parseInt(numSeats.getText()))) {
+            } else if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  numSeats.getValue())) {
                 outputLabel.setText("You already have this alert for this ride.");
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
                 return;
             }
             try {
-              businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  Integer.parseInt(numSeats.getText()));
+              businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  numSeats.getValue());
             } catch (CityDoesNotExistException ex) {
                   //it's not supposed to happen ever
             }
