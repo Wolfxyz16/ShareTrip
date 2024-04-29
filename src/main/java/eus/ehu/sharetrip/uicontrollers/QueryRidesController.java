@@ -59,7 +59,7 @@ public class QueryRidesController implements Controller {
     private ComboBox<City> comboDepartCity;
 
     @FXML
-    private TextField numSeats;
+    private ComboBox<Integer> numSeats;
 
     @FXML
     private TableView<Ride> tblRides;
@@ -135,7 +135,7 @@ public class QueryRidesController implements Controller {
         departureCities.setAll(businessLogic.getDepartCities());
 
         ObservableList<City> arrivalCities = FXCollections.observableArrayList(new ArrayList<>());
-
+        numSeats.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
         comboDepartCity.setItems(departureCities);
         comboArrivalCity.setItems(arrivalCities);
 
@@ -183,7 +183,7 @@ public class QueryRidesController implements Controller {
                 // Clear the table
                 tblRides.getItems().clear();
                 try{
-                  List<Ride> rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), Integer.parseInt(numSeats.getText()));
+                  List<Ride> rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue());
                 // If the search result is empty, show a message and return
                 if (rides.isEmpty()) {
                     outputLabel.setText("No rides available for you with the selected date, cities and number of seats.");
@@ -235,7 +235,7 @@ public class QueryRidesController implements Controller {
             outputLabel.getStyleClass().setAll("label", "lbl-danger");
             return false;
         }
-        if (numSeats.getText() == null || numSeats.getText().isEmpty()) {
+        if (numSeats.getValue() == null) {
             outputLabel.setText("Please enter the number of seats.");
             outputLabel.getStyleClass().setAll("label", "lbl-danger");
             return false;
@@ -259,7 +259,7 @@ public class QueryRidesController implements Controller {
 
         // Check if the number of seats is a positive integer
         try {
-            int seats = Integer.parseInt(numSeats.getText());
+            int seats = numSeats.getValue();
             if (seats <= 0) {
                 outputLabel.setText("The number of seats must be a positive integer.");
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
@@ -297,10 +297,18 @@ public class QueryRidesController implements Controller {
 
     @FXML
     public void addToFavorite(ActionEvent actionEvent) {
-        //TODO: Implement add to Favorites logic
         Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/redHeart.png"));
-        heartView.setImage(image);
-
+        Ride selectedRide = tblRides.getSelectionModel().getSelectedItem();
+        if (selectedRide == null) {
+            outputLabel.setText("Please select a ride to add to favorites.");
+            outputLabel.getStyleClass().setAll("label", "lbl-danger");
+            return;
+        } else {
+            heartView.setImage(image);
+            outputLabel.setText("Ride added to favorites.");
+            outputLabel.getStyleClass().setAll("label", "lbl-success");
+            businessLogic.addFavoriteRide(businessLogic.getCurrentUser(), selectedRide);
+        }
     }
 
     @FXML
@@ -313,7 +321,7 @@ public class QueryRidesController implements Controller {
                 return;
             }
             try {
-                businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), Integer.parseInt(numSeats.getText()));
+                businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue());
             } catch (CityDoesNotExistException ex) {
                 //it's not supposed to happen ever
             }
@@ -321,9 +329,11 @@ public class QueryRidesController implements Controller {
         }
     }
 
-    public void searchFavRide(City depCity, City arrCity, int seats) {
+    public void searchFavRide(City depCity, City arrCity) {
         comboDepartCity.setValue(depCity);
         comboArrivalCity.setValue(arrCity);
-        numSeats.setText(String.valueOf(seats));
+        numSeats.setValue(1);
+        datepicker.setValue(null);
     }
+
 }

@@ -19,6 +19,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "ride_id")
     )
     private List<Ride> favRides = new ArrayList<>();
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -76,6 +77,10 @@ public class User {
         User user = (User) o;
 
         return id.equals(user.id);
+    }
+
+    public void addFavRide(Ride ride) {
+        favRides.add(ride);
     }
 
     @Override

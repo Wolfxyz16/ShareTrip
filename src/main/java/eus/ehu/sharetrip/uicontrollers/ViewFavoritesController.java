@@ -29,9 +29,6 @@ public class ViewFavoritesController implements Controller {
     private TableColumn<Ride, City> depCityCol;
 
     @FXML
-    private TableColumn<Ride, Integer> seatsCol;
-
-    @FXML
     private TableView<Ride> tblFavorite;
 
     @FXML
@@ -56,7 +53,6 @@ public class ViewFavoritesController implements Controller {
         System.out.println("ViewFavorites button is working");
         depCityCol.setCellValueFactory(new PropertyValueFactory<>("fromLocation"));
         arrCityCol.setCellValueFactory(new PropertyValueFactory<>("toLocation"));
-        seatsCol.setCellValueFactory(new PropertyValueFactory<>("numSeats"));
 
         favoriteRides = FXCollections.observableArrayList();
         tblFavorite.setItems(favoriteRides);
@@ -80,13 +76,12 @@ public class ViewFavoritesController implements Controller {
         Ride selectedRide = tblFavorite.getSelectionModel().getSelectedItem();
         City depCity = selectedRide.getFromLocation();
         City arrCity = selectedRide.getToLocation();
-        Integer seats = selectedRide.getNumPlaces();
 
         if (selectedRide == null) {
             errorlbl.setText("Please select a ride");
             errorlbl.getStyleClass().setAll("label", "lbl-danger");
         } else {
-            mainGUI.searchFavRide(depCity, arrCity, seats);
+            mainGUI.searchFavRide(depCity, arrCity);
         }
     }
 

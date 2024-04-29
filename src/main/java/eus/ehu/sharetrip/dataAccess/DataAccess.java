@@ -509,9 +509,12 @@ public class DataAccess {
 
   public void addFavoriteRide(User user, Ride ride) {
     List<Ride> favoriteRides = this.getFavoriteRides(user);
-
+    //System.out.println(ride.toString());
+    //System.out.println(ride.getDriver().getUsername());
     if (!favoriteRides.contains(ride)) {
+      user.addFavRide(ride);
       favoriteRides.add(ride);
+     // System.out.println(favoriteRides.toString());
       db.getTransaction().begin();
       db.merge(user);
       db.getTransaction().commit();

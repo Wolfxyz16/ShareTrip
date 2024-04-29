@@ -149,9 +149,9 @@ public class MainGUI {
         stage.show();
     }
 
-    public void searchFavRide(City from, City to, int numSeats) {
+    public void searchFavRide(City from, City to) {
         mainWrapper.setCenter(queryRidesWin.ui);
-        ((QueryRidesController)queryRidesWin.c).searchFavRide(from, to, numSeats);
+        ((QueryRidesController)queryRidesWin.c).searchFavRide(from, to);
     }
 
     public static void main(String[] args) {
