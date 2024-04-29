@@ -136,7 +136,7 @@ public class Ride implements Serializable {
 	}
 
 	
-	public float getNumPlaces() {
+	public int getNumPlaces() {
 		return numPlaces;
 	}
 

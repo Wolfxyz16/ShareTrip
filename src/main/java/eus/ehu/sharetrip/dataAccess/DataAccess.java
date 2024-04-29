@@ -90,7 +90,7 @@ public class DataAccess {
 
       Calendar today = Calendar.getInstance();
 
-      int month = today.get(Calendar.MONTH);
+      int month = today.get(Calendar.MONTH) + 2;
       int year = today.get(Calendar.YEAR);
       if (month == 12) {
         month = 1;
