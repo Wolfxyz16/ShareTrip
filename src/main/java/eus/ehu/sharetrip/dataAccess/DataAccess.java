@@ -84,7 +84,8 @@ public class DataAccess {
 
     this.reset();
 
-    db.getTransaction().begin();
+
+    //db.getTransaction().begin();
 
     try {
 
@@ -92,7 +93,7 @@ public class DataAccess {
 
       int month = today.get(Calendar.MONTH) + 2;
       int year = today.get(Calendar.YEAR);
-      if (month == 12) {
+      if (month == 11) {
         month = 1;
         year += 1;
       }
@@ -102,6 +103,12 @@ public class DataAccess {
       Driver driver2 = new Driver("driver2@gmail.com", "Ane Gaztañaga", "1234");
       Driver driver3 = new Driver("driver3@gmail.com", "test", "test");
 
+      db.getTransaction().begin();
+      db.persist(driver1);
+      db.persist(driver2);
+      db.persist(driver3);
+      db.getTransaction().commit();
+
 
       //Create Cities
       City city1 = new City("Donostia");
@@ -109,6 +116,15 @@ public class DataAccess {
       City city3 = new City("Gasteiz");
       City city4 = new City("Iruña");
       City city5 = new City("Eibar");
+
+      db.getTransaction().begin();
+      db.persist(city1);
+      db.persist(city2);
+      db.persist(city3);
+      db.persist(city4);
+      db.persist(city5);
+      db.getTransaction().commit();
+
 
       Ride ride1 = new Ride(city1, city2, UtilDate.newDate(year, month, 15), 4, 7, driver1);
       Ride ride2 = new Ride(city1, city2, UtilDate.newDate(year, month + 1, 15), 4, 7, driver1);
@@ -119,23 +135,37 @@ public class DataAccess {
       Ride ride7 = new Ride(city2, city1, UtilDate.newDate(year, month, 25), 2, 5, driver2);
       Ride ride8 = new Ride(city5, city3, UtilDate.newDate(year, month, 6), 2, 5, driver2);
       Ride ride9 = new Ride(city2, city1, UtilDate.newDate(year, month, 14), 1, 3, driver3);
+      Ride ride10 = new Ride(city1, city2, UtilDate.newDate(year, month, 16), 4, 7, driver1);
+      Ride ride11 = new Ride(city1, city2, UtilDate.newDate(year, month, 17), 4, 7, driver2);
 
       driver1.addRide(ride1);
-        driver1.addRide(ride2);
-        driver1.addRide(ride3);
-        driver1.addRide(ride4);
-        driver1.addRide(ride5);
-        driver2.addRide(ride6);
-        driver2.addRide(ride7);
-        driver2.addRide(ride8);
-        driver3.addRide(ride9);
+      driver1.addRide(ride2);
+      driver1.addRide(ride3);
+      driver1.addRide(ride4);
+      driver1.addRide(ride5);
+      driver2.addRide(ride6);
+      driver2.addRide(ride7);
+      driver2.addRide(ride8);
+      driver3.addRide(ride9);
+      driver1.addRide(ride10);
+      driver2.addRide(ride11);
 
 
       //Create travelers
+
       Traveler traveler1 = new Traveler("user1@gmail.com", "User1", "1234");
       Traveler traveler2 = new Traveler("user2@gmail.com", "User2", "1234");
+      db.getTransaction().begin();
+      db.persist(traveler1);
+      db.persist(traveler2);
+      db.getTransaction().commit();
+
+
       //CREATE MESSAGES
       Message message1 = new Message("Hello",  traveler1, traveler2);
+      db.getTransaction().begin();
+      db.persist(message1);
+      db.getTransaction().commit();
 
 
       //CREATE ALERTS
@@ -145,28 +175,15 @@ public class DataAccess {
       Alert alert4 = new Alert(city3, city5, UtilDate.newDate(year, month, 25), 4);
       
       //Persist the objects
+      db.getTransaction().begin();
       db.persist(alert1);
       db.persist(alert2);
       db.persist(alert3);
       db.persist(alert4);
-      
-      db.persist(city1);
-      db.persist(city2);
-      db.persist(city3);
-      db.persist(city4);
-      db.persist(city5);
-      
-      db.persist(driver1);
-      db.persist(driver2);
-      db.persist(driver3);
-      
-      db.persist(traveler1);
-      db.persist(traveler2);
-
-
-      db.persist(message1);
-
       db.getTransaction().commit();
+
+
+     // db.getTransaction().commit();
       System.out.println("Db initialized");
     } catch (Exception e) {
       e.printStackTrace();
@@ -482,6 +499,28 @@ public class DataAccess {
     return query.getResultList();
   }
 
+
+  public List<Ride> getFavoriteRides(User user) {
+    TypedQuery<Ride> query = db.createQuery("SELECT u.favRides FROM User u WHERE u.id = :userId", Ride.class);
+    query.setParameter("userId", user.getId());
+    return query.getResultList();
+  }
+
+
+  public void addFavoriteRide(User user, Ride ride) {
+    List<Ride> favoriteRides = this.getFavoriteRides(user);
+    //System.out.println(ride.toString());
+    //System.out.println(ride.getDriver().getUsername());
+    if (!favoriteRides.contains(ride)) {
+      user.addFavRide(ride);
+      favoriteRides.add(ride);
+     // System.out.println(favoriteRides.toString());
+      db.getTransaction().begin();
+      db.merge(user);
+      db.getTransaction().commit();
+    }
+  }
+
   public boolean alertAlreadyExist(City city, City city1, Date date, int i) {
     TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.fromLocation = :from AND a.toLocation = :to AND a.rideDate = :date AND a.numSeats = :nPlaces", Alert.class);
     query.setParameter("from", city);
@@ -490,4 +529,5 @@ public class DataAccess {
     query.setParameter("nPlaces", i);
     return !query.getResultList().isEmpty();
   }
+
 }
