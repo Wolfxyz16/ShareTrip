@@ -200,11 +200,7 @@ public class QueryRidesController implements Controller {
                     outputLabel.getStyleClass().setAll("label", "lbl-warning");
                     return;
                 }
-                try {
-                    List<Ride> rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue());
-
-                    // If for this search there is an alert, show the red alert image
-                    try {
+                 try {
                         if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  numSeats.getValue())){
                             Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/redAlert.png"));
                             bellView.setImage(image);
