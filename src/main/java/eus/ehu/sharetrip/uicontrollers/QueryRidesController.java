@@ -252,6 +252,24 @@ public class QueryRidesController implements Controller {
         qc2.setCellValueFactory(new PropertyValueFactory<>("numPlaces"));
         qc3.setCellValueFactory(new PropertyValueFactory<>("price"));
 
+        tblRides.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                Ride ride = tblRides.getSelectionModel().getSelectedItem();
+                updateHeart(ride);
+            }
+        });
+    }
+
+    private void updateHeart(Ride ride) {
+        if (ride != null) {
+            if (businessLogic.getCurrentUser().get) {
+                Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/redHeart.png"));
+                heartView.setImage(image);
+            } else {
+                Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/Heart.png"));
+                heartView.setImage(image);
+            }
+        }
     }
 
     private boolean noErrorsInInputFields() {
