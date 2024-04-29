@@ -19,43 +19,43 @@
          <children>
             <Group>
                <children>
-                    <Label layoutY="-8.0" styleClass="h4" text="Username:" />
-                    <TextField fx:id="username" layoutY="12.0" prefHeight="30.0" prefWidth="400.0" promptText="Type an original username" />
+                    <Label layoutY="-8.0" styleClass="h4" text="%username" />
+                    <TextField fx:id="username" layoutY="12.0" prefHeight="30.0" prefWidth="400.0" promptText="%promptUsername" />
                </children>
             </Group>
             <Group>
                <children>
-                  <Label layoutY="-8.0" styleClass="h4" text="Email:" />
-                  <TextField fx:id="email" layoutY="12.0" prefHeight="30.0" prefWidth="400.0" promptText="Enter your email address" />
+                  <Label layoutY="-8.0" styleClass="h4" text="%email" />
+                  <TextField fx:id="email" layoutY="12.0" prefHeight="30.0" prefWidth="400.0" promptText="%promptEmail" />
                </children>
             </Group>
             <Group>
                <children>
-                    <Label styleClass="h4" text="Password:" />
-                    <PasswordField fx:id="password" layoutY="28.0" prefHeight="30.0" prefWidth="400.0" promptText="Type a secure password" />
+                    <Label styleClass="h4" text="%password" />
+                    <PasswordField fx:id="password" layoutY="28.0" prefHeight="30.0" prefWidth="400.0" promptText="%promptPasswd" />
                </children>
             </Group>
             <Group>
                <children>
-                  <Label layoutX="-6.0" layoutY="-10.0" styleClass="h4" text="Confirm password:" />
-                  <PasswordField fx:id="confirmPasswd" layoutX="-6.0" layoutY="15.0" prefHeight="30.0" prefWidth="400.0" promptText="Just to be sure retype your password :)" />
+                  <Label layoutX="-6.0" layoutY="-10.0" styleClass="h4" text="%passwdConfirm" />
+                  <PasswordField fx:id="confirmPasswd" layoutX="-6.0" layoutY="15.0" prefHeight="30.0" prefWidth="400.0" promptText="%promptConfirmPasswd" />
                </children>
             </Group>
             <Group>
                <children>
-                    <Label layoutY="-10.0" styleClass="h4" text="Role:" />
-                    <ComboBox fx:id="roles" layoutY="16.0" prefHeight="30.0" prefWidth="400.0" promptText="Which role will you choose?" />
+                    <Label layoutY="-10.0" styleClass="h4" text="%role" />
+                    <ComboBox fx:id="roles" layoutY="16.0" prefHeight="30.0" prefWidth="400.0" promptText="%promptRole" />
                </children>
             </Group>
          </children>
       </VBox>
-        <Button layoutX="446.0" layoutY="526.0" mnemonicParsing="false" onAction="#signUp" text="Register">
+        <Button layoutX="414.0" layoutY="526.0" mnemonicParsing="false" onAction="#signUp" text="%registerBtn">
          <styleClass>
             <String fx:value="btn" />
             <String fx:value="btn-primary" />
             <String fx:value="btn-lg" />
          </styleClass></Button>
-        <Label layoutX="362.0" layoutY="48.0" styleClass="h1" text="Create account">
+        <Label layoutX="362.0" layoutY="48.0" styleClass="h1" text="%CreateAccount">
             <font>
                 <Font size="25.0" />
             </font>

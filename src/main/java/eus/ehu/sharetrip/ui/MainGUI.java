@@ -27,6 +27,8 @@ public class MainGUI {
 
     private BorderPane mainWrapper;
 
+    private Stage stage;
+
     public BlFacade getBusinessLogic() {
         return businessLogic;
     }
@@ -35,11 +37,16 @@ public class MainGUI {
         businessLogic = afi;
     }
 
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+
     public MainGUI(BlFacade bl) {
         Platform.startup(() -> {
             try {
                 setBusinessLogic(bl);
-                init(new Stage());
+                init(stage=new Stage());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -53,6 +60,7 @@ public class MainGUI {
         Controller c;
         Parent ui;
     }
+
 
     private Window load(String fxml) {
         try {
@@ -132,11 +140,40 @@ public class MainGUI {
         myBookings = load("MyBookings.fxml");
         bookingRequests = load("BookingRequests.fxml");
         logOutWin = load("DoubleCheck.fxml");
-
         ((MainGUIController)mainWin.c).initializeButtonVisibility();
 
         showMain(stage);
     }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void updateViews(Stage stage) {
+
+        mainWin = load("MainGUI.fxml");
+        //mainWrapper = ((MainGUIController)mainWin.c).getMainWrapper();
+
+        createRideWin = load("CreateRide.fxml");
+        queryRidesWin = load("QueryRides.fxml");
+        loginWin = load("SignIn.fxml");
+        registerWin = load("SignUp.fxml");
+        favoriteOverviewWin = load("FavoriteOverview.fxml");
+        messagesOverviewWin = load("MessagesOverview.fxml");
+        sendMessageWin = load("SendMessage.fxml");
+        viewMessagesWin = load("MyMessagesOverview.fxml");
+        alertOverviewWin = load("AlertOverview.fxml");
+        createCityWin = load("CreateCity.fxml");
+        myBookings = load("MyBookings.fxml");
+        bookingRequests = load("BookingRequests.fxml");
+        logOutWin = load("DoubleCheck.fxml");
+        //((MainGUIController)mainWin.c).initializeButtonVisibility();
+
+        stage.show();
+    }
+
+
+
 
     private void showMain(Stage stage) {
         // set stage's scene
@@ -149,6 +186,7 @@ public class MainGUI {
 
         stage.show();
     }
+
 
     public static void main(String[] args) {
        launch();

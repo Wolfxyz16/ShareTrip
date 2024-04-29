@@ -1,6 +1,7 @@
 package eus.ehu.sharetrip.uicontrollers;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
+import eus.ehu.sharetrip.configuration.Config;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,8 +9,11 @@ import javafx.scene.control.Label;
 import eus.ehu.sharetrip.ui.MainGUI;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Popup;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class MainGUIController implements Controller{
@@ -56,6 +60,15 @@ public class MainGUIController implements Controller{
     @FXML
     private Label welcome;
 
+    @FXML
+    private Button enBtn;
+
+    @FXML
+    private Button esBtn;
+
+    @FXML
+    private Button euBtn;
+
     private MainGUI mainGUI;
 
     private BlFacade businessLogic;
@@ -65,10 +78,6 @@ public class MainGUIController implements Controller{
     public MainGUIController(BlFacade blFacade){
         businessLogic = blFacade;
     }
-
-
-    @FXML
-    void initialize() {}
 
     @FXML
     void viewAlerts(ActionEvent event) {
@@ -114,17 +123,35 @@ public class MainGUIController implements Controller{
     void viewBookingRequests(ActionEvent event) {mainGUI.showScene("BookingRequests");}
 
     @FXML
-    void viewMyBookings(ActionEvent event) {
-        mainGUI.showScene("MyBookings");}
+    void viewMyBookings(ActionEvent event) {mainGUI.showScene("MyBookings");}
 
     /**
      * Sign out logic, just 3 lines, we do not need another SignOutController
      * @param actionEvent
      */
     @FXML
-    void signOut(ActionEvent actionEvent) {
+    void signOut(ActionEvent actionEvent) {mainGUI.showScene("Log Out");}
 
-        mainGUI.showScene("Log Out");
+    @FXML
+    void initialize() {
+        //listener for the language buttons
+        enBtn.setOnAction(event -> {
+            Locale.setDefault(new Locale("en"));
+            System.out.println("Locale: " + Locale.getDefault());
+            mainGUI.updateViews(mainGUI.getStage());
+        });
+
+        esBtn.setOnAction(event -> {
+            Locale.setDefault(new Locale("es"));
+            System.out.println("Locale: " + Locale.getDefault());
+            mainGUI.updateViews(mainGUI.getStage());
+        });
+
+        euBtn.setOnAction(event -> {
+            Locale.setDefault(new Locale("eus"));
+            System.out.println("Locale: " + Locale.getDefault());
+            mainGUI.updateViews(mainGUI.getStage());
+        });
     }
 
 
@@ -182,4 +209,6 @@ public class MainGUIController implements Controller{
         userLbl.setVisible(isLoggedIn);
         welcome.setVisible(isLoggedIn);
     }
+
+
 }

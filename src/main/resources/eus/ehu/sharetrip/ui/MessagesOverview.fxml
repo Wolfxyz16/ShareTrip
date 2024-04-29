@@ -7,15 +7,15 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1000.0" stylesheets="@styles/bootstrapfx.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.MessagesController">
    <children>
-      <Button layoutX="215.0" layoutY="308.0" mnemonicParsing="false" onAction="#viewMessages" prefHeight="83.0" prefWidth="212.0" text="View my messages">
+      <Button layoutX="215.0" layoutY="308.0" mnemonicParsing="false" onAction="#viewMessages" prefHeight="83.0" prefWidth="212.0" text="%ViewMyMessages">
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Button layoutX="580.0" layoutY="308.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="83.0" prefWidth="212.0" text="Send a message">
+      <Button layoutX="580.0" layoutY="308.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="83.0" prefWidth="212.0" text="%SendAMessage">
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Label alignment="CENTER" layoutX="353.0" layoutY="111.0" prefHeight="75.0" styleClass="h1" text="Choose an option:" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="353.0" layoutY="111.0" prefHeight="75.0" styleClass="h1" text="%ChooseOption" textAlignment="CENTER">
          <font>
             <Font size="25.0" />
          </font>
