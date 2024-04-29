@@ -262,7 +262,7 @@ public class QueryRidesController implements Controller {
 
     private void updateHeart(Ride ride) {
         if (ride != null) {
-            if (businessLogic.getCurrentUser().get) {
+            if (businessLogic.getCurrentUser().getFavRides().contains(ride)) {
                 Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/redHeart.png"));
                 heartView.setImage(image);
             } else {
