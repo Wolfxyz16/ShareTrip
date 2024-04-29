@@ -69,6 +69,10 @@ public class User {
         return "User{" + "username='" + username + '\'' + '}';
     }
 
+    public List<Ride> getFavRides() {
+        return favRides;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
