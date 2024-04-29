@@ -91,5 +91,11 @@ public interface BlFacade {
 
     List<Alert> getAlerts();
 
+
+    public List<Ride> getFavoriteRides(User currentUser);
+
+    public void addFavoriteRide(User currentUser, Ride ride);
+
     boolean alertAlreadyExist(City city, City city1, Date date, int i);
+
 }
