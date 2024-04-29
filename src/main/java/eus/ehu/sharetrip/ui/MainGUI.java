@@ -48,7 +48,7 @@ public class MainGUI {
     }
 
     private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin, favoriteOverviewWin, alertOverviewWin,
-            createCityWin, messagesOverviewWin, sendMessageWin, viewMessagesWin, myBookings, bookingRequests;
+            createCityWin, messagesOverviewWin, sendMessageWin, viewMessagesWin, myBookings, bookingRequests, logOutWin;
 
     class Window {
         Controller c;
@@ -88,12 +88,12 @@ public class MainGUI {
         switch (scene) {
             case "Home" -> mainWrapper.setCenter(mainWin.ui);
             case "View Alert" -> {
-                    mainWrapper.setCenter(alertOverviewWin.ui);
-                    ((ViewAlertsController)alertOverviewWin.c).updateTables();
+                mainWrapper.setCenter(alertOverviewWin.ui);
+                ((ViewAlertsController) alertOverviewWin.c).updateTables();
             }
             case "Message Overview" -> {
                 mainWrapper.setCenter(messagesOverviewWin.ui);
-                ((MyMessagesController)viewMessagesWin.c).updateTables();
+                ((MyMessagesController) viewMessagesWin.c).updateTables();
             }
             case "Send message" -> mainWrapper.setCenter(sendMessageWin.ui);
             case "View messages" -> mainWrapper.setCenter(viewMessagesWin.ui);
@@ -101,7 +101,10 @@ public class MainGUI {
                 mainWrapper.setCenter(favoriteOverviewWin.ui);
                 ((ViewFavoritesController)favoriteOverviewWin.c).updateTables();
             }
-            case "Query Rides" -> mainWrapper.setCenter(queryRidesWin.ui);
+            case "Query Rides" -> {
+                mainWrapper.setCenter(queryRidesWin.ui);
+                ((QueryRidesController) queryRidesWin.c).resetValues();
+        }
             case "Create Ride" -> mainWrapper.setCenter(createRideWin.ui);
             case "Log in" -> {
                 mainWrapper.setCenter(loginWin.ui);
@@ -111,6 +114,7 @@ public class MainGUI {
             case "Create City" -> mainWrapper.setCenter(createCityWin.ui);
             case "MyBookings" -> mainWrapper.setCenter(myBookings.ui);
             case "BookingRequests" -> mainWrapper.setCenter(bookingRequests.ui);
+            case "Log Out" -> mainWrapper.setCenter(logOutWin.ui);
         }
     }
 
@@ -131,6 +135,7 @@ public class MainGUI {
         createCityWin = load("CreateCity.fxml");
         myBookings = load("MyBookings.fxml");
         bookingRequests = load("BookingRequests.fxml");
+        logOutWin = load("DoubleCheck.fxml");
 
         ((MainGUIController)mainWin.c).initializeButtonVisibility();
 
