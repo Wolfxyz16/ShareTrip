@@ -210,6 +210,51 @@ public class DataAccess {
               .driver(driver3)
               .build();
 
+      Ride ride10 = new Ride.Builder()
+              .fromLocation(city12)
+              .toLocation(city2)
+              .date(UtilDate.newDate(year, month, 15))
+              .numPlaces(4)
+              .price(7)
+              .driver(driver1)
+              .build();
+
+        Ride ride11 = new Ride.Builder()
+              .fromLocation(city13)
+              .toLocation(city10)
+              .date(UtilDate.newDate(year, month + 1, 15))
+              .numPlaces(4)
+              .price(7)
+              .driver(driver1)
+              .build();
+
+        Ride ride12 = new Ride.Builder()
+                .fromLocation(city14)
+                .toLocation(city15)
+                .date(UtilDate.newDate(year, month, 6))
+                .numPlaces(4)
+                .price(8)
+                .driver(driver1)
+                .build();
+
+        Ride ride13 = new Ride.Builder()
+                .fromLocation(city16)
+                .toLocation(city1)
+                .date(UtilDate.newDate(year, month, 25))
+                .numPlaces(4)
+                .price(4)
+                .driver(driver1)
+                .build();
+
+        Ride ride14 = new Ride.Builder()
+                .fromLocation(city1)
+                .toLocation(city15)
+                .date(UtilDate.newDate(year, month, 7))
+                .numPlaces(4)
+                .price(8)
+                .driver(driver1)
+                .build();
+
         driver1.addRide(ride1);
         driver1.addRide(ride2);
         driver1.addRide(ride3);
@@ -219,7 +264,11 @@ public class DataAccess {
         driver2.addRide(ride7);
         driver2.addRide(ride8);
         driver3.addRide(ride9);
-
+        driver1.addRide(ride10);
+        driver1.addRide(ride11);
+        driver2.addRide(ride12);
+        driver3.addRide(ride13);
+        driver2.addRide(ride14);
 
 
       //Create travelers
