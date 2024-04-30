@@ -2,11 +2,23 @@ package eus.ehu.sharetrip.domain;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "USERS") // Renames the table to avoid using a reserved keyword
 @DiscriminatorColumn(name = "USER_TYPE", discriminatorType = DiscriminatorType.STRING)
 public class User {
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "user_favorites",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "ride_id")
+    )
+    private List<Ride> favRides = new ArrayList<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +32,6 @@ public class User {
     protected String password;
 
     public User() {
-
     }
 
     private User(Builder builder) {
@@ -90,6 +101,10 @@ public class User {
         return "User{" + "username='" + username + '\'' + '}';
     }
 
+    public List<Ride> getFavRides() {
+        return favRides;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -98,6 +113,10 @@ public class User {
         User user = (User) o;
 
         return id.equals(user.id);
+    }
+
+    public void addFavRide(Ride ride) {
+        favRides.add(ride);
     }
 
     @Override

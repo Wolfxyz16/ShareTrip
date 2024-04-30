@@ -1,12 +1,10 @@
 package eus.ehu.sharetrip.ui;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
+import eus.ehu.sharetrip.domain.City;
 import eus.ehu.sharetrip.uicontrollers.MainGUIController;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -16,6 +14,7 @@ import eus.ehu.sharetrip.uicontrollers.Controller;
 import eus.ehu.sharetrip.uicontrollers.*;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -27,6 +26,8 @@ public class MainGUI {
 
     private BorderPane mainWrapper;
 
+    private Stage stage;
+
     public BlFacade getBusinessLogic() {
         return businessLogic;
     }
@@ -35,11 +36,12 @@ public class MainGUI {
         businessLogic = afi;
     }
 
+
     public MainGUI(BlFacade bl) {
         Platform.startup(() -> {
             try {
                 setBusinessLogic(bl);
-                init(new Stage());
+                init(stage=new Stage());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -47,7 +49,7 @@ public class MainGUI {
     }
 
     private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin, favoriteOverviewWin, alertOverviewWin,
-            createCityWin, messagesOverviewWin, sendMessageWin, viewMessagesWin, myBookings, bookingRequests;
+            createCityWin, messagesOverviewWin, sendMessageWin, viewMessagesWin, myBookings, bookingRequests, logOutWin;
 
     class Window {
         Controller c;
@@ -96,7 +98,10 @@ public class MainGUI {
             }
             case "Send message" -> mainWrapper.setCenter(sendMessageWin.ui);
             case "View messages" -> mainWrapper.setCenter(viewMessagesWin.ui);
-            case "View Favorites" -> mainWrapper.setCenter(favoriteOverviewWin.ui);
+            case "View Favorites" -> {
+                mainWrapper.setCenter(favoriteOverviewWin.ui);
+                ((ViewFavoritesController)favoriteOverviewWin.c).updateTables();
+            }
             case "Query Rides" -> {
                 mainWrapper.setCenter(queryRidesWin.ui);
                 ((QueryRidesController) queryRidesWin.c).resetValues();
@@ -110,11 +115,11 @@ public class MainGUI {
             case "Create City" -> mainWrapper.setCenter(createCityWin.ui);
             case "MyBookings" -> mainWrapper.setCenter(myBookings.ui);
             case "BookingRequests" -> mainWrapper.setCenter(bookingRequests.ui);
+            case "Log Out" -> mainWrapper.setCenter(logOutWin.ui);
         }
     }
 
     public void init(Stage stage) throws IOException {
-
         mainWin = load("MainGUI.fxml");
         mainWrapper = ((MainGUIController)mainWin.c).getMainWrapper();
 
@@ -130,22 +135,43 @@ public class MainGUI {
         createCityWin = load("CreateCity.fxml");
         myBookings = load("MyBookings.fxml");
         bookingRequests = load("BookingRequests.fxml");
-
+        logOutWin = load("DoubleCheck.fxml");
         ((MainGUIController)mainWin.c).initializeButtonVisibility();
 
         showMain(stage);
+    }
+
+
+    public Stage getStage() {
+        return stage;
     }
 
     private void showMain(Stage stage) {
         // set stage's scene
         Scene scene = new Scene(mainWin.ui);
         scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+        stage.setTitle("ShareTrip");
         stage.setScene(scene);
-        stage.setTitle("ShareTrip BorderLayout");
         stage.setHeight(740.0);
         stage.setWidth(1200.0);
-
         stage.show();
+    }
+
+    public void showUpdate(Stage stage, Double width, Double height, Boolean fullScreen) {
+        if (fullScreen){
+            stage.setFullScreen(true);
+        }else{
+            stage.setHeight(height + 28);
+            stage.setWidth(width);
+        }
+        stage.show();
+
+    }
+
+    public void searchFavRide(City from, City to, Date date) {
+        mainWrapper.setCenter(queryRidesWin.ui);
+        ((QueryRidesController) queryRidesWin.c).resetValues();
+        ((QueryRidesController)queryRidesWin.c).searchFavRide(from, to, date);
     }
 
     public static void main(String[] args) {

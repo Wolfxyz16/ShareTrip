@@ -1,15 +1,16 @@
 package eus.ehu.sharetrip.uicontrollers;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
+import eus.ehu.sharetrip.domain.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import eus.ehu.sharetrip.ui.MainGUI;
 import javafx.scene.layout.BorderPane;
-
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.IOException;
+import java.util.Locale;
 
 public class MainGUIController implements Controller{
 
@@ -55,6 +56,15 @@ public class MainGUIController implements Controller{
     @FXML
     private Label welcome;
 
+    @FXML
+    private Button enBtn;
+
+    @FXML
+    private Button esBtn;
+
+    @FXML
+    private Button euBtn;
+
     private MainGUI mainGUI;
 
     private BlFacade businessLogic;
@@ -64,10 +74,6 @@ public class MainGUIController implements Controller{
     public MainGUIController(BlFacade blFacade){
         businessLogic = blFacade;
     }
-
-
-    @FXML
-    void initialize() {}
 
     @FXML
     void viewAlerts(ActionEvent event) {
@@ -113,19 +119,79 @@ public class MainGUIController implements Controller{
     void viewBookingRequests(ActionEvent event) {mainGUI.showScene("BookingRequests");}
 
     @FXML
-    void viewMyBookings(ActionEvent event) {
-        mainGUI.showScene("MyBookings");}
+    void viewMyBookings(ActionEvent event) {mainGUI.showScene("MyBookings");}
 
     /**
      * Sign out logic, just 3 lines, we do not need another SignOutController
      * @param actionEvent
      */
     @FXML
-    void signOut(ActionEvent actionEvent) {
-        mainGUI.setIsLoggedIn(false);
-        mainGUI.setUserName("");
-        businessLogic.setCurrentUser(null);
-        this.logIn();
+    void signOut(ActionEvent actionEvent) {mainGUI.showScene("Log Out");}
+
+    @FXML
+    void setLanguageEn(ActionEvent event) {
+        Locale.setDefault(new Locale("en"));
+        System.out.println("Locale: " + Locale.getDefault());
+/*
+        Double width  = mainGUI.getStage().getScene().getWidth();
+        Double height = mainGUI.getStage().getScene().getHeight();
+        Boolean fullScreen = mainGUI.getStage().fullScreenProperty().getValue();
+*/
+        changeStageLanguage();
+    }
+
+    @FXML
+    void setLanguageEs(ActionEvent event) {
+        Locale.setDefault(new Locale("es"));
+        System.out.println("Locale: " + Locale.getDefault());
+        /*
+        Double width  = mainGUI.getStage().getScene().getWidth();
+        Double height = mainGUI.getStage().getScene().getHeight();
+        Boolean fullScreen = mainGUI.getStage().fullScreenProperty().getValue();
+        */
+        changeStageLanguage();
+    }
+
+    @FXML
+    void setLanguageEus(ActionEvent event) {
+        Locale.setDefault(new Locale("eus"));
+        System.out.println("Locale: " + Locale.getDefault());
+        /*
+        Double width  = mainGUI.getStage().getScene().getWidth();
+        Double height = mainGUI.getStage().getScene().getHeight();
+        Boolean fullScreen = mainGUI.getStage().isFullScreen();
+        */
+        changeStageLanguage();
+    }
+
+    private void changeStageLanguage() {
+        Double width  = mainGUI.getStage().getScene().getWidth();
+        Double height = mainGUI.getStage().getScene().getHeight();
+        Boolean fullScreen = mainGUI.getStage().isFullScreen();
+
+        try {
+            mainGUI.init(mainGUI.getStage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        mainGUI.showUpdate(mainGUI.getStage(), width, height, fullScreen);
+
+        try {
+            User u = mainGUI.getBusinessLogic().getCurrentUser();
+            if (u != null) {
+                mainGUI.setUserName(u.getUsername());
+                mainGUI.setIsLoggedIn(true);
+                mainGUI.showScene("Query Rides");
+            }
+        }catch (NullPointerException e){
+            System.out.println("No user logged in");
+        }
+
+    }
+
+    @FXML
+    void initialize() {
     }
 
 
@@ -183,4 +249,6 @@ public class MainGUIController implements Controller{
         userLbl.setVisible(isLoggedIn);
         welcome.setVisible(isLoggedIn);
     }
+
+
 }

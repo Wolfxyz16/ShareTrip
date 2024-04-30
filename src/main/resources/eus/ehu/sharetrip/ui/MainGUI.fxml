@@ -10,6 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -25,26 +26,27 @@
                   <Rectangle2D />
                </viewport>
             </ImageView>
-            <Label layoutX="774.0" layoutY="20.0" text="Created with &lt;3 by Orquesta Guayacan" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="276.0" layoutY="710.0" prefHeight="16.0" prefWidth="449.0" text="%OrquestraGuayacan" textAlignment="RIGHT" >
                <font>
                   <Font name="System Italic" size="12.0" />
-               </font></Label>
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>
    <left>
-      <AnchorPane prefHeight="740.0" prefWidth="200.0" styleClass="btn-block" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="800.0" prefWidth="200.0" styleClass="btn-block" BorderPane.alignment="CENTER">
          <children>
             <VBox layoutX="9.0" layoutY="45.0" spacing="10.0" styleClass="split-menu-btn">
                <children>
-                  <Button fx:id="logInBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#logIn" prefHeight="20.0" prefWidth="180.0" text="Sign In">
+                  <Button fx:id="logInBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#logIn" prefHeight="20.0" prefWidth="180.0" text="%SignIn">
                      <styleClass>
                         <String fx:value="split-menu-btn-lg" />
                         <String fx:value="btn-primary" />
                         <String fx:value="btn" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="registerBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#register" prefHeight="20.0" prefWidth="180.0" text="Create account">
+                  <Button fx:id="registerBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#register" prefHeight="20.0" prefWidth="180.0" text="%CreateAccount">
                      <styleClass>
                         <String fx:value="split-menu-btn-lg" />
                         <String fx:value="btn-primary" />
@@ -53,7 +55,7 @@
                   </Button>
                </children>
             </VBox>
-            <Button fx:id="queryRidesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="136.0" mnemonicParsing="false" onAction="#queryRides" prefHeight="20.0" prefWidth="180.0" text="Query Rides">
+            <Button fx:id="queryRidesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="136.0" mnemonicParsing="false" onAction="#queryRides" prefHeight="20.0" prefWidth="180.0" text="%QueryRides">
                <styleClass>
                   <String fx:value="split-menu-btn-lg" />
                   <String fx:value="btn-primary" />
@@ -69,14 +71,14 @@
                         <String fx:value="btn" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="createRidesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#createRide" prefHeight="20.0" prefWidth="180.0" text="Create Ride">
+                  <Button fx:id="createRidesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#createRide" prefHeight="20.0" prefWidth="180.0" text="%CreateRideGUI.CreateRide">
                      <styleClass>
                         <String fx:value="split-menu-btn-lg" />
                         <String fx:value="btn-primary" />
                         <String fx:value="btn" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="createCityBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#createCity" prefHeight="20.0" prefWidth="180.0" text="Create City">
+                  <Button fx:id="createCityBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#createCity" prefHeight="20.0" prefWidth="180.0" text="%CreateCityGUI.Btn">
                      <styleClass>
                         <String fx:value="split-menu-btn-lg" />
                         <String fx:value="btn-primary" />
@@ -87,7 +89,7 @@
             </VBox>
             <VBox layoutX="10.0" layoutY="181.0" spacing="10.0">
                <children>
-                  <Button fx:id="myBookingsBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#viewMyBookings" prefHeight="20.0" prefWidth="180.0" text="My Bookings">
+                  <Button fx:id="myBookingsBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#viewMyBookings" prefHeight="20.0" prefWidth="180.0" text="%MyBookings">
                      <styleClass>
                         <String fx:value="split-menu-btn-lg" />
                         <String fx:value="btn-primary" />
@@ -96,21 +98,21 @@
                   </Button>
                </children>
             </VBox>
-            <Button fx:id="messagesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="370.0" mnemonicParsing="false" onAction="#viewMessages" prefHeight="20.0" prefWidth="180.0" text="Messages">
+            <Button fx:id="messagesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="370.0" mnemonicParsing="false" onAction="#viewMessages" prefHeight="20.0" prefWidth="180.0" text="%Messages">
                <styleClass>
                   <String fx:value="split-menu-btn-lg" />
                   <String fx:value="btn-primary" />
                   <String fx:value="btn" />
                </styleClass>
             </Button>
-            <Button fx:id="alertsBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="415.0" mnemonicParsing="false" onAction="#viewAlerts" prefHeight="20.0" prefWidth="180.0" text="View Alerts">
+            <Button fx:id="alertsBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="415.0" mnemonicParsing="false" onAction="#viewAlerts" prefHeight="20.0" prefWidth="180.0" text="%ViewAlerts">
                <styleClass>
                   <String fx:value="split-menu-btn-lg" />
                   <String fx:value="btn-primary" />
                   <String fx:value="btn" />
                </styleClass>
             </Button>
-            <Button fx:id="favoritesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="460.0" mnemonicParsing="false" onAction="#viewFavorites" prefHeight="20.0" prefWidth="180.0" text="View Favorites">
+            <Button fx:id="favoritesBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="460.0" mnemonicParsing="false" onAction="#viewFavorites" prefHeight="20.0" prefWidth="180.0" text="%ViewFavorites">
                <styleClass>
                   <String fx:value="split-menu-btn-lg" />
                   <String fx:value="btn-primary" />
@@ -119,7 +121,7 @@
             </Button>
             <Group layoutX="26.0" layoutY="574.0">
                <children>
-                  <Label fx:id="welcome" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="20.0" prefHeight="20.0" styleClass="h3" text="Welcome" textAlignment="CENTER">
+                  <Label fx:id="welcome" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="20.0" prefHeight="20.0" styleClass="h3" text="%Welcome" textAlignment="CENTER">
                      <font>
                         <Font size="22.0" />
                      </font>
@@ -131,7 +133,7 @@
                   </Label>
                </children>
             </Group>
-            <Button fx:id="signOutBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="652.0" mnemonicParsing="false" onAction="#signOut" prefHeight="20.0" prefWidth="180.0" text="Sign Out">
+            <Button fx:id="signOutBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="652.0" mnemonicParsing="false" onAction="#signOut" prefHeight="20.0" prefWidth="180.0" text="%SignOut">
                <styleClass>
                   <String fx:value="split-menu-btn-lg" />
                   <String fx:value="btn-primary" />
@@ -144,4 +146,29 @@
       <!-- <URL value="@styles/main.css" /> -->
       <URL value="@styles/bootstrapfx.css" />
    </stylesheets>
+   <top>
+      <HBox alignment="TOP_RIGHT" prefHeight="27.0" prefWidth="976.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="enBtn" mnemonicParsing="false" onAction="#setLanguageEn" prefHeight="27.0" prefWidth="37.0" stylesheets="@styles/main.css" text="en">
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="btn-sm" />
+                  <String fx:value="btn-primary" />
+               </styleClass>
+            </Button>
+            <Button fx:id="esBtn" mnemonicParsing="false" onAction="#setLanguageEs" prefHeight="27.0" prefWidth="37.0" text="es">
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="btn-xs" />
+                  <String fx:value="btn-primary" />
+               </styleClass></Button>
+            <Button fx:id="euBtn" mnemonicParsing="false" onAction="#setLanguageEus" prefHeight="27.0" prefWidth="37.0" text="eu">
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="btn-xs" />
+                  <String fx:value="btn-primary" />
+               </styleClass></Button>
+         </children>
+      </HBox>
+   </top>
 </BorderPane>

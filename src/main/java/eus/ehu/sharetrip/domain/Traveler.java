@@ -1,6 +1,8 @@
 package eus.ehu.sharetrip.domain;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @DiscriminatorValue("TRAVELER")

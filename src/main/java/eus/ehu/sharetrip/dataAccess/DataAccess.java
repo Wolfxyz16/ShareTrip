@@ -84,15 +84,16 @@ public class DataAccess {
 
     this.reset();
 
-    db.getTransaction().begin();
+
+    //db.getTransaction().begin();
 
     try {
 
       Calendar today = Calendar.getInstance();
 
-      int month = today.get(Calendar.MONTH);
+      int month = today.get(Calendar.MONTH) + 2;
       int year = today.get(Calendar.YEAR);
-      if (month == 12) {
+      if (month == 11) {
         month = 1;
         year += 1;
       }
@@ -102,6 +103,12 @@ public class DataAccess {
       Driver driver2 = new Driver("driver2@gmail.com", "Ane Gaztañaga", "1234");
       Driver driver3 = new Driver("driver3@gmail.com", "test", "test");
 
+      db.getTransaction().begin();
+      db.persist(driver1);
+      db.persist(driver2);
+      db.persist(driver3);
+      db.getTransaction().commit();
+
 
       //Create Cities
       City city1 = new City("Donostia");
@@ -109,6 +116,7 @@ public class DataAccess {
       City city3 = new City("Gasteiz");
       City city4 = new City("Iruña");
       City city5 = new City("Eibar");
+
 
       Ride ride1 = new Ride.Builder()
               .fromLocation(city1)
@@ -202,7 +210,9 @@ public class DataAccess {
         driver3.addRide(ride9);
 
 
+
       //Create travelers
+
       Traveler traveler1 = new Traveler("user1@gmail.com", "User1", "1234");
       Traveler traveler2 = new Traveler("user2@gmail.com", "User2", "1234");
 
@@ -242,30 +252,27 @@ public class DataAccess {
               .numSeats(4)
               .build();
 
+      db.getTransaction().begin();
+      db.persist(traveler1);
+      db.persist(traveler2);
+      db.getTransaction().commit();
+
+
+      db.getTransaction().begin();
+      db.persist(message1);
+      db.getTransaction().commit();
+
 
       //Persist the objects
+      db.getTransaction().begin();
       db.persist(alert1);
       db.persist(alert2);
       db.persist(alert3);
       db.persist(alert4);
-      
-      db.persist(city1);
-      db.persist(city2);
-      db.persist(city3);
-      db.persist(city4);
-      db.persist(city5);
-      
-      db.persist(driver1);
-      db.persist(driver2);
-      db.persist(driver3);
-      
-      db.persist(traveler1);
-      db.persist(traveler2);
-
-
-      db.persist(message1);
-
       db.getTransaction().commit();
+
+
+     // db.getTransaction().commit();
       System.out.println("Db initialized");
     } catch (Exception e) {
       e.printStackTrace();
@@ -527,13 +534,13 @@ public class DataAccess {
       User existingUser = query.getSingleResult();
       throw new UserAlreadyExistException();
     } catch (NoResultException e) {
-        if (role.equals("Driver")) {
+        if (role.equals(ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("FindRidesGUI.Driver"))) {
           Driver driver = new Driver(email, userName, password);
           db.getTransaction().begin();
           db.persist(driver);
           db.getTransaction().commit();
           return driver;
-        } else if (role.equals("Traveler")) {
+        } else if (role.equals(ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("Traveler"))) {
           Traveler traveler = new Traveler(email, userName, password);
           db.getTransaction().begin();
           db.persist(traveler);
@@ -593,6 +600,28 @@ public class DataAccess {
     return query.getResultList();
   }
 
+
+  public List<Ride> getFavoriteRides(User user) {
+    TypedQuery<Ride> query = db.createQuery("SELECT u.favRides FROM User u WHERE u.id = :userId", Ride.class);
+    query.setParameter("userId", user.getId());
+    return query.getResultList();
+  }
+
+
+  public void addFavoriteRide(User user, Ride ride) {
+    List<Ride> favoriteRides = this.getFavoriteRides(user);
+    //System.out.println(ride.toString());
+    //System.out.println(ride.getDriver().getUsername());
+    if (!favoriteRides.contains(ride)) {
+      user.addFavRide(ride);
+      favoriteRides.add(ride);
+     // System.out.println(favoriteRides.toString());
+      db.getTransaction().begin();
+      db.merge(user);
+      db.getTransaction().commit();
+    }
+  }
+
   public boolean alertAlreadyExist(City city, City city1, Date date, int i) {
     TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.fromLocation = :from AND a.toLocation = :to AND a.rideDate = :date AND a.numSeats = :nPlaces", Alert.class);
     query.setParameter("from", city);
@@ -600,5 +629,11 @@ public class DataAccess {
     query.setParameter("date", date);
     query.setParameter("nPlaces", i);
     return !query.getResultList().isEmpty();
+  }
+
+  // Check whether a favorite already exists
+  public boolean favAlreadyExist(User user, Ride ride) {
+    List<Ride> favoriteRides = this.getFavoriteRides(user);
+    return favoriteRides.contains(ride);
   }
 }

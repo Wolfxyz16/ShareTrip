@@ -172,6 +172,11 @@ public class BlFacadeImplementation implements BlFacade {
         return dbManager.alertAlreadyExist(city, city1, date, i);
     }
 
+    @Override
+    public boolean favoriteAlreadyExist(User user, Ride ride) {
+        return dbManager.favAlreadyExist(user, ride);
+    }
+
     public List<Alert> getAlerts(City from, City to, Date date, int nPlaces) {
         return dbManager.getAlerts(from, to, date, nPlaces);
     }
@@ -181,5 +186,16 @@ public class BlFacadeImplementation implements BlFacade {
     public void saveMessage(Message message) {
         dbManager.saveMessage(message);
     }
+
+
+
+    public List<Ride> getFavoriteRides(User user) {
+        return dbManager.getFavoriteRides(user);
+    }
+
+    public void addFavoriteRide(User user, Ride ride) {
+        dbManager.addFavoriteRide(user, ride);
+    }
+
 
 }

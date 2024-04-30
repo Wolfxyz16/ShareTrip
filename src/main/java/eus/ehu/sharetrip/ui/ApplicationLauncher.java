@@ -23,8 +23,7 @@ public class ApplicationLauncher {
       if (config.isBusinessLogicLocal()) {
         businessLogic = new BlFacadeImplementation();
 
-
-      new MainGUI(businessLogic);
+        new MainGUI(businessLogic);
       }
     }
     catch (Exception e) {
