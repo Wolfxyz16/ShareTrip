@@ -16,32 +16,32 @@
          <children>
             <Group>
                <children>
-                  <DatePicker fx:id="datePicker" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" promptText="Pick a date" />
+                  <DatePicker fx:id="datePicker" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" promptText="%promptDate" />
                   <Label layoutY="4.0" styleClass="h4" text="%RideDate" />
                </children>
             </Group>
             <Group>
                <children>
                   <Label layoutY="4.0" styleClass="h4" text="%DepartCity" />
-                  <TextField fx:id="txtDepartCity" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" promptText="From where" />
+                  <TextField fx:id="txtDepartCity" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" promptText="%promptWhere" />
                </children>
             </Group>
             <Group>
                <children>
-                  <TextField fx:id="txtArrivalCity" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" promptText="Destination" />
+                  <TextField fx:id="txtArrivalCity" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" promptText="%promptDestination" />
                   <Label layoutY="5.0" styleClass="h4" text="%ArrivalCity" />
                </children>
             </Group>
             <Group>
                <children>
                   <Label layoutY="5.0" styleClass="h4" text="%NumberOfSeats" />
-                  <TextField fx:id="txtSeats" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" promptText="How many people" />
+                  <TextField fx:id="txtSeats" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" promptText="%promptNumSeats" />
                </children>
             </Group>
             <Group>
                <children>
                   <Label layoutY="5.0" styleClass="h4" text="%Price" />
-                  <TextField fx:id="txtPrice" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" promptText="How much?" />
+                  <TextField fx:id="txtPrice" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" promptText="%promptPrice" />
                </children>
             </Group>
          </children>
@@ -52,7 +52,7 @@
             <String fx:value="btn-primary" />
             <String fx:value="btn-lg" />
          </styleClass></Button>
-      <Label layoutX="344.0" layoutY="70.0" styleClass="h1" text="%CreateRideTitle" />
+      <Label alignment="CENTER" layoutX="260.0" layoutY="67.0" prefHeight="42.0" prefWidth="484.0" styleClass="h1" text="%CreateRideTitle" />
       <Separator layoutX="401.0" layoutY="555.0" prefWidth="200.0" />
       <Label fx:id="warningsInfo" alignment="CENTER" layoutX="161.0" layoutY="648.0" prefHeight="30.0" prefWidth="682.0" stylesheets="@styles/bootstrapfx.css" textAlignment="JUSTIFY" />
    </children>
