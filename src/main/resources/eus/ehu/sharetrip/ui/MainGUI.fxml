@@ -26,15 +26,11 @@
                   <Rectangle2D />
                </viewport>
             </ImageView>
-            <Label alignment="CENTER" layoutX="158.0" layoutY="510.0" prefHeight="50.0" prefWidth="685.0" styleClass="h1" text="%mainTitleQuestion" textAlignment="CENTER">
-               <font>
-                  <Font size="46.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="276.0" layoutY="710.0" prefHeight="16.0" prefWidth="449.0" text="%OrquestraGuayacan" textAlignment="RIGHT" />
+            <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="276.0" layoutY="710.0" prefHeight="16.0" prefWidth="449.0" text="%OrquestraGuayacan" textAlignment="RIGHT" >
                <font>
                   <Font name="System Italic" size="12.0" />
-               </font></Label>
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>
