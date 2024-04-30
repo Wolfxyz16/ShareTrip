@@ -116,6 +116,14 @@ public class DataAccess {
       City city3 = new City("Gasteiz");
       City city4 = new City("Iruña");
       City city5 = new City("Eibar");
+      City city6 = new City("Zarautz");
+      City city7 = new City("Hernani");
+      City city8 = new City("Tolosa");
+      City city9 = new City("Zumaia");
+      City city10 = new City("Orio");
+      City city11 = new City("Hondarribia");
+      City city12 = new City("Irun");
+      City city13 = new City("Hendaia");
 
 
       Ride ride1 = new Ride.Builder()
