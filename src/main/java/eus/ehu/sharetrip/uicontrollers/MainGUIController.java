@@ -2,6 +2,8 @@ package eus.ehu.sharetrip.uicontrollers;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
 import eus.ehu.sharetrip.configuration.Config;
+import eus.ehu.sharetrip.domain.User;
+import eus.ehu.sharetrip.exceptions.UnknownUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -133,25 +135,66 @@ public class MainGUIController implements Controller{
     void signOut(ActionEvent actionEvent) {mainGUI.showScene("Log Out");}
 
     @FXML
+    void setLanguageEn(ActionEvent event) {
+        Locale.setDefault(new Locale("en"));
+        System.out.println("Locale: " + Locale.getDefault());
+
+        Double width  = mainGUI.getStage().getScene().getWidth();
+        Double height = mainGUI.getStage().getScene().getHeight();
+        Boolean fullScreen = mainGUI.getStage().fullScreenProperty().getValue();
+
+        changeStageLanguage(width, height, fullScreen);
+    }
+
+    @FXML
+    void setLanguageEs(ActionEvent event) {
+        Locale.setDefault(new Locale("es"));
+        System.out.println("Locale: " + Locale.getDefault());
+
+        Double width  = mainGUI.getStage().getScene().getWidth();
+        Double height = mainGUI.getStage().getScene().getHeight();
+        Boolean fullScreen = mainGUI.getStage().fullScreenProperty().getValue();
+
+        changeStageLanguage(width, height, fullScreen);
+    }
+
+    @FXML
+    void setLanguageEus(ActionEvent event) {
+        Locale.setDefault(new Locale("eus"));
+        System.out.println("Locale: " + Locale.getDefault());
+
+        Double width  = mainGUI.getStage().getScene().getWidth();
+        Double height = mainGUI.getStage().getScene().getHeight();
+        Boolean fullScreen = mainGUI.getStage().isFullScreen();
+
+        changeStageLanguage(width, height, fullScreen);
+    }
+
+    private void changeStageLanguage(Double width, Double height, Boolean fullScreen) {
+        try {
+            mainGUI.init(mainGUI.getStage(), fullScreen);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            User u = mainGUI.getBusinessLogic().getCurrentUser();
+            if (u != null) {
+                mainGUI.setUserName(u.getUsername());
+                mainGUI.setIsLoggedIn(true);
+                mainGUI.showScene("Query Rides");
+            }
+        }catch (NullPointerException e){
+            System.out.println("No user logged in");
+        }
+
+        if (!fullScreen){
+            mainGUI.showUpdate(mainGUI.getStage(), width, height);
+        }
+    }
+
+    @FXML
     void initialize() {
-        //listener for the language buttons
-        enBtn.setOnAction(event -> {
-            Locale.setDefault(new Locale("en"));
-            System.out.println("Locale: " + Locale.getDefault());
-            mainGUI.updateViews(mainGUI.getStage());
-        });
-
-        esBtn.setOnAction(event -> {
-            Locale.setDefault(new Locale("es"));
-            System.out.println("Locale: " + Locale.getDefault());
-            mainGUI.updateViews(mainGUI.getStage());
-        });
-
-        euBtn.setOnAction(event -> {
-            Locale.setDefault(new Locale("eus"));
-            System.out.println("Locale: " + Locale.getDefault());
-            mainGUI.updateViews(mainGUI.getStage());
-        });
     }
 
 

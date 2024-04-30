@@ -150,20 +150,20 @@
    <top>
       <HBox alignment="TOP_RIGHT" prefHeight="27.0" prefWidth="976.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="enBtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="37.0" stylesheets="@styles/main.css" text="en">
+            <Button fx:id="enBtn" mnemonicParsing="false" onAction="#setLanguageEn" prefHeight="27.0" prefWidth="37.0" stylesheets="@styles/main.css" text="en">
                <styleClass>
                   <String fx:value="btn" />
                   <String fx:value="btn-sm" />
                   <String fx:value="btn-primary" />
                </styleClass>
             </Button>
-            <Button fx:id="esBtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="37.0" text="es">
+            <Button fx:id="esBtn" mnemonicParsing="false" onAction="#setLanguageEs" prefHeight="27.0" prefWidth="37.0" text="es">
                <styleClass>
                   <String fx:value="btn" />
                   <String fx:value="btn-xs" />
                   <String fx:value="btn-primary" />
                </styleClass></Button>
-            <Button fx:id="euBtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="37.0" text="eu">
+            <Button fx:id="euBtn" mnemonicParsing="false" onAction="#setLanguageEus" prefHeight="27.0" prefWidth="37.0" text="eu">
                <styleClass>
                   <String fx:value="btn" />
                   <String fx:value="btn-xs" />

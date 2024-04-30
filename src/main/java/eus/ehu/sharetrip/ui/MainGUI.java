@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.kordamp.bootstrapfx.BootstrapFX;
 import eus.ehu.sharetrip.uicontrollers.Controller;
 import eus.ehu.sharetrip.uicontrollers.*;
@@ -46,7 +47,7 @@ public class MainGUI {
         Platform.startup(() -> {
             try {
                 setBusinessLogic(bl);
-                init(stage=new Stage());
+                init(stage=new Stage(), false);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -60,7 +61,6 @@ public class MainGUI {
         Controller c;
         Parent ui;
     }
-
 
     private Window load(String fxml) {
         try {
@@ -122,8 +122,7 @@ public class MainGUI {
         }
     }
 
-    public void init(Stage stage) throws IOException {
-
+    public void init(Stage stage, Boolean fullScreen) throws IOException {
         mainWin = load("MainGUI.fxml");
         mainWrapper = ((MainGUIController)mainWin.c).getMainWrapper();
 
@@ -142,48 +141,32 @@ public class MainGUI {
         logOutWin = load("DoubleCheck.fxml");
         ((MainGUIController)mainWin.c).initializeButtonVisibility();
 
-        showMain(stage);
+        showMain(stage, fullScreen);
     }
+
 
     public Stage getStage() {
         return stage;
     }
 
-    public void updateViews(Stage stage) {
-
-        mainWin = load("MainGUI.fxml");
-        //mainWrapper = ((MainGUIController)mainWin.c).getMainWrapper();
-
-        createRideWin = load("CreateRide.fxml");
-        queryRidesWin = load("QueryRides.fxml");
-        loginWin = load("SignIn.fxml");
-        registerWin = load("SignUp.fxml");
-        favoriteOverviewWin = load("FavoriteOverview.fxml");
-        messagesOverviewWin = load("MessagesOverview.fxml");
-        sendMessageWin = load("SendMessage.fxml");
-        viewMessagesWin = load("MyMessagesOverview.fxml");
-        alertOverviewWin = load("AlertOverview.fxml");
-        createCityWin = load("CreateCity.fxml");
-        myBookings = load("MyBookings.fxml");
-        bookingRequests = load("BookingRequests.fxml");
-        logOutWin = load("DoubleCheck.fxml");
-        //((MainGUIController)mainWin.c).initializeButtonVisibility();
-
+    public void showUpdate(Stage stage, Double width, Double height) {
+        stage.setHeight(height + 28);
+        stage.setWidth(width);
         stage.show();
     }
 
-
-
-
-    private void showMain(Stage stage) {
+    private void showMain(Stage stage,Boolean fullScreen) {
         // set stage's scene
         Scene scene = new Scene(mainWin.ui);
         scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+        stage.setTitle("ShareTrip");
         stage.setScene(scene);
-        stage.setTitle("ShareTrip BorderLayout");
-        stage.setHeight(740.0);
-        stage.setWidth(1200.0);
-
+        if (fullScreen){
+            stage.setFullScreen(true);
+        }else{
+            stage.setHeight(740.0);
+            stage.setWidth(1200.0);
+        }
         stage.show();
     }
 
