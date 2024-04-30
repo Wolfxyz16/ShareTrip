@@ -117,63 +117,152 @@ public class DataAccess {
       City city4 = new City("Iruña");
       City city5 = new City("Eibar");
 
-      db.getTransaction().begin();
-      db.persist(city1);
-      db.persist(city2);
-      db.persist(city3);
-      db.persist(city4);
-      db.persist(city5);
-      db.getTransaction().commit();
 
+      Ride ride1 = new Ride.Builder()
+              .fromLocation(city1)
+              .toLocation(city2)
+              .date(UtilDate.newDate(year, month, 15))
+              .numPlaces(4)
+              .price(7)
+              .driver(driver1)
+              .build();
 
-      Ride ride1 = new Ride(city1, city2, UtilDate.newDate(year, month, 15), 4, 7, driver1);
-      Ride ride2 = new Ride(city1, city2, UtilDate.newDate(year, month + 1, 15), 4, 7, driver1);
-      Ride ride3 = new Ride(city1, city3, UtilDate.newDate(year, month, 6), 4, 8, driver1);
-      Ride ride4 = new Ride(city2, city1, UtilDate.newDate(year, month, 25), 4, 4, driver1);
-      Ride ride5 = new Ride(city1, city4, UtilDate.newDate(year, month, 7), 4, 8, driver1);
-      Ride ride6 = new Ride(city1, city2, UtilDate.newDate(year, month, 15), 3, 3, driver2);
-      Ride ride7 = new Ride(city2, city1, UtilDate.newDate(year, month, 25), 2, 5, driver2);
-      Ride ride8 = new Ride(city5, city3, UtilDate.newDate(year, month, 6), 2, 5, driver2);
-      Ride ride9 = new Ride(city2, city1, UtilDate.newDate(year, month, 14), 1, 3, driver3);
-      Ride ride10 = new Ride(city1, city2, UtilDate.newDate(year, month, 16), 4, 7, driver1);
-      Ride ride11 = new Ride(city1, city2, UtilDate.newDate(year, month, 17), 4, 7, driver2);
+      Ride ride2 = new Ride.Builder()
+              .fromLocation(city1)
+              .toLocation(city2)
+              .date(UtilDate.newDate(year, month + 1, 15))
+              .numPlaces(4)
+              .price(7)
+              .driver(driver1)
+              .build();
 
-      driver1.addRide(ride1);
-      driver1.addRide(ride2);
-      driver1.addRide(ride3);
-      driver1.addRide(ride4);
-      driver1.addRide(ride5);
-      driver2.addRide(ride6);
-      driver2.addRide(ride7);
-      driver2.addRide(ride8);
-      driver3.addRide(ride9);
-      driver1.addRide(ride10);
-      driver2.addRide(ride11);
+      Ride ride3 = new Ride.Builder()
+              .fromLocation(city1)
+              .toLocation(city3)
+              .date(UtilDate.newDate(year, month, 6))
+              .numPlaces(4)
+              .price(8)
+              .driver(driver1)
+              .build();
+
+      Ride ride4 = new Ride.Builder()
+              .fromLocation(city2)
+              .toLocation(city1)
+              .date(UtilDate.newDate(year, month, 25))
+              .numPlaces(4)
+              .price(4)
+              .driver(driver1)
+              .build();
+
+      Ride ride5 = new Ride.Builder()
+              .fromLocation(city1)
+              .toLocation(city4)
+              .date(UtilDate.newDate(year, month, 7))
+              .numPlaces(4)
+              .price(8)
+              .driver(driver1)
+              .build();
+
+      Ride ride6 = new Ride.Builder()
+              .fromLocation(city1)
+              .toLocation(city2)
+              .date(UtilDate.newDate(year, month, 15))
+              .numPlaces(3)
+              .price(3)
+              .driver(driver2)
+              .build();
+
+      Ride ride7 = new Ride.Builder()
+              .fromLocation(city2)
+              .toLocation(city1)
+              .date(UtilDate.newDate(year, month, 25))
+              .numPlaces(2)
+              .price(5)
+              .driver(driver2)
+              .build();
+
+      Ride ride8 = new Ride.Builder()
+              .fromLocation(city5)
+              .toLocation(city3)
+              .date(UtilDate.newDate(year, month, 6))
+              .numPlaces(2)
+              .price(5)
+              .driver(driver2)
+              .build();
+
+      Ride ride9 = new Ride.Builder()
+              .fromLocation(city2)
+              .toLocation(city1)
+              .date(UtilDate.newDate(year, month, 14))
+              .numPlaces(1)
+              .price(3)
+              .driver(driver3)
+              .build();
+
+        driver1.addRide(ride1);
+        driver1.addRide(ride2);
+        driver1.addRide(ride3);
+        driver1.addRide(ride4);
+        driver1.addRide(ride5);
+        driver2.addRide(ride6);
+        driver2.addRide(ride7);
+        driver2.addRide(ride8);
+        driver3.addRide(ride9);
+
 
 
       //Create travelers
 
       Traveler traveler1 = new Traveler("user1@gmail.com", "User1", "1234");
       Traveler traveler2 = new Traveler("user2@gmail.com", "User2", "1234");
+
+      // CREATE MESSAGES
+      Message message1 = new Message.Builder()
+              .messageText("Hello")
+              .sender(traveler1)
+              .receiver(traveler2)
+              .build();
+
+// CREATE ALERTS
+      Alert alert1 = new Alert.Builder()
+              .fromLocation(city1)
+              .toLocation(city2)
+              .rideDate(UtilDate.newDate(year, month, 15))
+              .numSeats(4)
+              .build();
+
+      Alert alert2 = new Alert.Builder()
+              .fromLocation(city3)
+              .toLocation(city4)
+              .rideDate(UtilDate.newDate(year, month + 1, 15))
+              .numSeats(4)
+              .build();
+
+      Alert alert3 = new Alert.Builder()
+              .fromLocation(city5)
+              .toLocation(city1)
+              .rideDate(UtilDate.newDate(year, month, 6))
+              .numSeats(4)
+              .build();
+
+      Alert alert4 = new Alert.Builder()
+              .fromLocation(city3)
+              .toLocation(city5)
+              .rideDate(UtilDate.newDate(year, month, 25))
+              .numSeats(4)
+              .build();
+
       db.getTransaction().begin();
       db.persist(traveler1);
       db.persist(traveler2);
       db.getTransaction().commit();
 
 
-      //CREATE MESSAGES
-      Message message1 = new Message("Hello",  traveler1, traveler2);
       db.getTransaction().begin();
       db.persist(message1);
       db.getTransaction().commit();
 
 
-      //CREATE ALERTS
-      Alert alert1 = new Alert(city1, city2, UtilDate.newDate(year, month, 15), 4);
-      Alert alert2 = new Alert(city3, city4, UtilDate.newDate(year, month + 1, 15), 4);
-      Alert alert3 = new Alert(city5,city1, UtilDate.newDate(year, month, 6), 4);
-      Alert alert4 = new Alert(city3, city5, UtilDate.newDate(year, month, 25), 4);
-      
       //Persist the objects
       db.getTransaction().begin();
       db.persist(alert1);
@@ -262,7 +351,12 @@ public class DataAccess {
         throw new AlertAlreadyExistException(ResourceBundle.getBundle("Etiquetas").getString("CreateAlertGUI.AlertAlreadyExist"));
       }
       db.getTransaction().begin();
-      Alert alert = new Alert(from, to, date, nPlaces);
+      Alert alert = new Alert.Builder()
+              .fromLocation(from)
+              .toLocation(to)
+              .rideDate(date)
+              .numSeats(nPlaces)
+              .build();
       db.persist(alert);
       db.getTransaction().commit();
       return alert;
@@ -290,7 +384,14 @@ public class DataAccess {
         throw new RideAlreadyExistException();
       }
 
-      Ride ride = new Ride(from, to, date, nPlaces, price, driver);
+      Ride ride = new Ride.Builder()
+              .fromLocation(from)
+              .toLocation(to)
+              .numPlaces(nPlaces)
+              .date(date)
+              .price(price)
+              .driver(driver)
+              .build();
 
       String email = driver.getEmail();
       TypedQuery<Driver> driverByEmail = db.createQuery("SELECT d FROM Driver d WHERE d.email = :email", Driver.class);
@@ -433,13 +534,13 @@ public class DataAccess {
       User existingUser = query.getSingleResult();
       throw new UserAlreadyExistException();
     } catch (NoResultException e) {
-        if (role.equals("Driver")) {
+        if (role.equals(ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("FindRidesGUI.Driver"))) {
           Driver driver = new Driver(email, userName, password);
           db.getTransaction().begin();
           db.persist(driver);
           db.getTransaction().commit();
           return driver;
-        } else if (role.equals("Traveler")) {
+        } else if (role.equals(ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("Traveler"))) {
           Traveler traveler = new Traveler(email, userName, password);
           db.getTransaction().begin();
           db.persist(traveler);

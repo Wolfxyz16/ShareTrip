@@ -11,6 +11,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class SendMessageController implements Controller{
 
 
@@ -42,8 +45,8 @@ public class SendMessageController implements Controller{
         String messageContent = txtMessage.getText();
 
         if (recipient.isEmpty() || messageContent.isEmpty()) {
-            System.out.println("Recipient and/or message cannot be empty.");
-            errorLabel.setText("Recipient and/or message cannot be empty.");
+            String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("EmptyMeessageOrRecipient");
+            errorLabel.setText(error);
             errorLabel.getStyleClass().setAll("label", "lbl-danger");
             return;
         }
@@ -52,18 +55,22 @@ public class SendMessageController implements Controller{
         User sender = businessLogic.getCurrentUser();
 
         if (receiver == null) {
-            System.out.println("Recipient does not exist.");
-            errorLabel.setText("Recipient does not exist.");
+            String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("RecipientDoesNotExist");
+            errorLabel.setText(error);
             errorLabel.getStyleClass().setAll("label", "lbl-danger");
             return;
         }
 
-        Message message = new Message(messageContent, sender, receiver);
+        Message message = new Message.Builder()
+                .messageText(messageContent)
+                .sender(sender)
+                .receiver(receiver)
+                .build();
 
         businessLogic.saveMessage(message);
 
-        System.out.println("Message sent successfully.");
-        errorLabel.setText("Message sent successfully.");
+        String success = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("MessageSentSuccessfully");
+        errorLabel.setText(success);
         errorLabel.getStyleClass().setAll("label", "lbl-success");
     }
 

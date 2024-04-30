@@ -12,7 +12,6 @@ public class Message {
     @Column(name = "MESSAGE")
     private String messageText;
 
-
     @ManyToOne
     private User receiver;
 
@@ -23,17 +22,54 @@ public class Message {
 
     private String recipientName;
 
-
-    public Message() {
-
+    protected Message() {
+        // Constructor protegido para uso exclusivo del builder
     }
 
-    public Message(String messageText, User sender, User receiver) {
-        this.messageText = messageText;
-        this.sender = sender;
-        this.receiver = receiver;
-        this.senderName = sender.getUsername();
-        this.recipientName = receiver.getUsername();
+    // Constructor privado para el builder
+    private Message(Builder builder) {
+        this.id = builder.id;
+        this.messageText = builder.messageText;
+        this.sender = builder.sender;
+        this.receiver = builder.receiver;
+        this.senderName = builder.senderName;
+        this.recipientName = builder.recipientName;
+    }
+
+    // Builder static inner class
+    public static class Builder {
+        private Long id;
+        private String messageText;
+        private User sender;
+        private User receiver;
+        private String senderName;
+        private String recipientName;
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder messageText(String messageText) {
+            this.messageText = messageText;
+            return this;
+        }
+
+        public Builder sender(User sender) {
+            this.sender = sender;
+            this.senderName = sender.getUsername();
+            return this;
+        }
+
+        public Builder receiver(User receiver) {
+            this.receiver = receiver;
+            this.recipientName = receiver.getUsername();
+            return this;
+        }
+
+        public Message build() {
+            return new Message(this);
+        }
     }
 
     // Getters and setters
@@ -85,13 +121,13 @@ public class Message {
         this.recipientName = recipientName;
     }
 
+    @Override
     public String toString() {
         return "Message{" +
                 "id=" + id +
                 ", message='" + messageText + '\'' +
-                ", from=" + sender +
-                ", to=" + receiver +
+                ", sender=" + sender +
+                ", receiver=" + receiver +
                 '}';
-
     }
 }

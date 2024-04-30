@@ -1,7 +1,7 @@
-body {
-    --main-blue : #1BAFBF;
-    --main-yellow : #F2E205;
-    --secondary-yellow : #F2CB05;
-    --main-white : #F2F2F2;
-    --main-black : #0D0D0D;
+.root {
+    -main-blue: #1BAFBF;
+    -main-yellow: #F2E205;
+    -secondary-yellow: #F2CB05;
+    -main-white: #F2F2F2;
+    -main-black: #0D0D0D;
 }
