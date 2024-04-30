@@ -15,36 +15,36 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1000.0" stylesheets="@styles/bootstrapfx.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.QueryRidesController">
     <children>
-      <Group layoutX="154.0" layoutY="96.0">
-         <children>
-            <ComboBox fx:id="comboDepartCity" layoutX="-28.0" layoutY="26.0" prefWidth="300.0" />
-            <Label layoutX="-28.0" layoutY="2.0" styleClass="h4" text="%DepartCity" />
-         </children>
-      </Group>
-      <Group layoutX="601.0" layoutY="97.0">
-         <children>
-            <ComboBox fx:id="comboArrivalCity" layoutX="-25.0" layoutY="24.0" prefWidth="300.0" />
-            <Label layoutX="-25.0" layoutY="2.0" styleClass="h4" text="%ArrivalCity" />
-         </children>
-      </Group>
-      <Group layoutX="126.0" layoutY="196.0">
-         <children>
-              <Label styleClass="h4" text="%EventDate" />
-              <DatePicker fx:id="datepicker" layoutX="145.0" layoutY="-1.0" prefHeight="25.0" prefWidth="155.0" />
-         </children>
-      </Group>
+        <Group layoutX="154.0" layoutY="96.0">
+            <children>
+                <ComboBox fx:id="comboDepartCity" layoutX="-28.0" layoutY="26.0" prefWidth="300.0" />
+                <Label layoutX="-28.0" layoutY="2.0" styleClass="h4" text="%DepartCity" />
+            </children>
+        </Group>
+        <Group layoutX="601.0" layoutY="97.0">
+            <children>
+                <ComboBox fx:id="comboArrivalCity" layoutX="-25.0" layoutY="24.0" prefWidth="300.0" />
+                <Label layoutX="-25.0" layoutY="2.0" styleClass="h4" text="%ArrivalCity" />
+            </children>
+        </Group>
+        <Group layoutX="126.0" layoutY="196.0">
+            <children>
+                <Label styleClass="h4" text="%EventDate" />
+                <DatePicker fx:id="datepicker" layoutX="145.0" layoutY="-1.0" prefHeight="25.0" prefWidth="155.0" />
+            </children>
+        </Group>
         <TableView fx:id="tblRides" layoutX="125.0" layoutY="376.0" prefHeight="342.0" prefWidth="750.0">
             <columns>
                 <TableColumn fx:id="qc1" prefWidth="223.5" text="%FindRidesGUI.Driver" />
                 <TableColumn fx:id="qc2" prefWidth="97.5" text="%FindRidesGUI.NPlaces" />
-            <TableColumn fx:id="qc3" prefWidth="70.0" text="%FindRidesGUI.Price" />
+                <TableColumn fx:id="qc3" prefWidth="70.0" text="%FindRidesGUI.Price" />
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
-         <effect>
-            <Blend />
-         </effect>
+            <effect>
+                <Blend />
+            </effect>
         </TableView>
         <Label layoutX="358.0" layoutY="49.0" text="  " />
         <Label layoutX="125.0" layoutY="343.0" styleClass="h4" text="%RideDate" />

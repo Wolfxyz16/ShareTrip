@@ -65,7 +65,7 @@ public class QueryRidesController implements Controller {
     private ComboBox<City> comboDepartCity;
 
     @FXML
-    private ComboBox<Integer>  numSeats;
+    private ComboBox<Integer> numSeats;
 
     @FXML
     private TableView<Ride> tblRides;
@@ -141,7 +141,6 @@ public class QueryRidesController implements Controller {
         departureCities.setAll(businessLogic.getDepartCities());
 
         ObservableList<City> arrivalCities = FXCollections.observableArrayList(new ArrayList<>());
-
         numSeats.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
         comboDepartCity.setItems(departureCities);
         comboArrivalCity.setItems(arrivalCities);
@@ -192,30 +191,12 @@ public class QueryRidesController implements Controller {
             if (noErrorsInInputFields()) {
                 // Clear the table
                 tblRides.getItems().clear();
+
                 try {
+                    //get all rides with the selected parameters
                     List<Ride> rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue());
 
-                    // If for this search there is an alert, show the red alert image
-                    try {
-                        if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  numSeats.getValue())){
-                            Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/redAlert.png"));
-                            bellView.setImage(image);
-                        } else {
-                            Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/alert.png"));
-                            bellView.setImage(image);
-                        }
-                    } catch (CityDoesNotExistException e) {
-                        //it's not supposed to happen ever
-                    }
-
-                    // TODO: if the search has an alert for it do not reset the heart image
-                    /*if (rideIsFav()) {
-                        Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/redHeart.png"));
-                        heartView.setImage(image);
-                    } else { */
-                    Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/Heart.png"));
-                    heartView.setImage(image);
-                    //}
+                    updateAlertsButton();
 
                     // If the search result is empty, show a message and return
                     if (rides.isEmpty()) {
@@ -225,17 +206,25 @@ public class QueryRidesController implements Controller {
                         return;
                     }
 
+                    // List all rides result
+                    for (Ride ride : rides) {
+                        tblRides.getItems().add(ride);
+                    }
+
                     // If the search is successful, show a success message and not empty
                     String success = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("RidesAvailable");
                     outputLabel.setText("These are the available rides for you:");
                     outputLabel.getStyleClass().setAll("label", "lbl-success");
 
-                    for (Ride ride : rides) {
-                        tblRides.getItems().add(ride);
-                    }
-                    } catch (CityDoesNotExistException ex) {
-                        //it's not supposed to happen ever
-                    }
+                    tblRides.getSelectionModel().selectedItemProperty().addListener((obs, oldRide, newRide) -> {
+                        if (newRide != null) {
+                            updateFavsButton(newRide);
+                        }
+                    });
+
+                } catch (CityDoesNotExistException ex) {
+                    //it's not supposed to happen ever
+                }
             }
         });
 
@@ -251,6 +240,38 @@ public class QueryRidesController implements Controller {
         qc2.setCellValueFactory(new PropertyValueFactory<>("numPlaces"));
         qc3.setCellValueFactory(new PropertyValueFactory<>("price"));
 
+        tblRides.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                Ride ride = tblRides.getSelectionModel().getSelectedItem();
+                updateFavsButton(ride);
+            }
+        });
+    }
+
+    private void updateAlertsButton() throws CityDoesNotExistException {
+        Image image;
+
+        // if the search has an alert set the bell icon to red, if not set it to normal
+        if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  numSeats.getValue())){
+            image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/redAlert.png"));
+            bellView.setImage(image);
+        } else {
+            image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/alert.png"));
+            bellView.setImage(image);
+        }
+    }
+
+
+    private void updateFavsButton(Ride ride) {
+        if (ride != null) {
+            if (businessLogic.getCurrentUser().getFavRides().contains(ride)) {
+                Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/redHeart.png"));
+                heartView.setImage(image);
+            } else {
+                Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/Heart.png"));
+                heartView.setImage(image);
+            }
+        }
     }
 
     private boolean noErrorsInInputFields() {
@@ -351,17 +372,17 @@ public class QueryRidesController implements Controller {
 
     @FXML
     public void addToFavorite(ActionEvent actionEvent) {
-        // TODO: Implement add to Favorites logic,
-        // For that take a look at the createNewAlert method and how it is implemented
-        /*Ride ride = tblRides.getSelectionModel().getSelectedItem();
-        if (ride != null) {
-            businessLogic.addToFavorite(ride);
+        Ride selectedRide = tblRides.getSelectionModel().getSelectedItem();
+        if (selectedRide == null) {
+            outputLabel.setText("Please select a ride to add to favorites.");
+            outputLabel.getStyleClass().setAll("label", "lbl-danger");
+            return;
+        } else {
+            outputLabel.setText("Ride added to favorites.");
+            outputLabel.getStyleClass().setAll("label", "lbl-success");
+            businessLogic.addFavoriteRide(businessLogic.getCurrentUser(), selectedRide);
         }
-         */
-
-        Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/redHeart.png"));
-        heartView.setImage(image);
-
+        updateFavsButton(selectedRide);
     }
 
     @FXML
@@ -380,14 +401,22 @@ public class QueryRidesController implements Controller {
                 return;
             }
             try {
-              businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  numSeats.getValue());
+                businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue());
             } catch (CityDoesNotExistException ex) {
-                  //it's not supposed to happen ever
+                //it's not supposed to happen ever
+
             }
             Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/redAlert.png"));
             bellView.setImage(image);
             System.out.println("Alert created");
 
         }
+    }
+
+    public void searchFavRide(City depCity, City arrCity, Date date) {
+        comboDepartCity.setValue(depCity);
+        comboArrivalCity.setValue(arrCity);
+        numSeats.setValue(1);
+        datepicker.setValue(Dates.convertToLocalDateViaInstant(date));
     }
 }

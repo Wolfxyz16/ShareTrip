@@ -1,6 +1,7 @@
 package eus.ehu.sharetrip.ui;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
+import eus.ehu.sharetrip.domain.City;
 import eus.ehu.sharetrip.uicontrollers.MainGUIController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import eus.ehu.sharetrip.uicontrollers.Controller;
 import eus.ehu.sharetrip.uicontrollers.*;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -96,7 +98,10 @@ public class MainGUI {
             }
             case "Send message" -> mainWrapper.setCenter(sendMessageWin.ui);
             case "View messages" -> mainWrapper.setCenter(viewMessagesWin.ui);
-            case "View Favorites" -> mainWrapper.setCenter(favoriteOverviewWin.ui);
+            case "View Favorites" -> {
+                mainWrapper.setCenter(favoriteOverviewWin.ui);
+                ((ViewFavoritesController)favoriteOverviewWin.c).updateTables();
+            }
             case "Query Rides" -> {
                 mainWrapper.setCenter(queryRidesWin.ui);
                 ((QueryRidesController) queryRidesWin.c).resetValues();
@@ -161,6 +166,12 @@ public class MainGUI {
         }
         stage.show();
 
+    }
+
+    public void searchFavRide(City from, City to, Date date) {
+        mainWrapper.setCenter(queryRidesWin.ui);
+        ((QueryRidesController) queryRidesWin.c).resetValues();
+        ((QueryRidesController)queryRidesWin.c).searchFavRide(from, to, date);
     }
 
     public static void main(String[] args) {
