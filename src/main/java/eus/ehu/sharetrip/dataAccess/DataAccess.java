@@ -252,24 +252,28 @@ public class DataAccess {
               .numSeats(4)
               .build();
 
-      db.getTransaction().begin();
-      db.persist(traveler1);
-      db.persist(traveler2);
-      db.getTransaction().commit();
-
-
-      db.getTransaction().begin();
-      db.persist(message1);
-      db.getTransaction().commit();
-
 
       //Persist the objects
-      db.getTransaction().begin();
       db.persist(alert1);
       db.persist(alert2);
       db.persist(alert3);
       db.persist(alert4);
-      db.getTransaction().commit();
+
+      db.persist(city1);
+      db.persist(city2);
+      db.persist(city3);
+      db.persist(city4);
+      db.persist(city5);
+
+      db.persist(driver1);
+      db.persist(driver2);
+      db.persist(driver3);
+
+      db.persist(traveler1);
+      db.persist(traveler2);
+
+
+      db.persist(message1);
 
 
      // db.getTransaction().commit();
