@@ -34,10 +34,42 @@ public class User {
     public User() {
     }
 
+    private User(Builder builder) {
+        this.email = builder.email;
+        this.username = builder.username;
+        this.password = builder.password;
+    }
+
     public User(String email, String name, String password) {
         this.username = name;
         this.password = password;
         this.email = email;
+    }
+
+    // Builder static inner class
+    public static class Builder {
+        private String email;
+        private String username;
+        private String password;
+
+        public Builder email(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder username(String username) {
+            this.username = username;
+            return this;
+        }
+
+        public Builder password(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public User build() {
+            return new User(this);
+        }
     }
 
     public Long getId() {
