@@ -1,32 +1,36 @@
 package eus.ehu.sharetrip.uicontrollers;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
-import eus.ehu.sharetrip.domain.City;
-import eus.ehu.sharetrip.domain.Message;
-import eus.ehu.sharetrip.domain.Ride;
-import eus.ehu.sharetrip.domain.User;
+import eus.ehu.sharetrip.domain.*;
 import eus.ehu.sharetrip.ui.MainGUI;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.TextStyle;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 public class ViewFavoritesController implements Controller {
-
 
     @FXML
     private TableColumn<Ride, City> arrCityCol;
 
     @FXML
     private TableColumn<Ride, City> depCityCol;
+
+    @FXML
+    private TableColumn<Ride, String> dateCol;
+
+    @FXML
+    private TableColumn<Ride, Driver> driverCol;
 
     @FXML
     private TableView<Ride> tblFavorite;
@@ -53,6 +57,15 @@ public class ViewFavoritesController implements Controller {
         System.out.println("ViewFavorites button is working");
         depCityCol.setCellValueFactory(new PropertyValueFactory<>("fromLocation"));
         arrCityCol.setCellValueFactory(new PropertyValueFactory<>("toLocation"));
+        driverCol.setCellValueFactory(new PropertyValueFactory<>("driver"));
+
+        // Set the weekday for the date column
+        dateCol.setCellValueFactory(cellData -> {
+            Date date = cellData.getValue().getDate();
+            LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            String weekday = localDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+            return new SimpleStringProperty(weekday);
+        });
 
         favoriteRides = FXCollections.observableArrayList();
         tblFavorite.setItems(favoriteRides);
@@ -76,12 +89,13 @@ public class ViewFavoritesController implements Controller {
         Ride selectedRide = tblFavorite.getSelectionModel().getSelectedItem();
         City depCity = selectedRide.getFromLocation();
         City arrCity = selectedRide.getToLocation();
+        Date date = selectedRide.getDate();
 
         if (selectedRide == null) {
             errorlbl.setText("Please select a ride");
             errorlbl.getStyleClass().setAll("label", "lbl-danger");
         } else {
-            mainGUI.searchFavRide(depCity, arrCity);
+            mainGUI.searchFavRide(depCity, arrCity, date);
         }
     }
 

@@ -530,4 +530,9 @@ public class DataAccess {
     return !query.getResultList().isEmpty();
   }
 
+  // Check whether a favorite already exists
+  public boolean favAlreadyExist(User user, Ride ride) {
+    List<Ride> favoriteRides = this.getFavoriteRides(user);
+    return favoriteRides.contains(ride);
+  }
 }

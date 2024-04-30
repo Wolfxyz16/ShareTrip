@@ -17,6 +17,7 @@ import eus.ehu.sharetrip.uicontrollers.Controller;
 import eus.ehu.sharetrip.uicontrollers.*;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -154,9 +155,10 @@ public class MainGUI {
         stage.show();
     }
 
-    public void searchFavRide(City from, City to) {
+    public void searchFavRide(City from, City to, Date date) {
         mainWrapper.setCenter(queryRidesWin.ui);
-        ((QueryRidesController)queryRidesWin.c).searchFavRide(from, to);
+        ((QueryRidesController) queryRidesWin.c).resetValues();
+        ((QueryRidesController)queryRidesWin.c).searchFavRide(from, to, date);
     }
 
     public static void main(String[] args) {

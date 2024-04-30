@@ -17,6 +17,8 @@
             <columns>
                 <TableColumn fx:id="depCityCol" prefWidth="150" text="Departure City" />
                 <TableColumn fx:id="arrCityCol" prefWidth="150" text="Arrival City" />
+            <TableColumn fx:id="dateCol" prefWidth="150" text="Date" />
+            <TableColumn fx:id="driverCol" prefWidth="150" text="Driver" />
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

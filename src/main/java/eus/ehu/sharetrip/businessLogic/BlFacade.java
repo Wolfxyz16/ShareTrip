@@ -98,4 +98,5 @@ public interface BlFacade {
 
     boolean alertAlreadyExist(City city, City city1, Date date, int i);
 
+    boolean favoriteAlreadyExist(User user, Ride ride);
 }
