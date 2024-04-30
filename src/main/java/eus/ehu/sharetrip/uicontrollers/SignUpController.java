@@ -12,9 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import eus.ehu.sharetrip.businessLogic.BlFacade;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class SignUpController implements Controller{
@@ -63,7 +61,8 @@ public class SignUpController implements Controller{
          * Checks that there are not empty fields
          */
         if (userEmail.isEmpty() || userPassword.isEmpty() || userRole == null || userName.isEmpty()) {
-            errorsLabel.setText("ERROR! Please fill in all the fields");
+            String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorEmptyFields");
+            errorsLabel.setText(error);
             errorsLabel.getStyleClass().setAll("label", "lbl-danger");
             return;
         }
@@ -72,7 +71,8 @@ public class SignUpController implements Controller{
          * Check that the password is valid
          */
         if (!isValid(userPassword, confirmPassword)) {
-            errorsLabel.setText("Passwd needs 8+ chars, uppercase, lowercase, digits, and special chars.");
+            String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorInvalidPassword");
+            errorsLabel.setText(error);
             errorsLabel.getStyleClass().setAll("label", "lbl-danger");
             return;
         }
@@ -80,7 +80,8 @@ public class SignUpController implements Controller{
          * We check that both passwords are the same
          */
         if (!userPassword.equals(confirmPassword)) {
-            errorsLabel.setText("ERROR! Passwords do not match");
+            String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorPasswordsDoNotMatch");
+            errorsLabel.setText(error);
             errorsLabel.getStyleClass().setAll("label", "lbl-danger");
             return;
         }
@@ -89,7 +90,8 @@ public class SignUpController implements Controller{
          * Check that the email has a valid format
          */
         if (!userEmail.matches("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$") ) {
-            errorsLabel.setText("ERROR! Invalid email format");
+            String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorInvalidEmail");
+            errorsLabel.setText(error);
             errorsLabel.getStyleClass().setAll("label", "lbl-danger");
             return;
         }
@@ -97,12 +99,14 @@ public class SignUpController implements Controller{
         // Call the business logic to sign up the use
         try {
             bl.signup(userEmail, userName, userPassword, userRole);
-            errorsLabel.setText("Registered successfully!");
+            String success = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("SuccessSignUp");
+            errorsLabel.setText(success);
             errorsLabel.getStyleClass().setAll("label", "lbl-success");
         } catch (UnknownUser e) {
             throw new RuntimeException(e);
         } catch (UserAlreadyExistException e) {
-            errorsLabel.setText("ERROR! User already exists.");
+            String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorUserAlreadyExists");
+            errorsLabel.setText(error);
             errorsLabel.getStyleClass().setAll("label", "lbl-danger");
         }
 
@@ -124,7 +128,9 @@ public class SignUpController implements Controller{
 
     @FXML
     void initialize() {
-        ObservableList<String> options = FXCollections.observableArrayList("Driver", "Traveler");
+        String driver = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("FindRidesGUI.Driver");
+        String traveler = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("Traveler");
+        ObservableList<String> options = FXCollections.observableArrayList(driver, traveler);
         roles.setItems(options);
     }
 

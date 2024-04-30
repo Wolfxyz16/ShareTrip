@@ -6,6 +6,7 @@ import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.exceptions.UnknownUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import eus.ehu.sharetrip.ui.MainGUI;
@@ -166,16 +167,19 @@ public class MainGUIController implements Controller{
         Double width  = mainGUI.getStage().getScene().getWidth();
         Double height = mainGUI.getStage().getScene().getHeight();
         Boolean fullScreen = mainGUI.getStage().isFullScreen();
+        Scene s1 = mainGUI.getStage().getScene();
 
         changeStageLanguage(width, height, fullScreen);
     }
 
     private void changeStageLanguage(Double width, Double height, Boolean fullScreen) {
         try {
-            mainGUI.init(mainGUI.getStage(), fullScreen);
+            mainGUI.init(mainGUI.getStage());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        mainGUI.showUpdate(mainGUI.getStage(), width, height, fullScreen);
 
         try {
             User u = mainGUI.getBusinessLogic().getCurrentUser();
@@ -188,9 +192,6 @@ public class MainGUIController implements Controller{
             System.out.println("No user logged in");
         }
 
-        if (!fullScreen){
-            mainGUI.showUpdate(mainGUI.getStage(), width, height);
-        }
     }
 
     @FXML

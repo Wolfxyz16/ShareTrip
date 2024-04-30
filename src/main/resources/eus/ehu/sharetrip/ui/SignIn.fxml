@@ -13,8 +13,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1000.0" stylesheets="@styles/bootstrapfx.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.SignInController">
     <children>
-      <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#f2cb05" height="300.0" layoutX="201.0" layoutY="252.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
-      <VBox layoutX="300.0" layoutY="302.0" spacing="20.0">
+      <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#f2cb05" height="300.0" layoutX="237.0" layoutY="254.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
+      <VBox layoutX="336.0" layoutY="304.0" spacing="20.0">
          <children>
             <Group>
                <children>
@@ -30,18 +30,21 @@
             </Group>
          </children>
       </VBox>
-        <Button layoutX="425.0" layoutY="475.0" mnemonicParsing="false" onAction="#onClick" prefWidth="150.0" text="%login">
+        <Button layoutX="461.0" layoutY="477.0" mnemonicParsing="false" onAction="#onClick" prefWidth="150.0" text="%login">
          <styleClass>
             <String fx:value="btn" />
             <String fx:value="btn-primary" />
             <String fx:value="btn-lg" />
          </styleClass></Button>
-        <Label alignment="CENTER" layoutX="274.0" layoutY="75.0" prefHeight="75.0" prefWidth="460.0" styleClass="h1" text="%welcomeBack" textAlignment="CENTER">
+        <Label alignment="CENTER" layoutX="306.0" layoutY="74.0" prefHeight="75.0" prefWidth="460.0" styleClass="h1" text="%welcomeBack" textAlignment="CENTER">
             <font>
                 <Font size="25.0" />
             </font>
         </Label>
-      <Label alignment="CENTER" layoutX="221.0" layoutY="176.0" prefHeight="36.0" prefWidth="546.0" styleClass="h2" text="%infoSignIn" textAlignment="CENTER" />
-      <Label fx:id="loginStatus" layoutX="476.0" layoutY="440.0" styleClass="h4" />
+      <Label alignment="CENTER" layoutX="146.0" layoutY="178.0" prefHeight="36.0" prefWidth="780.0" styleClass="h2" text="%infoSignIn" textAlignment="CENTER">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
+      <Label fx:id="loginStatus" alignment="CENTER" layoutX="378.0" layoutY="443.0" prefHeight="21.0" prefWidth="318.0" styleClass="h4" />
     </children>
 </AnchorPane>

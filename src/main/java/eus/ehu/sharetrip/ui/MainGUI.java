@@ -3,15 +3,11 @@ package eus.ehu.sharetrip.ui;
 import eus.ehu.sharetrip.businessLogic.BlFacade;
 import eus.ehu.sharetrip.uicontrollers.MainGUIController;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import org.kordamp.bootstrapfx.BootstrapFX;
 import eus.ehu.sharetrip.uicontrollers.Controller;
 import eus.ehu.sharetrip.uicontrollers.*;
@@ -38,16 +34,12 @@ public class MainGUI {
         businessLogic = afi;
     }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
 
     public MainGUI(BlFacade bl) {
         Platform.startup(() -> {
             try {
                 setBusinessLogic(bl);
-                init(stage=new Stage(), false);
+                init(stage=new Stage());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -122,7 +114,7 @@ public class MainGUI {
         }
     }
 
-    public void init(Stage stage, Boolean fullScreen) throws IOException {
+    public void init(Stage stage) throws IOException {
         mainWin = load("MainGUI.fxml");
         mainWrapper = ((MainGUIController)mainWin.c).getMainWrapper();
 
@@ -141,7 +133,7 @@ public class MainGUI {
         logOutWin = load("DoubleCheck.fxml");
         ((MainGUIController)mainWin.c).initializeButtonVisibility();
 
-        showMain(stage, fullScreen);
+        showMain(stage);
     }
 
 
@@ -149,27 +141,27 @@ public class MainGUI {
         return stage;
     }
 
-    public void showUpdate(Stage stage, Double width, Double height) {
-        stage.setHeight(height + 28);
-        stage.setWidth(width);
-        stage.show();
-    }
-
-    private void showMain(Stage stage,Boolean fullScreen) {
+    private void showMain(Stage stage) {
         // set stage's scene
         Scene scene = new Scene(mainWin.ui);
         scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
         stage.setTitle("ShareTrip");
         stage.setScene(scene);
-        if (fullScreen){
-            stage.setFullScreen(true);
-        }else{
-            stage.setHeight(740.0);
-            stage.setWidth(1200.0);
-        }
+        stage.setHeight(740.0);
+        stage.setWidth(1200.0);
         stage.show();
     }
 
+    public void showUpdate(Stage stage, Double width, Double height, Boolean fullScreen) {
+        if (fullScreen){
+            stage.setFullScreen(true);
+        }else{
+            stage.setHeight(height + 28);
+            stage.setWidth(width);
+        }
+        stage.show();
+
+    }
 
     public static void main(String[] args) {
        launch();

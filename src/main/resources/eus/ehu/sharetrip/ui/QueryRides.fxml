@@ -57,7 +57,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Label layoutX="378.0" layoutY="28.0" styleClass="h1" text="%whereGoing" />
+      <Label alignment="CENTER" layoutX="229.0" layoutY="27.0" prefHeight="42.0" prefWidth="555.0" styleClass="h1" text="%whereGoing" />
       <Button fx:id="bellBtn" layoutX="763.0" layoutY="194.0" mnemonicParsing="false" onAction="#createNewAlert" prefHeight="50.0" prefWidth="50.0">
          <graphic>
             <ImageView fx:id="bellView" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">

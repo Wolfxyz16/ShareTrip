@@ -49,7 +49,10 @@ public class SignInController implements Controller {
     void onClick(ActionEvent event) {
 
         // Checks that no field is null
-        if (login.getText() == null || password.getText() == null) {
+        if (login.getText().isEmpty() || password.getText().isEmpty()){
+            String error = ResourceBundle.getBundle("Etiquetas").getString("ErrorEmptyFields");
+            loginStatus.setText(error);
+            loginStatus.getStyleClass().setAll("label", "lbl-danger");
             return;
         }
 
@@ -64,12 +67,10 @@ public class SignInController implements Controller {
             loginStatus.getStyleClass().setAll("label", "lbl-success");
             mainGUI.showScene("Query Rides");
         } catch (UnknownUser unknownUser) {
-            loginStatus.setText("Unknown user");
+            String error = ResourceBundle.getBundle("Etiquetas").getString("UnknownUser");
+            loginStatus.setText(error);
             loginStatus.getStyleClass().setAll("label", "lbl-danger");
-            //mainGUI.setUserName("Unknown user");
         }
-
-        //mainGUI.showScene("Query Rides");
 
     }
 

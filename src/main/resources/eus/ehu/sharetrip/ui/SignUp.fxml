@@ -55,11 +55,14 @@
             <String fx:value="btn-primary" />
             <String fx:value="btn-lg" />
          </styleClass></Button>
-        <Label layoutX="362.0" layoutY="48.0" styleClass="h1" text="%CreateAccount">
+        <Label alignment="CENTER" layoutX="283.0" layoutY="48.0" prefHeight="42.0" prefWidth="458.0" styleClass="h1" text="%CreateAccount">
             <font>
                 <Font size="25.0" />
             </font>
         </Label>
-      <Label fx:id="errorsLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="482.0" prefHeight="36.0" prefWidth="400.0" />
+      <Label fx:id="errorsLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="489.0" prefHeight="21.0" prefWidth="400.0">
+         <font>
+            <Font size="12.0" />
+         </font></Label>
     </children>
 </AnchorPane>
