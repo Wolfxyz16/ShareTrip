@@ -9,6 +9,8 @@ import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 import java.util.Locale;
+import java.time.DayOfWeek;
+import java.time.format.TextStyle;
 
 public class Dates {
 
@@ -58,5 +60,11 @@ public class Dates {
         .toFormatter(Locale.getDefault());
 
     return YearMonth.parse(date, fmt);
+  }
+
+  public static String getWeekdayFromDate(Date date) {
+    LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    DayOfWeek dayOfWeek = localDate.getDayOfWeek();
+    return dayOfWeek.getDisplayName(TextStyle.FULL, Locale.GERMAN);
   }
 }

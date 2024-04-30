@@ -3,6 +3,7 @@ package eus.ehu.sharetrip.uicontrollers;
 import eus.ehu.sharetrip.businessLogic.BlFacade;
 import eus.ehu.sharetrip.domain.*;
 import eus.ehu.sharetrip.ui.MainGUI;
+import eus.ehu.sharetrip.utils.Dates;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -61,10 +62,7 @@ public class ViewFavoritesController implements Controller {
 
         // Set the weekday for the date column
         dateCol.setCellValueFactory(cellData -> {
-            Date date = cellData.getValue().getDate();
-            LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            String weekday = localDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
-            return new SimpleStringProperty(weekday);
+            return new SimpleStringProperty(Dates.getWeekdayFromDate(cellData.getValue().getDate()));
         });
 
         favoriteRides = FXCollections.observableArrayList();
@@ -89,6 +87,7 @@ public class ViewFavoritesController implements Controller {
         Ride selectedRide = tblFavorite.getSelectionModel().getSelectedItem();
         City depCity = selectedRide.getFromLocation();
         City arrCity = selectedRide.getToLocation();
+        //String weekday = Dates.getWeekdayFromDate(selectedRide.getDate());
         Date date = selectedRide.getDate();
 
         if (selectedRide == null) {
