@@ -99,6 +99,7 @@ public class SignUpController implements Controller{
         // Call the business logic to sign up the use
         try {
             bl.signup(userEmail, userName, userPassword, userRole);
+            System.out.println("User signed up");
             String success = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("SuccessSignUp");
             errorsLabel.setText(success);
             errorsLabel.getStyleClass().setAll("label", "lbl-success");
@@ -110,20 +111,22 @@ public class SignUpController implements Controller{
             errorsLabel.getStyleClass().setAll("label", "lbl-danger");
         }
 
-        this.autoLogin(userName, userPassword);
+        if (this.autoLogin(userName, userPassword)){
+            mainGUI.showScene("Query Rides");
 
-        mainGUI.showScene("Query Rides");
-
+        }
     }
 
-    private void autoLogin(String username, String password) {
+    private Boolean autoLogin(String username, String password) {
         try {
             bl.login(username, password);
             mainGUI.setUserName(username);
             mainGUI.setIsLoggedIn(true);
+            return true;
         } catch (UnknownUser unknownUser) {
             System.out.println("Unknown user");
         }
+        return false;
     }
 
     @FXML

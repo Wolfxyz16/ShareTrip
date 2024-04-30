@@ -19,7 +19,7 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
-        <Label fx:id="titleLabel" alignment="CENTER" layoutX="204.0" layoutY="45.0" prefHeight="30.0" prefWidth="199.0" text="%YourAlerts">
+        <Label fx:id="titleLabel" alignment="CENTER" layoutX="183.0" layoutY="45.0" prefHeight="30.0" prefWidth="234.0" text="%YourAlerts">
             <font>
                 <Font size="25.0" />
             </font></Label>

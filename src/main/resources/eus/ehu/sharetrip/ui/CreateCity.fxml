@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="740.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.CreateCityController">
    <children>
-      <Label alignment="CENTER" layoutX="246.0" layoutY="228.0" prefHeight="46.0" prefWidth="573.0" text="%CreateCityGUI.Title">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="246.0" layoutY="228.0" prefHeight="46.0" prefWidth="573.0" text="%CreateCityGUI.Title">
          <font>
             <Font size="37.0" />
          </font>
@@ -19,7 +19,7 @@
          </font>
       </Label>
       <TextField fx:id="newCity" layoutX="476.0" layoutY="356.0" />
-      <Button layoutX="517.0" layoutY="424.0" mnemonicParsing="false" onAction="#createCityClick" prefHeight="26.0" prefWidth="85.0" text="%CreateCityGUI.Btn" />
-      <Label fx:id="newCityStatusMessage" alignment="CENTER" layoutX="480.0" layoutY="473.0" prefHeight="17.0" prefWidth="160.0" />
+      <Button layoutX="488.0" layoutY="425.0" mnemonicParsing="false" onAction="#createCityClick" prefHeight="26.0" prefWidth="136.0" text="%CreateCityGUI.Btn" />
+      <Label fx:id="newCityStatusMessage" alignment="CENTER" layoutX="333.0" layoutY="471.0" prefHeight="17.0" prefWidth="445.0" />
    </children>
 </AnchorPane>

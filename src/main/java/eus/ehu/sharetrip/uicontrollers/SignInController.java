@@ -63,7 +63,8 @@ public class SignInController implements Controller {
             bl.login(username, pass);
             mainGUI.setUserName(username);
             mainGUI.setIsLoggedIn(true);
-            loginStatus.setText("Logged in");
+            String logged = ResourceBundle.getBundle("Etiquetas").getString("LogedIn");
+            loginStatus.setText(logged);
             loginStatus.getStyleClass().setAll("label", "lbl-success");
             mainGUI.showScene("Query Rides");
         } catch (UnknownUser unknownUser) {

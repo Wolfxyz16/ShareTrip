@@ -59,7 +59,7 @@ public class CreateRideController implements Controller {
     private String field_Errors() {
 
         try {
-            if ((txtDepartCity.getText().length() == 0) || (txtArrivalCity.getText().length() == 0) || (txtSeats.getText().length() == 0) || (txtPrice.getText().length() == 0))
+            if ((txtDepartCity.getText().isEmpty()) || (txtArrivalCity.getText().isEmpty()) || (txtSeats.getText().isEmpty()) || (txtPrice.getText().isEmpty()))
                 return ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.ErrorQuery");
             else {
 

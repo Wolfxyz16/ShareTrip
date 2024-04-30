@@ -219,12 +219,14 @@ public class QueryRidesController implements Controller {
 
                     // If the search result is empty, show a message and return
                     if (rides.isEmpty()) {
-                        outputLabel.setText("No rides available for you with the selected date, cities and number of seats.");
+                        String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("NoRidesAvailable");
+                        outputLabel.setText(error);
                         outputLabel.getStyleClass().setAll("label", "lbl-warning");
                         return;
                     }
 
                     // If the search is successful, show a success message and not empty
+                    String success = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("RidesAvailable");
                     outputLabel.setText("These are the available rides for you:");
                     outputLabel.getStyleClass().setAll("label", "lbl-success");
 
@@ -254,22 +256,26 @@ public class QueryRidesController implements Controller {
     private boolean noErrorsInInputFields() {
         // Check if all fields are filled
         if (comboDepartCity.getValue() == null) {
-            outputLabel.setText("Please select a departure city.");
+            String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("EmptyDepartureCity");
+            outputLabel.setText(error);
             outputLabel.getStyleClass().setAll("label", "lbl-danger");
             return false;
         }
         if (comboArrivalCity.getValue() == null) {
-            outputLabel.setText("Please select an arrival city.");
+            String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("EmptyArrivalCity");
+            outputLabel.setText(error);
             outputLabel.getStyleClass().setAll("label", "lbl-danger");
             return false;
         }
         if (datepicker.getValue() == null) {
-            outputLabel.setText("Please select a date.");
+            String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("EmptyDate");
+            outputLabel.setText(error);
             outputLabel.getStyleClass().setAll("label", "lbl-danger");
             return false;
         }
         if (numSeats.getValue() == null) {
-            outputLabel.setText("Please enter the number of seats.");
+            String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("EmptyNumSeats");
+            outputLabel.setText(error);
             outputLabel.getStyleClass().setAll("label", "lbl-danger");
             return false;
         }
@@ -278,6 +284,7 @@ public class QueryRidesController implements Controller {
 
         // Check if date is later than today
         if (datepicker.getValue().isBefore(LocalDate.now())) {
+            String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("CreateRideGUI.ErrorRideMustBeLaterThanToday");
             outputLabel.setText("The date must be later than today.");
             outputLabel.getStyleClass().setAll("label", "lbl-danger");
             return false;
@@ -285,7 +292,8 @@ public class QueryRidesController implements Controller {
 
         // A date is selected and not only a number input or something added to the datepicker
         if (datepicker.getValue() == null) {
-            outputLabel.setText("Please select a date.");
+            String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("EmptyDate");
+            outputLabel.setText(error);
             outputLabel.getStyleClass().setAll("label", "lbl-danger");
             return false;
         }
@@ -293,13 +301,12 @@ public class QueryRidesController implements Controller {
         // Check if the number of seats is a positive integer
         try {
             int seats = numSeats.getValue();
-            if (seats <= 0) {
-                outputLabel.setText("The number of seats must be a positive integer.");
-                outputLabel.getStyleClass().setAll("label", "lbl-danger");
-                return false;
+            if (seats <= 0) {//not possible
+               throw new NumberFormatException();
             }
         } catch (NumberFormatException e) {
-            outputLabel.setText("The number of seats must be a positive integer.");
+            String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("NumSeatsNotPositiveInteger");
+            outputLabel.setText(error);
             outputLabel.getStyleClass().setAll("label", "lbl-danger");
             return false;
         }
@@ -362,11 +369,13 @@ public class QueryRidesController implements Controller {
         if (noErrorsInInputFields()) {
             // check if user is logged in
             if (businessLogic.getCurrentUser() == null) {
-                outputLabel.setText("You must be logged in to create an alert.");
+                String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorMustBeLoggedIn");
+                outputLabel.setText(error);
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
                 return;
             } else if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  numSeats.getValue())) {
-                outputLabel.setText("You already have this alert for this ride.");
+                String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("CreateAlertGUI.AlertAlreadyExist");
+                outputLabel.setText(error);
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
                 return;
             }

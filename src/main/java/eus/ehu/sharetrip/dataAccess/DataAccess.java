@@ -416,13 +416,13 @@ public class DataAccess {
       User existingUser = query.getSingleResult();
       throw new UserAlreadyExistException();
     } catch (NoResultException e) {
-        if (role.equals("Driver")) {
+        if (role.equals(ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("FindRidesGUI.Driver"))) {
           Driver driver = new Driver(email, userName, password);
           db.getTransaction().begin();
           db.persist(driver);
           db.getTransaction().commit();
           return driver;
-        } else if (role.equals("Traveler")) {
+        } else if (role.equals(ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("Traveler"))) {
           Traveler traveler = new Traveler(email, userName, password);
           db.getTransaction().begin();
           db.persist(traveler);

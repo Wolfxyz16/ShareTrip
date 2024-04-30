@@ -8,6 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import eus.ehu.sharetrip.businessLogic.BlFacade;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class CreateCityController implements Controller {
 
     private BlFacade businessLogic;
@@ -28,11 +31,13 @@ public class CreateCityController implements Controller {
         String city = newCity.getText();
         try {
             businessLogic.createCity(city);
-            newCityStatusMessage.setText("City created successfully");
+            String success = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("CityCreated");
+            newCityStatusMessage.setText(success);
             newCityStatusMessage.getStyleClass().setAll("label", "lbl-success");
 
         } catch (CityAlreadyExistException e) {
-            newCityStatusMessage.setText("City already exists");
+            String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("CreateCityGUI.CityAlreadyExist");
+            newCityStatusMessage.setText(error);
             newCityStatusMessage.getStyleClass().setAll("label", "lbl-danger");
 
         }

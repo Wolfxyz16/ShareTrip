@@ -1,9 +1,7 @@
 package eus.ehu.sharetrip.uicontrollers;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
-import eus.ehu.sharetrip.configuration.Config;
 import eus.ehu.sharetrip.domain.User;
-import eus.ehu.sharetrip.exceptions.UnknownUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -11,13 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import eus.ehu.sharetrip.ui.MainGUI;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.net.URL;
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class MainGUIController implements Controller{
 
@@ -139,40 +132,43 @@ public class MainGUIController implements Controller{
     void setLanguageEn(ActionEvent event) {
         Locale.setDefault(new Locale("en"));
         System.out.println("Locale: " + Locale.getDefault());
-
+/*
         Double width  = mainGUI.getStage().getScene().getWidth();
         Double height = mainGUI.getStage().getScene().getHeight();
         Boolean fullScreen = mainGUI.getStage().fullScreenProperty().getValue();
-
-        changeStageLanguage(width, height, fullScreen);
+*/
+        changeStageLanguage();
     }
 
     @FXML
     void setLanguageEs(ActionEvent event) {
         Locale.setDefault(new Locale("es"));
         System.out.println("Locale: " + Locale.getDefault());
-
+        /*
         Double width  = mainGUI.getStage().getScene().getWidth();
         Double height = mainGUI.getStage().getScene().getHeight();
         Boolean fullScreen = mainGUI.getStage().fullScreenProperty().getValue();
-
-        changeStageLanguage(width, height, fullScreen);
+        */
+        changeStageLanguage();
     }
 
     @FXML
     void setLanguageEus(ActionEvent event) {
         Locale.setDefault(new Locale("eus"));
         System.out.println("Locale: " + Locale.getDefault());
-
+        /*
         Double width  = mainGUI.getStage().getScene().getWidth();
         Double height = mainGUI.getStage().getScene().getHeight();
         Boolean fullScreen = mainGUI.getStage().isFullScreen();
-        Scene s1 = mainGUI.getStage().getScene();
-
-        changeStageLanguage(width, height, fullScreen);
+        */
+        changeStageLanguage();
     }
 
-    private void changeStageLanguage(Double width, Double height, Boolean fullScreen) {
+    private void changeStageLanguage() {
+        Double width  = mainGUI.getStage().getScene().getWidth();
+        Double height = mainGUI.getStage().getScene().getHeight();
+        Boolean fullScreen = mainGUI.getStage().isFullScreen();
+
         try {
             mainGUI.init(mainGUI.getStage());
         } catch (IOException e) {

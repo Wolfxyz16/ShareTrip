@@ -52,7 +52,7 @@
             <String fx:value="btn-primary" />
             <String fx:value="btn-lg" />
          </styleClass></Button>
-      <Label layoutX="344.0" layoutY="70.0" styleClass="h1" text="%CreateRideTitle" />
+      <Label alignment="CENTER" layoutX="260.0" layoutY="67.0" prefHeight="42.0" prefWidth="484.0" styleClass="h1" text="%CreateRideTitle" />
       <Separator layoutX="401.0" layoutY="555.0" prefWidth="200.0" />
       <Label fx:id="warningsInfo" alignment="CENTER" layoutX="161.0" layoutY="648.0" prefHeight="30.0" prefWidth="682.0" stylesheets="@styles/bootstrapfx.css" textAlignment="JUSTIFY" />
    </children>

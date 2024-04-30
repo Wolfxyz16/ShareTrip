@@ -30,7 +30,7 @@
             </Group>
          </children>
       </VBox>
-        <Button layoutX="461.0" layoutY="477.0" mnemonicParsing="false" onAction="#onClick" prefWidth="150.0" text="%login">
+        <Button layoutX="446.0" layoutY="477.0" mnemonicParsing="false" onAction="#onClick" prefHeight="49.0" prefWidth="181.0" text="%login">
          <styleClass>
             <String fx:value="btn" />
             <String fx:value="btn-primary" />
