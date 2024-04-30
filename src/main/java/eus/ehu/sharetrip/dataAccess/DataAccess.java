@@ -124,6 +124,9 @@ public class DataAccess {
       City city11 = new City("Hondarribia");
       City city12 = new City("Irun");
       City city13 = new City("Hendaia");
+      City city14 = new City("Getxo");
+      City city15 = new City("Barakaldo");
+      City city16 = new City("Santurtzi");
 
 
       Ride ride1 = new Ride.Builder()
@@ -272,6 +275,17 @@ public class DataAccess {
       db.persist(city3);
       db.persist(city4);
       db.persist(city5);
+      db.persist(city6);
+      db.persist(city7);
+      db.persist(city8);
+      db.persist(city9);
+      db.persist(city10);
+      db.persist(city11);
+      db.persist(city12);
+      db.persist(city13);
+      db.persist(city14);
+      db.persist(city15);
+      db.persist(city16);
 
       db.persist(driver1);
       db.persist(driver2);
