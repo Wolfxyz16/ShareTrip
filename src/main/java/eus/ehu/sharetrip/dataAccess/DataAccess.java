@@ -85,7 +85,7 @@ public class DataAccess {
     this.reset();
 
 
-    //db.getTransaction().begin();
+
 
     try {
 
@@ -252,7 +252,7 @@ public class DataAccess {
               .numSeats(4)
               .build();
 
-
+      db.getTransaction().begin();
       //Persist the objects
       db.persist(alert1);
       db.persist(alert2);
@@ -274,9 +274,7 @@ public class DataAccess {
 
 
       db.persist(message1);
-
-
-     // db.getTransaction().commit();
+     db.getTransaction().commit();
       System.out.println("Db initialized");
     } catch (Exception e) {
       e.printStackTrace();
