@@ -213,6 +213,8 @@ public class QueryRidesController implements Controller {
 
                     // If the search is successful, show a success message and not empty
                     String success = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("RidesAvailable");
+                    Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/Heart.png"));
+                    heartView.setImage(image);
                     outputLabel.setText("These are the available rides for you:");
                     outputLabel.getStyleClass().setAll("label", "lbl-success");
 
