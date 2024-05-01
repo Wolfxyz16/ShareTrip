@@ -28,16 +28,7 @@ public class Ride implements Serializable {
 	public Ride(){
 		super();
 	}
-	
-	private Ride(Builder builder){
-		super();
-		this.fromLocation = builder.fromLocation;
-		this.toLocation = builder.toLocation;
-		this.numPlaces = builder.numPlaces;
-		this.date = builder.date;
-		this.price = builder.price;
-		this.driver = builder.driver;
-	}
+
 
 	public static class Builder{
 		private City fromLocation;
@@ -47,6 +38,8 @@ public class Ride implements Serializable {
 		private float price;
 		private Driver driver;
 
+		public Builder(){
+		}
 		public Builder fromLocation(City fromLocation){
 			this.fromLocation = fromLocation;
 			return this;
@@ -78,7 +71,17 @@ public class Ride implements Serializable {
 		}
 
 		public Ride build(){
-			return new Ride(this);
+			if(fromLocation == null || toLocation == null || numPlaces == 0 || date == null || price == 0 || driver == null){
+				throw new IllegalStateException("Cannot create Ride without all the required fields");
+			}
+			Ride ride = new Ride();
+			ride.fromLocation = this.fromLocation;
+			ride.toLocation = this.toLocation;
+			ride.numPlaces = this.numPlaces;
+			ride.date = this.date;
+			ride.price = this.price;
+			ride.driver = this.driver;
+			return ride;
 		}
 
 	}

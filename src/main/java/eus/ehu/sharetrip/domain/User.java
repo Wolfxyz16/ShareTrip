@@ -1,6 +1,7 @@
 package eus.ehu.sharetrip.domain;
 
 import jakarta.persistence.*;
+import javafx.util.Builder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,23 +28,11 @@ public class User {
     @Column(name = "USER_TYPE", insertable = false, updatable = false)
     private String userType;
 
-    protected String email;
-    protected String username;
-    protected String password;
+    private String email;
+    private String username;
+    private String password;
 
     public User() {
-    }
-
-    private User(Builder builder) {
-        this.email = builder.email;
-        this.username = builder.username;
-        this.password = builder.password;
-    }
-
-    public User(String email, String name, String password) {
-        this.username = name;
-        this.password = password;
-        this.email = email;
     }
 
     // Builder static inner class
@@ -51,6 +40,9 @@ public class User {
         private String email;
         private String username;
         private String password;
+
+        public Builder() {
+        }
 
         public Builder email(String email) {
             this.email = email;
@@ -68,7 +60,14 @@ public class User {
         }
 
         public User build() {
-            return new User(this);
+            if(email == null || username == null || password == null) {
+                throw new IllegalStateException("Cannot create User without email, username and password");
+            }
+            User user = new User();
+            user.email = this.email;
+            user.username = this.username;
+            user.password = this.password;
+            return user;
         }
     }
 
@@ -95,6 +94,27 @@ public class User {
     public String getEmail() {
         return email;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setFavRides(List<Ride> favRides) {
+        this.favRides = favRides;
+    }
+
 
     @Override
     public String toString() {
