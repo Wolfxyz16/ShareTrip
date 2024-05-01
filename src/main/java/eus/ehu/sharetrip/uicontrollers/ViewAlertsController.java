@@ -4,6 +4,8 @@ import eus.ehu.sharetrip.businessLogic.BlFacade;
 import eus.ehu.sharetrip.domain.Alert;
 import eus.ehu.sharetrip.domain.City;
 import eus.ehu.sharetrip.ui.MainGUI;
+import eus.ehu.sharetrip.utils.Dates;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,7 +14,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
+import java.util.Locale;
 
 public class ViewAlertsController implements Controller {
 
@@ -27,7 +32,7 @@ public class ViewAlertsController implements Controller {
     private TableColumn<Alert, City> destinyCol;
 
     @FXML
-    private TableColumn<Alert, Date> rideDateCol;
+    private TableColumn<Alert, String> rideDateCol;
 
     @FXML
     private TableColumn<Alert, Integer> numSeatsCol;
@@ -36,8 +41,6 @@ public class ViewAlertsController implements Controller {
     private TableView<Alert> tblAlerts;
 
     private ObservableList<Alert> alerts;
-
-
 
     public ViewAlertsController(BlFacade bl) {
         businessLogic = bl;
@@ -48,18 +51,37 @@ public class ViewAlertsController implements Controller {
         System.out.println("ViewAlerts button is working");
         originCol.setCellValueFactory(new PropertyValueFactory<>("fromLocation"));
         destinyCol.setCellValueFactory(new PropertyValueFactory<>("toLocation"));
-        rideDateCol.setCellValueFactory(new PropertyValueFactory<>("rideDate"));
+        //rideDateCol.setCellValueFactory(new PropertyValueFactory<>("rideDate"));
         numSeatsCol.setCellValueFactory(new PropertyValueFactory<>("numSeats"));
+
+        rideDateCol.setCellValueFactory(cellData -> {
+            LocalDate localdate = cellData.getValue().getRideDate()
+                    .toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+            Locale locale = Locale.ENGLISH;
+            String formattedDate = Dates.formatLocalizedDate(localdate,locale);
+            return new SimpleStringProperty(formattedDate);
+        });
+
         alerts = FXCollections.observableArrayList();
         alerts.addAll(businessLogic.getAlerts());
         this.tblAlerts.setItems(alerts);
+    }
+
+    @FXML
+    void deleteAlert(ActionEvent event) {
+        Alert alert = tblAlerts.getSelectionModel().getSelectedItem();
+        if (alert != null) {
+            businessLogic.deleteAlert(alert);
+            alerts.remove(alert);
+        }
     }
 
     @Override
     public void setMainApp(MainGUI mainGUI) {
         this.mainGUI = mainGUI;
     }
-
 
     public TableColumn<Alert, Integer> getNumSeatsCol() {
         return numSeatsCol;
@@ -85,11 +107,11 @@ public class ViewAlertsController implements Controller {
         this.destinyCol = destinyCol;
     }
 
-    public TableColumn<Alert, Date> getRideDateCol() {
+    public TableColumn<Alert, String> getRideDateCol() {
         return rideDateCol;
     }
 
-    public void setRideDateCol(TableColumn<Alert, Date> rideDateCol) {
+    public void setRideDateCol(TableColumn<Alert, String> rideDateCol) {
         this.rideDateCol = rideDateCol;
     }
 

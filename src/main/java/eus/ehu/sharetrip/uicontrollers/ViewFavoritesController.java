@@ -28,11 +28,11 @@ public class ViewFavoritesController implements Controller {
     @FXML
     private TableColumn<Ride, City> depCityCol;
 
-    /*@FXML
-    private TableColumn<Ride, String> dateCol;*/
-
     @FXML
-    private TableColumn<Ride, Date> dateCol;
+    private TableColumn<Ride, String> dateCol;
+
+    /*@FXML
+    private TableColumn<Ride, Date> dateCol;*/
 
     @FXML
     private TableColumn<Ride, Driver> driverCol;
@@ -63,7 +63,17 @@ public class ViewFavoritesController implements Controller {
         depCityCol.setCellValueFactory(new PropertyValueFactory<>("fromLocation"));
         arrCityCol.setCellValueFactory(new PropertyValueFactory<>("toLocation"));
         driverCol.setCellValueFactory(new PropertyValueFactory<>("driver"));
-        dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        //dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        dateCol.setCellValueFactory(cellData -> {
+            LocalDate localdate = cellData.getValue().getDate()
+                    .toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+            Locale locale = Locale.ENGLISH;
+            String formattedDate = Dates.formatLocalizedDate(localdate,locale);
+            return new SimpleStringProperty(formattedDate);
+        });
 
         /*
         // Set the weekday for the date column
@@ -104,4 +114,16 @@ public class ViewFavoritesController implements Controller {
         }
     }
 
+    @FXML
+    void deleteFav(ActionEvent event) {
+        Ride selectedRide = tblFavorite.getSelectionModel().getSelectedItem();
+        if (selectedRide == null) {
+            errorlbl.setText("Please select a ride");
+            errorlbl.getStyleClass().setAll("label", "lbl-danger");
+        } else {
+            User currentUser = businessLogic.getCurrentUser();
+            businessLogic.deleteFavoriteRide(currentUser, selectedRide);
+            updateTables();
+        }
+    }
 }

@@ -736,4 +736,21 @@ public class DataAccess {
     List<Ride> favoriteRides = this.getFavoriteRides(user);
     return favoriteRides.contains(ride);
   }
+
+  public void deleteFavoriteRide(User currentUser, Ride selectedRide) {
+    List<Ride> favoriteRides = this.getFavoriteRides(currentUser);
+    if (favoriteRides.contains(selectedRide)) {
+      currentUser.deleteFavRide(selectedRide);
+      favoriteRides.remove(selectedRide);
+      db.getTransaction().begin();
+      db.merge(currentUser);
+      db.getTransaction().commit();
+    }
+  }
+
+  public void deleteAlert(Alert alert) {
+    db.getTransaction().begin();
+    db.remove(alert);
+    db.getTransaction().commit();
+  }
 }

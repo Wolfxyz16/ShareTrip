@@ -35,6 +35,22 @@ public class User {
     public User() {
     }
 
+    private User(Builder builder) {
+        this.email = builder.email;
+        this.username = builder.username;
+        this.password = builder.password;
+    }
+
+    public User(String email, String name, String password) {
+        this.username = name;
+        this.password = password;
+        this.email = email;
+    }
+
+    public void deleteFavRide(Ride selectedRide) {
+        favRides.remove(selectedRide);
+    }
+  
     // Builder static inner class
     public static class Builder {
         private String email;
