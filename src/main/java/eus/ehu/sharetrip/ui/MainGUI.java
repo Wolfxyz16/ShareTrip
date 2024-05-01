@@ -170,7 +170,7 @@ public class MainGUI {
 
     public void searchFavRide(City from, City to, Date date) {
         mainWrapper.setCenter(queryRidesWin.ui);
-        ((QueryRidesController) queryRidesWin.c).resetValues();
+        ((QueryRidesController)queryRidesWin.c).resetValues();
         ((QueryRidesController)queryRidesWin.c).searchFavRide(from, to, date);
     }
 
