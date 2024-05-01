@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.TextStyle;
@@ -27,8 +28,11 @@ public class ViewFavoritesController implements Controller {
     @FXML
     private TableColumn<Ride, City> depCityCol;
 
+    /*@FXML
+    private TableColumn<Ride, String> dateCol;*/
+
     @FXML
-    private TableColumn<Ride, String> dateCol;
+    private TableColumn<Ride, Date> dateCol;
 
     @FXML
     private TableColumn<Ride, Driver> driverCol;
@@ -59,11 +63,13 @@ public class ViewFavoritesController implements Controller {
         depCityCol.setCellValueFactory(new PropertyValueFactory<>("fromLocation"));
         arrCityCol.setCellValueFactory(new PropertyValueFactory<>("toLocation"));
         driverCol.setCellValueFactory(new PropertyValueFactory<>("driver"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
 
+        /*
         // Set the weekday for the date column
         dateCol.setCellValueFactory(cellData -> {
-            return new SimpleStringProperty(Dates.getWeekdayFromDate(cellData.getValue().getDate()));
-        });
+            return new SimpleStringProperty(Dates.getWeekdayFromDate(cellData.getValue().getDate()).getDisplayName(TextStyle.FULL, Locale.ENGLISH));
+        });*/
 
         favoriteRides = FXCollections.observableArrayList();
         tblFavorite.setItems(favoriteRides);
@@ -87,14 +93,14 @@ public class ViewFavoritesController implements Controller {
         Ride selectedRide = tblFavorite.getSelectionModel().getSelectedItem();
         City depCity = selectedRide.getFromLocation();
         City arrCity = selectedRide.getToLocation();
-        //String weekday = Dates.getWeekdayFromDate(selectedRide.getDate());
+        // DayOfWeek weekday = Dates.getWeekdayFromDate(selectedRide.getDate());
         Date date = selectedRide.getDate();
 
         if (selectedRide == null) {
             errorlbl.setText("Please select a ride");
             errorlbl.getStyleClass().setAll("label", "lbl-danger");
         } else {
-            mainGUI.searchFavRide(depCity, arrCity, date);
+            mainGUI.searchFavRide(depCity, arrCity, /*Dates.getNextWeekday(weekday)*/ date);
         }
     }
 

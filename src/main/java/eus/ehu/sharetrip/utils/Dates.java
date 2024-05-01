@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 import java.util.Locale;
 import java.time.DayOfWeek;
@@ -62,9 +63,14 @@ public class Dates {
     return YearMonth.parse(date, fmt);
   }
 
-  public static String getWeekdayFromDate(Date date) {
+  public static DayOfWeek getWeekdayFromDate(Date date) {
     LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     DayOfWeek dayOfWeek = localDate.getDayOfWeek();
-    return dayOfWeek.getDisplayName(TextStyle.FULL, Locale.GERMAN);
+    return dayOfWeek;
+  }
+
+  public static Date getNextWeekday(DayOfWeek targetDay) {
+    LocalDate nextWeekday = LocalDate.now().with(TemporalAdjusters.next(targetDay));
+    return Date.from(nextWeekday.atStartOfDay(ZoneId.systemDefault()).toInstant());
   }
 }
