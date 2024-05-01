@@ -95,6 +95,27 @@ public class User {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setFavRides(List<Ride> favRides) {
+        this.favRides = favRides;
+    }
+
+
     @Override
     public String toString() {
         return "User{" + "username='" + username + '\'' + '}';

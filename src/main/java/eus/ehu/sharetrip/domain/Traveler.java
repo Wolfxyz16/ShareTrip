@@ -35,7 +35,12 @@ public class Traveler extends User {
         // Override build method to return Traveler instead of User
         @Override
         public Traveler build() {
-           Traveler traveler = (Traveler) super.build();
+            User user = super.build();
+            Traveler traveler = new Traveler();
+            traveler.setId(user.getId());
+            traveler.setEmail(user.getEmail());
+            traveler.setUsername(user.getUsername());
+            traveler.setPassword(user.getPassword());
             return traveler;
         }
     }

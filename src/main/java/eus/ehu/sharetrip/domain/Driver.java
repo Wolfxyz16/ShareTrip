@@ -25,6 +25,10 @@ public class Driver extends User implements Serializable {
 		return rides;
 	}
 
+	public void setRides(List<Ride> rides) {
+		this.rides = rides;
+	}
+
 
 	public static class Builder extends User.Builder {
 		private List<Ride> rides = new Vector<Ride>();
@@ -58,8 +62,12 @@ public class Driver extends User implements Serializable {
 
 		@Override
 		public Driver build() {
-			Driver driver = (Driver) super.build();
-			driver.rides = this.rides;
+			User user = super.build();
+			Driver driver = new Driver();
+			driver.setEmail(user.getEmail());
+			driver.setUsername(user.getUsername());
+			driver.setPassword(user.getPassword());
+			driver.setRides(this.rides);
 			return driver;
 		}
 	}
