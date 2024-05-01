@@ -23,26 +23,56 @@ public class Driver extends User implements Serializable {
 		super();
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getUsername() {
-		return username;
-	}
 
 	public List<Ride> getRides() {
 		return rides;
 	}
 
-	public String toString(){
-		return username;
+
+	public static class Builder extends User.Builder {
+		private List<Ride> rides = new Vector<Ride>();
+
+		public Builder() {
+			super();
+		}
+
+		@Override
+		public Driver.Builder email(String email) {
+			super.email(email);
+			return this;
+		}
+
+		@Override
+		public Driver.Builder username(String username) {
+			super.username(username);
+			return this;
+		}
+
+		@Override
+		public Driver.Builder password(String password) {
+			super.password(password);
+			return this;
+		}
+
+		public Driver.Builder rides(List<Ride> rides) {
+			this.rides = rides;
+			return this;
+		}
+
+		@Override
+		public Driver build() {
+			super.build(); // Check for mandatory fields
+			Driver driver = new Driver(this.email, this.username, this.password);
+			driver.rides = this.rides;
+			return driver;
+		}
 	}
-	
+
+
+
+
+
+
 	/**
 	 * This method creates a new ride for the driver
 	 * 
