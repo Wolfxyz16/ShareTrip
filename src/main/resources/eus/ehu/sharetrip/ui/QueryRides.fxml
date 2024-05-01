@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -33,6 +34,40 @@
                 <DatePicker fx:id="datepicker" layoutX="145.0" layoutY="-1.0" prefHeight="25.0" prefWidth="155.0" />
             </children>
         </Group>
+
+        <Label layoutX="358.0" layoutY="49.0" text="  " />
+        <Label layoutX="125.0" layoutY="343.0" styleClass="h4" text="%RideDate" />
+        <ComboBox fx:id="numSeats" layoutX="576.0" layoutY="196.0" prefWidth="150.0" />
+
+      <Label alignment="CENTER" layoutX="229.0" layoutY="27.0" prefHeight="42.0" prefWidth="555.0" styleClass="h1" text="%whereGoing" />
+      <Button fx:id="bellBtn" layoutX="763.0" layoutY="194.0" mnemonicParsing="false" onAction="#createNewAlert" prefHeight="50.0" prefWidth="50.0">
+         <graphic>
+            <ImageView fx:id="bellView" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/alert.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+        <Button fx:id="heartBtn" layoutX="825.0" layoutY="194.0" mnemonicParsing="false" onAction="#addToFavorite" prefHeight="50.0" prefWidth="50.0">
+            <graphic>
+                <ImageView fx:id="heartView" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@assets/heart.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+      <Label layoutX="576.0" layoutY="167.0" styleClass="h4" text="%CreateRideGUI.NumberOfSeats" />
+        <Label fx:id="outputLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="229.0" layoutY="302.0" prefHeight="25.0" prefWidth="551.0" />
+      <Button fx:id="searchBtn" layoutX="436.0" layoutY="244.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="137.0" text="%SearchBtn">
+         <font>
+            <Font size="17.0" />
+         </font>
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-lg" />
+         </styleClass></Button>
         <TableView fx:id="tblRides" layoutX="125.0" layoutY="376.0" prefHeight="342.0" prefWidth="750.0">
             <columns>
                 <TableColumn fx:id="qc1" prefWidth="223.5" text="%FindRidesGUI.Driver" />
@@ -46,34 +81,7 @@
                 <Blend />
             </effect>
         </TableView>
-        <Label layoutX="358.0" layoutY="49.0" text="  " />
-        <Label layoutX="125.0" layoutY="343.0" styleClass="h4" text="%RideDate" />
-      <Button fx:id="heartBtn" layoutX="825.0" layoutY="194.0" mnemonicParsing="false" onAction="#addToFavorite" prefHeight="50.0" prefWidth="50.0">
-         <graphic>
-            <ImageView fx:id="heartView" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/heart.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Label alignment="CENTER" layoutX="229.0" layoutY="27.0" prefHeight="42.0" prefWidth="555.0" styleClass="h1" text="%whereGoing" />
-      <Button fx:id="bellBtn" layoutX="763.0" layoutY="194.0" mnemonicParsing="false" onAction="#createNewAlert" prefHeight="50.0" prefWidth="50.0">
-         <graphic>
-            <ImageView fx:id="bellView" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/alert.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Label layoutX="576.0" layoutY="167.0" styleClass="h4" text="%CreateRideGUI.NumberOfSeats" />
-        <Label fx:id="outputLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="229.0" layoutY="302.0" prefHeight="25.0" prefWidth="551.0" />
-      <Button fx:id="searchBtn" layoutX="463.0" layoutY="257.0" mnemonicParsing="false" text="%SearchBtn">
-         <font>
-            <Font size="17.0" />
-         </font></Button>
-      <ComboBox fx:id="numSeats" layoutX="576.0" layoutY="196.0" prefWidth="150.0" />
+
 
     </children>
 </AnchorPane>
