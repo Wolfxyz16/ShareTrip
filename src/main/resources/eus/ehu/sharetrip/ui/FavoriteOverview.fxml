@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -13,7 +15,7 @@
             <font>
                 <Font size="25.0" />
             </font></Label>
-        <TableView fx:id="tblFavorite" layoutX="68.0" layoutY="100.0" prefHeight="200.0" prefWidth="445.0">
+        <TableView fx:id="tblFavorite" layoutX="68.0" layoutY="120.0" prefHeight="200.0" prefWidth="445.0">
             <columns>
 
              <TableColumn fx:id="depCityCol" prefWidth="150" text="%CreateRideGUI.LeavingFrom" />
@@ -27,8 +29,14 @@
             </columnResizePolicy>
         </TableView>
 
-      <Button fx:id="searchbtn" layoutX="274.0" layoutY="319.0" mnemonicParsing="false" onAction="#searchFav" text="%SearchBtn" />
+      <Button fx:id="searchbtn" layoutX="274.0" layoutY="339.0" mnemonicParsing="false" onAction="#searchFav" text="%SearchBtn" />
       <Label fx:id="errorlbl" layoutX="192.0" layoutY="363.0" prefHeight="18.0" prefWidth="206.0" />
+      <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="108.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assets/questionMark.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="135.0" layoutY="84.0" text="Storing a favorite, can help you search for your wanted rides faster." />
 
     </children>
 </AnchorPane>
