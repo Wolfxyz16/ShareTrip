@@ -100,18 +100,18 @@ public class ViewFavoritesController implements Controller {
 
     @FXML
     void searchFav(ActionEvent event) {
-        Ride selectedRide = tblFavorite.getSelectionModel().getSelectedItem();
-        City depCity = selectedRide.getFromLocation();
-        City arrCity = selectedRide.getToLocation();
         // DayOfWeek weekday = Dates.getWeekdayFromDate(selectedRide.getDate());
-        Date date = selectedRide.getDate();
-
-        if (selectedRide == null) {
+        try {
+            Ride selectedRide = tblFavorite.getSelectionModel().getSelectedItem();
+            City depCity = selectedRide.getFromLocation();
+            City arrCity = selectedRide.getToLocation();
+            Date date = selectedRide.getDate();
+            mainGUI.searchFavRide(depCity, arrCity, /*Dates.getNextWeekday(weekday)*/ date);
+        } catch (Exception e) {
             errorlbl.setText("Please select a ride");
             errorlbl.getStyleClass().setAll("label", "lbl-danger");
-        } else {
-            mainGUI.searchFavRide(depCity, arrCity, /*Dates.getNextWeekday(weekday)*/ date);
         }
+
     }
 
     @FXML
