@@ -31,11 +31,8 @@ public class ViewFavoritesController implements Controller {
     @FXML
     private TableColumn<Ride, String> dateCol;
 
-    /*@FXML
-    private TableColumn<Ride, Date> dateCol;*/
-
     @FXML
-    private TableColumn<Ride, Driver> driverCol;
+    private TableColumn<Ride, String> driverCol;
 
     @FXML
     private TableView<Ride> tblFavorite;
@@ -62,8 +59,10 @@ public class ViewFavoritesController implements Controller {
         System.out.println("ViewFavorites button is working");
         depCityCol.setCellValueFactory(new PropertyValueFactory<>("fromLocation"));
         arrCityCol.setCellValueFactory(new PropertyValueFactory<>("toLocation"));
-        driverCol.setCellValueFactory(new PropertyValueFactory<>("driver"));
+        //driverCol.setCellValueFactory(new PropertyValueFactory<>("driver"));
         //dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        driverCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDriver().getUsername()));
 
         dateCol.setCellValueFactory(cellData -> {
             LocalDate localdate = cellData.getValue().getDate()
