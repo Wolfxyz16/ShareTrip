@@ -1,5 +1,6 @@
 package eus.ehu.sharetrip.uicontrollers;
 
+import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.exceptions.UnknownUser;
 import eus.ehu.sharetrip.exceptions.UserAlreadyExistException;
 import eus.ehu.sharetrip.ui.MainGUI;

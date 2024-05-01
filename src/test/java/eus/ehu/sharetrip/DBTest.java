@@ -33,16 +33,28 @@ public class DBTest {
 
     @AfterEach
     void tearDown() {
-        // Clean up resources
         db.close();
     }
 
     @Test
-    public void testSignUp() throws UserAlreadyExistException {
-        //create with email, username, password
+    public void testSignUp()  {
+        // Ensure that the database is initialized correctly
+        db.initializeDB();
 
-            User user = db.signup("user1@gmail.com", "User1", "1234", "Traveler");
-            assertTrue(user != null, "user correctly created");
+        String email = "Jtest@gmail.com";
+        String username = "JTest";
+        String password = "1234#Test";
+        String role = "Traveler";
+
+        User user = null;
+        try {
+            user = db.signup(email, username, password, role);
+        } catch (UserAlreadyExistException e) {
+            fail("UserAlreadyExistException should not have been thrown");
+        }
+
+        assertNotNull(user, "User should not be null");
+        assertEquals(username, user.getUsername(), "Username should match");
 
     }
 
@@ -51,11 +63,9 @@ public class DBTest {
         // Ensure that the database is initialized correctly
         db.initializeDB();
 
-        // Check if there are some cities
         List<String> cities = db.getCities();
         assertTrue(cities.size() > 0 , "Cities created properly");
 
-        // Check if there are some rides
         Calendar today = Calendar.getInstance();
         int month = today.get(Calendar.MONTH) + 2;
         int year = today.get(Calendar.YEAR);
@@ -74,14 +84,11 @@ public class DBTest {
         // Ensure that the database is initialized correctly
         db.initializeDB();
 
-        // Test getting cities
         List<String> cities = db.getCities();
 
-        // Check if the list is not null and not empty
         assertNotNull(cities);
         assertFalse(cities.isEmpty());
 
-        // Check if the cities contain expected values
         assertTrue(cities.contains("donostia"));
         assertTrue(cities.contains("bilbo"));
         assertTrue(cities.contains("gasteiz"));
@@ -94,7 +101,6 @@ public class DBTest {
         // Ensure that the database is initialized correctly
         db.initializeDB();
 
-        // Test getting events
         Calendar today = Calendar.getInstance();
         int month = today.get(Calendar.MONTH) + 2;
         int year = today.get(Calendar.YEAR);
@@ -106,7 +112,6 @@ public class DBTest {
 
         Vector<Date> events = db.getEventsMonth(date);
 
-        // Check if the list is not null and not empty
         assertNotNull(events);
         assertTrue(!events.isEmpty());
     }
@@ -117,19 +122,15 @@ public class DBTest {
         // Ensure that the database is initialized correctly
         db.initializeDB();
 
-        // Test creating a new city
         String newCity = "NewCity";
         City city = db.createCity(newCity);
 
-        // Check if the city is created and exists in the database
         assertNotNull(city);
         assertEquals(newCity.toLowerCase(), city.getName().toLowerCase());
 
-        // Check if the created city exists in the list of cities
         List<String> cities = db.getCities();
         assertTrue(cities.contains(newCity.toLowerCase()));
 
-        // Try creating the same city again
         try {
             db.createCity(newCity);
             fail("CityAlreadyExistException should have been thrown");
@@ -143,15 +144,12 @@ public class DBTest {
         // Ensure that the database is initialized correctly
         db.initializeDB();
 
-        // Test getting a city
         String newCity = "NewCity";
         City city = db.createCity(newCity);
 
-        // Check if the city is created and exists in the database
         assertNotNull(city);
         assertEquals(newCity.toLowerCase(), city.getName().toLowerCase());
 
-        // Check if the created city exists in the list of cities
         List<String> cities = db.getCities();
         assertTrue(cities.contains(newCity.toLowerCase()));
 
@@ -163,39 +161,17 @@ public class DBTest {
             fail("CityDoesNotExistException should not have been thrown");
         }
 
-        // Check if the city is created and exists in the database
         assertNotNull(city2);
         assertEquals(newCity.toLowerCase(), city2.getName().toLowerCase());
     }
 
-    /**
-    @Test
-    public void testGetRides() {
-        // Ensure that the database is initialized correctly
-        db.initializeDB();
 
-        // Test getting rides
-        City origin = new City("donostia");
-        City destination = new City("bilbo");
-        int year = 2024;
-        int month = 5;
-        Date date = Dates.toDate(year, month);
-        int numSeats = 1;
-
-        List<Ride> rides = db.getRides(origin, destination, date, numSeats);
-
-        // Check if the list is not null and not empty
-        assertNotNull(rides);
-        assertTrue(!rides.isEmpty());
-    }
-    */
 
     @Test
     public void testLoginValidCredentials()  {
         // Ensure that the database is initialized correctly
         db.initializeDB();
 
-        // Test login with valid credentials
         String username = "test";
         String password = "test";
         User user = null;
@@ -205,7 +181,6 @@ public class DBTest {
             fail("UnknownUser should not have been thrown");
         }
 
-        // Check if the user is not null
         assertNotNull(user);
         assertEquals(username, user.getUsername());
     }
@@ -215,7 +190,6 @@ public class DBTest {
         // Ensure that the database is initialized correctly
         db.initializeDB();
 
-        // Test login with invalid credentials
         String username = "invaliduser@gmail.com";
         String password = "wrongpassword";
         try {
@@ -232,7 +206,6 @@ public class DBTest {
         // Ensure that the database is initialized correctly
         db.initializeDB();
 
-        // Test getting rides
         City origin = new City("Donostia");
         City destination = new City("Bilbo");
         int year = 2024;
@@ -241,28 +214,56 @@ public class DBTest {
         int numSeats = 1;
 
         List<Ride> rides = db.getRides(origin, destination, date, numSeats);
-
-        // Check if the list is not null and not empty
         assertNotNull(rides);
         assertTrue(!rides.isEmpty());
     }
 
     @Test
-    public void testSignupDriver() throws UserAlreadyExistException {
+    public void testCreateRides() {
         // Ensure that the database is initialized correctly
         db.initializeDB();
 
-        // Test signup for a driver
-        String email = "testdriver@gmail.com";
-        String userName = "testdriver";
-        String password = "password";
-        String role = "Driver";
+        City origin = new City("Donostia");
+        City destination = new City("Bilbo");
+        int year = 2024;
+        int month = 6;  // month 6 equals May, month 0 equals January
+        Date date = UtilDate.newDate(year, month,15); //Dates.toDate(year, month);
+        int numSeats = 1;
+        float price = 10;
+        long driverID = 1;
 
-        User user = db.signup(email, userName, password, role);
+        Ride ride = null;
+        try {
+            ride = db.createRide(origin, destination, date, numSeats, price, driverID);
+        } catch (Exception e) {
+            fail("Exception should not have been thrown");
+        }
 
-        // Check if the user is not null and is an instance of Driver
+        assertNotNull(ride);
+        List<Ride> rides = db.getRides(origin, destination, date, numSeats);
+        assertNotNull(rides);
+        assertTrue(rides.contains(ride));
+    }
+
+    @Test
+    public void testSignupDriver()  {
+        // Ensure that the database is initialized correctly
+        db.initializeDB();
+
+        String email = "testDriver@gmail.com";
+        String userName = "testDriver";
+        String password = "passworD#1234";
+        String role = "FindRidesGUI.Driver"; // dont know if it is Driver or FindRidesGUI.Driver
+
+        User user = null;
+        try {
+
+            user = db.signup(email, userName, password, role);
+        } catch (UserAlreadyExistException e) {
+            fail("UserAlreadyExistException should not have been thrown");
+        }
         assertNotNull(user);
-        assertTrue(user instanceof Driver);
+        assertInstanceOf(Driver.class, user);
 
 
     }
@@ -272,22 +273,18 @@ public class DBTest {
         // Ensure that the database is initialized correctly
         db.initializeDB();
 
-        // Test signup for a traveler
-        String email = "testtraveler@gmail.com";
-        String userName = "testtraveler";
-        String password = "password";
+        String email = "testTraveler@gmail.com";
+        String userName = "testTraveler";
+        String password = "passworD#1234";
         String role = "Traveler";
-
         User user = null;
         try {
             user = db.signup(email, userName, password, role);
         } catch (UserAlreadyExistException e) {
             fail("UserAlreadyExistException should not have been thrown");
         }
-
-        // Check if the user is not null and is an instance of Traveler
         assertNotNull(user);
-        assertTrue(user instanceof Traveler);
+        assertInstanceOf(Traveler.class, user);
     }
 
     @Test
@@ -295,12 +292,10 @@ public class DBTest {
         // Ensure that the database is initialized correctly
         db.initializeDB();
 
-        // Test signup with an existing user
         String email = "driver1@gmail.com";
         String userName = "driver1";
         String password = "password";
         String role = "Driver";
-
         try {
             db.signup(email, userName, password, role);
             fail("UserAlreadyExistException should have been thrown");
@@ -308,5 +303,70 @@ public class DBTest {
             // Success
         }
     }
+
+    @Test
+    public void testGetDepartCities() {
+        // Ensure that the database is initialized correctly
+        db.initializeDB();
+
+        List<City> cities = db.getDepartCities();
+        assertNotNull(cities);
+        assertTrue(!cities.isEmpty());
+    }
+
+    @Test
+    public void testGetSentMessages() {
+        // Ensure that the database is initialized correctly
+        db.initializeDB();
+
+        String username = "User1";
+        User user = db.getUser(username);
+        assertNotNull(user);
+
+        List<Message> messages = db.getSentMessages(user);
+        assertNotNull(messages);
+        assertTrue(!messages.isEmpty());
+
+    }
+
+    @Test
+    public void testGetAlerts() {
+        // Ensure that the database is initialized correctly
+        db.initializeDB();
+
+        //we can name directly the method getAlerts() because we know there are some alerts in db
+        //else we should create an alert first but is not tested yet
+        List<Alert> alerts = db.getAlerts();
+        assertNotNull(alerts);
+        assertTrue(!alerts.isEmpty());
+    }
+
+    @Test
+    public void testCreateAlert() {
+        // Ensure that the database is initialized correctly
+        db.initializeDB();
+
+        City from = new City("Donostia");
+        City to = new City("Bilbo");
+        int year = 2024;
+        int month = 6;  // month 6 equals May, month 0 equals January
+        Date date = UtilDate.newDate(year, month,15); //Dates.toDate(year, month);
+        int numSeats = 1;
+
+        Alert alert = null;
+        try {
+            alert = db.createAlert(from, to, date, numSeats);
+        } catch (Exception e) {
+            fail("Exception should not have been thrown");
+        }
+
+        assertNotNull(alert);
+        List<Alert> alerts = db.getAlerts();
+        assertNotNull(alerts);
+        assertTrue(alerts.contains(alert));
+
+    }
+
+
 
 }
