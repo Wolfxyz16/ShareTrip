@@ -73,4 +73,9 @@ public class Dates {
     LocalDate nextWeekday = LocalDate.now().with(TemporalAdjusters.next(targetDay));
     return Date.from(nextWeekday.atStartOfDay(ZoneId.systemDefault()).toInstant());
   }
+
+  public static String formatLocalizedDate(LocalDate date, Locale locale) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, dd.MM.yyyy", locale);
+    return formatter.format(date);
+  }
 }
