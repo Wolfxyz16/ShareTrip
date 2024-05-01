@@ -26,15 +26,6 @@ public class Message {
         // Constructor protegido para uso exclusivo del builder
     }
 
-    // Constructor privado para el builder
-    private Message(Builder builder) {
-        this.id = builder.id;
-        this.messageText = builder.messageText;
-        this.sender = builder.sender;
-        this.receiver = builder.receiver;
-        this.senderName = builder.senderName;
-        this.recipientName = builder.recipientName;
-    }
 
     // Builder static inner class
     public static class Builder {
@@ -45,6 +36,8 @@ public class Message {
         private String senderName;
         private String recipientName;
 
+        public Builder() {
+        }
         public Builder id(Long id) {
             this.id = id;
             return this;
@@ -68,7 +61,17 @@ public class Message {
         }
 
         public Message build() {
-            return new Message(this);
+            if(messageText == null || sender == null || receiver == null) {
+                throw new IllegalStateException("Cannot create Message without messageText, sender and receiver");
+            }
+            Message message = new Message();
+            message.id = this.id;
+            message.messageText = this.messageText;
+            message.sender = this.sender;
+            message.receiver = this.receiver;
+            message.senderName = this.senderName;
+            message.recipientName = this.recipientName;
+            return message;
         }
     }
 

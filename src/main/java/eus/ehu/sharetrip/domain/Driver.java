@@ -15,34 +15,68 @@ public class Driver extends User implements Serializable {
 	//@OneToMany(mappedBy = "driver")
 	private List<Ride> rides=new Vector<Ride>();
 
-	public Driver(String email, String userName, String password) {
-		super(email, userName, password);
-	}
 
 	public Driver() {
 		super();
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getUsername() {
-		return username;
-	}
 
 	public List<Ride> getRides() {
 		return rides;
 	}
 
-	public String toString(){
-		return username;
+	public void setRides(List<Ride> rides) {
+		this.rides = rides;
 	}
-	
+
+
+	public static class Builder extends User.Builder {
+		private List<Ride> rides = new Vector<Ride>();
+
+		public Builder() {
+			super();
+		}
+
+		@Override
+		public Driver.Builder email(String email) {
+			super.email(email);
+			return this;
+		}
+
+		@Override
+		public Driver.Builder username(String username) {
+			super.username(username);
+			return this;
+		}
+
+		@Override
+		public Driver.Builder password(String password) {
+			super.password(password);
+			return this;
+		}
+
+		public Driver.Builder rides(List<Ride> rides) {
+			this.rides = rides;
+			return this;
+		}
+
+		@Override
+		public Driver build() {
+			User user = super.build();
+			Driver driver = new Driver();
+			driver.setEmail(user.getEmail());
+			driver.setUsername(user.getUsername());
+			driver.setPassword(user.getPassword());
+			driver.setRides(this.rides);
+			return driver;
+		}
+	}
+
+
+
+
+
+
 	/**
 	 * This method creates a new ride for the driver
 	 * 
@@ -80,7 +114,7 @@ public class Driver extends User implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Driver other = (Driver) obj;
-		if (email != other.email)
+		if (getEmail() != other.getEmail())
 			return false;
 		return true;
 	}
