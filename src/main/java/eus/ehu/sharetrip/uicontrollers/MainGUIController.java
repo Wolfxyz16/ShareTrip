@@ -165,8 +165,8 @@ public class MainGUIController implements Controller{
     }
 
     private void changeStageLanguage() {
-        Double width  = mainGUI.getStage().getScene().getWidth();
-        Double height = mainGUI.getStage().getScene().getHeight();
+        Double width  = mainGUI.getStage().getWidth();
+        Double height = mainGUI.getStage().getHeight();
         Boolean fullScreen = mainGUI.getStage().isFullScreen();
 
         try {

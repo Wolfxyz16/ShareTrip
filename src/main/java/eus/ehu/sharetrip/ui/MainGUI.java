@@ -153,7 +153,7 @@ public class MainGUI {
         stage.setTitle("ShareTrip");
         stage.setScene(scene);
         stage.setHeight(740.0);
-        stage.setWidth(1200.0);
+        stage.setWidth(1220.0);
         stage.show();
     }
 
@@ -161,7 +161,7 @@ public class MainGUI {
         if (fullScreen){
             stage.setFullScreen(true);
         }else{
-            stage.setHeight(height + 28);
+            stage.setHeight(height);
             stage.setWidth(width);
         }
         stage.show();
