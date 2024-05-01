@@ -3,6 +3,7 @@ package eus.ehu.sharetrip.uicontrollers;
 import eus.ehu.sharetrip.businessLogic.BlFacade;
 import eus.ehu.sharetrip.domain.Alert;
 import eus.ehu.sharetrip.domain.City;
+import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.ui.MainGUI;
 import eus.ehu.sharetrip.utils.Dates;
 import javafx.beans.property.SimpleStringProperty;
@@ -10,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -39,6 +41,9 @@ public class ViewAlertsController implements Controller {
 
     @FXML
     private TableView<Alert> tblAlerts;
+
+    @FXML
+    private Label errorlbl;
 
     private ObservableList<Alert> alerts;
 
@@ -71,10 +76,13 @@ public class ViewAlertsController implements Controller {
 
     @FXML
     void deleteAlert(ActionEvent event) {
-        Alert alert = tblAlerts.getSelectionModel().getSelectedItem();
-        if (alert != null) {
-            businessLogic.deleteAlert(alert);
-            alerts.remove(alert);
+        Alert selectedAlert = tblAlerts.getSelectionModel().getSelectedItem();
+        if (selectedAlert == null) {
+            errorlbl.setText("Please select an alert");
+            errorlbl.getStyleClass().setAll("label", "lbl-danger");
+        } else {
+            businessLogic.deleteAlert(selectedAlert);
+            updateTables();
         }
     }
 
