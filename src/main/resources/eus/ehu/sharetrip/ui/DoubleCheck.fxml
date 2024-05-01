@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,7 +9,19 @@
    <children>
       <Label alignment="CENTER" layoutX="246.0" layoutY="92.0" prefHeight="48.0" prefWidth="108.0" text="%logOut?" />
       <Label alignment="CENTER" layoutX="106.0" layoutY="157.0" prefHeight="17.0" prefWidth="388.0" text="%secureLogOut" />
-      <Button fx:id="cancelBtn" layoutX="177.0" layoutY="225.0" mnemonicParsing="false" onAction="#cancelLogOut" prefHeight="39.0" prefWidth="74.0" text="%cancel" />
-      <Button fx:id="logOutBtn" layoutX="355.0" layoutY="225.0" mnemonicParsing="false" onAction="#confirmLogOut" prefHeight="39.0" prefWidth="81.0" text="%logOutBtn" />
+      <Button fx:id="cancelBtn" layoutX="107.0" layoutY="225.0" mnemonicParsing="false" onAction="#cancelLogOut" prefHeight="48.0" prefWidth="144.0" text="%cancel">
+      <styleClass>
+         <String fx:value="btn" />
+         <String fx:value="btn-lg" />
+         <String fx:value="btn-primary" />
+      </styleClass>
+        </Button>
+      <Button fx:id="logOutBtn" layoutX="355.0" layoutY="225.0" mnemonicParsing="false" onAction="#confirmLogOut" prefHeight="48.0" prefWidth="144.0" text="%logOutBtn">
+      <styleClass>
+         <String fx:value="btn" />
+         <String fx:value="btn-lg" />
+         <String fx:value="btn-primary" />
+      </styleClass>
+        </Button>
    </children>
 </AnchorPane>
