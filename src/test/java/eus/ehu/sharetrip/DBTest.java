@@ -253,7 +253,7 @@ public class DBTest {
         String email = "testDriver@gmail.com";
         String userName = "testDriver";
         String password = "passworD#1234";
-        String role = "FindRidesGUI.Driver"; // dont know if it is Driver or FindRidesGUI.Driver
+        String role = "Driver";
 
         User user = null;
         try {

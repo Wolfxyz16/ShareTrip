@@ -626,31 +626,33 @@ public class DataAccess {
       User existingUser = query.getSingleResult();
       throw new UserAlreadyExistException();
     } catch (NoResultException e) {
-        if (role.equals(ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("FindRidesGUI.Driver"))) {
-          Driver driver = new Driver.Builder()
-                    .email(email)
-                    .username(userName)
-                    .password(password)
-                    .build();
-          db.getTransaction().begin();
-          db.persist(driver);
-          db.getTransaction().commit();
-          return driver;
-        } else if (role.equals(ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("Traveler"))) {
-          Traveler traveler = new Traveler.Builder()
-                    .email(email)
-                    .username(userName)
-                    .password(password)
-                    .build();
-          db.getTransaction().begin();
-          db.persist(traveler);
-          db.getTransaction().commit();
-          return traveler;
-        } else {
-          return null;
-        }
+      User newUser = null;
+      if (role.equals(ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("FindRidesGUI.Driver")) || role.equals("Driver")) {
+        newUser = new Driver.Builder()
+                .email(email)
+                .username(userName)
+                .password(password)
+                .build();
+      } else if (role.equals(ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("Traveler")) || role.equals("Traveler")) {
+        newUser = new Traveler.Builder()
+                .email(email)
+                .username(userName)
+                .password(password)
+                .build();
       }
+
+      if(newUser != null) {
+        db.getTransaction().begin();
+        db.persist(newUser);
+        db.getTransaction().commit();
+      }else {
+        System.out.println("User is null");
+      }
+
+      return newUser;
     }
+  }
+
 
 
   public void close() {
