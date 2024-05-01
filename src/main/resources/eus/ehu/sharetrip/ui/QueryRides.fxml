@@ -64,10 +64,11 @@
          <font>
             <Font size="17.0" />
          </font>
-         <styleClass>
-            <String fx:value="btn" />
-            <String fx:value="btn-lg" />
-         </styleClass></Button>
+          <styleClass>
+              <String fx:value="btn" />
+              <String fx:value="btn-lg" />
+              <String fx:value="btn-primary" />
+          </styleClass></Button>
         <TableView fx:id="tblRides" layoutX="125.0" layoutY="376.0" prefHeight="342.0" prefWidth="750.0">
             <columns>
                 <TableColumn fx:id="qc1" prefWidth="223.5" text="%FindRidesGUI.Driver" />

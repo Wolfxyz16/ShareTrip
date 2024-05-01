@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -9,13 +10,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.ViewFavoritesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="713.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.ViewFavoritesController">
     <children>
-        <Label fx:id="titleLabel" layoutX="212.0" layoutY="44.0" text="%yourFavorites">
+        <Label fx:id="titleLabel" layoutX="270.0" layoutY="27.0" text="%yourFavorites">
             <font>
                 <Font size="25.0" />
             </font></Label>
-        <TableView fx:id="tblFavorite" layoutX="77.0" layoutY="120.0" prefHeight="200.0" prefWidth="445.0">
+        <TableView fx:id="tblFavorite" layoutX="122.0" layoutY="105.0" prefHeight="223.0" prefWidth="497.0">
             <columns>
 
              <TableColumn fx:id="depCityCol" prefWidth="150" text="%CreateRideGUI.LeavingFrom" />
@@ -29,15 +30,27 @@
             </columnResizePolicy>
         </TableView>
 
-      <Button fx:id="searchbtn" layoutX="197.0" layoutY="335.0" mnemonicParsing="false" onAction="#searchFav" text="%SearchBtn" />
-      <Label fx:id="errorlbl" layoutX="197.0" layoutY="368.0" prefHeight="18.0" prefWidth="206.0" />
-      <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="108.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="searchbtn" layoutX="132.0" layoutY="337.0" mnemonicParsing="false" onAction="#searchFav" prefHeight="44.0" prefWidth="206.0" text="%SearchBtn">
+        <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-lg" />
+            <String fx:value="btn-primary" />
+        </styleClass>
+        </Button>
+      <Label fx:id="errorlbl" alignment="CENTER" layoutX="254.0" layoutY="409.0" prefHeight="18.0" prefWidth="206.0" />
+      <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="166.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@assets/questionMark.png" />
          </image>
       </ImageView>
-      <Label layoutX="135.0" layoutY="84.0" text="Storing a favorite, can help you search for your wanted rides faster." />
-      <Button fx:id="deletebtn" layoutX="306.0" layoutY="335.0" mnemonicParsing="false" onAction="#deleteFav" text="Delete Favorite" />
+      <Label layoutX="193.0" layoutY="67.0" text="Storing a favorite, can help you search for your wanted rides faster." />
+      <Button fx:id="deletebtn" layoutX="398.0" layoutY="337.0" mnemonicParsing="false" onAction="#deleteFav" prefHeight="44.0" prefWidth="206.0" text="Delete Favorite">
+        <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-lg" />
+            <String fx:value="btn-primary" />
+        </styleClass>
+        </Button>
 
     </children>
 </AnchorPane>
