@@ -1,6 +1,7 @@
 package eus.ehu.sharetrip.domain;
 
 import jakarta.persistence.*;
+import javafx.util.Builder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,20 +35,12 @@ public class User {
     public User() {
     }
 
-    private User(Builder builder) {
-        this.email = builder.email;
-        this.username = builder.username;
-        this.password = builder.password;
-    }
-
-    public User(String email, String name, String password) {
-        this.username = name;
-        this.password = password;
-        this.email = email;
+    public static UserBuilder builder() {
+        return new UserBuilder();
     }
 
     // Builder static inner class
-    public static class Builder {
+    public static class Userbuilder {
         private String email;
         private String username;
         private String password;
