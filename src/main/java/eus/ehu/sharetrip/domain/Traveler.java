@@ -8,6 +8,7 @@ import java.util.List;
 @DiscriminatorValue("TRAVELER")
 public class Traveler extends User {
 
+
     public static class Builder extends User.Builder {
         public Builder() {
             super();
@@ -34,7 +35,8 @@ public class Traveler extends User {
         // Override build method to return Traveler instead of User
         @Override
         public Traveler build() {
-            super.build();
+           Traveler traveler = (Traveler) super.build();
+            return traveler;
         }
     }
 }

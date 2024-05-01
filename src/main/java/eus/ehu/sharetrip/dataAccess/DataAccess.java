@@ -99,14 +99,21 @@ public class DataAccess {
       }
 
       //Create drivers
-      Driver driver1 = new Driver("driver1@gmail.com", "Aitor Fernandez", "1234");
-      Driver driver2 = new Driver()
+      Driver driver1 = new Driver.Builder()
+                .email("driver1@gmail.com")
+                .username("Aitor Fernandez")
+                .password("1234")
+                .build();
+      Driver driver2 = new Driver.Builder()
                 .email("driver2@gmail.com")
                 .username("Ane Gaztañaga")
                 .password("1234")
                 .build();
-      Driver driver3 = new Driver("driver3@gmail.com", "test", "test");
-
+      Driver driver3 = new Driver.Builder()
+                  .email("driver3@gmail.com")
+                  .username("test")
+                  .password("test")
+                  .build();
       db.getTransaction().begin();
       db.persist(driver1);
       db.persist(driver2);
@@ -277,8 +284,16 @@ public class DataAccess {
 
       //Create travelers
 
-      Traveler traveler1 = new Traveler("user1@gmail.com", "User1", "1234");
-      Traveler traveler2 = new Traveler("user2@gmail.com", "User2", "1234");
+      Traveler traveler1 = new Traveler.Builder()
+              .email("user1@gmail.com")
+                .username("User1")
+                .password("1234")
+                .build();
+      Traveler traveler2 = new Traveler.Builder()
+                .email("user2@gmail.com")
+                .username("User2")
+                .password("1234")
+                .build();
 
       // CREATE MESSAGES
       Message message1 = new Message.Builder()
@@ -612,7 +627,7 @@ public class DataAccess {
       throw new UserAlreadyExistException();
     } catch (NoResultException e) {
         if (role.equals(ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("FindRidesGUI.Driver"))) {
-          Driver driver = new Driver()
+          Driver driver = new Driver.Builder()
                     .email(email)
                     .username(userName)
                     .password(password)
@@ -622,7 +637,7 @@ public class DataAccess {
           db.getTransaction().commit();
           return driver;
         } else if (role.equals(ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("Traveler"))) {
-          Traveler traveler = new Traveler()
+          Traveler traveler = new Traveler.Builder()
                     .email(email)
                     .username(userName)
                     .password(password)

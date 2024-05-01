@@ -106,7 +106,7 @@ public class Driver extends User implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Driver other = (Driver) obj;
-		if (email != other.email)
+		if (getEmail() != other.getEmail())
 			return false;
 		return true;
 	}
