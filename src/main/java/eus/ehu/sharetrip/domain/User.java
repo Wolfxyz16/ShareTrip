@@ -46,6 +46,10 @@ public class User {
         this.email = email;
     }
 
+    public void deleteFavRide(Ride selectedRide) {
+        favRides.remove(selectedRide);
+    }
+
     // Builder static inner class
     public static class Builder {
         private String email;

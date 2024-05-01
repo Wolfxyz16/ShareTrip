@@ -177,10 +177,19 @@ public class BlFacadeImplementation implements BlFacade {
         return dbManager.favAlreadyExist(user, ride);
     }
 
+    @Override
+    public void deleteFavoriteRide(User currentUser, Ride selectedRide) {
+        dbManager.deleteFavoriteRide(currentUser, selectedRide);
+    }
+
+    @Override
+    public void deleteAlert(Alert alert) {
+        dbManager.deleteAlert(alert);
+    }
+
     public List<Alert> getAlerts(City from, City to, Date date, int nPlaces) {
         return dbManager.getAlerts(from, to, date, nPlaces);
     }
-
 
     @Override
     public void saveMessage(Message message) {

@@ -69,6 +69,15 @@ public class ViewAlertsController implements Controller {
         this.tblAlerts.setItems(alerts);
     }
 
+    @FXML
+    void deleteAlert(ActionEvent event) {
+        Alert alert = tblAlerts.getSelectionModel().getSelectedItem();
+        if (alert != null) {
+            businessLogic.deleteAlert(alert);
+            alerts.remove(alert);
+        }
+    }
+
     @Override
     public void setMainApp(MainGUI mainGUI) {
         this.mainGUI = mainGUI;

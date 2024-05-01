@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -31,5 +32,7 @@
          </image>
       </ImageView>
       <Label layoutX="125.0" layoutY="84.0" text="If a new ride with the alerted attributes is created, you will be notified." />
+      <Button fx:id="deletebtn" layoutX="261.0" layoutY="335.0" mnemonicParsing="false" onAction="#deleteAlert" text="Delete Alert" />
+      <Label fx:id="errorlbl" layoutX="207.0" layoutY="368.0" prefHeight="18.0" prefWidth="206.0" />
     </children>
 </AnchorPane>

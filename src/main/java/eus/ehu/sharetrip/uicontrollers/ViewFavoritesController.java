@@ -114,4 +114,16 @@ public class ViewFavoritesController implements Controller {
         }
     }
 
+    @FXML
+    void deleteFav(ActionEvent event) {
+        Ride selectedRide = tblFavorite.getSelectionModel().getSelectedItem();
+        if (selectedRide == null) {
+            errorlbl.setText("Please select a ride");
+            errorlbl.getStyleClass().setAll("label", "lbl-danger");
+        } else {
+            User currentUser = businessLogic.getCurrentUser();
+            businessLogic.deleteFavoriteRide(currentUser, selectedRide);
+            updateTables();
+        }
+    }
 }
