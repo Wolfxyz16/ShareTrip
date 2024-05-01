@@ -15,9 +15,6 @@ public class Driver extends User implements Serializable {
 	//@OneToMany(mappedBy = "driver")
 	private List<Ride> rides=new Vector<Ride>();
 
-	public Driver(String email, String userName, String password) {
-		super(email, userName, password);
-	}
 
 	public Driver() {
 		super();
@@ -61,8 +58,7 @@ public class Driver extends User implements Serializable {
 
 		@Override
 		public Driver build() {
-			super.build(); // Check for mandatory fields
-			Driver driver = new Driver(this.email, this.username, this.password);
+			Driver driver = (Driver) super.build();
 			driver.rides = this.rides;
 			return driver;
 		}

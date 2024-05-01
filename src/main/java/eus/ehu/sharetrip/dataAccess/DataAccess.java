@@ -100,7 +100,11 @@ public class DataAccess {
 
       //Create drivers
       Driver driver1 = new Driver("driver1@gmail.com", "Aitor Fernandez", "1234");
-      Driver driver2 = new Driver("driver2@gmail.com", "Ane Gaztañaga", "1234");
+      Driver driver2 = new Driver()
+                .email("driver2@gmail.com")
+                .username("Ane Gaztañaga")
+                .password("1234")
+                .build();
       Driver driver3 = new Driver("driver3@gmail.com", "test", "test");
 
       db.getTransaction().begin();
@@ -608,13 +612,21 @@ public class DataAccess {
       throw new UserAlreadyExistException();
     } catch (NoResultException e) {
         if (role.equals(ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("FindRidesGUI.Driver"))) {
-          Driver driver = new Driver(email, userName, password);
+          Driver driver = new Driver()
+                    .email(email)
+                    .username(userName)
+                    .password(password)
+                    .build();
           db.getTransaction().begin();
           db.persist(driver);
           db.getTransaction().commit();
           return driver;
         } else if (role.equals(ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("Traveler"))) {
-          Traveler traveler = new Traveler(email, userName, password);
+          Traveler traveler = new Traveler()
+                    .email(email)
+                    .username(userName)
+                    .password(password)
+                    .build();
           db.getTransaction().begin();
           db.persist(traveler);
           db.getTransaction().commit();
