@@ -29,6 +29,12 @@ public class CreateCityController implements Controller {
     @FXML
     void createCityClick(ActionEvent event){
         String city = newCity.getText();
+        if (city.isEmpty()) {
+            String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("CreateCityGUI.CityNameEmpty");
+            newCityStatusMessage.setText(error);
+            newCityStatusMessage.getStyleClass().setAll("label", "lbl-danger");
+            return;
+        }
         try {
             businessLogic.createCity(city);
             String success = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("CityCreated");
