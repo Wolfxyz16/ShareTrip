@@ -28,22 +28,21 @@ public class User {
     @Column(name = "USER_TYPE", insertable = false, updatable = false)
     private String userType;
 
-    protected String email;
-    protected String username;
-    protected String password;
+    private String email;
+    private String username;
+    private String password;
 
     public User() {
     }
 
-    public static UserBuilder builder() {
-        return new UserBuilder();
-    }
-
     // Builder static inner class
-    public static class Userbuilder {
+    public static class Builder {
         private String email;
         private String username;
         private String password;
+
+        public Builder() {
+        }
 
         public Builder email(String email) {
             this.email = email;
@@ -61,7 +60,14 @@ public class User {
         }
 
         public User build() {
-            return new User(this);
+            if(email == null || username == null || password == null) {
+                throw new IllegalStateException("Cannot create User without email, username and password");
+            }
+            User user = new User();
+            user.email = this.email;
+            user.username = this.username;
+            user.password = this.password;
+            return user;
         }
     }
 

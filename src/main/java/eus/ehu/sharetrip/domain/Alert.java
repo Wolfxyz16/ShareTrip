@@ -27,18 +27,15 @@ public class Alert {
 
     public Alert() {
     }
-    private Alert(Builder builder) {
-        this.fromLocation = builder.fromLocation;
-        this.toLocation = builder.toLocation;
-        this.rideDate = builder.rideDate;
-        this.numSeats = builder.numSeats;
-    }
 
     public static class Builder {
         private City fromLocation;
         private City toLocation;
         private Date rideDate;
         private int numSeats;
+
+        public Builder() {
+        }
 
         public Builder fromLocation(City fromLocation) {
             this.fromLocation = fromLocation;
@@ -61,7 +58,15 @@ public class Alert {
         }
 
         public Alert build() {
-            return new Alert(this);
+            if(fromLocation == null || toLocation == null || rideDate == null || numSeats == 0) {
+                throw new IllegalStateException("Cannot create Alert without fromLocation, toLocation, rideDate and numSeats");
+            }
+            Alert alert = new Alert();
+            alert.fromLocation = this.fromLocation;
+            alert.toLocation = this.toLocation;
+            alert.rideDate = this.rideDate;
+            alert.numSeats = this.numSeats;
+            return alert;
         }
     }
     public Date getRideDate() {
