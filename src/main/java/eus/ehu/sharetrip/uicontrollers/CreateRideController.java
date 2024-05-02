@@ -7,15 +7,19 @@ import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.exceptions.CityDoesNotExistException;
 import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
+import eus.ehu.sharetrip.utils.SafeLocalDateStringConverter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import eus.ehu.sharetrip.ui.MainGUI;
 import eus.ehu.sharetrip.utils.Dates;
+import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -133,15 +137,14 @@ public class CreateRideController implements Controller {
                 warningsInfo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.DepartureCityDoesNotExist"));
                 warningsInfo.getStyleClass().setAll("label", "lbl-danger");
             }
-
         }
-
-
-
     }
 
     @FXML
-    void initialize() {}
+    void initialize() {
+        // Set converter to catch invalid dates
+        datePicker.setConverter(new SafeLocalDateStringConverter(warningsInfo));
+    }
 
     @Override
     public void setMainApp(MainGUI mainGUI) {

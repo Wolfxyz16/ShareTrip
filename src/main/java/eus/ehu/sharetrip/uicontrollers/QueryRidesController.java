@@ -6,6 +6,7 @@ import eus.ehu.sharetrip.domain.Driver;
 import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.exceptions.AlertAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.CityDoesNotExistException;
+import eus.ehu.sharetrip.utils.SafeLocalDateStringConverter;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -30,8 +31,6 @@ import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class QueryRidesController implements Controller {
-
-    private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     @FXML
     private Button bellBtn;
@@ -103,43 +102,43 @@ public class QueryRidesController implements Controller {
 
     private void updateDatePickerCellFactory(DatePicker datePicker) {
 
-            List<Date> dates = businessLogic.getDatesWithRides(comboDepartCity.getValue(), comboArrivalCity.getValue());
+        List<Date> dates = businessLogic.getDatesWithRides(comboDepartCity.getValue(), comboArrivalCity.getValue());
 
-            // extract datesWithBooking from rides
-            datesWithBooking.clear();
-            for (Date day : dates) {
-                datesWithBooking.add(Dates.convertToLocalDateViaInstant(day));
-            }
+        // extract datesWithBooking from rides
+        datesWithBooking.clear();
+        for (Date day : dates) {
+            datesWithBooking.add(Dates.convertToLocalDateViaInstant(day));
+        }
 
-            // update the DatePicker cells
-            datePicker.setDayCellFactory(new Callback<>() {
-                @Override
-                public DateCell call(DatePicker param) {
-                    return new DateCell() {
-                        @Override
-                        public void updateItem(LocalDate item, boolean empty) {
-                            super.updateItem(item, empty);
+        // update the DatePicker cells
+        datePicker.setDayCellFactory(new Callback<>() {
+            @Override
+            public DateCell call(DatePicker param) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
 
-                            if (!empty && item != null) {
-                                if (item.equals(LocalDate.now())) {
-                                    this.setStyle("-fx-background-color: #ADD8E6");
-                                } else if (datesWithBooking.contains(item)) {
-                                    this.setStyle("-fx-background-color: pink");
-                                } else {
-                                    this.setStyle("-fx-background-color: rgb(235, 235, 235)");
-                                }
+                        if (!empty && item != null) {
+                            if (item.equals(LocalDate.now())) {
+                                this.setStyle("-fx-background-color: #ADD8E6");
+                            } else if (datesWithBooking.contains(item)) {
+                                this.setStyle("-fx-background-color: pink");
+                            } else {
+                                this.setStyle("-fx-background-color: rgb(235, 235, 235)");
                             }
                         }
-                    };
-                }
-            });
+                    }
+                };
+            }
+        });
     }
 
     @FXML
     void initialize() {
 
         // Set converter to catch invalid dates
-        datepicker.setConverter(new SafeLocalDateStringConverter(formatter, outputLabel));
+        datepicker.setConverter(new SafeLocalDateStringConverter(outputLabel));
 
         // Update DatePicker cells when ComboBox value changes
         comboArrivalCity.valueProperty().addListener(
@@ -265,7 +264,7 @@ public class QueryRidesController implements Controller {
         Image image;
 
         // if the search has an alert set the bell icon to red, if not set it to normal
-        if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  numSeats.getValue())){
+        if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue())) {
             image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/redAlert.png"));
             bellView.setImage(image);
         } else {
@@ -336,7 +335,7 @@ public class QueryRidesController implements Controller {
         try {
             int seats = numSeats.getValue();
             if (seats <= 0) {//not possible
-               throw new NumberFormatException();
+                throw new NumberFormatException();
             }
         } catch (NumberFormatException e) {
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("NumSeatsNotPositiveInteger");
@@ -405,7 +404,7 @@ public class QueryRidesController implements Controller {
                 outputLabel.setText(error);
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
                 return;
-            } else if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  numSeats.getValue())) {
+            } else if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue())) {
                 String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("CreateAlertGUI.AlertAlreadyExist");
                 outputLabel.setText(error);
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
@@ -427,39 +426,5 @@ public class QueryRidesController implements Controller {
         comboArrivalCity.setValue(arrCity);
         numSeats.setValue(1);
         datepicker.setValue(Dates.convertToLocalDateViaInstant(date));
-    }
-
-    public static class SafeLocalDateStringConverter extends StringConverter<LocalDate> {
-        DateTimeFormatter formatter;
-        Label outputLabel;
-
-        public SafeLocalDateStringConverter(DateTimeFormatter formatter, Label outputLabel) {
-            this.formatter = formatter;
-            this.outputLabel = outputLabel;
-        }
-
-        @Override
-        public String toString(LocalDate object) {
-            if (object != null) {
-                return object.format(formatter);
-            } else {
-                return "";
-            }
-        }
-
-        @Override
-        public LocalDate fromString(String string) {
-            try {
-                if (string != null && !string.isEmpty()) {
-                    return LocalDate.parse(string, formatter);
-                } else {
-                    return null;
-                }
-            } catch (DateTimeParseException e) {
-                outputLabel.setText("Invalid date");
-                outputLabel.getStyleClass().setAll("label", "lbl-danger");
-                return null;
-            }
-        }
     }
 }
