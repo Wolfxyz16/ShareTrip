@@ -21,12 +21,17 @@ import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 import eus.ehu.sharetrip.ui.MainGUI;
 import eus.ehu.sharetrip.utils.Dates;
+import javafx.util.StringConverter;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class QueryRidesController implements Controller {
+
+    private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     @FXML
     private Button bellBtn;
@@ -98,40 +103,43 @@ public class QueryRidesController implements Controller {
 
     private void updateDatePickerCellFactory(DatePicker datePicker) {
 
-        List<Date> dates = businessLogic.getDatesWithRides(comboDepartCity.getValue(), comboArrivalCity.getValue());
+            List<Date> dates = businessLogic.getDatesWithRides(comboDepartCity.getValue(), comboArrivalCity.getValue());
 
-        // extract datesWithBooking from rides
-        datesWithBooking.clear();
-        for (Date day : dates) {
-            datesWithBooking.add(Dates.convertToLocalDateViaInstant(day));
-        }
+            // extract datesWithBooking from rides
+            datesWithBooking.clear();
+            for (Date day : dates) {
+                datesWithBooking.add(Dates.convertToLocalDateViaInstant(day));
+            }
 
-        // update the DatePicker cells
-        datePicker.setDayCellFactory(new Callback<>() {
-            @Override
-            public DateCell call(DatePicker param) {
-                return new DateCell() {
-                    @Override
-                    public void updateItem(LocalDate item, boolean empty) {
-                        super.updateItem(item, empty);
+            // update the DatePicker cells
+            datePicker.setDayCellFactory(new Callback<>() {
+                @Override
+                public DateCell call(DatePicker param) {
+                    return new DateCell() {
+                        @Override
+                        public void updateItem(LocalDate item, boolean empty) {
+                            super.updateItem(item, empty);
 
-                        if (!empty && item != null) {
-                            if (item.equals(LocalDate.now())) {
-                                this.setStyle("-fx-background-color: #ADD8E6");
-                            } else if (datesWithBooking.contains(item)) {
-                                this.setStyle("-fx-background-color: pink");
-                            } else {
-                                this.setStyle("-fx-background-color: rgb(235, 235, 235)");
+                            if (!empty && item != null) {
+                                if (item.equals(LocalDate.now())) {
+                                    this.setStyle("-fx-background-color: #ADD8E6");
+                                } else if (datesWithBooking.contains(item)) {
+                                    this.setStyle("-fx-background-color: pink");
+                                } else {
+                                    this.setStyle("-fx-background-color: rgb(235, 235, 235)");
+                                }
                             }
                         }
-                    }
-                };
-            }
-        });
+                    };
+                }
+            });
     }
 
     @FXML
     void initialize() {
+
+        // Set converter to catch invalid dates
+        datepicker.setConverter(new SafeLocalDateStringConverter(formatter, outputLabel));
 
         // Update DatePicker cells when ComboBox value changes
         comboArrivalCity.valueProperty().addListener(
@@ -147,14 +155,14 @@ public class QueryRidesController implements Controller {
 
         // when the user selects a departure city, update the arrival cities
         comboDepartCity.setOnAction(e -> {
-                arrivalCities.clear();
+            arrivalCities.clear();
             try {
                 if ((comboDepartCity.getValue() != null)) {
                     arrivalCities.setAll(businessLogic.getDestinationCities(businessLogic.getCity(comboDepartCity.getValue())));
 
                 }
             } catch (CityDoesNotExistException ex) {
-                  //it's not supposed to happen ever
+                //it's not supposed to happen ever
             }
         });
 
@@ -213,8 +221,11 @@ public class QueryRidesController implements Controller {
 
                     // If the search is successful, show a success message and not empty
                     String success = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("RidesAvailable");
+
+
                     Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/Heart.png"));
                     heartView.setImage(image);
+
                     outputLabel.setText("These are the available rides for you:");
                     outputLabel.getStyleClass().setAll("label", "lbl-success");
 
@@ -338,22 +349,6 @@ public class QueryRidesController implements Controller {
         return true;
     }
 
-
-/*
-
-  private void setupEventSelection() {
-    tblEvents.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-      if (newSelection != null) {
-
-        tblQuestions.getItems().clear();
-        for (Question q : tblEvents.getSelectionModel().getSelectedItem().getQuestions()) {
-          tblQuestions.getItems().add(q);
-        }
-      }
-    });
-  }
-*/
-
     public void resetValues() {
         comboDepartCity.setValue(null);
         comboArrivalCity.setValue(null);
@@ -374,17 +369,31 @@ public class QueryRidesController implements Controller {
 
     @FXML
     public void addToFavorite(ActionEvent actionEvent) {
-        Ride selectedRide = tblRides.getSelectionModel().getSelectedItem();
-        if (selectedRide == null) {
-            outputLabel.setText("Please select a ride to add to favorites.");
-            outputLabel.getStyleClass().setAll("label", "lbl-danger");
-            return;
-        } else {
+        if (noErrorsInInputFields()) {
+            // check if user is logged in
+            if (businessLogic.getCurrentUser() == null) {
+                String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorMustBeLoggedIn");
+                outputLabel.setText(error);
+                outputLabel.getStyleClass().setAll("label", "lbl-danger");
+                return;
+            } else if (businessLogic.favoriteAlreadyExist(businessLogic.getCurrentUser(), tblRides.getSelectionModel().getSelectedItem())) {
+                outputLabel.setText("The favorite already exists");
+                outputLabel.getStyleClass().setAll("label", "lbl-danger");
+                return;
+            } else if (tblRides.getSelectionModel().getSelectedItem() == null) {
+                outputLabel.setText("Please select a ride to add to favorites.");
+                outputLabel.getStyleClass().setAll("label", "lbl-danger");
+                return;
+            }
+
+            Ride selectedRide = tblRides.getSelectionModel().getSelectedItem();
+            businessLogic.addFavoriteRide(businessLogic.getCurrentUser(), selectedRide);
             outputLabel.setText("Ride added to favorites.");
             outputLabel.getStyleClass().setAll("label", "lbl-success");
-            businessLogic.addFavoriteRide(businessLogic.getCurrentUser(), selectedRide);
+
+            updateFavsButton(selectedRide);
+            System.out.println("Favorite created");
         }
-        updateFavsButton(selectedRide);
     }
 
     @FXML
@@ -408,10 +417,8 @@ public class QueryRidesController implements Controller {
                 //it's not supposed to happen ever
 
             }
-            Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/redAlert.png"));
-            bellView.setImage(image);
+            updateAlertsButton();
             System.out.println("Alert created");
-
         }
     }
 
@@ -420,5 +427,39 @@ public class QueryRidesController implements Controller {
         comboArrivalCity.setValue(arrCity);
         numSeats.setValue(1);
         datepicker.setValue(Dates.convertToLocalDateViaInstant(date));
+    }
+
+    public static class SafeLocalDateStringConverter extends StringConverter<LocalDate> {
+        DateTimeFormatter formatter;
+        Label outputLabel;
+
+        public SafeLocalDateStringConverter(DateTimeFormatter formatter, Label outputLabel) {
+            this.formatter = formatter;
+            this.outputLabel = outputLabel;
+        }
+
+        @Override
+        public String toString(LocalDate object) {
+            if (object != null) {
+                return object.format(formatter);
+            } else {
+                return "";
+            }
+        }
+
+        @Override
+        public LocalDate fromString(String string) {
+            try {
+                if (string != null && !string.isEmpty()) {
+                    return LocalDate.parse(string, formatter);
+                } else {
+                    return null;
+                }
+            } catch (DateTimeParseException e) {
+                outputLabel.setText("Invalid date");
+                outputLabel.getStyleClass().setAll("label", "lbl-danger");
+                return null;
+            }
+        }
     }
 }
