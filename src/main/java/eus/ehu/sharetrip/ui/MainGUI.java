@@ -106,7 +106,10 @@ public class MainGUI {
                 mainWrapper.setCenter(queryRidesWin.ui);
                 ((QueryRidesController) queryRidesWin.c).resetValues();
         }
-            case "Create Ride" -> mainWrapper.setCenter(createRideWin.ui);
+            case "Create Ride" -> {
+                mainWrapper.setCenter(createRideWin.ui);
+                ((CreateRideController) createRideWin.c).clearFields();
+            }
             case "Log in" -> {
                 mainWrapper.setCenter(loginWin.ui);
                 ((SignInController)loginWin.c).clearFields();

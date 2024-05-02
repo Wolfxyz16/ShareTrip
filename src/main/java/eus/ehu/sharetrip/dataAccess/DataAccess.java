@@ -915,4 +915,9 @@ public class DataAccess {
     db.remove(alert);
     db.getTransaction().commit();
   }
+
+  public List<City> getAllCities() {
+    TypedQuery<City> query = db.createQuery("SELECT c FROM City c", City.class);
+    return query.getResultList();
+  }
 }

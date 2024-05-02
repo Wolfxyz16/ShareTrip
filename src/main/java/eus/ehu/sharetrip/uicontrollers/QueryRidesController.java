@@ -22,18 +22,12 @@ import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 import eus.ehu.sharetrip.ui.MainGUI;
 import eus.ehu.sharetrip.utils.Dates;
-import javafx.util.StringConverter;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class QueryRidesController implements Controller {
-
-    @FXML
-    private Button bellBtn;
 
     @FXML
     private ImageView bellView;
@@ -74,7 +68,7 @@ public class QueryRidesController implements Controller {
     @FXML
     private TableView<Ride> tblRides;
 
-    private List<LocalDate> datesWithBooking = new ArrayList<>();
+    private final List<LocalDate> datesWithBooking = new ArrayList<>();
 
     private final BlFacade businessLogic;
 
