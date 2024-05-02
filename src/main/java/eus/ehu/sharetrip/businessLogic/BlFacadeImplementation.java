@@ -123,6 +123,12 @@ public class BlFacadeImplementation implements BlFacade {
     }
 
     @Override
+    public List<City> getAllCities() {
+        List<City> allCities = dbManager.getAllCities();
+        return allCities;
+    }
+
+    @Override
     public List<Date> getDatesWithRides(City value, City value1) {
         List<Date> dates = dbManager.getDatesWithRides(value, value1);
         return dates;

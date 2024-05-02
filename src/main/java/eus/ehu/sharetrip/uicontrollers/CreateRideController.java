@@ -2,36 +2,32 @@ package eus.ehu.sharetrip.uicontrollers;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
 import eus.ehu.sharetrip.domain.City;
-import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.exceptions.CityDoesNotExistException;
 import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
+import eus.ehu.sharetrip.utils.SafeLocalDateStringConverter;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import eus.ehu.sharetrip.ui.MainGUI;
 import eus.ehu.sharetrip.utils.Dates;
 
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
 public class CreateRideController implements Controller {
 
-    public CreateRideController(BlFacade bl) {
-        this.bl = bl;
+    public CreateRideController(BlFacade businessLogic) {
+        this.businessLogic = businessLogic;
     }
 
-    private BlFacade bl;
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
+    private final BlFacade businessLogic;
 
     private MainGUI mainGUI;
 
@@ -42,10 +38,10 @@ public class CreateRideController implements Controller {
     private DatePicker datePicker;
 
     @FXML
-    private TextField txtDepartCity;
+    private ComboBox<City> comboArrivalCity;
 
     @FXML
-    private TextField txtArrivalCity;
+    private ComboBox<City> comboDepartCity;
 
     @FXML
     private TextField txtSeats;
@@ -59,9 +55,9 @@ public class CreateRideController implements Controller {
     private String field_Errors() {
 
         try {
-            if ((txtDepartCity.getText().isEmpty()) || (txtArrivalCity.getText().isEmpty()) || (txtSeats.getText().isEmpty()) || (txtPrice.getText().isEmpty()))
+            if (comboDepartCity.getValue() == null || (comboArrivalCity.getValue() == null) || (txtSeats.getText().isEmpty()) || (txtPrice.getText().isEmpty())) {
                 return ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.ErrorQuery");
-            else {
+            } else {
 
                 // trigger an exception if the introduced string is not a number
                 int inputSeats = Integer.parseInt(txtSeats.getText());
@@ -106,45 +102,61 @@ public class CreateRideController implements Controller {
         } else {
             LocalDate localDate = datePicker.getValue();
             Date date = Date.from(localDate.atStartOfDay( ZoneId.systemDefault() ).toInstant());
-            City departCity = new City (txtDepartCity.getText());
-            City arrivalCity = new City(txtArrivalCity.getText());
+            City departCity = comboDepartCity.getValue();
+            City arrivalCity = comboArrivalCity.getValue();
             int numSeats = Integer.parseInt( txtSeats.getText() );
             float price = Float.parseFloat( txtPrice.getText() );
-            User user = bl.getCurrentUser();
+            User user = businessLogic.getCurrentUser();
 
-            try{
-                City depart = bl.getCity(departCity);
-                try {
-                    City arrival = bl.getCity(arrivalCity);
-                    bl.createRide(depart, arrival, Dates.convertToDate(datePicker.getValue()), numSeats, price, user.getId());
-                    warningsInfo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.RideCreated"));
-                    warningsInfo.getStyleClass().setAll("label", "lbl-success");
-                } catch (RideMustBeLaterThanTodayException e1) {
-                    warningsInfo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.ErrorRideMustBeLaterThanToday"));
-                    warningsInfo.getStyleClass().setAll("label", "lbl-danger");
-                } catch (RideAlreadyExistException e1) {
-                    warningsInfo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.RideAlreadyExist"));
-                    warningsInfo.getStyleClass().setAll("label", "lbl-danger");
-                }catch (CityDoesNotExistException e1) {
-                    warningsInfo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.DestinationCityDoesNotExist"));
-                    warningsInfo.getStyleClass().setAll("label", "lbl-danger");
-                }
-            }catch (CityDoesNotExistException e1) {
-                warningsInfo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.DepartureCityDoesNotExist"));
+            try {
+                businessLogic.createRide(departCity, arrivalCity, Dates.convertToDate(datePicker.getValue()), numSeats, price, user.getId());
+                warningsInfo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.RideCreated"));
+                warningsInfo.getStyleClass().setAll("label", "lbl-success");
+            } catch (RideMustBeLaterThanTodayException e1) {
+                warningsInfo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.ErrorRideMustBeLaterThanToday"));
+                warningsInfo.getStyleClass().setAll("label", "lbl-danger");
+            } catch (RideAlreadyExistException e1) {
+                warningsInfo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.RideAlreadyExist"));
                 warningsInfo.getStyleClass().setAll("label", "lbl-danger");
             }
-
         }
-
-
-
     }
 
     @FXML
-    void initialize() {}
+    void initialize() {
+        // Set converter to catch invalid dates
+        datePicker.setConverter(new SafeLocalDateStringConverter(warningsInfo));
+
+        ObservableList<City> departureCities = FXCollections.observableArrayList(new ArrayList<>());
+        ObservableList<City> arrivalCities = FXCollections.observableArrayList(new ArrayList<>());
+
+        comboDepartCity.getItems().addAll(businessLogic.getAllCities());
+
+        // Set the arrival cities based on the selected departure city, so remove the departure city
+        comboDepartCity.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                departureCities.setAll(businessLogic.getAllCities());
+                departureCities.remove(newValue);
+                comboArrivalCity.setItems(departureCities);
+            }
+        });
+    }
 
     @Override
     public void setMainApp(MainGUI mainGUI) {
         this.mainGUI = mainGUI;
+    }
+
+    public void clearFields() {
+        comboDepartCity.getSelectionModel().clearSelection();
+        comboArrivalCity.getSelectionModel().clearSelection();
+        txtSeats.clear();
+        txtPrice.clear();
+        datePicker.getEditor().clear();
+
+        // Add new cities to the combo box
+        comboDepartCity.getItems().clear();
+        comboDepartCity.getItems().addAll(businessLogic.getAllCities());
+        comboArrivalCity.getItems().clear();
     }
 }
