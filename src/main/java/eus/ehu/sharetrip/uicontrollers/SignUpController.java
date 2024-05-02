@@ -12,7 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import eus.ehu.sharetrip.businessLogic.BlFacade;
-
+import org.mindrot.jbcrypt.BCrypt;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -99,7 +99,8 @@ public class SignUpController implements Controller{
 
         // Call the business logic to sign up the use
         try {
-            bl.signup(userEmail, userName, userPassword, userRole);
+            String hashedPassword = BCrypt.hashpw(userPassword, BCrypt.gensalt());
+            bl.signup(userEmail, userName, hashedPassword, userRole);
             System.out.println("User signed up");
             String success = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("SuccessSignUp");
             errorsLabel.setText(success);
@@ -120,7 +121,8 @@ public class SignUpController implements Controller{
 
     private Boolean autoLogin(String username, String password) {
         try {
-            bl.login(username, password);
+            String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+            bl.login(username, hashedPassword);
             mainGUI.setUserName(username);
             mainGUI.setIsLoggedIn(true);
             return true;

@@ -103,4 +103,6 @@ public interface BlFacade {
     void deleteFavoriteRide(User currentUser, Ride selectedRide);
 
     void deleteAlert(Alert alert);
+
+    public String getHashedPassword(String username) throws UnknownUser;
 }

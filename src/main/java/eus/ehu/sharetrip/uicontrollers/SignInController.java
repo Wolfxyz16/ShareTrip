@@ -12,6 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 import java.net.URL;
@@ -55,25 +56,32 @@ public class SignInController implements Controller {
             loginStatus.getStyleClass().setAll("label", "lbl-danger");
             return;
         }
-
         String username = login.getText();
         String pass = password.getText();
-
-        try {
-            bl.login(username, pass);
-            mainGUI.setUserName(username);
-            mainGUI.setIsLoggedIn(true);
-            String logged = ResourceBundle.getBundle("Etiquetas").getString("LogedIn");
-            loginStatus.setText(logged);
-            loginStatus.getStyleClass().setAll("label", "lbl-success");
-            mainGUI.showScene("Query Rides");
-        } catch (UnknownUser unknownUser) {
-            String error = ResourceBundle.getBundle("Etiquetas").getString("UnknownUser");
-            loginStatus.setText(error);
-            loginStatus.getStyleClass().setAll("label", "lbl-danger");
+        String hashed = BCrypt.hashpw(pass, BCrypt.gensalt());
+            try {
+                //String hashed = bl.getHashedPassword(username);
+                //if(BCrypt.checkpw(pass, hashed)) {
+                    bl.login(username, hashed);
+                    mainGUI.setUserName(username);
+                    mainGUI.setIsLoggedIn(true);
+                    String logged = ResourceBundle.getBundle("Etiquetas").getString("LogedIn");
+                    loginStatus.setText(logged);
+                    loginStatus.getStyleClass().setAll("label", "lbl-success");
+                    mainGUI.showScene("Query Rides");
+                /*} /*else {
+                    String error = ResourceBundle.getBundle("Etiquetas").getString("WrongPassword");
+                    loginStatus.setText(error);
+                    loginStatus.getStyleClass().setAll("label", "lbl-danger");
+                }
+                */
+            } catch (UnknownUser unknownUser) {
+                String error = ResourceBundle.getBundle("Etiquetas").getString("UnknownUser");
+                loginStatus.setText(error);
+                loginStatus.getStyleClass().setAll("label", "lbl-danger");
+            }
         }
 
-    }
 
     @FXML
     void initialize() {

@@ -764,6 +764,7 @@ public class DataAccess {
   }
   public User login(String username, String password) throws UnknownUser {
     User user;
+    System.out.println(password);
     TypedQuery<User> query = db.createQuery("SELECT u FROM User u WHERE u.username =?1 AND u.password =?2", User.class);
     query.setParameter(1, username);
     query.setParameter(2, password);
@@ -776,7 +777,7 @@ public class DataAccess {
     return user;
   }
 
-  public User signup(String email, String userName, String password, String role) throws UserAlreadyExistException {
+  public User signup(String email, String userName, String hashedPassword, String role) throws UserAlreadyExistException {
     TypedQuery<User> query = db.createQuery(
             "SELECT u FROM User u WHERE u.email = :email OR u.username = :userName", User.class);
     query.setParameter("email", email);
@@ -791,13 +792,13 @@ public class DataAccess {
         newUser = new Driver.Builder()
                 .email(email)
                 .username(userName)
-                .password(password)
+                .password(hashedPassword)
                 .build();
       } else if (role.equals(ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("Traveler")) || role.equals("Traveler")) {
         newUser = new Traveler.Builder()
                 .email(email)
                 .username(userName)
-                .password(password)
+                .password(hashedPassword)
                 .build();
       }
 
@@ -915,4 +916,16 @@ public class DataAccess {
     db.remove(alert);
     db.getTransaction().commit();
   }
+
+    public String getHashedPassword(String username) throws UnknownUser {
+        String hashedPass;
+        TypedQuery<String> query = db.createQuery("SELECT u.password FROM User u WHERE u.username = :username", String.class);
+        query.setParameter("username", username);
+          try {
+            hashedPass = query.getSingleResult();
+          } catch (Exception e) {
+            throw new UnknownUser();
+          }
+        return hashedPass;
+    }
 }
