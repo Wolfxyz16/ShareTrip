@@ -58,10 +58,10 @@ public class SignInController implements Controller {
         }
         String username = login.getText();
         String pass = password.getText();
-        String hashed = BCrypt.hashpw(pass, BCrypt.gensalt());
+        //String hashed = BCrypt.hashpw(pass, BCrypt.gensalt());
             try {
-                //String hashed = bl.getHashedPassword(username);
-                //if(BCrypt.checkpw(pass, hashed)) {
+                    String hashed = bl.getHashedPassword(username);
+                    if(BCrypt.checkpw(pass, hashed)) {
                     bl.login(username, hashed);
                     mainGUI.setUserName(username);
                     mainGUI.setIsLoggedIn(true);
@@ -69,12 +69,12 @@ public class SignInController implements Controller {
                     loginStatus.setText(logged);
                     loginStatus.getStyleClass().setAll("label", "lbl-success");
                     mainGUI.showScene("Query Rides");
-                /*} /*else {
+                } else {
                     String error = ResourceBundle.getBundle("Etiquetas").getString("WrongPassword");
                     loginStatus.setText(error);
                     loginStatus.getStyleClass().setAll("label", "lbl-danger");
                 }
-                */
+
             } catch (UnknownUser unknownUser) {
                 String error = ResourceBundle.getBundle("Etiquetas").getString("UnknownUser");
                 loginStatus.setText(error);

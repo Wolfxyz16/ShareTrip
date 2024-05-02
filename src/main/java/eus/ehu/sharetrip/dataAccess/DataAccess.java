@@ -764,7 +764,7 @@ public class DataAccess {
   }
   public User login(String username, String password) throws UnknownUser {
     User user;
-    System.out.println(password);
+    System.out.println("Hashed password when LOGIN: " + password);
     TypedQuery<User> query = db.createQuery("SELECT u FROM User u WHERE u.username =?1 AND u.password =?2", User.class);
     query.setParameter(1, username);
     query.setParameter(2, password);

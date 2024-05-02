@@ -100,6 +100,7 @@ public class SignUpController implements Controller{
         // Call the business logic to sign up the use
         try {
             String hashedPassword = BCrypt.hashpw(userPassword, BCrypt.gensalt());
+            System.out.println("Hashed password when signup: " + hashedPassword);
             bl.signup(userEmail, userName, hashedPassword, userRole);
             System.out.println("User signed up");
             String success = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("SuccessSignUp");
@@ -113,10 +114,12 @@ public class SignUpController implements Controller{
             errorsLabel.getStyleClass().setAll("label", "lbl-danger");
         }
 
+
         if (this.autoLogin(userName, userPassword)){
             mainGUI.showScene("Query Rides");
 
         }
+
     }
 
     private Boolean autoLogin(String username, String password) {
