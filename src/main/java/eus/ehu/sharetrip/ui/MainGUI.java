@@ -175,6 +175,8 @@ public class MainGUI {
         mainWrapper.setCenter(queryRidesWin.ui);
         ((QueryRidesController)queryRidesWin.c).resetValues();
         ((QueryRidesController)queryRidesWin.c).searchFavRide(from, to, date);
+        ((QueryRidesController)queryRidesWin.c).searchRides(null);
+
     }
 
     public static void main(String[] args) {
