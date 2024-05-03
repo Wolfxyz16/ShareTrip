@@ -388,6 +388,7 @@ public class QueryRidesController implements Controller {
     public void searchRides(ActionEvent actionEvent) {
         outputLabel.setText("");
         outputLabel.getStyleClass().setAll("label");
+        heartView.setImage(new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/Heart.png")));
 
         // Check if all fields are not empty and logically correct
         if (noErrorsInInputFields()) {
@@ -416,7 +417,8 @@ public class QueryRidesController implements Controller {
 
                 // If the search is successful, show a success message and not empty
                 String success = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("RidesAvailable");
-
+                outputLabel.setText(success);
+                dissapearLabel();
 
                 Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/Heart.png"));
                 heartView.setImage(image);
