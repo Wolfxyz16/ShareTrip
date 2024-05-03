@@ -42,7 +42,7 @@ With this method we will guarantee that the `main` branch will be always working
 ## What about the sprints?
 1. feb 28 - mar 19
 2. mar 20 - apr 12
-3. apr 3 - may 4
+3. apr 12 - may 4
 
 ## How can I pull a single git branch?
 1. `git fetch <remote_name> <branch_name>`
