@@ -18,6 +18,6 @@
 5. The system processes the inputs, creates the new ride offers and stores it.
 
 ## Alternative Flows:
-3a.  If the origin or destination city does not exist in the system, the driver is offered the option to create a new city.
-1. The driver enters the "Create a City" flow of events
-2. After that flow is finished, go to 2.
+5a. Ride already exists
+    1. The system shows an error message
+    Go to 2.

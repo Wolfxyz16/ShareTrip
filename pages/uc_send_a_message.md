@@ -18,7 +18,4 @@
 5. The actor enters the recipient and a text for the message. Then he clicks on "Send".
 6. The system sends the message of the actor to the recipient.
 
-## Alternative Flows:
-5a. If the actor wants to cancel the reply after typing a message:
-1. The actor selects the "Cancel" option.
-2. The system discards the written message, does not send it and breaks.
+## Alternative Flows: None

@@ -1,6 +1,6 @@
 ## Title: Delete Alert
 
-## Primary Actors: Traveler
+## Primary Actors: Traveler or Driver
 ## Secondary Actors: None
 
 ## Preconditions:

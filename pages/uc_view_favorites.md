@@ -1,6 +1,6 @@
 ## Title: View Favorites
 
-## Primary Actors: Traveler
+## Primary Actors: Traveler & Driver
 ## Secondary Actors: None
 
 ## Preconditions:

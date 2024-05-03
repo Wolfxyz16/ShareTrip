@@ -1,6 +1,6 @@
 ## Title: Query Rides
 
-## Primary Actors: NotLogged User or Traveler
+## Primary Actors: NotLogged User
 ## Secondary Actors: None
 
 ## Preconditions:
