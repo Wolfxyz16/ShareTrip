@@ -4,6 +4,7 @@ import eus.ehu.sharetrip.businessLogic.BlFacade;
 import eus.ehu.sharetrip.domain.*;
 import eus.ehu.sharetrip.ui.MainGUI;
 import eus.ehu.sharetrip.utils.Dates;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -100,6 +101,7 @@ public class ViewFavoritesController implements Controller {
     @FXML
     void searchFav(ActionEvent event) {
         // DayOfWeek weekday = Dates.getWeekdayFromDate(selectedRide.getDate());
+        errorlbl.setVisible(true);
         try {
             Ride selectedRide = tblFavorite.getSelectionModel().getSelectedItem();
             City depCity = selectedRide.getFromLocation();
@@ -109,6 +111,7 @@ public class ViewFavoritesController implements Controller {
         } catch (Exception e) {
             errorlbl.setText("Please select a ride");
             errorlbl.getStyleClass().setAll("label", "lbl-danger");
+            dissapearLabel();
         }
 
     }
@@ -116,13 +119,30 @@ public class ViewFavoritesController implements Controller {
     @FXML
     void deleteFav(ActionEvent event) {
         Ride selectedRide = tblFavorite.getSelectionModel().getSelectedItem();
+        errorlbl.setVisible(true);
+
         if (selectedRide == null) {
             errorlbl.setText("Please select a ride");
             errorlbl.getStyleClass().setAll("label", "lbl-danger");
+            dissapearLabel();
         } else {
             User currentUser = businessLogic.getCurrentUser();
             businessLogic.deleteFavoriteRide(currentUser, selectedRide);
             updateTables();
         }
+    }
+
+    private void dissapearLabel() {
+        new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Platform.runLater(() -> {
+                errorlbl.setVisible(false);
+            });
+        }).start();
     }
 }
