@@ -57,6 +57,7 @@ public class SignUpController implements Controller{
         String userRole = roles.getValue();
         String userName = username.getText();
         String confirmPassword = confirmPasswd.getText();
+        String hashedPassword = BCrypt.hashpw(userPassword, BCrypt.gensalt());
 
         /**
          * Checks that there are not empty fields
@@ -99,7 +100,6 @@ public class SignUpController implements Controller{
 
         // Call the business logic to sign up the use
         try {
-            String hashedPassword = BCrypt.hashpw(userPassword, BCrypt.gensalt());
             System.out.println("Hashed password when signup: " + hashedPassword);
             bl.signup(userEmail, userName, hashedPassword, userRole);
             System.out.println("User signed up");
@@ -115,16 +115,15 @@ public class SignUpController implements Controller{
         }
 
 
-        if (this.autoLogin(userName, userPassword)){
+        if (this.autoLogin(userName, hashedPassword)){
             mainGUI.showScene("Query Rides");
 
         }
 
     }
 
-    private Boolean autoLogin(String username, String password) {
+    private Boolean autoLogin(String username, String hashedPassword) {
         try {
-            String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
             bl.login(username, hashedPassword);
             mainGUI.setUserName(username);
             mainGUI.setIsLoggedIn(true);

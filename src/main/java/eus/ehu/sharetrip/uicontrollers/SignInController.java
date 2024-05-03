@@ -58,18 +58,18 @@ public class SignInController implements Controller {
         }
         String username = login.getText();
         String pass = password.getText();
-        //String hashed = BCrypt.hashpw(pass, BCrypt.gensalt());
             try {
                     String hashed = bl.getHashedPassword(username);
-                    if(BCrypt.checkpw(pass, hashed)) {
-                    bl.login(username, hashed);
-                    mainGUI.setUserName(username);
-                    mainGUI.setIsLoggedIn(true);
-                    String logged = ResourceBundle.getBundle("Etiquetas").getString("LogedIn");
-                    loginStatus.setText(logged);
-                    loginStatus.getStyleClass().setAll("label", "lbl-success");
-                    mainGUI.showScene("Query Rides");
-                } else {
+                    if (BCrypt.checkpw(pass, hashed)) {
+                        bl.login(username, hashed);
+                        mainGUI.setUserName(username);
+                        mainGUI.setIsLoggedIn(true);
+                        String logged = ResourceBundle.getBundle("Etiquetas").getString("LogedIn");
+                        loginStatus.setText(logged);
+                        loginStatus.getStyleClass().setAll("label", "lbl-success");
+                        mainGUI.showScene("Query Rides");
+                    }
+                    else {
                     String error = ResourceBundle.getBundle("Etiquetas").getString("WrongPassword");
                     loginStatus.setText(error);
                     loginStatus.getStyleClass().setAll("label", "lbl-danger");
