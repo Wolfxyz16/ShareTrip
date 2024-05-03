@@ -73,6 +73,14 @@ public interface BlFacade {
 
     public List<City> getDestinationCities(City from);
 
+    /**
+     * This method returns all cities, departure and arrival cities
+     *
+     * @return all the cities
+     */
+
+    public List<City> getAllCities();
+
 
     List<Date> getDatesWithRides(City value, City value1);
 

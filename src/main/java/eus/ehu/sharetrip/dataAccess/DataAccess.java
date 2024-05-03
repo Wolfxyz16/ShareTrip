@@ -917,6 +917,7 @@ public class DataAccess {
     db.getTransaction().commit();
   }
 
+
     public String getHashedPassword(String username) throws UnknownUser {
         String hashedPass;
         TypedQuery<String> query = db.createQuery("SELECT u.password FROM User u WHERE u.username = :username", String.class);
@@ -928,4 +929,9 @@ public class DataAccess {
           }
         return hashedPass;
     }
+
+  public List<City> getAllCities() {
+    TypedQuery<City> query = db.createQuery("SELECT c FROM City c", City.class);
+    return query.getResultList();
+  }
 }

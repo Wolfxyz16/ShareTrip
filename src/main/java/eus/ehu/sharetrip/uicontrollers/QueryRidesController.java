@@ -6,6 +6,7 @@ import eus.ehu.sharetrip.domain.Driver;
 import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.exceptions.AlertAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.CityDoesNotExistException;
+import eus.ehu.sharetrip.utils.SafeLocalDateStringConverter;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -27,9 +28,6 @@ import java.time.YearMonth;
 import java.util.*;
 
 public class QueryRidesController implements Controller {
-
-    @FXML
-    private Button bellBtn;
 
     @FXML
     private ImageView bellView;
@@ -70,7 +68,7 @@ public class QueryRidesController implements Controller {
     @FXML
     private TableView<Ride> tblRides;
 
-    private List<LocalDate> datesWithBooking = new ArrayList<>();
+    private final List<LocalDate> datesWithBooking = new ArrayList<>();
 
     private final BlFacade businessLogic;
 
@@ -133,6 +131,9 @@ public class QueryRidesController implements Controller {
     @FXML
     void initialize() {
 
+        // Set converter to catch invalid dates
+        datepicker.setConverter(new SafeLocalDateStringConverter(outputLabel));
+
         // Update DatePicker cells when ComboBox value changes
         comboArrivalCity.valueProperty().addListener(
                 (obs, oldVal, newVal) -> updateDatePickerCellFactory(datepicker));
@@ -147,14 +148,14 @@ public class QueryRidesController implements Controller {
 
         // when the user selects a departure city, update the arrival cities
         comboDepartCity.setOnAction(e -> {
-                arrivalCities.clear();
+            arrivalCities.clear();
             try {
                 if ((comboDepartCity.getValue() != null)) {
                     arrivalCities.setAll(businessLogic.getDestinationCities(businessLogic.getCity(comboDepartCity.getValue())));
 
                 }
             } catch (CityDoesNotExistException ex) {
-                  //it's not supposed to happen ever
+                //it's not supposed to happen ever
             }
         });
 
@@ -180,55 +181,6 @@ public class QueryRidesController implements Controller {
             });
         });
 
-        // Query Rides logic
-        searchBtn.setOnAction(actionEvent -> {
-
-            // Clear the output label
-            outputLabel.setText("");
-            outputLabel.getStyleClass().setAll("label");
-
-            // Check if all fields are not empty and logically correct
-            if (noErrorsInInputFields()) {
-                // Clear the table
-                tblRides.getItems().clear();
-
-                try {
-                    //get all rides with the selected parameters
-                    List<Ride> rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue());
-
-                    updateAlertsButton();
-
-                    // If the search result is empty, show a message and return
-                    if (rides.isEmpty()) {
-                        String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("NoRidesAvailable");
-                        outputLabel.setText(error);
-                        outputLabel.getStyleClass().setAll("label", "lbl-warning");
-                        return;
-                    }
-
-                    // List all rides result
-                    for (Ride ride : rides) {
-                        tblRides.getItems().add(ride);
-                    }
-
-                    // If the search is successful, show a success message and not empty
-                    String success = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("RidesAvailable");
-                    Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/Heart.png"));
-                    heartView.setImage(image);
-                    outputLabel.setText("These are the available rides for you:");
-                    outputLabel.getStyleClass().setAll("label", "lbl-success");
-
-                    tblRides.getSelectionModel().selectedItemProperty().addListener((obs, oldRide, newRide) -> {
-                        if (newRide != null) {
-                            updateFavsButton(newRide);
-                        }
-                    });
-
-                } catch (CityDoesNotExistException ex) {
-                    //it's not supposed to happen ever
-                }
-            }
-        });
 
         // show just the driver's name in column1
         qc1.setCellValueFactory(new Callback<>() {
@@ -243,7 +195,7 @@ public class QueryRidesController implements Controller {
         qc3.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         tblRides.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
+            if (newSelection != null && businessLogic.getCurrentUser() != null) {
                 Ride ride = tblRides.getSelectionModel().getSelectedItem();
                 updateFavsButton(ride);
             }
@@ -254,7 +206,7 @@ public class QueryRidesController implements Controller {
         Image image;
 
         // if the search has an alert set the bell icon to red, if not set it to normal
-        if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  numSeats.getValue())){
+        if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue())) {
             image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/redAlert.png"));
             bellView.setImage(image);
         } else {
@@ -265,7 +217,7 @@ public class QueryRidesController implements Controller {
 
 
     private void updateFavsButton(Ride ride) {
-        if (ride != null) {
+        if (ride != null && businessLogic.getCurrentUser() != null){
             if (businessLogic.getCurrentUser().getFavRides().contains(ride)) {
                 Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/redHeart.png"));
                 heartView.setImage(image);
@@ -325,7 +277,7 @@ public class QueryRidesController implements Controller {
         try {
             int seats = numSeats.getValue();
             if (seats <= 0) {//not possible
-               throw new NumberFormatException();
+                throw new NumberFormatException();
             }
         } catch (NumberFormatException e) {
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("NumSeatsNotPositiveInteger");
@@ -337,22 +289,6 @@ public class QueryRidesController implements Controller {
         // If all checks pass, return true
         return true;
     }
-
-
-/*
-
-  private void setupEventSelection() {
-    tblEvents.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-      if (newSelection != null) {
-
-        tblQuestions.getItems().clear();
-        for (Question q : tblEvents.getSelectionModel().getSelectedItem().getQuestions()) {
-          tblQuestions.getItems().add(q);
-        }
-      }
-    });
-  }
-*/
 
     public void resetValues() {
         comboDepartCity.setValue(null);
@@ -374,17 +310,31 @@ public class QueryRidesController implements Controller {
 
     @FXML
     public void addToFavorite(ActionEvent actionEvent) {
-        Ride selectedRide = tblRides.getSelectionModel().getSelectedItem();
-        if (selectedRide == null) {
-            outputLabel.setText("Please select a ride to add to favorites.");
-            outputLabel.getStyleClass().setAll("label", "lbl-danger");
-            return;
-        } else {
+        if (noErrorsInInputFields()) {
+            // check if user is logged in
+            if (businessLogic.getCurrentUser() == null) {
+                String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorMustBeLoggedIn");
+                outputLabel.setText(error);
+                outputLabel.getStyleClass().setAll("label", "lbl-danger");
+                return;
+            } else if (businessLogic.favoriteAlreadyExist(businessLogic.getCurrentUser(), tblRides.getSelectionModel().getSelectedItem())) {
+                outputLabel.setText("The favorite already exists");
+                outputLabel.getStyleClass().setAll("label", "lbl-danger");
+                return;
+            } else if (tblRides.getSelectionModel().getSelectedItem() == null) {
+                outputLabel.setText("Please select a ride to add to favorites.");
+                outputLabel.getStyleClass().setAll("label", "lbl-danger");
+                return;
+            }
+
+            Ride selectedRide = tblRides.getSelectionModel().getSelectedItem();
+            businessLogic.addFavoriteRide(businessLogic.getCurrentUser(), selectedRide);
             outputLabel.setText("Ride added to favorites.");
             outputLabel.getStyleClass().setAll("label", "lbl-success");
-            businessLogic.addFavoriteRide(businessLogic.getCurrentUser(), selectedRide);
+
+            updateFavsButton(selectedRide);
+            System.out.println("Favorite created");
         }
-        updateFavsButton(selectedRide);
     }
 
     @FXML
@@ -396,7 +346,7 @@ public class QueryRidesController implements Controller {
                 outputLabel.setText(error);
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
                 return;
-            } else if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()),  numSeats.getValue())) {
+            } else if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue())) {
                 String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("CreateAlertGUI.AlertAlreadyExist");
                 outputLabel.setText(error);
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
@@ -408,10 +358,8 @@ public class QueryRidesController implements Controller {
                 //it's not supposed to happen ever
 
             }
-            Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/redAlert.png"));
-            bellView.setImage(image);
+            updateAlertsButton();
             System.out.println("Alert created");
-
         }
     }
 
@@ -420,5 +368,55 @@ public class QueryRidesController implements Controller {
         comboArrivalCity.setValue(arrCity);
         numSeats.setValue(1);
         datepicker.setValue(Dates.convertToLocalDateViaInstant(date));
+    }
+  
+    public void searchRides(ActionEvent actionEvent) {
+        outputLabel.setText("");
+        outputLabel.getStyleClass().setAll("label");
+
+        // Check if all fields are not empty and logically correct
+        if (noErrorsInInputFields()) {
+            // Clear the table
+            tblRides.getItems().clear();
+
+            try {
+                //get all rides with the selected parameters
+                List<Ride> rides = businessLogic.getRides(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue());
+
+                updateAlertsButton();
+
+                // If the search result is empty, show a message and return
+                if (rides.isEmpty()) {
+                    String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("NoRidesAvailable");
+                    outputLabel.setText(error);
+                    outputLabel.getStyleClass().setAll("label", "lbl-warning");
+                    return;
+                }
+
+                // List all rides result
+                for (Ride ride : rides) {
+                    tblRides.getItems().add(ride);
+                }
+
+                // If the search is successful, show a success message and not empty
+                String success = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("RidesAvailable");
+
+
+                Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/Heart.png"));
+                heartView.setImage(image);
+
+                outputLabel.setText("These are the available rides for you:");
+                outputLabel.getStyleClass().setAll("label", "lbl-success");
+
+                tblRides.getSelectionModel().selectedItemProperty().addListener((obs, oldRide, newRide) -> {
+                    if (newRide != null && businessLogic.getCurrentUser() != null) {
+                        updateFavsButton(newRide);
+                    }
+                });
+
+            } catch (CityDoesNotExistException ex) {
+                //it's not supposed to happen ever
+            }
+        }
     }
 }

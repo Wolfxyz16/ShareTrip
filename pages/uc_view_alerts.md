@@ -1,6 +1,6 @@
 ## Title: View Alerts
 
-## Primary Actors: Traveler
+## Primary Actors: Traveler & Drier
 ## Secondary Actors: None
 
 ## Preconditions:

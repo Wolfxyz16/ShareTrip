@@ -5,7 +5,6 @@
 
 ## Preconditions:
 - The actor must be registered and logged into the system.
-- This use case has to be entered from the  3a. alternative flow of the "Offer a Ride" use case
 
 ## Postconditions:
 - The new city is now available in the system.
@@ -16,3 +15,6 @@
 3. The system processes the input, creates and stores the new city.
 
 ## Alternative Flows: None
+3a. Ride already exists
+    1. The system shows an error message
+       Go to 1.

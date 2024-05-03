@@ -22,3 +22,7 @@
 ## Alternative Flows:
 5a. The inputs are invalid
 1.  The system shows an error message indicating the invalid inputs. Go to 3.
+
+8a. Favorite already exists
+1. The system shows an error message
+   Go to 6.
