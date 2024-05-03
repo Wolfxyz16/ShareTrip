@@ -4,6 +4,7 @@ import eus.ehu.sharetrip.businessLogic.BlFacade;
 import eus.ehu.sharetrip.domain.Message;
 import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.ui.MainGUI;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -43,11 +44,13 @@ public class SendMessageController implements Controller{
     void sendMessage(ActionEvent event) {
         String recipient = txtRecipient.getText();
         String messageContent = txtMessage.getText();
+        errorLabel.setVisible(true);
 
         if (recipient.isEmpty() || messageContent.isEmpty()) {
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("EmptyMeessageOrRecipient");
             errorLabel.setText(error);
             errorLabel.getStyleClass().setAll("label", "lbl-danger");
+            dissapearLabel();
             return;
         }
 
@@ -58,6 +61,7 @@ public class SendMessageController implements Controller{
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("RecipientDoesNotExist");
             errorLabel.setText(error);
             errorLabel.getStyleClass().setAll("label", "lbl-danger");
+            dissapearLabel();
             return;
         }
 
@@ -72,10 +76,25 @@ public class SendMessageController implements Controller{
         String success = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("MessageSentSuccessfully");
         errorLabel.setText(success);
         errorLabel.getStyleClass().setAll("label", "lbl-success");
+        dissapearLabel();
     }
 
 
     public void backToMessageController(ActionEvent actionEvent) {
         mainGUI.showScene("Message Overview");
+    }
+
+    private void dissapearLabel() {
+        new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Platform.runLater(() -> {
+                errorLabel.setVisible(false);
+            });
+        }).start();
     }
 }

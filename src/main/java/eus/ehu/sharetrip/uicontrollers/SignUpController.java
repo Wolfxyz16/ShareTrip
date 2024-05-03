@@ -4,6 +4,7 @@ import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.exceptions.UnknownUser;
 import eus.ehu.sharetrip.exceptions.UserAlreadyExistException;
 import eus.ehu.sharetrip.ui.MainGUI;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -59,6 +60,8 @@ public class SignUpController implements Controller{
         String confirmPassword = confirmPasswd.getText();
         String hashedPassword = BCrypt.hashpw(userPassword, BCrypt.gensalt());
 
+        errorsLabel.setVisible(true);
+
         /**
          * Checks that there are not empty fields
          */
@@ -66,6 +69,7 @@ public class SignUpController implements Controller{
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorEmptyFields");
             errorsLabel.setText(error);
             errorsLabel.getStyleClass().setAll("label", "lbl-danger");
+            dissapearLabel();
             return;
         }
 
@@ -76,6 +80,7 @@ public class SignUpController implements Controller{
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorInvalidPassword");
             errorsLabel.setText(error);
             errorsLabel.getStyleClass().setAll("label", "lbl-danger");
+            dissapearLabel();
             return;
         }
         /**
@@ -85,6 +90,7 @@ public class SignUpController implements Controller{
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorPasswordsDoNotMatch");
             errorsLabel.setText(error);
             errorsLabel.getStyleClass().setAll("label", "lbl-danger");
+            dissapearLabel();
             return;
         }
 
@@ -95,6 +101,7 @@ public class SignUpController implements Controller{
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorInvalidEmail");
             errorsLabel.setText(error);
             errorsLabel.getStyleClass().setAll("label", "lbl-danger");
+            dissapearLabel();
             return;
         }
 
@@ -106,14 +113,15 @@ public class SignUpController implements Controller{
             String success = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("SuccessSignUp");
             errorsLabel.setText(success);
             errorsLabel.getStyleClass().setAll("label", "lbl-success");
+            dissapearLabel();
         } catch (UnknownUser e) {
             throw new RuntimeException(e);
         } catch (UserAlreadyExistException e) {
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorUserAlreadyExists");
             errorsLabel.setText(error);
             errorsLabel.getStyleClass().setAll("label", "lbl-danger");
+            dissapearLabel();
         }
-
 
         if (this.autoLogin(userName, hashedPassword)){
             mainGUI.showScene("Query Rides");
@@ -163,4 +171,18 @@ public class SignUpController implements Controller{
         return flag;
     }
 
+    private void dissapearLabel() {
+        new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Platform.runLater(() -> {
+                errorsLabel.setVisible(false);
+            });
+        }).start();
     }
+
+}

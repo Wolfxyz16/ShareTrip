@@ -2,6 +2,7 @@ package eus.ehu.sharetrip.uicontrollers;
 
 import eus.ehu.sharetrip.exceptions.CityAlreadyExistException;
 import eus.ehu.sharetrip.ui.MainGUI;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -29,10 +30,13 @@ public class CreateCityController implements Controller {
     @FXML
     void createCityClick(ActionEvent event){
         String city = newCity.getText();
+        newCityStatusMessage.setVisible(true);
+
         if (city.isEmpty()) {
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("CreateCityGUI.CityNameEmpty");
             newCityStatusMessage.setText(error);
             newCityStatusMessage.getStyleClass().setAll("label", "lbl-danger");
+            dissapearLabel();
             return;
         }
         try {
@@ -48,8 +52,25 @@ public class CreateCityController implements Controller {
 
         }
 
+        dissapearLabel();
+
 
     }
+
+    private void dissapearLabel() {
+        new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Platform.runLater(() -> {
+                newCityStatusMessage.setVisible(false);
+            });
+        }).start();
+    }
+
 
     @Override
     public void setMainApp(MainGUI mainGUI) {

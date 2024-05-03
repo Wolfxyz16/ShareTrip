@@ -7,6 +7,7 @@ import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.exceptions.AlertAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.CityDoesNotExistException;
 import eus.ehu.sharetrip.utils.SafeLocalDateStringConverter;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -229,29 +230,34 @@ public class QueryRidesController implements Controller {
     }
 
     private boolean noErrorsInInputFields() {
+        outputLabel.setVisible(true);
         // Check if all fields are filled
         if (comboDepartCity.getValue() == null) {
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("EmptyDepartureCity");
             outputLabel.setText(error);
             outputLabel.getStyleClass().setAll("label", "lbl-danger");
+            dissapearLabel();
             return false;
         }
         if (comboArrivalCity.getValue() == null) {
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("EmptyArrivalCity");
             outputLabel.setText(error);
             outputLabel.getStyleClass().setAll("label", "lbl-danger");
+            dissapearLabel();
             return false;
         }
         if (datepicker.getValue() == null) {
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("EmptyDate");
             outputLabel.setText(error);
             outputLabel.getStyleClass().setAll("label", "lbl-danger");
+            dissapearLabel();
             return false;
         }
         if (numSeats.getValue() == null) {
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("EmptyNumSeats");
             outputLabel.setText(error);
             outputLabel.getStyleClass().setAll("label", "lbl-danger");
+            dissapearLabel();
             return false;
         }
 
@@ -262,6 +268,7 @@ public class QueryRidesController implements Controller {
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("CreateRideGUI.ErrorRideMustBeLaterThanToday");
             outputLabel.setText("The date must be later than today.");
             outputLabel.getStyleClass().setAll("label", "lbl-danger");
+            dissapearLabel();
             return false;
         }
 
@@ -270,6 +277,7 @@ public class QueryRidesController implements Controller {
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("EmptyDate");
             outputLabel.setText(error);
             outputLabel.getStyleClass().setAll("label", "lbl-danger");
+            dissapearLabel();
             return false;
         }
 
@@ -283,6 +291,7 @@ public class QueryRidesController implements Controller {
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("NumSeatsNotPositiveInteger");
             outputLabel.setText(error);
             outputLabel.getStyleClass().setAll("label", "lbl-danger");
+            dissapearLabel();
             return false;
         }
 
@@ -316,14 +325,17 @@ public class QueryRidesController implements Controller {
                 String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorMustBeLoggedIn");
                 outputLabel.setText(error);
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
+                dissapearLabel();
                 return;
             } else if (businessLogic.favoriteAlreadyExist(businessLogic.getCurrentUser(), tblRides.getSelectionModel().getSelectedItem())) {
                 outputLabel.setText("The favorite already exists");
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
+                dissapearLabel();
                 return;
             } else if (tblRides.getSelectionModel().getSelectedItem() == null) {
                 outputLabel.setText("Please select a ride to add to favorites.");
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
+                dissapearLabel();
                 return;
             }
 
@@ -331,6 +343,7 @@ public class QueryRidesController implements Controller {
             businessLogic.addFavoriteRide(businessLogic.getCurrentUser(), selectedRide);
             outputLabel.setText("Ride added to favorites.");
             outputLabel.getStyleClass().setAll("label", "lbl-success");
+            dissapearLabel();
 
             updateFavsButton(selectedRide);
             System.out.println("Favorite created");
@@ -345,11 +358,13 @@ public class QueryRidesController implements Controller {
                 String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorMustBeLoggedIn");
                 outputLabel.setText(error);
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
+                dissapearLabel();
                 return;
             } else if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue())) {
                 String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("CreateAlertGUI.AlertAlreadyExist");
                 outputLabel.setText(error);
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
+                dissapearLabel();
                 return;
             }
             try {
@@ -390,6 +405,7 @@ public class QueryRidesController implements Controller {
                     String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("NoRidesAvailable");
                     outputLabel.setText(error);
                     outputLabel.getStyleClass().setAll("label", "lbl-warning");
+                    dissapearLabel();
                     return;
                 }
 
@@ -407,6 +423,7 @@ public class QueryRidesController implements Controller {
 
                 outputLabel.setText("These are the available rides for you:");
                 outputLabel.getStyleClass().setAll("label", "lbl-success");
+                dissapearLabel();
 
                 tblRides.getSelectionModel().selectedItemProperty().addListener((obs, oldRide, newRide) -> {
                     if (newRide != null && businessLogic.getCurrentUser() != null) {
@@ -418,5 +435,19 @@ public class QueryRidesController implements Controller {
                 //it's not supposed to happen ever
             }
         }
+    }
+
+    private void dissapearLabel() {
+        new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Platform.runLater(() -> {
+                outputLabel.setVisible(false);
+            });
+        }).start();
     }
 }

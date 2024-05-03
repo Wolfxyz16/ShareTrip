@@ -6,6 +6,7 @@ import eus.ehu.sharetrip.domain.City;
 import eus.ehu.sharetrip.domain.Ride;
 import eus.ehu.sharetrip.ui.MainGUI;
 import eus.ehu.sharetrip.utils.Dates;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -77,9 +78,12 @@ public class ViewAlertsController implements Controller {
     @FXML
     void deleteAlert(ActionEvent event) {
         Alert selectedAlert = tblAlerts.getSelectionModel().getSelectedItem();
+        errorlbl.setVisible(true);
+
         if (selectedAlert == null) {
             errorlbl.setText("Please select an alert");
             errorlbl.getStyleClass().setAll("label", "lbl-danger");
+            dissapearLabel();
         } else {
             businessLogic.deleteAlert(selectedAlert);
             updateTables();
@@ -142,5 +146,19 @@ public class ViewAlertsController implements Controller {
     public void updateTables() {
         alerts.clear();
         alerts.addAll(businessLogic.getAlerts());
+    }
+
+    private void dissapearLabel() {
+        new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Platform.runLater(() -> {
+                errorlbl.setVisible(false);
+            });
+        }).start();
     }
 }

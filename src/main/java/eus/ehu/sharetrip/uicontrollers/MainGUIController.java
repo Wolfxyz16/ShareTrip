@@ -56,15 +56,6 @@ public class MainGUIController implements Controller{
     @FXML
     private Label welcome;
 
-    @FXML
-    private Button enBtn;
-
-    @FXML
-    private Button esBtn;
-
-    @FXML
-    private Button euBtn;
-
     private MainGUI mainGUI;
 
     private BlFacade businessLogic;
