@@ -11,6 +11,7 @@ import jakarta.persistence.TypedQuery;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.*;
 
@@ -102,58 +103,58 @@ public class DataAccess {
       Driver driver1 = new Driver.Builder()
                 .email("driver1@gmail.com")
                 .username("Aitor Fernandez")
-                .password("1234")
+                .password(BCrypt.hashpw("1234", BCrypt.gensalt()))
                 .build();
       Driver driver2 = new Driver.Builder()
                 .email("driver2@gmail.com")
                 .username("Ane Gaztañaga")
-                .password("1234")
+                .password(BCrypt.hashpw("1234", BCrypt.gensalt()))
                 .build();
       Driver driver3 = new Driver.Builder()
                   .email("driver3@gmail.com")
                   .username("test")
-                  .password("test")
+                  .password(BCrypt.hashpw("test", BCrypt.gensalt()))
                   .build();
       Driver driver4 = new Driver.Builder()
               .email("driver4@gmail.com")
               .username("María Rodriguez")
-              .password("pass123")
+              .password(BCrypt.hashpw("1234", BCrypt.gensalt()))
               .build();
 
       Driver driver5 = new Driver.Builder()
               .email("driver5@gmail.com")
               .username("Carlos García")
-              .password("driverpass")
+              .password(BCrypt.hashpw("1234", BCrypt.gensalt()))
               .build();
 
       Driver driver6 = new Driver.Builder()
               .email("driver6@gmail.com")
               .username("Laura Martínez")
-              .password("laurapass")
+              .password(BCrypt.hashpw("1234", BCrypt.gensalt()))
               .build();
 
       Driver driver7 = new Driver.Builder()
               .email("driver7@gmail.com")
               .username("Pedro Sánchez")
-              .password("driver123")
+              .password(BCrypt.hashpw("1234", BCrypt.gensalt()))
               .build();
 
       Driver driver8 = new Driver.Builder()
               .email("driver8@gmail.com")
               .username("Sofía López")
-              .password("sofpass")
+              .password(BCrypt.hashpw("1234", BCrypt.gensalt()))
               .build();
 
       Driver driver9 = new Driver.Builder()
               .email("driver9@gmail.com")
               .username("Ana Fernandez")
-              .password("driverpass123")
+              .password(BCrypt.hashpw("1234", BCrypt.gensalt()))
               .build();
 
       Driver driver10 = new Driver.Builder()
               .email("driver10@gmail.com")
               .username("David Gutiérrez")
-              .password("david123")
+              .password(BCrypt.hashpw("1234", BCrypt.gensalt()))
               .build();
 
 // Persistir los drivers en la base de datos
@@ -445,14 +446,14 @@ public class DataAccess {
       //Create travelers
 
       Traveler traveler1 = new Traveler.Builder()
-              .email("user1@gmail.com")
+                .email("user1@gmail.com")
                 .username("User1")
-                .password("1234")
+                .password(BCrypt.hashpw("1234", BCrypt.gensalt()))
                 .build();
       Traveler traveler2 = new Traveler.Builder()
                 .email("user2@gmail.com")
                 .username("User2")
-                .password("1234")
+                .password(BCrypt.hashpw("1234", BCrypt.gensalt()))
                 .build();
 
       // CREATE MESSAGES
@@ -762,11 +763,11 @@ public class DataAccess {
       return null; // Or handle it in another appropriate way
     }
   }
-  public User login(String username, String password) throws UnknownUser {
+  public User login(String username, String hashedPassword) throws UnknownUser {
     User user;
     TypedQuery<User> query = db.createQuery("SELECT u FROM User u WHERE u.username =?1 AND u.password =?2", User.class);
     query.setParameter(1, username);
-    query.setParameter(2, password);
+    query.setParameter(2, hashedPassword);
     try {
       user = query.getSingleResult();
     } catch (Exception e) {
@@ -776,7 +777,7 @@ public class DataAccess {
     return user;
   }
 
-  public User signup(String email, String userName, String password, String role) throws UserAlreadyExistException {
+  public User signup(String email, String userName, String hashedPassword, String role) throws UserAlreadyExistException {
     TypedQuery<User> query = db.createQuery(
             "SELECT u FROM User u WHERE u.email = :email OR u.username = :userName", User.class);
     query.setParameter("email", email);
@@ -791,13 +792,13 @@ public class DataAccess {
         newUser = new Driver.Builder()
                 .email(email)
                 .username(userName)
-                .password(password)
+                .password(hashedPassword)
                 .build();
       } else if (role.equals(ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("Traveler")) || role.equals("Traveler")) {
         newUser = new Traveler.Builder()
                 .email(email)
                 .username(userName)
-                .password(password)
+                .password(hashedPassword)
                 .build();
       }
 
@@ -915,6 +916,19 @@ public class DataAccess {
     db.remove(alert);
     db.getTransaction().commit();
   }
+
+
+    public String getHashedPassword(String username) throws UnknownUser {
+        String hashedPass;
+        TypedQuery<String> query = db.createQuery("SELECT u.password FROM User u WHERE u.username = :username", String.class);
+        query.setParameter("username", username);
+          try {
+            hashedPass = query.getSingleResult();
+          } catch (Exception e) {
+            throw new UnknownUser();
+          }
+        return hashedPass;
+    }
 
   public List<City> getAllCities() {
     TypedQuery<City> query = db.createQuery("SELECT c FROM City c", City.class);

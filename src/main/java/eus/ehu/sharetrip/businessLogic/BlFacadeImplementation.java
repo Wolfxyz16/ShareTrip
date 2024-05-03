@@ -212,5 +212,7 @@ public class BlFacadeImplementation implements BlFacade {
         dbManager.addFavoriteRide(user, ride);
     }
 
-
+    public String getHashedPassword(String username) throws UnknownUser {
+        return dbManager.getHashedPassword(username);
+    }
 }

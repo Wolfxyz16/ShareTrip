@@ -12,7 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import eus.ehu.sharetrip.businessLogic.BlFacade;
-
+import org.mindrot.jbcrypt.BCrypt;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -57,6 +57,7 @@ public class SignUpController implements Controller{
         String userRole = roles.getValue();
         String userName = username.getText();
         String confirmPassword = confirmPasswd.getText();
+        String hashedPassword = BCrypt.hashpw(userPassword, BCrypt.gensalt());
 
         /**
          * Checks that there are not empty fields
@@ -99,7 +100,8 @@ public class SignUpController implements Controller{
 
         // Call the business logic to sign up the use
         try {
-            bl.signup(userEmail, userName, userPassword, userRole);
+            System.out.println("Hashed password when signup: " + hashedPassword);
+            bl.signup(userEmail, userName, hashedPassword, userRole);
             System.out.println("User signed up");
             String success = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("SuccessSignUp");
             errorsLabel.setText(success);
@@ -112,15 +114,17 @@ public class SignUpController implements Controller{
             errorsLabel.getStyleClass().setAll("label", "lbl-danger");
         }
 
-        if (this.autoLogin(userName, userPassword)){
+
+        if (this.autoLogin(userName, hashedPassword)){
             mainGUI.showScene("Query Rides");
 
         }
+
     }
 
-    private Boolean autoLogin(String username, String password) {
+    private Boolean autoLogin(String username, String hashedPassword) {
         try {
-            bl.login(username, password);
+            bl.login(username, hashedPassword);
             mainGUI.setUserName(username);
             mainGUI.setIsLoggedIn(true);
             return true;
