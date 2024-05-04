@@ -116,8 +116,14 @@ public class MainGUI {
             }
             case "Register" -> mainWrapper.setCenter(registerWin.ui);
             case "Create City" -> mainWrapper.setCenter(createCityWin.ui);
-            case "MyBookings" -> mainWrapper.setCenter(myBookings.ui);
-            case "BookingRequests" -> mainWrapper.setCenter(bookingRequests.ui);
+            case "MyBookings" -> {
+                mainWrapper.setCenter(myBookings.ui);
+                ((MyBookingsController)myBookings.c).updateTable();
+            }
+            case "BookingRequests" -> {
+                mainWrapper.setCenter(bookingRequests.ui);
+                ((BookingRequestsController)bookingRequests.c).updateTable();
+            }
             case "Log Out" -> mainWrapper.setCenter(logOutWin.ui);
         }
     }

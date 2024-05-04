@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.BookingRequestsController">
-    <children>
-        <Label layoutX="172.0" layoutY="131.0" text="TODO">
-            <font>
-                <Font size="94.0" />
-            </font>
-        </Label>
-    </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1000.0" stylesheets="@styles/bootstrapfx.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.BookingRequestsController">
+   <children>
+      <Label alignment="CENTER" layoutX="229.0" layoutY="111.0" prefHeight="42.0" prefWidth="555.0" styleClass="h1" text="%myRidesReservations" />
+      <TableView fx:id="tblMyRidesBooks" layoutX="125.0" layoutY="250.0" prefHeight="342.0" prefWidth="750.0">
+         <columns>
+            <TableColumn fx:id="requestAplicantName" prefWidth="148.5" text="%requestAplicantName" />
+            <TableColumn fx:id="rideDate" prefWidth="148.5" text="%rideDate" />
+            <TableColumn fx:id="requestRideFrom" prefWidth="145.0" text="%requestFrom" />
+            <TableColumn fx:id="requestRideTo" prefWidth="135.5" text="%requestTo" />
+            <TableColumn fx:id="requestedSeats" prefWidth="141.5" text="%resquestSeats" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+         <effect>
+            <Blend />
+         </effect>
+      </TableView>
+   </children>
 </AnchorPane>

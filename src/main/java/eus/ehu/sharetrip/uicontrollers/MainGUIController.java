@@ -226,9 +226,11 @@ public class MainGUIController implements Controller{
         if (businessLogic.getCurrentUserType().equals("TRAVELER")) {
             myBookingsBtn.setVisible(isLoggedIn);
 
+
         } else if (businessLogic.getCurrentUserType().equals("DRIVER")) {
             createRidesBtn.setVisible(isLoggedIn);
             createCityBtn.setVisible(isLoggedIn);
+            bookingRequestsBtn.setVisible(isLoggedIn);
             bookingRequestsBtn.setVisible(isLoggedIn);
         }
 

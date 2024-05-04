@@ -4,6 +4,7 @@ import eus.ehu.sharetrip.businessLogic.BlFacade;
 import eus.ehu.sharetrip.domain.City;
 import eus.ehu.sharetrip.domain.Driver;
 import eus.ehu.sharetrip.domain.Ride;
+import eus.ehu.sharetrip.domain.Traveler;
 import eus.ehu.sharetrip.exceptions.AlertAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.CityDoesNotExistException;
 import eus.ehu.sharetrip.utils.SafeLocalDateStringConverter;
@@ -41,6 +42,9 @@ public class QueryRidesController implements Controller {
 
     @FXML
     public Button searchBtn;
+
+    @FXML
+    private Button bookBtn;
 
     @FXML
     private Label outputLabel;
@@ -305,8 +309,8 @@ public class QueryRidesController implements Controller {
         datepicker.setValue(null);
         numSeats.setValue(null);
         tblRides.getItems().clear();
-        outputLabel.setText("");
-        outputLabel.getStyleClass().setAll("label");
+        //outputLabel.setText("");
+        //outputLabel.getStyleClass().setAll("label");
         Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/Heart.png"));
         heartView.setImage(image);
         Image image2 = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/Alert.png"));
@@ -366,15 +370,39 @@ public class QueryRidesController implements Controller {
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
                 dissapearLabel();
                 return;
-            }
-            try {
-                businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue());
-            } catch (CityDoesNotExistException ex) {
-                //it's not supposed to happen ever
-
+            }else{
+                try {
+                    businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue());
+                } catch (CityDoesNotExistException ex) {
+                    //it's not supposed to happen ever
+                }
             }
             updateAlertsButton();
             System.out.println("Alert created");
+        }
+    }
+
+    @FXML
+    void bookRideAction(ActionEvent event) {
+        if (noErrorsInInputFields()) {
+            if (businessLogic.getCurrentUser() == null) {
+                String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorMustBeLoggedIn");
+                outputLabel.setText(error);
+                outputLabel.getStyleClass().setAll("label", "lbl-danger");
+                dissapearLabel();
+            }else if (tblRides.getSelectionModel().getSelectedItem() == null) {
+                    outputLabel.setText("Please select a ride to book.");
+                    outputLabel.getStyleClass().setAll("label", "lbl-danger");
+                    dissapearLabel();
+            }else{
+                Ride selectedRide = tblRides.getSelectionModel().getSelectedItem();
+                businessLogic.bookRide((Traveler)businessLogic.getCurrentUser(), selectedRide, numSeats.getValue());
+                outputLabel.setText("Ride booked successfully.");
+                outputLabel.getStyleClass().setAll("label", "lbl-success");
+                dissapearLabel();
+                resetValues();
+            }
+
         }
     }
 
@@ -438,6 +466,7 @@ public class QueryRidesController implements Controller {
             }
         }
     }
+
 
     private void dissapearLabel() {
         new Thread(() -> {

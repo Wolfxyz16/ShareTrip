@@ -5,6 +5,7 @@ import eus.ehu.sharetrip.dataAccess.DataAccess;
 import eus.ehu.sharetrip.domain.*;
 import eus.ehu.sharetrip.exceptions.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
@@ -215,4 +216,20 @@ public class BlFacadeImplementation implements BlFacade {
     public String getHashedPassword(String username) throws UnknownUser {
         return dbManager.getHashedPassword(username);
     }
+
+    @Override
+    public void bookRide(Traveler user, Ride selectedRide, Integer numSeats) {
+        dbManager.bookRide(user, selectedRide, numSeats);
+    }
+
+    @Override
+    public ArrayList<Ride> getRidesByDriver(Driver currentUser) {
+        return dbManager.getRidesByDriver(currentUser);
+    }
+
+    @Override
+    public ArrayList<Reservation> getMyBookings(User currentUser) {
+        return dbManager.getMyBookings(currentUser);
+    }
+
 }

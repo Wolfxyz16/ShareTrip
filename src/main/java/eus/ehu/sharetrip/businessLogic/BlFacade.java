@@ -3,6 +3,8 @@ package eus.ehu.sharetrip.businessLogic;
 import eus.ehu.sharetrip.domain.*;
 import eus.ehu.sharetrip.exceptions.*;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
@@ -113,4 +115,11 @@ public interface BlFacade {
     void deleteAlert(Alert alert);
 
     public String getHashedPassword(String username) throws UnknownUser;
+
+    void bookRide(Traveler user, Ride selectedRide, Integer numSeats);
+
+    ArrayList<Ride> getRidesByDriver(Driver currentUser);
+
+    ArrayList<Reservation> getMyBookings(User currentUser);
+
 }
