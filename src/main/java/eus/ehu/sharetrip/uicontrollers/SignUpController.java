@@ -68,7 +68,7 @@ public class SignUpController implements Controller{
         if (userEmail.isEmpty() || userPassword.isEmpty() || userRole == null || userName.isEmpty()) {
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorEmptyFields");
             errorsLabel.setText(error);
-            errorsLabel.getStyleClass().setAll("label", "lbl-danger");
+            errorsLabel.getStyleClass().setAll("alert", "alert-danger");
             dissapearLabel();
             return;
         }
@@ -79,7 +79,7 @@ public class SignUpController implements Controller{
         if (!isValid(userPassword, confirmPassword)) {
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorInvalidPassword");
             errorsLabel.setText(error);
-            errorsLabel.getStyleClass().setAll("label", "lbl-danger");
+            errorsLabel.getStyleClass().setAll("alert", "alert-danger");
             dissapearLabel();
             return;
         }
@@ -89,7 +89,7 @@ public class SignUpController implements Controller{
         if (!userPassword.equals(confirmPassword)) {
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorPasswordsDoNotMatch");
             errorsLabel.setText(error);
-            errorsLabel.getStyleClass().setAll("label", "lbl-danger");
+            errorsLabel.getStyleClass().setAll("alert", "alert-danger");
             dissapearLabel();
             return;
         }
@@ -100,7 +100,7 @@ public class SignUpController implements Controller{
         if (!userEmail.matches("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$") ) {
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorInvalidEmail");
             errorsLabel.setText(error);
-            errorsLabel.getStyleClass().setAll("label", "lbl-danger");
+            errorsLabel.getStyleClass().setAll("alert", "alert-danger");
             dissapearLabel();
             return;
         }
@@ -112,14 +112,14 @@ public class SignUpController implements Controller{
             System.out.println("User signed up");
             String success = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("SuccessSignUp");
             errorsLabel.setText(success);
-            errorsLabel.getStyleClass().setAll("label", "lbl-success");
+            errorsLabel.getStyleClass().setAll("alert", "alert-success");
             dissapearLabel();
         } catch (UnknownUser e) {
             throw new RuntimeException(e);
         } catch (UserAlreadyExistException e) {
             String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorUserAlreadyExists");
             errorsLabel.setText(error);
-            errorsLabel.getStyleClass().setAll("label", "lbl-danger");
+            errorsLabel.getStyleClass().setAll("alert", "alert-danger");
             dissapearLabel();
         }
 

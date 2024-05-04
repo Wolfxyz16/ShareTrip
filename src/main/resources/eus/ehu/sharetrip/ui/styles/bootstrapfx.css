@@ -8,6 +8,11 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+.text-input {
+    -fx-border-color: transparent;
+    -fx-border-width: 1px;
+}
+
 * {
     -fx-font-family: 'sans-serif'; }
 
@@ -959,7 +964,7 @@ a.badge:hover, a.badge:focused {
     -fx-padding: 15px;
     -fx-border-width: 1px;
     -fx-border-style: solid;
-    -fx-border-color: black;
+    -fx-border-color: transparent;
     -fx-border-radius: 4px;
     -fx-background-radius: 4px; }
 
