@@ -469,6 +469,7 @@ public class DataAccess {
               .toLocation(city2)
               .rideDate(UtilDate.newDate(year, month, 15))
               .numSeats(4)
+              .user(traveler1)
               .build();
 
       Alert alert2 = new Alert.Builder()
@@ -476,6 +477,7 @@ public class DataAccess {
               .toLocation(city4)
               .rideDate(UtilDate.newDate(year, month + 1, 15))
               .numSeats(4)
+              .user(traveler1)
               .build();
 
       Alert alert3 = new Alert.Builder()
@@ -483,6 +485,7 @@ public class DataAccess {
               .toLocation(city1)
               .rideDate(UtilDate.newDate(year, month, 6))
               .numSeats(4)
+              .user(traveler2)
               .build();
 
       Alert alert4 = new Alert.Builder()
@@ -490,6 +493,7 @@ public class DataAccess {
               .toLocation(city5)
               .rideDate(UtilDate.newDate(year, month, 25))
               .numSeats(4)
+              .user(traveler2)
               .build();
 
       db.getTransaction().begin();
@@ -948,4 +952,12 @@ public class DataAccess {
       return !query.getResultList().isEmpty();
     }
 
+  public User getSystemUser() {
+    User systemUser  = new User.Builder()
+            .email("sharetripSystem@gmail.com")
+            .username("System Sharetrip")
+            .password(BCrypt.hashpw("admin", BCrypt.gensalt()))
+            .build();
+      return systemUser;
+  }
 }

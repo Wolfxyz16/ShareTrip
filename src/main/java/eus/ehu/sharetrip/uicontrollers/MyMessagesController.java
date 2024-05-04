@@ -104,9 +104,10 @@ public class MyMessagesController implements Controller{
 
     public void sendAlertEmail(City departCity, City arrivalCity, Date date, int numSeats) {
         Message message1 = new Message.Builder()
-                .messageText("Hello")
+                .messageText("A new ride that matches your alert has been created!")
                 .sender(businessLogic.getSystemUser())
-                .receiver(traveler2)
+                .receiver(businessLogic.getCurrentUser())
                 .build();
+        this.receivedMessages.add(message1);
     }
 }
