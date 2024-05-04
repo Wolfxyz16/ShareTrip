@@ -342,7 +342,7 @@ public class DBTest {
 
         //we can name directly the method getAlerts() because we know there are some alerts in db
         //else we should create an alert first but is not tested yet
-        List<Alert> alerts = db.getAlerts();
+        List<Alert> alerts = db.getUserAlerts(db.getUser("User1"));
         assertNotNull(alerts);
         assertTrue(!alerts.isEmpty());
     }
@@ -367,7 +367,7 @@ public class DBTest {
         }
 
         assertNotNull(alert);
-        List<Alert> alerts = db.getAlerts();
+        List<Alert> alerts = db.getUserAlerts(db.getUser("User1"));
         assertNotNull(alerts);
         assertTrue(alerts.contains(alert));
 
