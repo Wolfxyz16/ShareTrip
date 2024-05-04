@@ -410,8 +410,7 @@ public class QueryRidesController implements Controller {
         comboDepartCity.setValue(depCity);
         comboArrivalCity.setValue(arrCity);
         numSeats.setValue(1);
-        String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("NoRidesAvailable");
-        outputLabel.setText("Please, select the date and number of your next favorite ride");
+        String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("setTheDate");
         outputLabel.setText(error);
         outputLabel.getStyleClass().setAll("label", "lbl-warning");
         dissapearLabel();
