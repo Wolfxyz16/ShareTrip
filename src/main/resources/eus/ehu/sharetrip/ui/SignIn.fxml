@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.scene.Group?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1000.0" stylesheets="@styles/bootstrapfx.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.SignInController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1000.0" stylesheets="@styles/bootstrapfx.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.SignInController">
     <children>
       <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#f2cb05" height="300.0" layoutX="237.0" layoutY="254.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
       <VBox layoutX="336.0" layoutY="304.0" spacing="20.0">
@@ -28,6 +24,11 @@
                     <PasswordField fx:id="password" layoutY="21.0" prefHeight="30.0" prefWidth="400.0" promptText="%promptPassword" />
                </children>
             </Group>
+            <Label fx:id="loginStatus" alignment="CENTER" prefHeight="20.0" prefWidth="400.0" styleClass="h4">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
          </children>
       </VBox>
         <Button layoutX="446.0" layoutY="477.0" mnemonicParsing="false" onAction="#onClick" prefHeight="49.0" prefWidth="181.0" text="%login">
@@ -45,6 +46,5 @@
          <font>
             <Font size="10.0" />
          </font></Label>
-      <Label fx:id="loginStatus" alignment="CENTER" layoutX="378.0" layoutY="443.0" prefHeight="21.0" prefWidth="318.0" styleClass="h4" />
     </children>
 </AnchorPane>
