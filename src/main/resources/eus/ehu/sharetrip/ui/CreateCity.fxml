@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import eus.ehu.sharetrip.utils.AutoCompleteTextField?>
 
 <AnchorPane prefHeight="740.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.CreateCityController">
    <children>
@@ -19,7 +20,7 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="newCity" layoutX="455.0" layoutY="352.0" prefHeight="32.0" prefWidth="192.0" />
+      <AutoCompleteTextField fx:id="newCity" layoutX="455.0" layoutY="352.0" prefHeight="32.0" prefWidth="192.0" />
       <Button layoutX="455.0" layoutY="426.0" mnemonicParsing="false" onAction="#createCityClick" prefHeight="54.0" prefWidth="192.0" text="%CreateCityGUI.Btn">
       <styleClass>
          <String fx:value="btn" />

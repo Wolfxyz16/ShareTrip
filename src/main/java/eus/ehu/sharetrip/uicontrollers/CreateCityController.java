@@ -2,12 +2,17 @@ package eus.ehu.sharetrip.uicontrollers;
 
 import eus.ehu.sharetrip.exceptions.CityAlreadyExistException;
 import eus.ehu.sharetrip.ui.MainGUI;
+import eus.ehu.sharetrip.utils.AutoCompleteTextField;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import eus.ehu.sharetrip.businessLogic.BlFacade;
+
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -22,13 +27,29 @@ public class CreateCityController implements Controller {
     }
 
     @FXML
-    private TextField newCity;
+    private AutoCompleteTextField newCity;
 
     @FXML
     private Label newCityStatusMessage;
 
+
+    @FXML
+    public void initialize() {
+        newCity.setEntries(FXCollections.observableArrayList(
+                "A Coruña", "Álava", "Albacete", "Alicante", "Almería", "Asturias", "Ávila",
+                "Badajoz", "Baleares", "Barcelona", "Burgos", "Cáceres", "Cádiz", "Cantabria",
+                "Castellón", "Ciudad Real", "Córdoba", "Cuenca", "Girona", "Granada",
+                "Guadalajara", "Guipúzcoa", "Huelva", "Huesca", "Jaén", "La Rioja", "Las Palmas",
+                "León", "Lleida", "Lugo", "Madrid", "Málaga", "Murcia", "Navarra", "Ourense",
+                "Palencia", "Pontevedra", "Salamanca", "Santa Cruz de Tenerife", "Segovia",
+                "Sevilla", "Soria", "Tarragona", "Teruel", "Toledo", "Valencia", "Valladolid",
+                "Vizcaya", "Zamora", "Zaragoza"
+        ));
+    }
+
     @FXML
     void createCityClick(ActionEvent event){
+        System.out.println("city name is: " + newCity.getText());
         String city = newCity.getText();
         newCityStatusMessage.setVisible(true);
 
