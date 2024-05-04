@@ -374,7 +374,6 @@ public class QueryRidesController implements Controller {
                 try {
                     businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue(), businessLogic.getCurrentUser());
                 } catch (CityDoesNotExistException ex) {
-                    //it's not supposed to happen ever
                 }
             outputLabel.setText("Alert created.");
             outputLabel.getStyleClass().setAll("label", "lbl-success");
