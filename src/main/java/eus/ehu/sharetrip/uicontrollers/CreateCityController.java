@@ -36,14 +36,22 @@ public class CreateCityController implements Controller {
     @FXML
     public void initialize() {
         newCity.setEntries(FXCollections.observableArrayList(
-                "A Coruña", "Álava", "Albacete", "Alicante", "Almería", "Asturias", "Ávila",
-                "Badajoz", "Baleares", "Barcelona", "Burgos", "Cáceres", "Cádiz", "Cantabria",
-                "Castellón", "Ciudad Real", "Córdoba", "Cuenca", "Girona", "Granada",
-                "Guadalajara", "Guipúzcoa", "Huelva", "Huesca", "Jaén", "La Rioja", "Las Palmas",
-                "León", "Lleida", "Lugo", "Madrid", "Málaga", "Murcia", "Navarra", "Ourense",
-                "Palencia", "Pontevedra", "Salamanca", "Santa Cruz de Tenerife", "Segovia",
-                "Sevilla", "Soria", "Tarragona", "Teruel", "Toledo", "Valencia", "Valladolid",
-                "Vizcaya", "Zamora", "Zaragoza"
+
+                "Madrid", "Barcelona", "Valencia", "Sevilla",
+                "Zaragoza", "Málaga", "Murcia", "Palma de Mallorca",
+                "Las Palmas de Gran Canaria", "Bilbao", "Alicante", "Córdoba",
+                "Valladolid", "Vigo", "Gijón", "L'Hospitalet de Llobregat",
+                "A Coruña", "Vitoria-Gasteiz", "Granada", "Elche",
+                "Oviedo", "Badalona", "Cartagena", "Terrassa",
+                "Jerez de la Frontera", "Sabadell", "Santa Cruz de Tenerife", "Móstoles",
+                "Alcalá de Henares", "Pamplona", "Fuenlabrada", "Almería",
+                "Leganés", "Donostia-San Sebastián", "Burgos", "Santander",
+                "Castellón de la Plana", "Getafe", "Albacete", "Alcorcón",
+                "Logroño", "San Cristóbal de La Laguna", "Badajoz", "Salamanca",
+                "Huelva", "Lleida", "Marbella", "Tarragona",
+                "León", "Cádiz"
+
+
         ));
     }
 
