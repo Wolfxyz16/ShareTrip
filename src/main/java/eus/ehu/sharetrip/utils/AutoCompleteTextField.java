@@ -11,7 +11,6 @@ import javafx.util.Duration;
 
 public class AutoCompleteTextField extends TextField {
     private ObservableList<String> entries;
-    private int lastTextLength = 0;
     private PauseTransition pause = new PauseTransition(Duration.millis(300)); // 300 ms delay
 
 
