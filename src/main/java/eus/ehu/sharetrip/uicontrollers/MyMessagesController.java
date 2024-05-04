@@ -7,18 +7,14 @@ import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.ui.MainGUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.Date;
@@ -67,17 +63,56 @@ public class MyMessagesController implements Controller{
     @FXML
     void initialize() {
         System.out.println("ViewMessages button is working");
+
+        // Configurar la columna de mensajes enviados
         sentMessageTextCol.setCellValueFactory(new PropertyValueFactory<>("messageText"));
         recipientNameCol.setCellValueFactory(new PropertyValueFactory<>("recipientName"));
 
+        // Configurar la columna de mensajes recibidos
         receivedMessageTextCol.setCellValueFactory(new PropertyValueFactory<>("messageText"));
         receivedSenderNameCol.setCellValueFactory(new PropertyValueFactory<>("senderName"));
 
+        // Crear una función de celda personalizada para mostrar la vista previa emergente del texto completo
+        sentMessageTextCol.setCellFactory(column -> {
+            return new TableCell<Message, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item == null || empty) {
+                        setText(null);
+                        setTooltip(null);
+                    } else {
+                        setText(item);
+                        Tooltip tooltip = new Tooltip(item);
+                        setTooltip(tooltip);
+                    }
+                }
+            };
+        });
+        receivedMessageTextCol.setCellFactory(column -> {
+            return new TableCell<Message, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item == null || empty) {
+                        setText(null);
+                        setTooltip(null); // Eliminar la vista previa emergente si la celda está vacía
+                    } else {
+                        setText(item);
+                        Tooltip tooltip = new Tooltip(item); // Crear una vista previa emergente con el texto completo
+                        setTooltip(tooltip); // Asignar la vista previa emergente a la celda
+                    }
+                }
+            };
+        });
+
+        // Configurar las listas observables y asignarlas a las tablas
         receivedMessages = FXCollections.observableArrayList();
         sentMessages = FXCollections.observableArrayList();
         receivedTableView.setItems(receivedMessages);
         sentTableView.setItems(sentMessages);
     }
+
 
 
 

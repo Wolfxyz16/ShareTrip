@@ -147,6 +147,7 @@ public class QueryRidesController implements Controller {
         comboArrivalCity.setItems(arrivalCities);
 
         // when the user selects a departure city, update the arrival cities
+        /*
         comboDepartCity.setOnAction(e -> {
             arrivalCities.clear();
             try {
@@ -158,6 +159,8 @@ public class QueryRidesController implements Controller {
                 //it's not supposed to happen ever
             }
         });
+        */
+        arrivalCities.setAll(businessLogic.getAllCities());
 
         datepicker.setOnMouseClicked(e -> {
             // get a reference to datepicker inner content
