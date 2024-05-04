@@ -206,7 +206,7 @@ public class QueryRidesController implements Controller {
         Image image;
 
         // if the search has an alert set the bell icon to red, if not set it to normal
-        if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue())) {
+        if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue(), businessLogic.getCurrentUser())) {
             image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/redAlert.png"));
             bellView.setImage(image);
         } else {
@@ -346,7 +346,7 @@ public class QueryRidesController implements Controller {
                 outputLabel.setText(error);
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
                 return;
-            } else if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue())) {
+            } else if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue(), businessLogic.getCurrentUser())) {
                 String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("CreateAlertGUI.AlertAlreadyExist");
                 outputLabel.setText(error);
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");

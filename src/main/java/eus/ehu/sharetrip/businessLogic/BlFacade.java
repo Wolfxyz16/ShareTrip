@@ -104,7 +104,7 @@ public interface BlFacade {
 
     public void addFavoriteRide(User currentUser, Ride ride);
 
-    boolean alertAlreadyExist(City city, City city1, Date date, int i);
+    boolean alertAlreadyExist(City city, City city1, Date date, int i, User user);
 
     boolean favoriteAlreadyExist(User user, Ride ride);
 

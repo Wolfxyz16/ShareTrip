@@ -854,12 +854,13 @@ public class DataAccess {
     return query.getSingleResult();
   }
 
-  public List<Alert> getAlerts(City from, City to, Date date, int nPlaces) {
-    TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.fromLocation = :from AND a.toLocation = :to AND a.rideDate = :date AND a.numSeats = :nPlaces", Alert.class);
+  public List<Alert> getAlerts(City from, City to, Date date, int nPlaces, User user) {
+    TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.fromLocation = :from AND a.toLocation = :to AND a.rideDate = :date AND a.user = :user AND a.numSeats = :nPlaces", Alert.class);
     query.setParameter("from", from);
     query.setParameter("to", to);
     query.setParameter("date", date);
     query.setParameter("nPlaces", nPlaces);
+    query.setParameter("user", user);
     return query.getResultList();
   }
 
