@@ -1,5 +1,6 @@
 package eus.ehu.sharetrip.uicontrollers;
 
+import eus.ehu.sharetrip.domain.City;
 import eus.ehu.sharetrip.exceptions.CityAlreadyExistException;
 import eus.ehu.sharetrip.ui.MainGUI;
 import eus.ehu.sharetrip.utils.AutoCompleteTextField;
@@ -57,7 +58,7 @@ public class CreateCityController implements Controller {
 
     @FXML
     void createCityClick(ActionEvent event){
-        System.out.println("city name is: " + newCity.getText());
+
         String city = newCity.getText();
         newCityStatusMessage.setVisible(true);
 
@@ -69,7 +70,8 @@ public class CreateCityController implements Controller {
             return;
         }
         try {
-            businessLogic.createCity(city);
+            City created = businessLogic.createCity(city);
+            System.out.println("City created: " + created.getName());
             String success = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("CityCreated");
             newCityStatusMessage.setText(success);
             newCityStatusMessage.getStyleClass().setAll("label", "lbl-success");
