@@ -7,6 +7,7 @@ import eus.ehu.sharetrip.exceptions.CityDoesNotExistException;
 import eus.ehu.sharetrip.exceptions.RideAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.RideMustBeLaterThanTodayException;
 import eus.ehu.sharetrip.utils.SafeLocalDateStringConverter;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -94,10 +95,12 @@ public class CreateRideController implements Controller {
         warningsInfo.setText("");
         warningsInfo.getStyleClass().setAll("label");
         String errors = field_Errors();
+        warningsInfo.setVisible(true);
 
         if (errors != null) {
             warningsInfo.setText(errors);
             warningsInfo.getStyleClass().setAll("label", "lbl-danger");
+            dissapearLabel();
 
         } else {
             LocalDate localDate = datePicker.getValue();
@@ -112,17 +115,24 @@ public class CreateRideController implements Controller {
                 businessLogic.createRide(departCity, arrivalCity, Dates.convertToDate(datePicker.getValue()), numSeats, price, user.getId());
                 warningsInfo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.RideCreated"));
                 warningsInfo.getStyleClass().setAll("label", "lbl-success");
+
                 boolean matchAlert = businessLogic.checkAlertsNewRide(departCity, arrivalCity, Dates.convertToDate(datePicker.getValue()), numSeats, businessLogic.getCurrentUser());
                 System.out.println("MATCH ALERT: " + matchAlert);
                 if (matchAlert){
                     mainGUI.sendAlertEmail(departCity, arrivalCity, Dates.convertToDate(datePicker.getValue()), numSeats);
                 }
+
+                dissapearLabel();
+
             } catch (RideMustBeLaterThanTodayException e1) {
                 warningsInfo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.ErrorRideMustBeLaterThanToday"));
                 warningsInfo.getStyleClass().setAll("label", "lbl-danger");
+                dissapearLabel();
+
             } catch (RideAlreadyExistException e1) {
                 warningsInfo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.RideAlreadyExist"));
                 warningsInfo.getStyleClass().setAll("label", "lbl-danger");
+                dissapearLabel();
             }
         }
     }
@@ -163,5 +173,20 @@ public class CreateRideController implements Controller {
         comboDepartCity.getItems().clear();
         comboDepartCity.getItems().addAll(businessLogic.getAllCities());
         comboArrivalCity.getItems().clear();
+        comboArrivalCity.getItems().addAll(businessLogic.getAllCities());
+    }
+
+    private void dissapearLabel() {
+        new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Platform.runLater(() -> {
+                warningsInfo.setVisible(false);
+            });
+        }).start();
     }
 }

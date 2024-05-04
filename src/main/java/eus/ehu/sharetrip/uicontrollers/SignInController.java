@@ -4,6 +4,7 @@ import eus.ehu.sharetrip.businessLogic.BlFacade;
 import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.exceptions.UnknownUser;
 import eus.ehu.sharetrip.ui.MainGUI;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -49,12 +50,13 @@ public class SignInController implements Controller {
 
     @FXML
     void onClick(ActionEvent event) {
-
+        loginStatus.setVisible(true);
         // Checks that no field is null
         if (login.getText().isEmpty() || password.getText().isEmpty()){
             String error = ResourceBundle.getBundle("Etiquetas").getString("ErrorEmptyFields");
             loginStatus.setText(error);
             loginStatus.getStyleClass().setAll("label", "lbl-danger");
+            dissapearLabel();
             return;
         }
         String username = login.getText();
@@ -68,18 +70,22 @@ public class SignInController implements Controller {
                         String logged = ResourceBundle.getBundle("Etiquetas").getString("LogedIn");
                         loginStatus.setText(logged);
                         loginStatus.getStyleClass().setAll("label", "lbl-success");
+                        dissapearLabel();
                         mainGUI.showScene("Query Rides");
                     }
                     else {
-                            String error = ResourceBundle.getBundle("Etiquetas").getString("WrongPassword");
-                            loginStatus.setText(error);
-                            loginStatus.getStyleClass().setAll("label", "lbl-danger");
-                    }
+
+                    String error = ResourceBundle.getBundle("Etiquetas").getString("WrongPassword");
+                    loginStatus.setText(error);
+                    loginStatus.getStyleClass().setAll("label", "lbl-danger");
+                    dissapearLabel();
+                }
 
             } catch (Exception e) {
                 String error = ResourceBundle.getBundle("Etiquetas").getString("UnknownUser");
                 loginStatus.setText(error);
                 loginStatus.getStyleClass().setAll("label", "lbl-danger");
+                dissapearLabel();
             }
         }
 
@@ -93,5 +99,19 @@ public class SignInController implements Controller {
         password.setText("");
         loginStatus.setText("");
         loginStatus.getStyleClass().setAll("label");
+    }
+
+    private void dissapearLabel() {
+        new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Platform.runLater(() -> {
+                loginStatus.setVisible(false);
+            });
+        }).start();
     }
 }
