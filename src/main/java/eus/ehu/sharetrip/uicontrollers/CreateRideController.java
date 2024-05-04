@@ -166,6 +166,7 @@ public class CreateRideController implements Controller {
         comboDepartCity.getItems().clear();
         comboDepartCity.getItems().addAll(businessLogic.getAllCities());
         comboArrivalCity.getItems().clear();
+        comboArrivalCity.getItems().addAll(businessLogic.getAllCities());
     }
 
     private void dissapearLabel() {
