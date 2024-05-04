@@ -353,7 +353,7 @@ public class QueryRidesController implements Controller {
                 return;
             }
             try {
-                businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue());
+                businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue(), businessLogic.getCurrentUser());
             } catch (CityDoesNotExistException ex) {
                 //it's not supposed to happen ever
 

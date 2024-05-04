@@ -43,8 +43,8 @@ public class BlFacadeImplementation implements BlFacade {
         return ride;
     }
 
-    public Alert createAlert(City from, City to, Date date, int nPlaces) throws AlertAlreadyExistException{
-        Alert alert = dbManager.createAlert(from, to, date, nPlaces);
+    public Alert createAlert(City from, City to, Date date, int nPlaces, User user) throws AlertAlreadyExistException{
+        Alert alert = dbManager.createAlert(from, to, date, nPlaces, user);
         return alert;
     }
 
@@ -174,8 +174,8 @@ public class BlFacadeImplementation implements BlFacade {
     }
 
     @Override
-    public boolean alertAlreadyExist(City city, City city1, Date date, int i) {
-        return dbManager.alertAlreadyExist(city, city1, date, i);
+    public boolean alertAlreadyExist(City city, City city1, Date date, int i, User user) {
+        return dbManager.alertAlreadyExist(city, city1, date, i, user);
     }
 
     @Override

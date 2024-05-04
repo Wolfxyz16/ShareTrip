@@ -602,9 +602,9 @@ public class DataAccess {
       }
   }
 
-  public Alert createAlert(City from, City to, Date date, int nPlaces) throws AlertAlreadyExistException {
+  public Alert createAlert(City from, City to, Date date, int nPlaces, User user) throws AlertAlreadyExistException {
     try{
-      if (!getAlerts(from, to, date, nPlaces).isEmpty()) {
+      if (!getAlerts(from, to, date, nPlaces, user).isEmpty()) {
         throw new AlertAlreadyExistException(ResourceBundle.getBundle("Etiquetas").getString("CreateAlertGUI.AlertAlreadyExist"));
       }
       db.getTransaction().begin();
@@ -613,6 +613,7 @@ public class DataAccess {
               .toLocation(to)
               .rideDate(date)
               .numSeats(nPlaces)
+              .user(user)
               .build();
       db.persist(alert);
       db.getTransaction().commit();
@@ -889,12 +890,13 @@ public class DataAccess {
     }
   }
 
-  public boolean alertAlreadyExist(City city, City city1, Date date, int i) {
-    TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.fromLocation = :from AND a.toLocation = :to AND a.rideDate = :date AND a.numSeats = :nPlaces", Alert.class);
+  public boolean alertAlreadyExist(City city, City city1, Date date, int i, User user) {
+    TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.fromLocation = :from AND a.toLocation = :to AND a.rideDate = :date AND a.user = :user AND a.numSeats = :nPlaces", Alert.class);
     query.setParameter("from", city);
     query.setParameter("to", city1);
     query.setParameter("date", date);
     query.setParameter("nPlaces", i);
+    query.setParameter("user", user);
     return !query.getResultList().isEmpty();
   }
 
