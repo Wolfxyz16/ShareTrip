@@ -42,7 +42,7 @@
          </image>
       </ImageView>
       <Label layoutX="193.0" layoutY="67.0" text="Storing a favorite, can help you search for your wanted rides faster." />
-      <Button fx:id="deletebtn" layoutX="398.0" layoutY="337.0" mnemonicParsing="false" onAction="#deleteFav" prefHeight="44.0" prefWidth="206.0" text="Delete Favorite">
+      <Button fx:id="deletebtn" layoutX="398.0" layoutY="337.0" mnemonicParsing="false" onAction="#deleteFav" prefHeight="44.0" prefWidth="206.0" text="%deleteFavorite">
         <styleClass>
             <String fx:value="btn" />
             <String fx:value="btn-lg" />

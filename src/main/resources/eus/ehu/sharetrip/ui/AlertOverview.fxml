@@ -33,7 +33,7 @@
          </image>
       </ImageView>
       <Label layoutX="125.0" layoutY="84.0" text="If a new ride with the alerted attributes is created, you will be notified." />
-      <Button fx:id="deletebtn" layoutX="198.0" layoutY="332.0" mnemonicParsing="false" onAction="#deleteAlert" prefHeight="50.0" prefWidth="206.0" text="Delete Alert">
+      <Button fx:id="deletebtn" layoutX="198.0" layoutY="332.0" mnemonicParsing="false" onAction="#deleteAlert" prefHeight="50.0" prefWidth="206.0" text="%deleteAlert">
           <styleClass>
               <String fx:value="btn" />
               <String fx:value="btn-lg" />
