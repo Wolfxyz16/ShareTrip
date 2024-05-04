@@ -452,4 +452,12 @@ public class QueryRidesController implements Controller {
             });
         }).start();
     }
+
+    public void clearFields() {
+        comboDepartCity.getItems().clear();
+        comboDepartCity.getItems().addAll(businessLogic.getAllCities());
+        comboArrivalCity.getItems().clear();
+        comboArrivalCity.getItems().addAll(businessLogic.getAllCities());
+
+    }
 }
