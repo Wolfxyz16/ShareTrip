@@ -1,5 +1,7 @@
 package eus.ehu.sharetrip;
 
+import eus.ehu.sharetrip.businessLogic.BlFacade;
+import eus.ehu.sharetrip.businessLogic.BlFacadeImplementation;
 import eus.ehu.sharetrip.configuration.UtilDate;
 import eus.ehu.sharetrip.dataAccess.DataAccess;
 import eus.ehu.sharetrip.domain.*;
@@ -168,15 +170,19 @@ public class DBTest {
 
 
     @Test
-    public void testLoginValidCredentials()  {
+    public void testLoginValidCredentials() throws UserAlreadyExistException, UnknownUser {
         // Ensure that the database is initialized correctly
         db.initializeDB();
 
+
         String username = "test";
         String password = "test";
+
+        String hashed = db.getHashedPassword(username);
+
         User user = null;
         try {
-            user = db.login(username, password);
+            user = db.login(username, hashed);
         } catch (UnknownUser e) {
             fail("UnknownUser should not have been thrown");
         }
@@ -367,6 +373,20 @@ public class DBTest {
 
     }
 
+    @Test
+    public void testGetHashePassword() {
+        // Ensure that the database is initialized correctly
+        db.initializeDB();
+
+        String username = "User1";
+        String hashed = null;
+        try {
+            hashed = db.getHashedPassword(username);
+        } catch (UnknownUser e) {
+            fail("UnknownUser should not have been thrown");
+        }
+        assertNotNull(hashed);
+    }
 
 
 }
