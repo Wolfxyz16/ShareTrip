@@ -71,8 +71,6 @@ public class DataAccess {
     }
   }
 
-
-
   public void reset() {
     db.getTransaction().begin();
     db.createNativeQuery("DELETE FROM USERS_RIDE").executeUpdate();
@@ -83,10 +81,8 @@ public class DataAccess {
 
   public void initializeDB() {
 
-    this.reset();
-
-
-
+    // When we try to connect to the db using this method the connection is refused because it does not found the tables
+    // this.reset();
 
     try {
 
