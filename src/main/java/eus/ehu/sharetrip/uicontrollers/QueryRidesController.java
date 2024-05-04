@@ -147,19 +147,14 @@ public class QueryRidesController implements Controller {
         comboArrivalCity.setItems(arrivalCities);
 
         // when the user selects a departure city, update the arrival cities
-        /*
-        comboDepartCity.setOnAction(e -> {
-            arrivalCities.clear();
-            try {
-                if ((comboDepartCity.getValue() != null)) {
-                    arrivalCities.setAll(businessLogic.getDestinationCities(businessLogic.getCity(comboDepartCity.getValue())));
 
+        comboDepartCity.setOnAction(e -> {
+                if ((comboDepartCity.getValue() != null)) {
+                    Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/alert.png"));
+                    bellView.setImage(image);
                 }
-            } catch (CityDoesNotExistException ex) {
-                //it's not supposed to happen ever
-            }
         });
-        */
+
         arrivalCities.setAll(businessLogic.getAllCities());
 
         datepicker.setOnMouseClicked(e -> {
