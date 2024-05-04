@@ -85,7 +85,6 @@ public class DataAccess {
     // this.reset();
 
     try {
-
       Calendar today = Calendar.getInstance();
 
       int month = today.get(Calendar.MONTH) + 2;
@@ -153,7 +152,7 @@ public class DataAccess {
               .password(BCrypt.hashpw("1234", BCrypt.gensalt()))
               .build();
 
-// Persistir los drivers en la base de datos
+      // Persistir los drivers en la base de datos
       db.getTransaction().begin();
       db.persist(driver1);
       db.persist(driver2);
@@ -184,7 +183,6 @@ public class DataAccess {
       City city14 = new City("Getxo");
       City city15 = new City("Barakaldo");
       City city16 = new City("Santurtzi");
-
 
       Ride ride1 = new Ride.Builder()
               .fromLocation(city1)
@@ -436,11 +434,7 @@ public class DataAccess {
         driver9.addRide(ride24);
         driver10.addRide(ride25);
 
-
-
-
       //Create travelers
-
       Traveler traveler1 = new Traveler.Builder()
                 .email("user1@gmail.com")
                 .username("User1")
@@ -459,7 +453,7 @@ public class DataAccess {
               .receiver(traveler2)
               .build();
 
-// CREATE ALERTS
+      // CREATE ALERTS
       Alert alert1 = new Alert.Builder()
               .fromLocation(city1)
               .toLocation(city2)
@@ -519,9 +513,8 @@ public class DataAccess {
       db.persist(traveler1);
       db.persist(traveler2);
 
-
       db.persist(message1);
-     db.getTransaction().commit();
+      db.getTransaction().commit();
       System.out.println("Db initialized");
     } catch (Exception e) {
       e.printStackTrace();
@@ -613,9 +606,6 @@ public class DataAccess {
       db.getTransaction().commit();
       return null;
     }
-
-
-
   }
 
 
@@ -648,8 +638,6 @@ public class DataAccess {
       Driver driver1 = driverByEmail.getSingleResult();
       driver1.addRide(ride);
 
-
-
       //next instruction can be obviated
       db.persist(driver1);
       //db.persist(ride);
@@ -661,8 +649,6 @@ public class DataAccess {
       db.getTransaction().commit();
       return null;
     }
-
-
   }
 
   public List<Ride> getRides(City origin, City destination, Date date, int numSeats) {

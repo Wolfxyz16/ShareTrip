@@ -9,7 +9,7 @@
         <!-- We must choose which connection we will use. Local database or Azure database -->
 
         <!-- Local connection -->
-        <!--<property name="hibernate.connection.url">jdbc:h2:~/shareTrip;AUTO_SERVER=TRUE;</property>-->
+        <!--<property name="hibernate.connection.url">jdbc:h2:~/sharetrip;AUTO_SERVER=TRUE;</property>-->
 
         <!-- Azure connection -->
         <property name="hibernate.connection.url">jdbc:h2:tcp://20.19.80.6:9092/sharetrip;AUTO_SERVER=TRUE;</property>

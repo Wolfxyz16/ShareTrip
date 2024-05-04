@@ -23,19 +23,7 @@ public class BlFacadeImplementation implements BlFacade {
         System.out.println("Creating BlFacadeImplementation instance");
         boolean initialize = config.getDataBaseOpenMode().equals("initialize");
         dbManager = new DataAccess(initialize);
-        if (initialize)
-            dbManager.initializeDB();
-        //dbManager.close();
-    }
-
-    public BlFacadeImplementation(DataAccess dam) {
-        System.out.println("Creating BlFacadeImplementation instance with DataAccess parameter");
-        if (config.getDataBaseOpenMode().equals("initialize")) {
-            //dam.open(true);
-            dam.initializeDB();
-            //dam.close();
-        }
-        dbManager = dam;
+        if (initialize) dbManager.initializeDB();
     }
 
     public Ride createRide(City from, City to, Date date, int nPlaces, float price, long driverID) throws RideMustBeLaterThanTodayException, RideAlreadyExistException {
