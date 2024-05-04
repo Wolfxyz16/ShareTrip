@@ -148,17 +148,15 @@ public class QueryRidesController implements Controller {
         comboArrivalCity.setItems(arrivalCities);
 
         // when the user selects a departure city, update the arrival cities
-        comboDepartCity.setOnAction(e -> {
-            arrivalCities.clear();
-            try {
-                if ((comboDepartCity.getValue() != null)) {
-                    arrivalCities.setAll(businessLogic.getDestinationCities(businessLogic.getCity(comboDepartCity.getValue())));
 
+        comboDepartCity.setOnAction(e -> {
+                if ((comboDepartCity.getValue() != null)) {
+                    Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/alert.png"));
+                    bellView.setImage(image);
                 }
-            } catch (CityDoesNotExistException ex) {
-                //it's not supposed to happen ever
-            }
         });
+
+        arrivalCities.setAll(businessLogic.getAllCities());
 
         datepicker.setOnMouseClicked(e -> {
             // get a reference to datepicker inner content
@@ -207,7 +205,7 @@ public class QueryRidesController implements Controller {
         Image image;
 
         // if the search has an alert set the bell icon to red, if not set it to normal
-        if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue())) {
+        if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue(), businessLogic.getCurrentUser())) {
             image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/redAlert.png"));
             bellView.setImage(image);
         } else {
@@ -360,7 +358,7 @@ public class QueryRidesController implements Controller {
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
                 dissapearLabel();
                 return;
-            } else if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue())) {
+            } else if (businessLogic.alertAlreadyExist(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue(), businessLogic.getCurrentUser())) {
                 String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("CreateAlertGUI.AlertAlreadyExist");
                 outputLabel.setText(error);
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
@@ -368,7 +366,7 @@ public class QueryRidesController implements Controller {
                 return;
             }
             try {
-                businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue());
+                businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue(), businessLogic.getCurrentUser());
             } catch (CityDoesNotExistException ex) {
                 //it's not supposed to happen ever
 

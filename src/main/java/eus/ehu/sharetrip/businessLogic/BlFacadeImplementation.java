@@ -43,8 +43,8 @@ public class BlFacadeImplementation implements BlFacade {
         return ride;
     }
 
-    public Alert createAlert(City from, City to, Date date, int nPlaces) throws AlertAlreadyExistException{
-        Alert alert = dbManager.createAlert(from, to, date, nPlaces);
+    public Alert createAlert(City from, City to, Date date, int nPlaces, User user) throws AlertAlreadyExistException{
+        Alert alert = dbManager.createAlert(from, to, date, nPlaces, user);
         return alert;
     }
 
@@ -169,13 +169,13 @@ public class BlFacadeImplementation implements BlFacade {
     }
 
     @Override
-    public List<Alert> getAlerts() {
-        return dbManager.getAlerts();
+    public List<Alert> getUserAlerts(User user) {
+        return dbManager.getUserAlerts(user);
     }
 
     @Override
-    public boolean alertAlreadyExist(City city, City city1, Date date, int i) {
-        return dbManager.alertAlreadyExist(city, city1, date, i);
+    public boolean alertAlreadyExist(City city, City city1, Date date, int i, User user) {
+        return dbManager.alertAlreadyExist(city, city1, date, i, user);
     }
 
     @Override
@@ -193,8 +193,8 @@ public class BlFacadeImplementation implements BlFacade {
         dbManager.deleteAlert(alert);
     }
 
-    public List<Alert> getAlerts(City from, City to, Date date, int nPlaces) {
-        return dbManager.getAlerts(from, to, date, nPlaces);
+    public List<Alert> getAlerts(City from, City to, Date date, int nPlaces, User user) {
+        return dbManager.getAlerts(from, to, date, nPlaces, user);
     }
 
     @Override
@@ -215,4 +215,14 @@ public class BlFacadeImplementation implements BlFacade {
     public String getHashedPassword(String username) throws UnknownUser {
         return dbManager.getHashedPassword(username);
     }
+
+    public boolean checkAlertsNewRide(City departCity, City arrivalCity, Date date, int numSeats, User user) {
+        return dbManager.checkAlertsNewRide(departCity, arrivalCity, date, numSeats, user);
+    }
+
+    public User getSystemUser(){
+        return dbManager.getSystemUser();
+    }
+
+
 }

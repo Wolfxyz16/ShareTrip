@@ -465,6 +465,7 @@ public class DataAccess {
               .toLocation(city2)
               .rideDate(UtilDate.newDate(year, month, 15))
               .numSeats(4)
+              .user(traveler1)
               .build();
 
       Alert alert2 = new Alert.Builder()
@@ -472,6 +473,7 @@ public class DataAccess {
               .toLocation(city4)
               .rideDate(UtilDate.newDate(year, month + 1, 15))
               .numSeats(4)
+              .user(traveler1)
               .build();
 
       Alert alert3 = new Alert.Builder()
@@ -479,6 +481,7 @@ public class DataAccess {
               .toLocation(city1)
               .rideDate(UtilDate.newDate(year, month, 6))
               .numSeats(4)
+              .user(traveler2)
               .build();
 
       Alert alert4 = new Alert.Builder()
@@ -486,6 +489,7 @@ public class DataAccess {
               .toLocation(city5)
               .rideDate(UtilDate.newDate(year, month, 25))
               .numSeats(4)
+              .user(traveler2)
               .build();
 
       db.getTransaction().begin();
@@ -521,7 +525,13 @@ public class DataAccess {
 
 
       db.persist(message1);
-     db.getTransaction().commit();
+      User systemUser  = new User.Builder()
+              .email("sharetripSystem@gmail.com")
+              .username("System Sharetrip")
+              .password(BCrypt.hashpw("admin", BCrypt.gensalt()))
+              .build();
+      db.persist(systemUser);
+      db.getTransaction().commit();
       System.out.println("Db initialized");
     } catch (Exception e) {
       e.printStackTrace();
@@ -594,9 +604,9 @@ public class DataAccess {
       }
   }
 
-  public Alert createAlert(City from, City to, Date date, int nPlaces) throws AlertAlreadyExistException {
+  public Alert createAlert(City from, City to, Date date, int nPlaces, User user) throws AlertAlreadyExistException {
     try{
-      if (!getAlerts(from, to, date, nPlaces).isEmpty()) {
+      if (!getAlerts(from, to, date, nPlaces, user).isEmpty()) {
         throw new AlertAlreadyExistException(ResourceBundle.getBundle("Etiquetas").getString("CreateAlertGUI.AlertAlreadyExist"));
       }
       db.getTransaction().begin();
@@ -605,6 +615,7 @@ public class DataAccess {
               .toLocation(to)
               .rideDate(date)
               .numSeats(nPlaces)
+              .user(user)
               .build();
       db.persist(alert);
       db.getTransaction().commit();
@@ -845,17 +856,19 @@ public class DataAccess {
     return query.getSingleResult();
   }
 
-  public List<Alert> getAlerts(City from, City to, Date date, int nPlaces) {
-    TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.fromLocation = :from AND a.toLocation = :to AND a.rideDate = :date AND a.numSeats = :nPlaces", Alert.class);
+  public List<Alert> getAlerts(City from, City to, Date date, int nPlaces, User user) {
+    TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.fromLocation = :from AND a.toLocation = :to AND a.rideDate = :date AND a.user = :user AND a.numSeats = :nPlaces", Alert.class);
     query.setParameter("from", from);
     query.setParameter("to", to);
     query.setParameter("date", date);
     query.setParameter("nPlaces", nPlaces);
+    query.setParameter("user", user);
     return query.getResultList();
   }
 
-  public List<Alert> getAlerts() {
-    TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a", Alert.class);
+  public List<Alert> getUserAlerts(User user) {
+    TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.user = :user", Alert.class);
+    query.setParameter("user", user);
     return query.getResultList();
   }
 
@@ -881,12 +894,13 @@ public class DataAccess {
     }
   }
 
-  public boolean alertAlreadyExist(City city, City city1, Date date, int i) {
-    TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.fromLocation = :from AND a.toLocation = :to AND a.rideDate = :date AND a.numSeats = :nPlaces", Alert.class);
+  public boolean alertAlreadyExist(City city, City city1, Date date, int i, User user) {
+    TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.fromLocation = :from AND a.toLocation = :to AND a.rideDate = :date AND a.user = :user AND a.numSeats = :nPlaces", Alert.class);
     query.setParameter("from", city);
     query.setParameter("to", city1);
     query.setParameter("date", date);
     query.setParameter("nPlaces", i);
+    query.setParameter("user", user);
     return !query.getResultList().isEmpty();
   }
 
@@ -929,5 +943,26 @@ public class DataAccess {
   public List<City> getAllCities() {
     TypedQuery<City> query = db.createQuery("SELECT c FROM City c", City.class);
     return query.getResultList();
+  }
+
+
+  public boolean checkAlertsNewRide(City departCity, City arrivalCity, Date date, int numSeats, User user) {
+      TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.fromLocation = :fromLocation " +
+              "AND a.toLocation = :toLocation AND a.rideDate = :rideDate AND a.numSeats <= :numSeats " +
+              "AND a.user = :user", Alert.class);
+      query.setParameter("fromLocation", departCity);
+      query.setParameter("toLocation", arrivalCity);
+      query.setParameter("rideDate", date);
+      query.setParameter("numSeats", numSeats);
+      query.setParameter("user", user);
+      //System.out.println("Alerts found: " + query.getResultList());
+      return !query.getResultList().isEmpty();
+    }
+
+  public User getSystemUser() {
+    TypedQuery<User> query = db.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
+    query.setParameter("username", "System Sharetrip");
+    User systemUser = query.getSingleResult();
+      return systemUser;
   }
 }

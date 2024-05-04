@@ -361,7 +361,7 @@ public class DBTest {
 
         Alert alert = null;
         try {
-            alert = db.createAlert(from, to, date, numSeats);
+            alert = db.createAlert(from, to, date, numSeats, db.getUser("User1"));
         } catch (Exception e) {
             fail("Exception should not have been thrown");
         }

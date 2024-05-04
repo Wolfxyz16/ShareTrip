@@ -71,7 +71,7 @@ public class ViewAlertsController implements Controller {
         });
 
         alerts = FXCollections.observableArrayList();
-        alerts.addAll(businessLogic.getAlerts());
+        alerts.addAll(businessLogic.getUserAlerts(businessLogic.getCurrentUser()));
         this.tblAlerts.setItems(alerts);
     }
 
@@ -145,7 +145,7 @@ public class ViewAlertsController implements Controller {
 
     public void updateTables() {
         alerts.clear();
-        alerts.addAll(businessLogic.getAlerts());
+        alerts.addAll(businessLogic.getUserAlerts(businessLogic.getCurrentUser()));
     }
 
     private void dissapearLabel() {

@@ -24,6 +24,8 @@ public class Alert {
     @Column(name = "numSeats")
     private int numSeats;
 
+    @ManyToOne
+    private User user;
 
     public Alert() {
     }
@@ -33,6 +35,8 @@ public class Alert {
         private City toLocation;
         private Date rideDate;
         private int numSeats;
+
+        private User user;
 
         public Builder() {
         }
@@ -57,8 +61,13 @@ public class Alert {
             return this;
         }
 
+        public Builder user(User user) {
+            this.user = user;
+            return this;
+        }
+
         public Alert build() {
-            if(fromLocation == null || toLocation == null || rideDate == null || numSeats == 0) {
+            if(fromLocation == null || toLocation == null || rideDate == null || numSeats == 0 || user == null) {
                 throw new IllegalStateException("Cannot create Alert without fromLocation, toLocation, rideDate and numSeats");
             }
             Alert alert = new Alert();
@@ -66,6 +75,7 @@ public class Alert {
             alert.toLocation = this.toLocation;
             alert.rideDate = this.rideDate;
             alert.numSeats = this.numSeats;
+            alert.user = this.user;
             return alert;
         }
     }
