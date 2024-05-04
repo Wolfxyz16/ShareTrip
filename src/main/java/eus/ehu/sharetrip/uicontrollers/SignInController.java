@@ -16,6 +16,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class SignInController implements Controller {
@@ -70,12 +71,12 @@ public class SignInController implements Controller {
                         mainGUI.showScene("Query Rides");
                     }
                     else {
-                    String error = ResourceBundle.getBundle("Etiquetas").getString("WrongPassword");
-                    loginStatus.setText(error);
-                    loginStatus.getStyleClass().setAll("label", "lbl-danger");
-                }
+                            String error = ResourceBundle.getBundle("Etiquetas").getString("WrongPassword");
+                            loginStatus.setText(error);
+                            loginStatus.getStyleClass().setAll("label", "lbl-danger");
+                    }
 
-            } catch (UnknownUser unknownUser) {
+            } catch (Exception e) {
                 String error = ResourceBundle.getBundle("Etiquetas").getString("UnknownUser");
                 loginStatus.setText(error);
                 loginStatus.getStyleClass().setAll("label", "lbl-danger");
