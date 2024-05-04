@@ -21,8 +21,6 @@
 
              <TableColumn fx:id="depCityCol" prefWidth="150" text="%CreateRideGUI.LeavingFrom" />
              <TableColumn fx:id="arrCityCol" prefWidth="150" text="%CreateRideGUI.GoingTo" />
-            <TableColumn fx:id="dateCol" prefWidth="150" text="%RideDate" />
-            <TableColumn fx:id="driverCol" prefWidth="150" text="%FindRidesGUI.Driver" />
 
             </columns>
             <columnResizePolicy>
