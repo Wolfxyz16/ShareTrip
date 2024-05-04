@@ -2,12 +2,17 @@ package eus.ehu.sharetrip.uicontrollers;
 
 import eus.ehu.sharetrip.exceptions.CityAlreadyExistException;
 import eus.ehu.sharetrip.ui.MainGUI;
+import eus.ehu.sharetrip.utils.AutoCompleteTextField;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import eus.ehu.sharetrip.businessLogic.BlFacade;
+
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -22,13 +27,37 @@ public class CreateCityController implements Controller {
     }
 
     @FXML
-    private TextField newCity;
+    private AutoCompleteTextField newCity;
 
     @FXML
     private Label newCityStatusMessage;
 
+
+    @FXML
+    public void initialize() {
+        newCity.setEntries(FXCollections.observableArrayList(
+
+                "Madrid", "Barcelona", "Valencia", "Sevilla",
+                "Zaragoza", "Málaga", "Murcia", "Palma de Mallorca",
+                "Las Palmas de Gran Canaria", "Bilbao", "Alicante", "Córdoba",
+                "Valladolid", "Vigo", "Gijón", "L'Hospitalet de Llobregat",
+                "A Coruña", "Granada", "Elche",
+                "Oviedo", "Badalona", "Cartagena", "Terrassa",
+                "Jerez de la Frontera", "Sabadell", "Santa Cruz de Tenerife", "Móstoles",
+                "Alcalá de Henares", "Pamplona", "Fuenlabrada", "Almería",
+                "Leganés", "Burgos", "Santander",
+                "Castellón de la Plana", "Getafe", "Albacete", "Alcorcón",
+                "Logroño", "San Cristóbal de La Laguna", "Badajoz", "Salamanca",
+                "Huelva", "Lleida", "Marbella", "Tarragona",
+                "León", "Cádiz"
+
+
+        ));
+    }
+
     @FXML
     void createCityClick(ActionEvent event){
+        System.out.println("city name is: " + newCity.getText());
         String city = newCity.getText();
         newCityStatusMessage.setVisible(true);
 

@@ -11,5 +11,6 @@ module eus.ehu.sharetrip {
     opens eus.ehu.sharetrip.domain to javafx.base, org.hibernate.orm.core;
     opens eus.ehu.sharetrip.ui to javafx.fxml;
     opens eus.ehu.sharetrip.uicontrollers to javafx.fxml;
+    opens eus.ehu.sharetrip.utils to javafx.fxml;
     exports eus.ehu.sharetrip.ui;
 }
