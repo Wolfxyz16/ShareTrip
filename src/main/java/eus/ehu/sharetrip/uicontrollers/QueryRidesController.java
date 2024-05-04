@@ -138,7 +138,6 @@ public class QueryRidesController implements Controller {
 
     @FXML
     void initialize() {
-        updateButtonVisibilityDependingOnUserType();
         // Set converter to catch invalid dates
         datepicker.setConverter(new SafeLocalDateStringConverter(outputLabel));
 
@@ -371,14 +370,13 @@ public class QueryRidesController implements Controller {
                 outputLabel.getStyleClass().setAll("label", "lbl-danger");
                 dissapearLabel();
                 return;
-            }else
-            try {
-                businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue(), businessLogic.getCurrentUser());
-            } catch (CityDoesNotExistException ex) {
-                //it's not supposed to happen ever
-
-
-            }
+            } else
+                try {
+                    businessLogic.createAlert(businessLogic.getCity(comboDepartCity.getValue()), businessLogic.getCity(comboArrivalCity.getValue()), Dates.convertToDate(datepicker.getValue()), numSeats.getValue(), businessLogic.getCurrentUser());
+                } catch (CityDoesNotExistException ex) {
+                }
+            outputLabel.setText("Alert created.");
+            outputLabel.getStyleClass().setAll("label", "lbl-success");
             updateAlertsButton();
             System.out.println("Alert created");
         }
@@ -473,7 +471,7 @@ public class QueryRidesController implements Controller {
     private void dissapearLabel() {
         new Thread(() -> {
             try {
-                Thread.sleep(2000);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -485,7 +483,7 @@ public class QueryRidesController implements Controller {
     }
 
 
-    private void updateButtonVisibilityDependingOnUserType() {
+    public void updateButtonVisibilityDependingOnUserType() {
         if (businessLogic.getCurrentUser() instanceof Driver) {
             bookBtn.setVisible(false);
             heartBtn.setVisible(false);

@@ -108,6 +108,7 @@ public class MainGUI {
             }
             case "Query Rides" -> {
                 mainWrapper.setCenter(queryRidesWin.ui);
+                ((QueryRidesController) queryRidesWin.c).updateButtonVisibilityDependingOnUserType();
                 ((QueryRidesController) queryRidesWin.c).resetValues();
                 ((QueryRidesController) queryRidesWin.c).clearFields();
         }

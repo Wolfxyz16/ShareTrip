@@ -225,7 +225,8 @@ public class MainGUIController implements Controller{
         //Different buttons will be visible for Drivers or for Travelers
         if (businessLogic.getCurrentUserType().equals("TRAVELER")) {
             myBookingsBtn.setVisible(isLoggedIn);
-
+            alertsBtn.setVisible(isLoggedIn);
+            favoritesBtn.setVisible(isLoggedIn);
 
         } else if (businessLogic.getCurrentUserType().equals("DRIVER")) {
             createRidesBtn.setVisible(isLoggedIn);
@@ -235,8 +236,7 @@ public class MainGUIController implements Controller{
         }
 
         //These will be shown for both drivers and travelers
-        alertsBtn.setVisible(isLoggedIn);
-        favoritesBtn.setVisible(isLoggedIn);
+
         messagesBtn.setVisible(isLoggedIn);
         signOutBtn.setVisible(isLoggedIn);
         userLbl.setVisible(isLoggedIn);

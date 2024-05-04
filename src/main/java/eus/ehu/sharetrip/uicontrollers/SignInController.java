@@ -66,6 +66,7 @@ public class SignInController implements Controller {
                     if (BCrypt.checkpw(pass, hashed)) {
                         bl.login(username, hashed);
                         mainGUI.setUserName(username);
+                        mainGUI.setUserName(username);
                         mainGUI.setIsLoggedIn(true);
                         String logged = ResourceBundle.getBundle("Etiquetas").getString("LogedIn");
                         loginStatus.setText(logged);
@@ -104,7 +105,7 @@ public class SignInController implements Controller {
     private void dissapearLabel() {
         new Thread(() -> {
             try {
-                Thread.sleep(2000);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
