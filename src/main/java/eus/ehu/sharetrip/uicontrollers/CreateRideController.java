@@ -115,6 +115,13 @@ public class CreateRideController implements Controller {
                 businessLogic.createRide(departCity, arrivalCity, Dates.convertToDate(datePicker.getValue()), numSeats, price, user.getId());
                 warningsInfo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.RideCreated"));
                 warningsInfo.getStyleClass().setAll("label", "lbl-success");
+
+                boolean matchAlert = businessLogic.checkAlertsNewRide(departCity, arrivalCity, Dates.convertToDate(datePicker.getValue()), numSeats, businessLogic.getCurrentUser());
+                System.out.println("MATCH ALERT: " + matchAlert);
+                if (matchAlert){
+                    mainGUI.sendAlertEmail(departCity, arrivalCity, Dates.convertToDate(datePicker.getValue()), numSeats);
+                }
+
                 dissapearLabel();
 
             } catch (RideMustBeLaterThanTodayException e1) {
@@ -166,6 +173,7 @@ public class CreateRideController implements Controller {
         comboDepartCity.getItems().clear();
         comboDepartCity.getItems().addAll(businessLogic.getAllCities());
         comboArrivalCity.getItems().clear();
+        comboArrivalCity.getItems().addAll(businessLogic.getAllCities());
     }
 
     private void dissapearLabel() {

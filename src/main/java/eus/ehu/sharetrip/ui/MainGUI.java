@@ -51,6 +51,10 @@ public class MainGUI {
     private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin, favoriteOverviewWin, alertOverviewWin,
             createCityWin, messagesOverviewWin, sendMessageWin, viewMessagesWin, myBookings, bookingRequests, logOutWin;
 
+    public void sendAlertEmail(City departCity, City arrivalCity, Date date, int numSeats) {
+        ((MyMessagesController)viewMessagesWin.c).sendAlertEmail(departCity, arrivalCity, date, numSeats);
+    }
+
     class Window {
         Controller c;
         Parent ui;
@@ -105,6 +109,7 @@ public class MainGUI {
             case "Query Rides" -> {
                 mainWrapper.setCenter(queryRidesWin.ui);
                 ((QueryRidesController) queryRidesWin.c).resetValues();
+                ((QueryRidesController) queryRidesWin.c).clearFields();
         }
             case "Create Ride" -> {
                 mainWrapper.setCenter(createRideWin.ui);

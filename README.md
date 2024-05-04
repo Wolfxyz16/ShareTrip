@@ -23,13 +23,18 @@ ShareTrip is an open source carpooling application between users that aims to be
 
 ## Last sprint work
 
-* Fav ride logic
+* Favorite ride logic
 * Password hashing
 * Event flows updated
 * Builders on domain classes
 * Double check when logout
 * Language change logic
 * JUNIT test
+* Long messages preview (when the user hovers over the message)
+* Notification (message) when a ride that matches any of your alerts is created
+* Remote DB with Azure
+* Autocompletation when creating a new city
+* UI tweaks
 
 
 ## How can (*must*) I contribute

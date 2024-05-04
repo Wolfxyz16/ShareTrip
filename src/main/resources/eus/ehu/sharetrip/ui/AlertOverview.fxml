@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.ViewAlertsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.ViewAlertsController">
     <children>
         <TableView fx:id="tblAlerts" layoutX="78.0" layoutY="120.0" prefHeight="200.0" prefWidth="445.0">
             <columns>
@@ -39,6 +39,6 @@
               <String fx:value="btn-lg" />
               <String fx:value="btn-primary" />
           </styleClass></Button>
-      <Label fx:id="errorlbl" layoutX="207.0" layoutY="368.0" prefHeight="18.0" prefWidth="206.0" />
+      <Label fx:id="errorlbl" alignment="CENTER" layoutX="197.0" layoutY="401.0" prefHeight="18.0" prefWidth="206.0" />
     </children>
 </AnchorPane>

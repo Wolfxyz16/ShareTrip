@@ -50,7 +50,7 @@ public interface BlFacade {
 
     Ride createRide(City dep, City arr, Date date, int inputSeats, float price, long driverID) throws RideMustBeLaterThanTodayException, RideAlreadyExistException;
 
-    Alert createAlert(City from, City to, Date date, int nPlaces) throws AlertAlreadyExistException;
+    Alert createAlert(City from, City to, Date date, int nPlaces, User user) throws AlertAlreadyExistException;
 
     City createCity(String name) throws CityAlreadyExistException;
 
@@ -99,14 +99,14 @@ public interface BlFacade {
 
     String getCurrentUserType();
 
-    List<Alert> getAlerts();
+    List<Alert> getUserAlerts(User currentUser);
 
 
     public List<Ride> getFavoriteRides(User currentUser);
 
     public void addFavoriteRide(User currentUser, Ride ride);
 
-    boolean alertAlreadyExist(City city, City city1, Date date, int i);
+    boolean alertAlreadyExist(City city, City city1, Date date, int i, User user);
 
     boolean favoriteAlreadyExist(User user, Ride ride);
 
@@ -116,10 +116,16 @@ public interface BlFacade {
 
     public String getHashedPassword(String username) throws UnknownUser;
 
+
     void bookRide(Traveler user, Ride selectedRide, Integer numSeats);
 
     ArrayList<Ride> getRidesByDriver(Driver currentUser);
 
     ArrayList<Reservation> getMyBookings(User currentUser);
+
+
+    boolean checkAlertsNewRide(City departCity, City arrivalCity, Date date, int numSeats, User user);
+
+    User getSystemUser();
 
 }
