@@ -193,8 +193,8 @@ public class BlFacadeImplementation implements BlFacade {
         dbManager.deleteAlert(alert);
     }
 
-    public List<Alert> getAlerts(City from, City to, Date date, int nPlaces) {
-        return dbManager.getAlerts(from, to, date, nPlaces);
+    public List<Alert> getAlerts(City from, City to, Date date, int nPlaces, User user) {
+        return dbManager.getAlerts(from, to, date, nPlaces, user);
     }
 
     @Override
