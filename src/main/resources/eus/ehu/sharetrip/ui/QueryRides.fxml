@@ -82,7 +82,7 @@
                 <Blend />
             </effect>
         </TableView>
-      <Button fx:id="bookBtn" layoutX="438.0" layoutY="658.0" mnemonicParsing="false" onAction="#bookRideAction" prefHeight="48.0" prefWidth="137.0" text="%BookBtn">
+      <Button fx:id="bookBtn" layoutX="392.0" layoutY="668.0" mnemonicParsing="false" onAction="#bookRideAction" prefHeight="49.0" prefWidth="228.0" text="%BookBtn">
          <font>
             <Font size="17.0" />
          </font>
