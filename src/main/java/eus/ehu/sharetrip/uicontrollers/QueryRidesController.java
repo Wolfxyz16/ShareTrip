@@ -4,6 +4,7 @@ import eus.ehu.sharetrip.businessLogic.BlFacade;
 import eus.ehu.sharetrip.domain.City;
 import eus.ehu.sharetrip.domain.Driver;
 import eus.ehu.sharetrip.domain.Ride;
+import eus.ehu.sharetrip.domain.Traveler;
 import eus.ehu.sharetrip.exceptions.AlertAlreadyExistException;
 import eus.ehu.sharetrip.exceptions.CityDoesNotExistException;
 import eus.ehu.sharetrip.utils.SafeLocalDateStringConverter;
@@ -31,6 +32,9 @@ import java.util.*;
 public class QueryRidesController implements Controller {
 
     @FXML
+    private Button bellBtn;
+
+    @FXML
     private ImageView bellView;
 
     @FXML
@@ -41,6 +45,9 @@ public class QueryRidesController implements Controller {
 
     @FXML
     public Button searchBtn;
+
+    @FXML
+    private Button bookBtn;
 
     @FXML
     private Label outputLabel;
@@ -131,7 +138,7 @@ public class QueryRidesController implements Controller {
 
     @FXML
     void initialize() {
-
+        updateButtonVisibilityDependingOnUserType();
         // Set converter to catch invalid dates
         datepicker.setConverter(new SafeLocalDateStringConverter(outputLabel));
 
@@ -216,7 +223,7 @@ public class QueryRidesController implements Controller {
 
 
     private void updateFavsButton(Ride ride) {
-        if (ride != null && businessLogic.getCurrentUser() != null){
+        if (ride != null && businessLogic.getCurrentUser() != null) {
             if (businessLogic.getCurrentUser().getFavRides().contains(ride)) {
                 Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/redHeart.png"));
                 heartView.setImage(image);
@@ -303,8 +310,8 @@ public class QueryRidesController implements Controller {
         datepicker.setValue(null);
         numSeats.setValue(null);
         tblRides.getItems().clear();
-        outputLabel.setText("");
-        outputLabel.getStyleClass().setAll("label");
+        //outputLabel.setText("");
+        //outputLabel.getStyleClass().setAll("label");
         Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/Heart.png"));
         heartView.setImage(image);
         Image image2 = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/Alert.png"));
@@ -370,9 +377,34 @@ public class QueryRidesController implements Controller {
             } catch (CityDoesNotExistException ex) {
                 //it's not supposed to happen ever
 
+
             }
             updateAlertsButton();
             System.out.println("Alert created");
+        }
+    }
+
+    @FXML
+    void bookRideAction(ActionEvent event) {
+        if (noErrorsInInputFields()) {
+            if (businessLogic.getCurrentUser() == null) {
+                String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("ErrorMustBeLoggedIn");
+                outputLabel.setText(error);
+                outputLabel.getStyleClass().setAll("label", "lbl-danger");
+                dissapearLabel();
+            } else if (tblRides.getSelectionModel().getSelectedItem() == null) {
+                outputLabel.setText("Please select a ride to book.");
+                outputLabel.getStyleClass().setAll("label", "lbl-danger");
+                dissapearLabel();
+            } else {
+                Ride selectedRide = tblRides.getSelectionModel().getSelectedItem();
+                businessLogic.bookRide((Traveler) businessLogic.getCurrentUser(), selectedRide, numSeats.getValue());
+                outputLabel.setText("Ride booked successfully.");
+                outputLabel.getStyleClass().setAll("label", "lbl-success");
+                dissapearLabel();
+                resetValues();
+            }
+
         }
     }
 
@@ -382,7 +414,7 @@ public class QueryRidesController implements Controller {
         numSeats.setValue(1);
         datepicker.setValue(Dates.convertToLocalDateViaInstant(date));
     }
-  
+
     public void searchRides(ActionEvent actionEvent) {
         outputLabel.setText("");
         outputLabel.getStyleClass().setAll("label");
@@ -437,6 +469,7 @@ public class QueryRidesController implements Controller {
         }
     }
 
+
     private void dissapearLabel() {
         new Thread(() -> {
             try {
@@ -451,11 +484,22 @@ public class QueryRidesController implements Controller {
         }).start();
     }
 
+
+    private void updateButtonVisibilityDependingOnUserType() {
+        if (businessLogic.getCurrentUser() instanceof Driver) {
+            bookBtn.setVisible(false);
+            heartBtn.setVisible(false);
+            bellBtn.setVisible(false);
+        } else {
+            bookBtn.setVisible(true);
+            heartBtn.setVisible(true);
+            bellBtn.setVisible(true);
+        }
+
     public void clearFields() {
         comboDepartCity.getItems().clear();
         comboDepartCity.getItems().addAll(businessLogic.getAllCities());
         comboArrivalCity.getItems().clear();
         comboArrivalCity.getItems().addAll(businessLogic.getAllCities());
-
     }
 }

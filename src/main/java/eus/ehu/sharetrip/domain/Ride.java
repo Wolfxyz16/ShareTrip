@@ -3,7 +3,9 @@ package eus.ehu.sharetrip.domain;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @SuppressWarnings("serial")
@@ -24,7 +26,10 @@ public class Ride implements Serializable {
 	@ManyToOne
 	//@JoinColumn(name = "driver_id")
 	private Driver driver;
-	
+
+	@OneToMany(mappedBy = "forRide", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Reservation> reservations = new ArrayList<Reservation>();
+
 	public Ride(){
 		super();
 	}
@@ -37,6 +42,8 @@ public class Ride implements Serializable {
 		private Date date;
 		private float price;
 		private Driver driver;
+		private List<Reservation> reservations = new ArrayList<Reservation>();
+
 
 		public Builder(){
 		}
@@ -81,6 +88,7 @@ public class Ride implements Serializable {
 			ride.date = this.date;
 			ride.price = this.price;
 			ride.driver = this.driver;
+			ride.reservations = this.reservations;
 			return ride;
 		}
 
@@ -220,7 +228,13 @@ public class Ride implements Serializable {
 		return rideNumber+";"+";"+ fromLocation +";"+ toLocation +";"+date;
 	}
 
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
 
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
 
 
 	

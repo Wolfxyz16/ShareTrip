@@ -89,6 +89,7 @@ public class DataAccess {
 
       int month = today.get(Calendar.MONTH) + 2;
       int year = today.get(Calendar.YEAR);
+      int day = today.get(Calendar.DAY_OF_MONTH);
       if (month == 11) {
         month = 1;
         year += 1;
@@ -446,6 +447,7 @@ public class DataAccess {
                 .password(BCrypt.hashpw("1234", BCrypt.gensalt()))
                 .build();
 
+
       // CREATE MESSAGES
       Message message1 = new Message.Builder()
               .messageText("Hello")
@@ -509,6 +511,7 @@ public class DataAccess {
       db.persist(city14);
       db.persist(city15);
       db.persist(city16);
+
 
       db.persist(driver1);
       db.persist(driver2);
@@ -933,6 +936,33 @@ public class DataAccess {
     return query.getResultList();
   }
 
+  public void bookRide(Traveler currentUser, Ride ride, Integer numSeats) {
+    db.getTransaction().begin();
+    Reservation reservation = new Reservation.Builder()
+            .numSeats(numSeats)
+            .forRide(ride)
+            .madeBy(currentUser)
+            .build();
+    ride.setNumPlaces(ride.getNumPlaces() - numSeats);
+    ride.getReservations().add(reservation);
+    db.merge(ride);
+    db.getTransaction().commit();
+
+  }
+
+  public ArrayList<Ride> getRidesByDriver(Driver driver) {
+    TypedQuery<Ride> query = db.createQuery("SELECT r FROM Ride r WHERE r.driver = :driver", Ride.class);
+    query.setParameter("driver", driver);
+    return new ArrayList<>(query.getResultList());
+  }
+
+
+
+  public ArrayList<Reservation> getMyBookings(User currentUser) {
+    TypedQuery<Reservation> query = db.createQuery("SELECT r FROM Reservation r WHERE r.madeBy = :user", Reservation.class);
+    query.setParameter("user", currentUser);
+    return new ArrayList<>(query.getResultList());
+
 
   public boolean checkAlertsNewRide(City departCity, City arrivalCity, Date date, int numSeats, User user) {
       TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.fromLocation = :fromLocation " +
@@ -952,5 +982,6 @@ public class DataAccess {
     query.setParameter("username", "System Sharetrip");
     User systemUser = query.getSingleResult();
       return systemUser;
+
   }
 }

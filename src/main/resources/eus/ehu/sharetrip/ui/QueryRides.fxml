@@ -36,7 +36,7 @@
         </Group>
 
         <Label layoutX="358.0" layoutY="49.0" text="  " />
-        <Label layoutX="125.0" layoutY="343.0" styleClass="h4" text="%RideDate" />
+        <Label layoutX="125.0" layoutY="336.0" styleClass="h4" text="%RideDate" />
         <ComboBox fx:id="numSeats" layoutX="576.0" layoutY="196.0" prefWidth="150.0" />
 
       <Label alignment="CENTER" layoutX="229.0" layoutY="27.0" prefHeight="42.0" prefWidth="555.0" styleClass="h1" text="%whereGoing" />
@@ -59,8 +59,8 @@
             </graphic>
         </Button>
       <Label layoutX="576.0" layoutY="167.0" styleClass="h4" text="%CreateRideGUI.NumberOfSeats" />
-        <Label fx:id="outputLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="229.0" layoutY="302.0" prefHeight="25.0" prefWidth="551.0" />
-      <Button fx:id="searchBtn" onAction="#searchRides" layoutX="436.0" layoutY="244.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="137.0" text="%SearchBtn">
+        <Label fx:id="outputLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="225.0" layoutY="302.0" prefHeight="25.0" prefWidth="551.0" />
+      <Button fx:id="searchBtn" layoutX="432.0" layoutY="244.0" mnemonicParsing="false" onAction="#searchRides" prefHeight="35.0" prefWidth="137.0" text="%SearchBtn">
          <font>
             <Font size="17.0" />
          </font>
@@ -69,7 +69,7 @@
               <String fx:value="btn-lg" />
               <String fx:value="btn-primary" />
           </styleClass></Button>
-        <TableView fx:id="tblRides" layoutX="125.0" layoutY="376.0" prefHeight="342.0" prefWidth="750.0">
+        <TableView fx:id="tblRides" layoutX="125.0" layoutY="357.0" prefHeight="292.0" prefWidth="750.0">
             <columns>
                 <TableColumn fx:id="qc1" prefWidth="223.5" text="%FindRidesGUI.Driver" />
                 <TableColumn fx:id="qc2" prefWidth="97.5" text="%FindRidesGUI.NPlaces" />
@@ -82,6 +82,16 @@
                 <Blend />
             </effect>
         </TableView>
+      <Button fx:id="bookBtn" layoutX="438.0" layoutY="658.0" mnemonicParsing="false" onAction="#bookRideAction" prefHeight="48.0" prefWidth="137.0" text="%BookBtn">
+         <font>
+            <Font size="17.0" />
+         </font>
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-lg" />
+            <String fx:value="btn-primary" />
+         </styleClass>
+      </Button>
 
 
     </children>
