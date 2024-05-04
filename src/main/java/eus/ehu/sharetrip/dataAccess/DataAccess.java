@@ -529,7 +529,13 @@ public class DataAccess {
 
 
       db.persist(message1);
-     db.getTransaction().commit();
+      User systemUser  = new User.Builder()
+              .email("sharetripSystem@gmail.com")
+              .username("System Sharetrip")
+              .password(BCrypt.hashpw("admin", BCrypt.gensalt()))
+              .build();
+      db.persist(systemUser);
+      db.getTransaction().commit();
       System.out.println("Db initialized");
     } catch (Exception e) {
       e.printStackTrace();
@@ -864,8 +870,9 @@ public class DataAccess {
     return query.getResultList();
   }
 
-  public List<Alert> getAlerts() {
-    TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a", Alert.class);
+  public List<Alert> getUserAlerts(User user) {
+    TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.user = :user", Alert.class);
+    query.setParameter("user", user);
     return query.getResultList();
   }
 
@@ -945,22 +952,21 @@ public class DataAccess {
 
   public boolean checkAlertsNewRide(City departCity, City arrivalCity, Date date, int numSeats, User user) {
       TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.fromLocation = :fromLocation " +
-              "AND a.toLocation = :toLocation AND a.rideDate = :rideDate AND a.numSeats >= :numSeats " +
+              "AND a.toLocation = :toLocation AND a.rideDate = :rideDate AND a.numSeats <= :numSeats " +
               "AND a.user = :user", Alert.class);
       query.setParameter("fromLocation", departCity);
       query.setParameter("toLocation", arrivalCity);
       query.setParameter("rideDate", date);
       query.setParameter("numSeats", numSeats);
       query.setParameter("user", user);
+      //System.out.println("Alerts found: " + query.getResultList());
       return !query.getResultList().isEmpty();
     }
 
   public User getSystemUser() {
-    User systemUser  = new User.Builder()
-            .email("sharetripSystem@gmail.com")
-            .username("System Sharetrip")
-            .password(BCrypt.hashpw("admin", BCrypt.gensalt()))
-            .build();
+    TypedQuery<User> query = db.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
+    query.setParameter("username", "System Sharetrip");
+    User systemUser = query.getSingleResult();
       return systemUser;
   }
 }

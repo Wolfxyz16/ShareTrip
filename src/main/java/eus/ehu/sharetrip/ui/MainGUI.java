@@ -52,7 +52,7 @@ public class MainGUI {
             createCityWin, messagesOverviewWin, sendMessageWin, viewMessagesWin, myBookings, bookingRequests, logOutWin;
 
     public void sendAlertEmail(City departCity, City arrivalCity, Date date, int numSeats) {
-        ((MyMessagesController)mainWin.c).sendAlertEmail(departCity, arrivalCity, date, numSeats);
+        ((MyMessagesController)viewMessagesWin.c).sendAlertEmail(departCity, arrivalCity, date, numSeats);
     }
 
     class Window {

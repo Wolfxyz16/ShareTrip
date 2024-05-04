@@ -108,6 +108,8 @@ public class MyMessagesController implements Controller{
                 .sender(businessLogic.getSystemUser())
                 .receiver(businessLogic.getCurrentUser())
                 .build();
-        this.receivedMessages.add(message1);
+        //this.receivedMessages.add(message1);
+        businessLogic.saveMessage(message1);
+        updateTables();
     }
 }

@@ -169,8 +169,8 @@ public class BlFacadeImplementation implements BlFacade {
     }
 
     @Override
-    public List<Alert> getAlerts() {
-        return dbManager.getAlerts();
+    public List<Alert> getUserAlerts(User user) {
+        return dbManager.getUserAlerts(user);
     }
 
     @Override

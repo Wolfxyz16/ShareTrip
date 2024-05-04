@@ -97,7 +97,7 @@ public interface BlFacade {
 
     String getCurrentUserType();
 
-    List<Alert> getAlerts();
+    List<Alert> getUserAlerts(User currentUser);
 
 
     public List<Ride> getFavoriteRides(User currentUser);
