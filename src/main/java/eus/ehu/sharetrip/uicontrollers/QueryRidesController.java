@@ -406,11 +406,15 @@ public class QueryRidesController implements Controller {
         }
     }
 
-    public void searchFavRide(City depCity, City arrCity, Date date) {
+    public void searchFavRide(City depCity, City arrCity) {
         comboDepartCity.setValue(depCity);
         comboArrivalCity.setValue(arrCity);
         numSeats.setValue(1);
-        datepicker.setValue(Dates.convertToLocalDateViaInstant(date));
+        String error = ResourceBundle.getBundle("Etiquetas", Locale.getDefault()).getString("NoRidesAvailable");
+        outputLabel.setText("Please, select the date and number of your next favorite ride");
+        outputLabel.setText(error);
+        outputLabel.getStyleClass().setAll("label", "lbl-warning");
+        dissapearLabel();
     }
 
     public void searchRides(ActionEvent actionEvent) {

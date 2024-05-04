@@ -29,11 +29,6 @@ public class ViewFavoritesController implements Controller {
     @FXML
     private TableColumn<Ride, City> depCityCol;
 
-    @FXML
-    private TableColumn<Ride, String> dateCol;
-
-    @FXML
-    private TableColumn<Ride, String> driverCol;
 
     @FXML
     private TableView<Ride> tblFavorite;
@@ -63,17 +58,6 @@ public class ViewFavoritesController implements Controller {
         //driverCol.setCellValueFactory(new PropertyValueFactory<>("driver"));
         //dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-        driverCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDriver().getUsername()));
-
-        dateCol.setCellValueFactory(cellData -> {
-            LocalDate localdate = cellData.getValue().getDate()
-                    .toInstant()
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDate();
-            Locale locale = Locale.ENGLISH;
-            String formattedDate = Dates.formatLocalizedDate(localdate,locale);
-            return new SimpleStringProperty(formattedDate);
-        });
 
         /*
         // Set the weekday for the date column
@@ -106,14 +90,12 @@ public class ViewFavoritesController implements Controller {
             Ride selectedRide = tblFavorite.getSelectionModel().getSelectedItem();
             City depCity = selectedRide.getFromLocation();
             City arrCity = selectedRide.getToLocation();
-            Date date = selectedRide.getDate();
-            mainGUI.searchFavRide(depCity, arrCity, /*Dates.getNextWeekday(weekday)*/ date);
+            mainGUI.searchFavRide(depCity, arrCity);
         } catch (Exception e) {
             errorlbl.setText("Please select a ride");
             errorlbl.getStyleClass().setAll("label", "lbl-danger");
             dissapearLabel();
         }
-
     }
 
     @FXML
