@@ -34,6 +34,7 @@ ShareTrip is an open source carpooling application between users that aims to be
 * Notification (message) when a ride that matches any of your alerts is created
 * Remote DB with Azure
 * Autocompletation when creating a new city
+* UI tweaks
 
 
 ## How can (*must*) I contribute
