@@ -1,6 +1,7 @@
 package eus.ehu.sharetrip.uicontrollers;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
+import eus.ehu.sharetrip.domain.City;
 import eus.ehu.sharetrip.domain.Message;
 import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.ui.MainGUI;
@@ -20,6 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.util.Date;
 import java.util.List;
 
 public class MyMessagesController implements Controller{
@@ -79,7 +81,6 @@ public class MyMessagesController implements Controller{
 
 
 
-
     public void updateTables() {
         receivedMessages.clear();
         sentMessages.clear();
@@ -99,5 +100,13 @@ public class MyMessagesController implements Controller{
 
     public void backToMessageController(ActionEvent actionEvent) {
         mainGUI.showScene("Message Overview");
+    }
+
+    public void sendAlertEmail(City departCity, City arrivalCity, Date date, int numSeats) {
+        Message message1 = new Message.Builder()
+                .messageText("Hello")
+                .sender(businessLogic.getSystemUser())
+                .receiver(traveler2)
+                .build();
     }
 }

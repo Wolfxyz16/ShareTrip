@@ -113,4 +113,8 @@ public interface BlFacade {
     void deleteAlert(Alert alert);
 
     public String getHashedPassword(String username) throws UnknownUser;
+
+    boolean checkAlertsNewRide(City departCity, City arrivalCity, Date date, int numSeats, User user);
+
+    User getSystemUser();
 }

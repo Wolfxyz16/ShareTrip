@@ -215,4 +215,9 @@ public class BlFacadeImplementation implements BlFacade {
     public String getHashedPassword(String username) throws UnknownUser {
         return dbManager.getHashedPassword(username);
     }
+
+    public boolean checkAlertsNewRide(City departCity, City arrivalCity, Date date, int numSeats, User user) {
+        dbManager.checkAlertsNewRide(departCity, arrivalCity, date, numSeats, user);
+    }
+
 }

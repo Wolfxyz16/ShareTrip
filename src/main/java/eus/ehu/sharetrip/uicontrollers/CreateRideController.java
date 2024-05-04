@@ -112,6 +112,10 @@ public class CreateRideController implements Controller {
                 businessLogic.createRide(departCity, arrivalCity, Dates.convertToDate(datePicker.getValue()), numSeats, price, user.getId());
                 warningsInfo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.RideCreated"));
                 warningsInfo.getStyleClass().setAll("label", "lbl-success");
+                boolean matchAlert = businessLogic.checkAlertsNewRide(departCity, arrivalCity, Dates.convertToDate(datePicker.getValue()), numSeats, businessLogic.getCurrentUser());
+                if (matchAlert){
+                    mainGUI.sendAlertEmail(departCity, arrivalCity, Dates.convertToDate(datePicker.getValue()), numSeats);
+                }
             } catch (RideMustBeLaterThanTodayException e1) {
                 warningsInfo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.ErrorRideMustBeLaterThanToday"));
                 warningsInfo.getStyleClass().setAll("label", "lbl-danger");
