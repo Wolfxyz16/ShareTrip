@@ -495,6 +495,7 @@ public class QueryRidesController implements Controller {
             heartBtn.setVisible(true);
             bellBtn.setVisible(true);
         }
+    }
 
     public void clearFields() {
         comboDepartCity.getItems().clear();

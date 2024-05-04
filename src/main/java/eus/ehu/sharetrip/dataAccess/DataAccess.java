@@ -962,7 +962,7 @@ public class DataAccess {
     TypedQuery<Reservation> query = db.createQuery("SELECT r FROM Reservation r WHERE r.madeBy = :user", Reservation.class);
     query.setParameter("user", currentUser);
     return new ArrayList<>(query.getResultList());
-
+  }
 
   public boolean checkAlertsNewRide(City departCity, City arrivalCity, Date date, int numSeats, User user) {
       TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.fromLocation = :fromLocation " +
