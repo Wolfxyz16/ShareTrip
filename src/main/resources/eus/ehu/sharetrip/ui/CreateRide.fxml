@@ -4,9 +4,11 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1000.0" stylesheets="@styles/bootstrapfx.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.CreateRideController">
    <children>
+      <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#f2cb05" height="475.0" layoutX="260.0" layoutY="173.0" stroke="BLACK" strokeType="INSIDE" width="500.0" />
       <VBox layoutX="359.0" layoutY="200.0" spacing="20.0">
          <children>
             <Group>
