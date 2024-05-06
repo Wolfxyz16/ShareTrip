@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="740.0" prefWidth="1000.0" stylesheets="@styles/bootstrapfx.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.SendMessageController">
-
+<AnchorPane prefHeight="740.0" prefWidth="1000.0" stylesheets="@styles/bootstrapfx.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.SendMessageController">
     <children>
-         <TextField fx:id="txtRecipient" layoutX="301.0" layoutY="221.0" prefHeight="38.0" prefWidth="166.0" promptText="%promptRecipient" />
-         <TextArea fx:id="txtMessage" layoutX="301.0" layoutY="296.0" prefHeight="200" prefWidth="400" promptText="%promptMessage" />
-         <Button layoutX="394.0" layoutY="550.0" onAction="#sendMessage" prefHeight="52.0" prefWidth="213.0" text="%SendBtn">
-         <font>
-            <Font size="24.0" />
-         </font>
-         <styleClass>
-            <String fx:value="btn" />
-            <String fx:value="btn-lg" />
-            <String fx:value="btn-primary" />
-         </styleClass></Button>
+        <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#f2cb05" height="450.0" layoutX="251.0" layoutY="110.0" stroke="BLACK" strokeType="INSIDE" width="500.0" />
+        <VBox alignment="TOP_CENTER" layoutX="301.0" layoutY="205.0" spacing="20.0">
+         <children>
+               <TextField fx:id="txtRecipient" prefHeight="38.0" prefWidth="166.0" promptText="%promptRecipient" />
+               <TextArea fx:id="txtMessage" prefHeight="200" prefWidth="400" promptText="%promptMessage">
+               <font>
+                  <Font name="Fira Code Regular" size="16.0" />
+               </font>
+            </TextArea>
+               <Button onAction="#sendMessage" prefHeight="52.0" text="%SendBtn">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="btn-lg" />
+                  <String fx:value="btn-primary" />
+               </styleClass>
+            </Button>
+         </children>
+      </VBox>
 
-      <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="301.0" layoutY="657.0" prefHeight="25.0" prefWidth="339.0" />
-      <Label alignment="CENTER" layoutX="358.0" layoutY="75.0" prefHeight="91.0" prefWidth="286.0" text="%sendMessages">
+      <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="251.0" layoutY="634.0" prefHeight="25.0" prefWidth="500.0" styleClass="alert" />
+      <Label alignment="CENTER" layoutX="351.0" layoutY="124.0" prefHeight="60.0" styleClass="h1" text="%sendMessages">
          <font>
             <Font size="25.0" />
          </font>
