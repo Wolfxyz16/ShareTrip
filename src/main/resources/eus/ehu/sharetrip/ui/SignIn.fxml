@@ -9,8 +9,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1000.0" stylesheets="@styles/bootstrapfx.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.SignInController">
     <children>
-      <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#f2cb05" height="300.0" layoutX="237.0" layoutY="254.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
-      <VBox layoutX="336.0" layoutY="304.0" spacing="20.0">
+      <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#f2cb05" height="300.0" layoutX="200.0" layoutY="258.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
+      <VBox layoutX="300.0" layoutY="304.0" spacing="20.0">
          <children>
             <Group>
                <children>
@@ -31,18 +31,18 @@
             </Label>
          </children>
       </VBox>
-        <Button layoutX="446.0" layoutY="477.0" mnemonicParsing="false" onAction="#onClick" prefHeight="49.0" prefWidth="181.0" text="%login">
+        <Button layoutX="410.0" layoutY="477.0" mnemonicParsing="false" onAction="#onClick" prefHeight="49.0" prefWidth="181.0" text="%login">
          <styleClass>
             <String fx:value="btn" />
             <String fx:value="btn-primary" />
             <String fx:value="btn-lg" />
          </styleClass></Button>
-        <Label alignment="CENTER" layoutX="306.0" layoutY="74.0" prefHeight="75.0" prefWidth="460.0" styleClass="h1" text="%welcomeBack" textAlignment="CENTER">
+        <Label alignment="CENTER" layoutX="270.0" layoutY="74.0" prefHeight="75.0" prefWidth="460.0" styleClass="h1" text="%welcomeBack" textAlignment="CENTER">
             <font>
                 <Font size="25.0" />
             </font>
         </Label>
-      <Label alignment="CENTER" layoutX="146.0" layoutY="178.0" prefHeight="36.0" prefWidth="780.0" styleClass="h2" text="%infoSignIn" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="110.0" layoutY="177.0" prefHeight="36.0" prefWidth="780.0" styleClass="h2" text="%infoSignIn" textAlignment="CENTER">
          <font>
             <Font size="10.0" />
          </font></Label>
