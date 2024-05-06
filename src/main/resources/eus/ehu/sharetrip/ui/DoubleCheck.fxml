@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.LogOutController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles/bootstrapfx.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.LogOutController">
    <children>
-      <Label alignment="CENTER" layoutX="246.0" layoutY="92.0" prefHeight="48.0" prefWidth="108.0" text="%logOut?" />
-      <Label alignment="CENTER" layoutX="106.0" layoutY="157.0" prefHeight="17.0" prefWidth="388.0" text="%secureLogOut" />
-      <Button fx:id="cancelBtn" layoutX="107.0" layoutY="225.0" mnemonicParsing="false" onAction="#cancelLogOut" prefHeight="48.0" prefWidth="144.0" text="%cancel">
-      <styleClass>
-         <String fx:value="btn" />
-         <String fx:value="btn-lg" />
-         <String fx:value="btn-primary" />
-      </styleClass>
-        </Button>
-      <Button fx:id="logOutBtn" layoutX="355.0" layoutY="225.0" mnemonicParsing="false" onAction="#confirmLogOut" prefHeight="48.0" prefWidth="144.0" text="%logOutBtn">
-      <styleClass>
-         <String fx:value="btn" />
-         <String fx:value="btn-lg" />
-         <String fx:value="btn-primary" />
-      </styleClass>
-        </Button>
+      <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#f2cb05" height="300.0" layoutX="51.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="500.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="49.0" AnchorPane.topAnchor="50.0" />
+      <Label alignment="CENTER" layoutX="228.0" layoutY="92.0" prefHeight="48.0" styleClass="h2" text="%logOut?" AnchorPane.leftAnchor="228.0" AnchorPane.rightAnchor="227.0" AnchorPane.topAnchor="92.0" />
+      <Label alignment="CENTER" layoutX="205.0" layoutY="158.0" prefHeight="17.0" styleClass="h3" text="%secureLogOut" AnchorPane.leftAnchor="205.0" AnchorPane.rightAnchor="205.0" AnchorPane.topAnchor="158.0" />
+      <HBox layoutX="91.0" layoutY="225.0" spacing="20.0" AnchorPane.topAnchor="225.0">
+         <children>
+            <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#cancelLogOut" prefHeight="48.0" prefWidth="200.0" text="%cancel">
+            <styleClass>
+               <String fx:value="btn" />
+               <String fx:value="btn-lg" />
+               <String fx:value="btn-primary" />
+            </styleClass>
+              </Button>
+            <Button fx:id="logOutBtn" mnemonicParsing="false" onAction="#confirmLogOut" prefHeight="48.0" prefWidth="200.0" text="%logOutBtn">
+            <styleClass>
+               <String fx:value="btn" />
+               <String fx:value="btn-lg" />
+               <String fx:value="btn-primary" />
+            </styleClass>
+              </Button>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
