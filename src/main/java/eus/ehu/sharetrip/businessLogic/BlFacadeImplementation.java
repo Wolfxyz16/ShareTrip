@@ -24,7 +24,7 @@ public class BlFacadeImplementation implements BlFacade {
         System.out.println("Creating BlFacadeImplementation instance");
         boolean initialize = config.getDataBaseOpenMode().equals("initialize");
         dbManager = new DataAccess(initialize);
-        if (initialize) dbManager.initializeDB();
+        // if (initialize) dbManager.initializeDB();
     }
 
     public Ride createRide(City from, City to, Date date, int nPlaces, float price, long driverID) throws RideMustBeLaterThanTodayException, RideAlreadyExistException {
