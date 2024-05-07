@@ -1,6 +1,7 @@
 package eus.ehu.sharetrip.uicontrollers;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
+import eus.ehu.sharetrip.configuration.UtilDate;
 import eus.ehu.sharetrip.domain.*;
 import eus.ehu.sharetrip.ui.MainGUI;
 import javafx.fxml.FXML;
@@ -112,8 +113,28 @@ public class BookingRequestsController implements Controller  {
             }
         });
         requestedSeats.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("numSeats"));
-        rideDate.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("requestDate"));
-
+        rideDate.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Reservation, Date>, javafx.beans.value.ObservableValue<Date>>() {
+            @Override
+            public javafx.beans.value.ObservableValue<Date> call(TableColumn.CellDataFeatures<Reservation, Date> param) {
+                Reservation reservation = param.getValue();
+                if (reservation != null && reservation.getForRide() != null) {
+                    Date date = reservation.getForRide().getDate();
+                    return new javafx.beans.value.ObservableValueBase<Date>() {
+                        @Override
+                        public Date getValue() {
+                            return date;
+                        }
+                    };
+                } else {
+                    return new javafx.beans.value.ObservableValueBase<Date>() {
+                        @Override
+                        public Date getValue() {
+                            return UtilDate.newDate(0,0,0);
+                        }
+                    };
+                }
+            }
+        });
     }
 
     public void updateTable() {
