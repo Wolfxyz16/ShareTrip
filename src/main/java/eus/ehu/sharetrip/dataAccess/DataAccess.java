@@ -964,15 +964,13 @@ public class DataAccess {
     return new ArrayList<>(query.getResultList());
   }
 
-  public boolean checkAlertsNewRide(City departCity, City arrivalCity, Date date, int numSeats, User user) {
+  public boolean checkAlertsNewRide(City departCity, City arrivalCity, Date date, int numSeats) {
       TypedQuery<Alert> query = db.createQuery("SELECT a FROM Alert a WHERE a.fromLocation = :fromLocation " +
-              "AND a.toLocation = :toLocation AND a.rideDate = :rideDate AND a.numSeats <= :numSeats " +
-              "AND a.user = :user", Alert.class);
+              "AND a.toLocation = :toLocation AND a.rideDate = :rideDate AND a.numSeats <= :numSeats ", Alert.class);
       query.setParameter("fromLocation", departCity);
       query.setParameter("toLocation", arrivalCity);
       query.setParameter("rideDate", date);
       query.setParameter("numSeats", numSeats);
-      query.setParameter("user", user);
       //System.out.println("Alerts found: " + query.getResultList());
       return !query.getResultList().isEmpty();
     }
