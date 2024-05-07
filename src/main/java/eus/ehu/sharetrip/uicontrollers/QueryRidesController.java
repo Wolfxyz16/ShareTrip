@@ -309,8 +309,8 @@ public class QueryRidesController implements Controller {
         datepicker.setValue(null);
         numSeats.setValue(null);
         tblRides.getItems().clear();
-        outputLabel.setText("");
-        outputLabel.getStyleClass().setAll("label");
+        //outputLabel.setText("");
+        //outputLabel.getStyleClass().setAll("label");
         Image image = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/Heart.png"));
         heartView.setImage(image);
         Image image2 = new Image(getClass().getResourceAsStream("/eus/ehu/sharetrip/ui/assets/Alert.png"));
@@ -400,7 +400,6 @@ public class QueryRidesController implements Controller {
                 outputLabel.setText("Ride booked successfully.");
                 outputLabel.getStyleClass().setAll("label", "lbl-success");
                 dissapearLabel();
-                resetValues();
             }
 
         }
@@ -480,6 +479,8 @@ public class QueryRidesController implements Controller {
             }
 
             Platform.runLater(() -> {
+                outputLabel.setText("");
+                outputLabel.getStyleClass().setAll("label");
                 outputLabel.setVisible(false);
             });
         }).start();

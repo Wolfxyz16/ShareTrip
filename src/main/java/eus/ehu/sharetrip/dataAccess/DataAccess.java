@@ -449,12 +449,13 @@ public class DataAccess {
 
 
       // CREATE MESSAGES
+      /*
       Message message1 = new Message.Builder()
               .messageText("Hello")
               .sender(traveler1)
               .receiver(traveler2)
               .build();
-      /*
+
       // CREATE ALERTS
       Alert alert1 = new Alert.Builder()
               .fromLocation(city1)
@@ -520,7 +521,7 @@ public class DataAccess {
       db.persist(traveler1);
       db.persist(traveler2);
 
-      db.persist(message1);
+      //db.persist(message1);
 
       User systemUser  = new User.Builder()
               .email("sharetripSystem@gmail.com")
