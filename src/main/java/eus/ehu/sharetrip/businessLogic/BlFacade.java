@@ -124,7 +124,7 @@ public interface BlFacade {
     ArrayList<Reservation> getMyBookings(User currentUser);
 
 
-    boolean checkAlertsNewRide(City departCity, City arrivalCity, Date date, int numSeats, User user);
+    boolean checkAlertsNewRide(City departCity, City arrivalCity, Date date, int numSeats);
 
     User getSystemUser();
 
