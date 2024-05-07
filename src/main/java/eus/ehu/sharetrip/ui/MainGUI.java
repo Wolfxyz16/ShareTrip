@@ -49,7 +49,7 @@ public class MainGUI {
     }
 
     private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin, favoriteOverviewWin, alertOverviewWin,
-            createCityWin, messagesOverviewWin, sendMessageWin, viewMessagesWin, myBookings, bookingRequests, logOutWin;
+            createCityWin, messagesOverviewWin, sendMessageWin, viewMessagesWin, myBookings, bookingRequests, logOutWin, videoWin;
 
     public void sendAlertEmail(City departCity, City arrivalCity, Date date, int numSeats) {
         ((MyMessagesController)viewMessagesWin.c).sendAlertEmail(departCity, arrivalCity, date, numSeats);
@@ -131,6 +131,9 @@ public class MainGUI {
                 ((BookingRequestsController)bookingRequests.c).updateTable();
             }
             case "Log Out" -> mainWrapper.setCenter(logOutWin.ui);
+            case "Video" -> {
+                mainWrapper.setCenter(videoWin.ui);
+                ((videoController)videoWin.c).visibleVideo();}
         }
     }
 
@@ -151,6 +154,7 @@ public class MainGUI {
         myBookings = load("MyBookings.fxml");
         bookingRequests = load("BookingRequests.fxml");
         logOutWin = load("DoubleCheck.fxml");
+        videoWin = load("video.fxml");
         ((MainGUIController)mainWin.c).initializeButtonVisibility();
 
         showMain(stage);

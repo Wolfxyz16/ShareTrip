@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 public class LogOutController implements Controller {
 
     @FXML
+    private Button video;
+    @FXML
     private Button cancelBtn;
 
     @FXML
@@ -39,5 +41,9 @@ public class LogOutController implements Controller {
         mainGUI.setUserName("");
         businessLogic.setCurrentUser(null);
         mainGUI.showScene("Log in");
+    }
+
+    public void chargeVideo(ActionEvent actionEvent) {
+        mainGUI.showScene("Video");
     }
 }

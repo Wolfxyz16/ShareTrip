@@ -1,6 +1,8 @@
 module eus.ehu.sharetrip {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.media;
+
 
     requires org.kordamp.bootstrapfx.core;
     requires org.hibernate.orm.core;
