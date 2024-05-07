@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Rectangle?>
 
+<?import javafx.scene.layout.VBox?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="433.0" prefWidth="600.0" stylesheets="@styles/bootstrapfx.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.LogOutController">
    <children>
       <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#f2cb05" height="300.0" layoutX="51.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="500.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="49.0" AnchorPane.topAnchor="50.0" />

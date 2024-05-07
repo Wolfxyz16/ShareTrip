@@ -57,6 +57,6 @@ public class videoController implements Controller {
     }
 
     public void visibleVideo(){
-        video.isVisible();
+        video.setVisible(true);
     }
 }
