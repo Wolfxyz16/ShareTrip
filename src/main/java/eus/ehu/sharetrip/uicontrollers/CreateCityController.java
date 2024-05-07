@@ -38,9 +38,9 @@ public class CreateCityController implements Controller {
     public void initialize() {
         newCity.setEntries(FXCollections.observableArrayList(
 
-                "Madrid", "Barcelona", "Valencia", "Sevilla",
+                "Madrid", "Barcelona", "Valencia", "Hondarribia", "Sevilla",
                 "Zaragoza", "Málaga", "Murcia", "Palma de Mallorca",
-                "Las Palmas de Gran Canaria", "Bilbao", "Alicante", "Córdoba",
+                "Las Palmas de Gran Canaria", "Bilbo", "Alicante", "Córdoba",
                 "Valladolid", "Vigo", "Gijón", "L'Hospitalet de Llobregat",
                 "A Coruña", "Granada", "Elche",
                 "Oviedo", "Badalona", "Cartagena", "Terrassa",
