@@ -41,6 +41,7 @@ public class videoController implements Controller {
         media = new Media(file.toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         video.setMediaPlayer(mediaPlayer);
+        visibleVideo();
 
     }
 
@@ -53,6 +54,7 @@ public class videoController implements Controller {
     }
 
     public void play(ActionEvent actionEvent) {
+        visibleVideo();
         mediaPlayer.play();
     }
 
