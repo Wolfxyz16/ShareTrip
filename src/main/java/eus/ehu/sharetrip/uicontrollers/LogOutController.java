@@ -43,7 +43,5 @@ public class LogOutController implements Controller {
         mainGUI.showScene("Log in");
     }
 
-    public void chargeVideo(ActionEvent actionEvent) {
-        mainGUI.showScene("Video");
-    }
+
 }

@@ -35,6 +35,5 @@
               </Button>
          </children>
       </HBox>
-      <Button fx:id="video" layoutX="51.0" layoutY="358.0" mnemonicParsing="false" onAction="#chargeVideo" opacity="0.0" prefHeight="40.0" prefWidth="500.0" />
    </children>
 </AnchorPane>
