@@ -2,6 +2,7 @@ package eus.ehu.sharetrip.ui;
 
 import eus.ehu.sharetrip.businessLogic.BlFacade;
 import eus.ehu.sharetrip.domain.City;
+import eus.ehu.sharetrip.domain.User;
 import eus.ehu.sharetrip.uicontrollers.MainGUIController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -51,8 +52,8 @@ public class MainGUI {
     private Window mainWin, createRideWin, queryRidesWin, loginWin, registerWin, favoriteOverviewWin, alertOverviewWin,
             createCityWin, messagesOverviewWin, sendMessageWin, viewMessagesWin, myBookings, bookingRequests, logOutWin, videoWin;
 
-    public void sendAlertEmail(City departCity, City arrivalCity, Date date, int numSeats) {
-        ((MyMessagesController)viewMessagesWin.c).sendAlertEmail(departCity, arrivalCity, date, numSeats);
+    public void sendAlertEmail(User sentTo, City departCity, City arrivalCity, Date date, int numSeats) {
+        ((MyMessagesController)viewMessagesWin.c).sendAlertEmail(sentTo, departCity, arrivalCity, date, numSeats);
     }
 
     class Window {

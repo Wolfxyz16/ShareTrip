@@ -137,11 +137,11 @@ public class MyMessagesController implements Controller{
         mainGUI.showScene("Message Overview");
     }
 
-    public void sendAlertEmail(City departCity, City arrivalCity, Date date, int numSeats) {
+    public void sendAlertEmail(User sentTo, City departCity, City arrivalCity, Date date, int numSeats) {
         Message message1 = new Message.Builder()
                 .messageText("A new ride from " + departCity + " to " + arrivalCity + " that matches your alert has been created!")
                 .sender(businessLogic.getSystemUser())
-                .receiver(businessLogic.getCurrentUser())
+                .receiver(sentTo)
                 .build();
         //this.receivedMessages.add(message1);
         businessLogic.saveMessage(message1);

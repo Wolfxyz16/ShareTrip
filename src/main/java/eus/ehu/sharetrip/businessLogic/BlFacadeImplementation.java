@@ -220,7 +220,7 @@ public class BlFacadeImplementation implements BlFacade {
         return dbManager.getMyBookings(currentUser);
     }
 
-    public boolean checkAlertsNewRide(City departCity, City arrivalCity, Date date, int numSeats) {
+    public User checkAlertsNewRide(City departCity, City arrivalCity, Date date, int numSeats) {
         return dbManager.checkAlertsNewRide(departCity, arrivalCity, date, numSeats);
     }
 

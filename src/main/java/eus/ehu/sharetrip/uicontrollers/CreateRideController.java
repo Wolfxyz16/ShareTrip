@@ -116,10 +116,10 @@ public class CreateRideController implements Controller {
                 warningsInfo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateRideGUI.RideCreated"));
                 warningsInfo.getStyleClass().setAll("label", "lbl-success");
 
-                boolean matchAlert = businessLogic.checkAlertsNewRide(departCity, arrivalCity, Dates.convertToDate(datePicker.getValue()), numSeats );
-                System.out.println("MATCH ALERT: " + matchAlert);
-                if (matchAlert){
-                    mainGUI.sendAlertEmail(departCity, arrivalCity, Dates.convertToDate(datePicker.getValue()), numSeats);
+                User sentTo = businessLogic.checkAlertsNewRide(departCity, arrivalCity, Dates.convertToDate(datePicker.getValue()), numSeats );
+                System.out.println("MATCH ALERT: " + sentTo.getUsername());
+                if (sentTo != null){
+                    mainGUI.sendAlertEmail(sentTo,departCity, arrivalCity, Dates.convertToDate(datePicker.getValue()), numSeats);
                 }
 
                 dissapearLabel();
