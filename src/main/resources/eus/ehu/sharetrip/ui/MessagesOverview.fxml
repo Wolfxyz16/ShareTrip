@@ -8,10 +8,10 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1000.0" stylesheets="@styles/bootstrapfx.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.sharetrip.uicontrollers.MessagesController">
    <children>
-      <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#f2cb05" height="300.0" layoutX="213.0" layoutY="220.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
-      <HBox layoutX="253.0" layoutY="370.0" spacing="20.0">
+      <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#f2cb05" height="300.0" layoutX="163.0" layoutY="220.0" stroke="BLACK" strokeType="INSIDE" width="700.0" />
+      <HBox layoutX="203.0" layoutY="370.0" spacing="20.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#viewMessages" prefHeight="80.0" prefWidth="250.0" text="%ViewMyMessages">
+            <Button mnemonicParsing="false" onAction="#viewMessages" prefHeight="80.0" prefWidth="300.0" text="%ViewMyMessages">
                <font>
                   <Font size="18.0" />
                </font>
@@ -21,7 +21,7 @@
                   <String fx:value="btn-primary" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false" onAction="#sendMessage" prefHeight="80.0" prefWidth="250.0" text="%SendAMessage">
+            <Button mnemonicParsing="false" onAction="#sendMessage" prefHeight="80.0" prefWidth="300.0" text="%SendAMessage">
                <font>
                   <Font size="18.0" />
                </font>
@@ -33,7 +33,7 @@
             </Button>
          </children>
       </HBox>
-      <Label alignment="CENTER" layoutX="369.0" layoutY="240.0" prefHeight="75.0" styleClass="h1" text="%ChooseOption" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="369.0" layoutY="240.0" prefHeight="75.0" styleClass="h1" text="%ChooseOption" textAlignment="CENTER" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
          <font>
             <Font size="25.0" />
          </font>
