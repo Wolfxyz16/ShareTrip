@@ -454,7 +454,7 @@ public class DataAccess {
               .sender(traveler1)
               .receiver(traveler2)
               .build();
-
+      /*
       // CREATE ALERTS
       Alert alert1 = new Alert.Builder()
               .fromLocation(city1)
@@ -487,13 +487,13 @@ public class DataAccess {
               .numSeats(4)
               .user(traveler2)
               .build();
-
+      */
       db.getTransaction().begin();
       //Persist the objects
-      db.persist(alert1);
-      db.persist(alert2);
-      db.persist(alert3);
-      db.persist(alert4);
+      //db.persist(alert1);
+      //db.persist(alert2);
+      //db.persist(alert3);
+      //db.persist(alert4);
 
       db.persist(city1);
       db.persist(city2);

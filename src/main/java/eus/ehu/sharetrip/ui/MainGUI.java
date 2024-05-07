@@ -172,8 +172,8 @@ public class MainGUI {
         scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
         stage.setTitle("ShareTrip");
         stage.setScene(scene);
-        stage.setHeight(790.0);
-        stage.setWidth(1220.0);
+        stage.setHeight(944.0);
+        stage.setWidth(1512.0);
         stage.show();
     }
 
